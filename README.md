@@ -6,7 +6,7 @@ SIPRESS es un proyecto académico desarrollado para la Tecnología de Análisis 
 SENA. Este sistema está diseñado para facilitar la gestión de usuarios, pacientes y empleados, permitiendo a las Instituciones
 Prestadoras de Salud (IPS) gestionar y tener un mejor control de la información.
 
-### Tecnologías Utilizadas
+### Tecnologías Utilizadas (o que se planea utilizar)
 
 - Spring Boot
 - MySQL
