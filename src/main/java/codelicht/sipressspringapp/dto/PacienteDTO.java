@@ -11,5 +11,6 @@ public class PacienteDTO {
     private Integer id;
     private String detalleEps;
     private LocalDate fechaConsulta;
+    private UsuarioDTO usuario; // Relación con Usuario
 
 }

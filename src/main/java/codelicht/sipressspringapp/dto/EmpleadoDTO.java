@@ -9,4 +9,5 @@ public class EmpleadoDTO {
     private Integer id;
     private String cargo;
     private Double sueldo;
+    private UsuarioDTO usuario; // Relación con Usuario
 }

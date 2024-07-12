@@ -24,4 +24,12 @@ public class HistorialDTO {
     private String grupoSanguineo;
     private String notasAdicionales;
     private Instant ultimaActualizacion;
+
+    // Anidamos el DTO del paciente
+    private PacienteDTO paciente;
+    // Anidamos el DTO del usuario
+    private UsuarioDTO usuario;
 }
+
+
+
