@@ -1,18 +1,13 @@
 package codelicht.sipressspringapp.controlador;
 
 import codelicht.sipressspringapp.dto.EmpleadoDTO;
-import codelicht.sipressspringapp.modelo.Empleado;
 import codelicht.sipressspringapp.servicio.IEmpleadoServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("sipress-spring-app/empleados")
@@ -24,20 +19,34 @@ public class EmpleadoControlador {
     @Autowired
     private IEmpleadoServicio empleadoServicio;
 
+    // Método para listar todos los empleados
     // http://localhost:8080/sipress-spring-app/empleados
-    @GetMapping()
+    @GetMapping
     public List<EmpleadoDTO> listarEmpleados() {
-        List<Empleado> empleados = empleadoServicio.listarRegistros();
-        empleados.forEach((empleado -> logger.info(empleado.toString())));
-        return empleados.stream().map(this::convertirADTO).collect(Collectors.toList());
+        List<EmpleadoDTO> empleados = empleadoServicio.listarRegistros();
+        empleados.forEach(empleado -> logger.info(empleado.toString()));
+        return empleados;
     }
 
-    private EmpleadoDTO convertirADTO(Empleado empleado) {
-        EmpleadoDTO dto = new EmpleadoDTO();
-        dto.setId(empleado.getId());
-        dto.setCargo(empleado.getCargo());
-        dto.setSueldo(empleado.getSueldo());
-        return dto;
+    // Método para buscar un empleado por ID
+    // http://localhost:8080/sipress-spring-app/empleados/{id}
+    @GetMapping("/{id}")
+    public EmpleadoDTO obtenerEmpleadoPorId(@PathVariable Integer id) {
+        return empleadoServicio.buscarRegistroPorId(id);
+    }
+
+    // Método para guardar o actualizar un empleado
+    // http://localhost:8080/sipress-spring-app/empleados
+    @PostMapping
+    public EmpleadoDTO guardarEmpleado(@RequestBody EmpleadoDTO empleadoDTO) {
+        return empleadoServicio.guardarRegistro(empleadoDTO);
+    }
+
+    // Método para eliminar un empleado
+    // http://localhost:8080/sipress-spring-app/empleados/{id}
+    @DeleteMapping("/{id}")
+    public void eliminarEmpleado(@PathVariable Integer id) {
+        empleadoServicio.eliminarRegistro(id);
     }
 
 }
