@@ -29,4 +29,13 @@ public class Empleado {
     @Column(name = "sueldo")
     private Double sueldo;
 
+    // Sobrescribimos el método toString para evitar la carga ´lazy´
+    @Override
+    public String toString() {
+        return "Empleado{" +
+                "id=" + id +
+                ", cargo='" + cargo + '\'' +
+                ", sueldo=" + sueldo +
+                '}';
+    }
 }

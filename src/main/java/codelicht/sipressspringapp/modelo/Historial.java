@@ -88,4 +88,26 @@ public class Historial {
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "ultima_actualizacion")
     private Instant ultimaActualizacion;
+
+    // Sobrescribimos el método toString para evitar la carga ´lazy´
+    @Override
+    public String toString() {
+        return "Historial{" +
+                "id=" + id +
+                ", motivoConsulta='" + motivoConsulta + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", sexo='" + sexo + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", ocupacion='" + ocupacion + '\'' +
+                ", contactoEmergencia='" + contactoEmergencia + '\'' +
+                ", nombreContactoEmergencia='" + nombreContactoEmergencia + '\'' +
+                ", alergias='" + alergias + '\'' +
+                ", condicionesPreexistentes='" + condicionesPreexistentes + '\'' +
+                ", medicamentosActuales='" + medicamentosActuales + '\'' +
+                ", historialVacunas='" + historialVacunas + '\'' +
+                ", grupoSanguineo='" + grupoSanguineo + '\'' +
+                ", notasAdicionales='" + notasAdicionales + '\'' +
+                ", ultimaActualizacion=" + ultimaActualizacion +
+                '}';
+    }
 }

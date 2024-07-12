@@ -31,4 +31,14 @@ public class Paciente {
     @Column(name = "fecha_consulta")
     private LocalDate fechaConsulta;
 
+    // Sobrescribimos el método toString para evitar la carga ´lazy´
+    @Override
+    public String toString() {
+        return "Paciente{" +
+                "id=" + id +
+                ", detalleEps='" + detalleEps + '\'' +
+                ", fechaConsulta=" + fechaConsulta +
+                '}';
+    }
+
 }
