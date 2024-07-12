@@ -1,6 +1,6 @@
 package codelicht.sipressspringapp.servicio;
 
-import codelicht.sipressspringapp.modelo.Paciente;
+import codelicht.sipressspringapp.dto.PacienteDTO;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public interface IPacienteServicio {
      *
      * @return una lista de todos los pacientes.
      */
-    List<Paciente> listarRegistros();
+    List<PacienteDTO> listarRegistros();
 
     /**
      * Busca un registro de paciente por su ID.
@@ -22,22 +22,23 @@ public interface IPacienteServicio {
      * @param idPaciente el ID del paciente.
      * @return el paciente con el ID especificado, o null si no se encuentra.
      */
-    Paciente buscarRegistroPorId(Integer idPaciente);
+    PacienteDTO buscarRegistroPorId(Integer idPaciente);
 
     /**
      * Guarda un nuevo registro de paciente o actualiza uno existente.
      *
-     * @param paciente el paciente a guardar o actualizar.
+     * @param pacienteDTO el paciente a guardar o actualizar.
      * @return el paciente guardado o actualizado.
      */
-    Paciente guardarRegistro(Paciente paciente);
+    PacienteDTO guardarRegistro(PacienteDTO pacienteDTO);
 
     /**
      * Elimina un registro de paciente.
      *
-     * @param paciente el paciente a eliminar.
+     * @param idPaciente el ID del paciente a eliminar.
      */
-    void eliminarRegistro(Paciente paciente);
+    void eliminarRegistro(Integer idPaciente);
 }
+
 
 

@@ -1,5 +1,6 @@
 package codelicht.sipressspringapp.servicio;
 
+import codelicht.sipressspringapp.dto.PacienteDTO;
 import codelicht.sipressspringapp.modelo.Paciente;
 import codelicht.sipressspringapp.repositorio.PacienteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Implementación del servicio para la entidad Paciente.
@@ -24,8 +26,10 @@ public class PacienteServicio implements IPacienteServicio {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<Paciente> listarRegistros() {
-        return pacienteRepositorio.findAll();
+    public List<PacienteDTO> listarRegistros() {
+        return pacienteRepositorio.findAll().stream()
+                .map(this::convertirEntidadADTO)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -36,30 +40,51 @@ public class PacienteServicio implements IPacienteServicio {
      */
     @Override
     @Transactional(readOnly = true)
-    public Paciente buscarRegistroPorId(Integer idPaciente) {
-        return pacienteRepositorio.findById(idPaciente).orElse(null);
+    public PacienteDTO buscarRegistroPorId(Integer idPaciente) {
+        return pacienteRepositorio.findById(idPaciente)
+                .map(this::convertirEntidadADTO)
+                .orElse(null);
     }
 
     /**
      * Guarda un nuevo registro de paciente o actualiza uno existente.
      *
-     * @param paciente el paciente a guardar o actualizar.
+     * @param pacienteDTO el paciente a guardar o actualizar.
      * @return el paciente guardado o actualizado.
      */
     @Override
     @Transactional
-    public Paciente guardarRegistro(Paciente paciente) {
-        return pacienteRepositorio.save(paciente);
+    public PacienteDTO guardarRegistro(PacienteDTO pacienteDTO) {
+        Paciente paciente = convertirDTOAEntidad(pacienteDTO);
+        Paciente pacienteGuardado = pacienteRepositorio.save(paciente);
+        return convertirEntidadADTO(pacienteGuardado);
     }
 
     /**
      * Elimina un registro de paciente.
      *
-     * @param paciente el paciente a eliminar.
+     * @param idPaciente el ID del paciente a eliminar.
      */
     @Override
     @Transactional
-    public void eliminarRegistro(Paciente paciente) {
-        pacienteRepositorio.delete(paciente);
+    public void eliminarRegistro(Integer idPaciente) {
+        pacienteRepositorio.deleteById(idPaciente);
+    }
+
+    private PacienteDTO convertirEntidadADTO(Paciente paciente) {
+        PacienteDTO pacienteDTO = new PacienteDTO();
+        pacienteDTO.setId(paciente.getId());
+        pacienteDTO.setDetalleEps(paciente.getDetalleEps());
+        pacienteDTO.setFechaConsulta(paciente.getFechaConsulta());
+        return pacienteDTO;
+    }
+
+    private Paciente convertirDTOAEntidad(PacienteDTO pacienteDTO) {
+        Paciente paciente = new Paciente();
+        paciente.setId(pacienteDTO.getId());
+        paciente.setDetalleEps(pacienteDTO.getDetalleEps());
+        paciente.setFechaConsulta(pacienteDTO.getFechaConsulta());
+        return paciente;
     }
 }
+

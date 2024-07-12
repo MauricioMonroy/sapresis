@@ -1,6 +1,6 @@
 package codelicht.sipressspringapp.servicio;
 
-import codelicht.sipressspringapp.modelo.Empleado;
+import codelicht.sipressspringapp.dto.EmpleadoDTO;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public interface IEmpleadoServicio {
      *
      * @return una lista de todos los empleados.
      */
-    List<Empleado> listarRegistros();
+    List<EmpleadoDTO> listarRegistros();
 
     /**
      * Busca un registro de empleado por su ID.
@@ -22,21 +22,21 @@ public interface IEmpleadoServicio {
      * @param idEmpleado el ID del empleado.
      * @return el empleado con el ID especificado, o null si no se encuentra.
      */
-    Empleado buscarRegistroPorId(Integer idEmpleado);
+    EmpleadoDTO buscarRegistroPorId(Integer idEmpleado);
 
     /**
      * Guarda un nuevo registro de empleado o actualiza uno existente.
      *
-     * @param empleado el empleado a guardar o actualizar.
+     * @param empleadoDTO el empleado a guardar o actualizar.
      * @return el empleado guardado o actualizado.
      */
-    Empleado guardarRegistro(Empleado empleado);
+    EmpleadoDTO guardarRegistro(EmpleadoDTO empleadoDTO);
 
     /**
      * Elimina un registro de empleado.
      *
-     * @param empleado el empleado a eliminar.
+     * @param idEmpleado el empleado a eliminar.
      */
-    void eliminarRegistro(Empleado empleado);
+    void eliminarRegistro(Integer idEmpleado);
 }
 

@@ -1,43 +1,43 @@
 package codelicht.sipressspringapp.servicio;
 
-import codelicht.sipressspringapp.modelo.Usuario;
+import codelicht.sipressspringapp.dto.UsuarioDTO;
 
 import java.util.List;
 
 /**
- * Interfaz para definir los métodos de servicio relacionados con la entidad Usuario.
+ * Interfaz para definir los métodos de servicio relacionados con la entidad UsuarioDTO.
  */
 public interface IUsuarioServicio {
 
     /**
-     * Lista todos los registros de usuarios.
+     * Lista todos los registros de usuarioDTOs.
      *
-     * @return una lista de todos los usuarios.
+     * @return una lista de todos los usuarioDTOs.
      */
-    List<Usuario> listarRegistros();
+    List<UsuarioDTO> listarRegistros();
 
     /**
-     * Busca un registro de usuario por su ID.
+     * Busca un registro de usuarioDTO por su ID.
      *
-     * @param idUsuario el ID del usuario.
-     * @return el usuario con el ID especificado, o null si no se encuentra.
+     * @param idUsuarioDTO el ID del usuarioDTO.
+     * @return el usuarioDTO con el ID especificado, o null si no se encuentra.
      */
-    Usuario buscarRegistroPorId(Integer idUsuario);
+    UsuarioDTO buscarRegistroPorId(Integer idUsuarioDTO);
 
     /**
-     * Guarda un nuevo registro de usuario o actualiza uno existente.
+     * Guarda un nuevo registro de usuarioDTO o actualiza uno existente.
      *
-     * @param usuario el usuario a guardar o actualizar.
-     * @return el usuario guardado o actualizado.
+     * @param usuarioDTO el usuarioDTO a guardar o actualizar.
+     * @return el usuarioDTO guardado o actualizado.
      */
-    Usuario guardarRegistro(Usuario usuario);
+    UsuarioDTO guardarRegistro(UsuarioDTO usuarioDTO);
 
     /**
-     * Elimina un registro de usuario.
+     * Elimina un registro de usuarioDTO.
      *
-     * @param usuario el usuario a eliminar.
+     * @param idUsuario el usuarioDTO a eliminar.
      */
-    void eliminarRegistro(Usuario usuario);
+    void eliminarRegistro(Integer idUsuario);
 }
 
 
