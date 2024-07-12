@@ -4,6 +4,7 @@ import codelicht.sipressspringapp.modelo.Empleado;
 import codelicht.sipressspringapp.repositorio.EmpleadoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class EmpleadoServicio implements IEmpleadoServicio {
      * @return una lista de todos los empleados.
      */
     @Override
+    @Transactional(readOnly = true)
     public List<Empleado> listarRegistros() {
         return empleadoRepositorio.findAll();
     }
@@ -33,6 +35,7 @@ public class EmpleadoServicio implements IEmpleadoServicio {
      * @return el empleado con el ID especificado, o null si no se encuentra.
      */
     @Override
+    @Transactional(readOnly = true)
     public Empleado buscarRegistroPorId(Integer idEmpleado) {
         return empleadoRepositorio.findById(idEmpleado).orElse(null);
     }
@@ -44,6 +47,7 @@ public class EmpleadoServicio implements IEmpleadoServicio {
      * @return el empleado guardado o actualizado.
      */
     @Override
+    @Transactional
     public Empleado guardarRegistro(Empleado empleado) {
         return empleadoRepositorio.save(empleado);
     }
@@ -54,6 +58,7 @@ public class EmpleadoServicio implements IEmpleadoServicio {
      * @param empleado el empleado a eliminar.
      */
     @Override
+    @Transactional
     public void eliminarRegistro(Empleado empleado) {
         empleadoRepositorio.delete(empleado);
     }

@@ -4,6 +4,7 @@ import codelicht.sipressspringapp.modelo.Paciente;
 import codelicht.sipressspringapp.repositorio.PacienteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class PacienteServicio implements IPacienteServicio {
      * @return una lista de todos los pacientes.
      */
     @Override
+    @Transactional(readOnly = true)
     public List<Paciente> listarRegistros() {
         return pacienteRepositorio.findAll();
     }
@@ -33,6 +35,7 @@ public class PacienteServicio implements IPacienteServicio {
      * @return el paciente con el ID especificado, o null si no se encuentra.
      */
     @Override
+    @Transactional(readOnly = true)
     public Paciente buscarRegistroPorId(Integer idPaciente) {
         return pacienteRepositorio.findById(idPaciente).orElse(null);
     }
@@ -44,6 +47,7 @@ public class PacienteServicio implements IPacienteServicio {
      * @return el paciente guardado o actualizado.
      */
     @Override
+    @Transactional
     public Paciente guardarRegistro(Paciente paciente) {
         return pacienteRepositorio.save(paciente);
     }
@@ -54,6 +58,7 @@ public class PacienteServicio implements IPacienteServicio {
      * @param paciente el paciente a eliminar.
      */
     @Override
+    @Transactional
     public void eliminarRegistro(Paciente paciente) {
         pacienteRepositorio.delete(paciente);
     }

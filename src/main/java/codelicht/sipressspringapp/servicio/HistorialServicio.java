@@ -4,6 +4,7 @@ import codelicht.sipressspringapp.modelo.Historial;
 import codelicht.sipressspringapp.repositorio.HistorialRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class HistorialServicio implements IHistorialServicio {
      * @return una lista de todos los historiales.
      */
     @Override
+    @Transactional(readOnly = true)
     public List<Historial> listarRegistros() {
         return historialRepositorio.findAll();
     }
@@ -33,6 +35,7 @@ public class HistorialServicio implements IHistorialServicio {
      * @return el historial con el ID especificado, o null si no se encuentra.
      */
     @Override
+    @Transactional(readOnly = true)
     public Historial buscarRegistroPorId(Integer idHistorial) {
         return historialRepositorio.findById(idHistorial).orElse(null);
     }
@@ -44,6 +47,7 @@ public class HistorialServicio implements IHistorialServicio {
      * @return el historial guardado o actualizado.
      */
     @Override
+    @Transactional
     public Historial guardarRegistro(Historial historial) {
         return historialRepositorio.save(historial);
     }
@@ -54,6 +58,7 @@ public class HistorialServicio implements IHistorialServicio {
      * @param historial el historial a eliminar.
      */
     @Override
+    @Transactional
     public void eliminarRegistro(Historial historial) {
         historialRepositorio.delete(historial);
     }
