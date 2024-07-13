@@ -5,9 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class EmpleadoDTO {
-    private Integer id;
+public class EmpleadoDTO extends UsuarioDTO {
     private String cargo;
     private Double sueldo;
-    private UsuarioDTO usuario; // Relación con Usuario
 }

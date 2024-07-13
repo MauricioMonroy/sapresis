@@ -7,10 +7,8 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class PacienteDTO {
-    private Integer id;
+public class PacienteDTO extends UsuarioDTO {
     private String detalleEps;
     private LocalDate fechaConsulta;
-    private UsuarioDTO usuario; // Relación con Usuario
 
 }
