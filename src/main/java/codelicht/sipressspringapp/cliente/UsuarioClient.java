@@ -56,7 +56,7 @@ public class UsuarioClient {
     private static void buscarUsuarioPorId() throws Exception {
         System.out.print("Ingrese el ID del usuario: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/sipress-spring-app/usuarios/" + id))
@@ -68,6 +68,8 @@ public class UsuarioClient {
     }
 
     private static void guardarUsuario() throws Exception {
+        System.out.print("Ingrese el username: ");
+        String username = scanner.nextLine();
         System.out.print("Ingrese el nombre del usuario: ");
         String nombre = scanner.nextLine();
         System.out.print("Ingrese el apellido del usuario: ");
@@ -78,8 +80,18 @@ public class UsuarioClient {
         String telefono = scanner.nextLine();
         System.out.print("Ingrese el email del usuario: ");
         String email = scanner.nextLine();
+        System.out.print("Ingrese la contraseña: ");
+        String password = scanner.nextLine();
+        System.out.print("¿Es paciente? (true/false): ");
+        boolean esPaciente = scanner.nextBoolean();
+        System.out.print("¿Es empleado? (true/false): ");
+        boolean esEmpleado = scanner.nextBoolean();
+        scanner.nextLine();
 
-        String json = String.format("{\"nombre\": \"%s\", \"apellido\": \"%s\", \"identificacion\": \"%s\", \"telefono\": \"%s\", \"email\": \"%s\"}", nombre, apellido, identificacion, telefono, email);
+        String json = String.format(
+                "{\"username\": \"%s\", \"nombre\": \"%s\", \"apellido\": \"%s\", \"identificacion\": \"%s\", \"telefono\": \"%s\", \"email\": \"%s\", \"password\": \"%s\", \"esPaciente\": %b, \"esEmpleado\": %b}",
+                username, nombre, apellido, identificacion, telefono, email, password, esPaciente, esEmpleado
+        );
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/sipress-spring-app/usuarios"))
                 .header("Content-Type", "application/json")
@@ -87,7 +99,8 @@ public class UsuarioClient {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println("Guardar usuario: " + response.body());
+        System.out.println("Guardar usuario:");
+        prettyPrint(response.body());
     }
 
     private static void eliminarUsuario() throws Exception {
@@ -101,7 +114,8 @@ public class UsuarioClient {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println("Eliminar usuario: " + response.body());
+        System.out.println("Eliminar usuario:");
+        prettyPrint(response.body());
     }
 
     private static void prettyPrint(String responseBody) {

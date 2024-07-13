@@ -63,19 +63,38 @@ public class PacienteClient {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println("Buscar paciente por ID: " + response.body());
+        System.out.println("Buscar paciente por ID:");
+        prettyPrint(response.body());
     }
 
     private static void guardarPaciente() throws Exception {
-        System.out.print("Ingrese el ID del paciente: ");
-        int id = scanner.nextInt();
-        scanner.nextLine(); // Integra una nueva línea
         System.out.print("Ingrese el detalle de EPS: ");
         String detalleEps = scanner.nextLine();
         System.out.print("Ingrese la fecha de consulta (yyyy-MM-dd): ");
         String fechaConsulta = scanner.nextLine();
+        System.out.print("Ingrese el nombre de usuario: ");
+        String username = scanner.nextLine();
+        System.out.print("Ingrese la contraseña: ");
+        String password = scanner.nextLine();
+        System.out.print("Ingrese el nombre: ");
+        String nombre = scanner.nextLine();
+        System.out.print("Ingrese el apellido: ");
+        String apellido = scanner.nextLine();
+        System.out.print("Ingrese la identificación: ");
+        String identificacion = scanner.nextLine();
+        System.out.print("Ingrese el teléfono: ");
+        String telefono = scanner.nextLine();
+        System.out.print("Ingrese el email: ");
+        String email = scanner.nextLine();
+        System.out.print("¿Es paciente? (true/false): ");
+        boolean esPaciente = scanner.nextBoolean();
+        System.out.print("¿Es empleado? (true/false): ");
+        boolean esEmpleado = scanner.nextBoolean();
+        scanner.nextLine(); // Integra una nueva línea
 
-        String json = String.format("{\"id\": %d, \"detalleEps\": \"%s\", \"fechaConsulta\": \"%s\"}", id, detalleEps, fechaConsulta);
+        String json = String.format(
+                "{\"detalleEps\": \"%s\", \"fechaConsulta\": \"%s\", \"username\": \"%s\", \"password\": \"%s\", \"nombre\": \"%s\", \"apellido\": \"%s\", \"identificacion\": \"%s\", \"telefono\": \"%s\", \"email\": \"%s\", \"esPaciente\": %b, \"esEmpleado\": %b}",
+                detalleEps, fechaConsulta, username, password, nombre, apellido, identificacion, telefono, email, esPaciente, esEmpleado);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/sipress-spring-app/pacientes"))
                 .header("Content-Type", "application/json")
@@ -83,7 +102,8 @@ public class PacienteClient {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println("Guardar paciente: " + response.body());
+        System.out.println("Guardar paciente:");
+        prettyPrint(response.body());
     }
 
     private static void eliminarPaciente() throws Exception {
@@ -97,7 +117,8 @@ public class PacienteClient {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println("Eliminar paciente: " + response.body());
+        System.out.println("Eliminar paciente:");
+        prettyPrint(response.body());
     }
 
     private static void prettyPrint(String responseBody) {
@@ -108,4 +129,5 @@ public class PacienteClient {
         }
     }
 }
+
 
