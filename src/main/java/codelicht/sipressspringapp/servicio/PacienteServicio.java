@@ -5,7 +5,6 @@ import codelicht.sipressspringapp.modelo.Paciente;
 import codelicht.sipressspringapp.repositorio.PacienteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,72 +18,69 @@ public class PacienteServicio implements IPacienteServicio {
     @Autowired
     private PacienteRepositorio pacienteRepositorio;
 
-    /**
-     * Lista todos los registros de pacientes.
-     *
-     * @return una lista de todos los pacientes.
-     */
     @Override
-    @Transactional(readOnly = true)
     public List<PacienteDTO> listarRegistros() {
         return pacienteRepositorio.findAll().stream()
-                .map(this::convertirEntidadADTO)
+                .map(this::convertirADTO)
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Busca un registro de paciente por su ID.
-     *
-     * @param idPaciente el ID del paciente.
-     * @return el paciente con el ID especificado, o null si no se encuentra.
-     */
     @Override
-    @Transactional(readOnly = true)
     public PacienteDTO buscarRegistroPorId(Integer idPaciente) {
         return pacienteRepositorio.findById(idPaciente)
-                .map(this::convertirEntidadADTO)
+                .map(this::convertirADTO)
                 .orElse(null);
     }
 
-    /**
-     * Guarda un nuevo registro de paciente o actualiza uno existente.
-     *
-     * @param pacienteDTO el paciente a guardar o actualizar.
-     * @return el paciente guardado o actualizado.
-     */
     @Override
-    @Transactional
     public PacienteDTO guardarRegistro(PacienteDTO pacienteDTO) {
-        Paciente paciente = convertirDTOAEntidad(pacienteDTO);
+        Paciente paciente = convertirAEntidad(pacienteDTO);
         Paciente pacienteGuardado = pacienteRepositorio.save(paciente);
-        return convertirEntidadADTO(pacienteGuardado);
+        return convertirADTO(pacienteGuardado);
     }
 
-    /**
-     * Elimina un registro de paciente.
-     *
-     * @param idPaciente el ID del paciente a eliminar.
-     */
     @Override
-    @Transactional
     public void eliminarRegistro(Integer idPaciente) {
         pacienteRepositorio.deleteById(idPaciente);
     }
 
-    private PacienteDTO convertirEntidadADTO(Paciente paciente) {
-        PacienteDTO pacienteDTO = new PacienteDTO();
-        pacienteDTO.setId(paciente.getId());
-        pacienteDTO.setDetalleEps(paciente.getDetalleEps());
-        pacienteDTO.setFechaConsulta(paciente.getFechaConsulta());
-        return pacienteDTO;
+    private PacienteDTO convertirADTO(Paciente paciente) {
+        PacienteDTO dto = new PacienteDTO();
+        // mapea los campos de Usuario
+        dto.setId(paciente.getId());
+        dto.setUsername(paciente.getUsername());
+        dto.setPassword(paciente.getPassword());
+        dto.setNombre(paciente.getNombre());
+        dto.setApellido(paciente.getApellido());
+        dto.setIdentificacion(paciente.getIdentificacion());
+        dto.setTelefono(paciente.getTelefono());
+        dto.setEmail(paciente.getEmail());
+        dto.setEsPaciente(paciente.getEsPaciente());
+        dto.setEsEmpleado(paciente.getEsEmpleado());
+        // mapea los campos específicos de Paciente
+        dto.setDetalleEps(paciente.getDetalleEps());
+        dto.setFechaConsulta(paciente.getFechaConsulta());
+        return dto;
     }
 
-    private Paciente convertirDTOAEntidad(PacienteDTO pacienteDTO) {
+    private Paciente convertirAEntidad(PacienteDTO dto) {
         Paciente paciente = new Paciente();
-        paciente.setId(pacienteDTO.getId());
-        paciente.setDetalleEps(pacienteDTO.getDetalleEps());
-        paciente.setFechaConsulta(pacienteDTO.getFechaConsulta());
+        // mapea los campos de Usuario
+        paciente.setId(dto.getId());
+        paciente.setUsername(dto.getUsername());
+        paciente.setPassword(dto.getPassword());
+        paciente.setNombre(dto.getNombre());
+        paciente.setApellido(dto.getApellido());
+        paciente.setIdentificacion(dto.getIdentificacion());
+        paciente.setTelefono(dto.getTelefono());
+        paciente.setEmail(dto.getEmail());
+        paciente.setEsPaciente(dto.getEsPaciente());
+        paciente.setEsEmpleado(dto.getEsEmpleado());
+        // mapea los campos específicos de Paciente
+        paciente.setDetalleEps(dto.getDetalleEps());
+        paciente.setFechaConsulta(dto.getFechaConsulta());
         return paciente;
     }
 }
+
 

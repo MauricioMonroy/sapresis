@@ -91,23 +91,23 @@ public class HistorialServicio implements IHistorialServicio {
         dto.setNotasAdicionales(historial.getNotasAdicionales());
         dto.setUltimaActualizacion(historial.getUltimaActualizacion());
 
-        PacienteDTO pacienteDTO = new PacienteDTO();
-        Paciente paciente = historial.getIdPaciente();
-        pacienteDTO.setId(paciente.getId());
-        pacienteDTO.setDetalleEps(paciente.getDetalleEps());
-        pacienteDTO.setFechaConsulta(paciente.getFechaConsulta());
+//        PacienteDTO pacienteDTO = new PacienteDTO();
+//        Paciente paciente = historial.getIdUsuario();
+//        pacienteDTO.setId(paciente.getId());
+//        pacienteDTO.setDetalleEps(paciente.getDetalleEps());
+//        pacienteDTO.setFechaConsulta(paciente.getFechaConsulta());
+//
+//        UsuarioDTO usuarioDTO = new UsuarioDTO();
+//        usuarioDTO.setId(paciente.getIdUsuario().getId());
+//        usuarioDTO.setNombre(paciente.getIdUsuario().getNombre());
+//        usuarioDTO.setApellido(paciente.getIdUsuario().getApellido());
+//        usuarioDTO.setIdentificacion(paciente.getIdUsuario().getIdentificacion());
+//        usuarioDTO.setTelefono(paciente.getIdUsuario().getTelefono());
+//        usuarioDTO.setEmail(paciente.getIdUsuario().getEmail());
+//
+//        pacienteDTO.setUsuario(usuarioDTO);
 
-        UsuarioDTO usuarioDTO = new UsuarioDTO();
-        usuarioDTO.setId(paciente.getIdUsuario().getId());
-        usuarioDTO.setNombre(paciente.getIdUsuario().getNombre());
-        usuarioDTO.setApellido(paciente.getIdUsuario().getApellido());
-        usuarioDTO.setIdentificacion(paciente.getIdUsuario().getIdentificacion());
-        usuarioDTO.setTelefono(paciente.getIdUsuario().getTelefono());
-        usuarioDTO.setEmail(paciente.getIdUsuario().getEmail());
-
-        pacienteDTO.setUsuario(usuarioDTO);
-
-        dto.setPaciente(pacienteDTO);
+//        dto.setPaciente(pacienteDTO);
 
         return dto;
     }
@@ -130,26 +130,26 @@ public class HistorialServicio implements IHistorialServicio {
         historial.setNotasAdicionales(dto.getNotasAdicionales());
         historial.setUltimaActualizacion(dto.getUltimaActualizacion());
 
-        PacienteDTO pacienteDTO = dto.getPaciente();
-        if (pacienteDTO != null) {
-            Paciente paciente = new Paciente();
-            paciente.setId(pacienteDTO.getId());
-            paciente.setDetalleEps(pacienteDTO.getDetalleEps());
-            paciente.setFechaConsulta(pacienteDTO.getFechaConsulta());
-
-            UsuarioDTO usuarioDTO = pacienteDTO.getUsuario();
-            if (usuarioDTO != null) {
-                Usuario usuario = new Usuario();
-                usuario.setId(usuarioDTO.getId());
-                usuario.setNombre(usuarioDTO.getNombre());
-                usuario.setApellido(usuarioDTO.getApellido());
-                usuario.setIdentificacion(usuarioDTO.getIdentificacion());
-                usuario.setTelefono(usuarioDTO.getTelefono());
-                usuario.setEmail(usuarioDTO.getEmail());
-            }
-
-            historial.setIdPaciente(paciente);
-        }
+//        PacienteDTO pacienteDTO = dto.getPaciente();
+//        if (pacienteDTO != null) {
+//            Paciente paciente = new Paciente();
+//            paciente.setId(pacienteDTO.getId());
+//            paciente.setDetalleEps(pacienteDTO.getDetalleEps());
+//            paciente.setFechaConsulta(pacienteDTO.getFechaConsulta());
+//
+//            UsuarioDTO usuarioDTO = pacienteDTO.getUsuario();
+//            if (usuarioDTO != null) {
+//                Usuario usuario = new Usuario();
+//                usuario.setId(usuarioDTO.getId());
+//                usuario.setNombre(usuarioDTO.getNombre());
+//                usuario.setApellido(usuarioDTO.getApellido());
+//                usuario.setIdentificacion(usuarioDTO.getIdentificacion());
+//                usuario.setTelefono(usuarioDTO.getTelefono());
+//                usuario.setEmail(usuarioDTO.getEmail());
+//            }
+//
+//            historial.setIdPaciente(paciente);
+//        }
 
         return historial;
     }
