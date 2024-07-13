@@ -8,8 +8,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class HistorialDTO {
-    private Integer id;
+public class HistorialDTO extends PacienteDTO {
     private String motivoConsulta;
     private LocalDate fechaNacimiento;
     private String sexo;
@@ -25,10 +24,6 @@ public class HistorialDTO {
     private String notasAdicionales;
     private Instant ultimaActualizacion;
 
-    // Anidamos el DTO del paciente
-    private PacienteDTO paciente;
-    // Anidamos el DTO del usuario
-    private UsuarioDTO usuario;
 }
 
 
