@@ -49,7 +49,8 @@ public class PacienteClient {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println("Listar pacientes: " + response.body());
+        System.out.println("Listar pacientes:");
+        prettyPrint(response.body());
     }
 
     private static void buscarPacientePorId() throws Exception {
@@ -97,6 +98,14 @@ public class PacienteClient {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println("Eliminar paciente: " + response.body());
+    }
+
+    private static void prettyPrint(String responseBody) {
+        String[] entries = responseBody.split("},\\{");
+        for (String entry : entries) {
+            System.out.println(entry.replace("{", "").replace("}", "").replace(",", "\n"));
+            System.out.println("------------");
+        }
     }
 }
 
