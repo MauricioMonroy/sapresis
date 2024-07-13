@@ -1,11 +1,7 @@
 package codelicht.sipressspringapp.servicio;
 
 import codelicht.sipressspringapp.dto.HistorialDTO;
-import codelicht.sipressspringapp.dto.PacienteDTO;
-import codelicht.sipressspringapp.dto.UsuarioDTO;
 import codelicht.sipressspringapp.modelo.Historial;
-import codelicht.sipressspringapp.modelo.Paciente;
-import codelicht.sipressspringapp.modelo.Usuario;
 import codelicht.sipressspringapp.repositorio.HistorialRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +25,6 @@ public class HistorialServicio implements IHistorialServicio {
      * @return una lista de todos los historiales.
      */
     @Override
-    @Transactional(readOnly = true)
     public List<HistorialDTO> listarRegistros() {
         return historialRepositorio.findAll().stream()
                 .map(this::convertirADTO)
@@ -43,7 +38,6 @@ public class HistorialServicio implements IHistorialServicio {
      * @return el historial con el ID especificado, o null si no se encuentra.
      */
     @Override
-    @Transactional(readOnly = true)
     public HistorialDTO buscarRegistroPorId(Integer idHistorial) {
         return historialRepositorio.findById(idHistorial)
                 .map(this::convertirADTO)
@@ -57,10 +51,10 @@ public class HistorialServicio implements IHistorialServicio {
      * @return el historial guardado o actualizado.
      */
     @Override
-    @Transactional
     public HistorialDTO guardarRegistro(HistorialDTO historialDTO) {
         Historial historial = convertirAEntidad(historialDTO);
-        return convertirADTO(historialRepositorio.save(historial));
+        Historial historialGuardado = historialRepositorio.save(historial);
+        return convertirADTO(historialGuardado);
     }
 
     /**
@@ -73,9 +67,26 @@ public class HistorialServicio implements IHistorialServicio {
     public void eliminarRegistro(Integer idHistorial) {
         historialRepositorio.deleteById(idHistorial);
     }
+
     private HistorialDTO convertirADTO(Historial historial) {
         HistorialDTO dto = new HistorialDTO();
+        // Mapea los campos de Usuario
         dto.setId(historial.getId());
+        dto.setUsername(historial.getUsername());
+        dto.setPassword(historial.getPassword());
+        dto.setNombre(historial.getNombre());
+        dto.setApellido(historial.getApellido());
+        dto.setIdentificacion(historial.getIdentificacion());
+        dto.setTelefono(historial.getTelefono());
+        dto.setEmail(historial.getEmail());
+        dto.setEsPaciente(historial.getEsPaciente());
+        dto.setEsEmpleado(historial.getEsEmpleado());
+
+        // Mapea los campos de Paciente
+        dto.setDetalleEps(historial.getDetalleEps());
+        dto.setFechaConsulta(historial.getFechaConsulta());
+
+        // Mapea los campos específicos de Historial
         dto.setMotivoConsulta(historial.getMotivoConsulta());
         dto.setFechaNacimiento(historial.getFechaNacimiento());
         dto.setSexo(historial.getSexo());
@@ -91,30 +102,28 @@ public class HistorialServicio implements IHistorialServicio {
         dto.setNotasAdicionales(historial.getNotasAdicionales());
         dto.setUltimaActualizacion(historial.getUltimaActualizacion());
 
-//        PacienteDTO pacienteDTO = new PacienteDTO();
-//        Paciente paciente = historial.getIdUsuario();
-//        pacienteDTO.setId(paciente.getId());
-//        pacienteDTO.setDetalleEps(paciente.getDetalleEps());
-//        pacienteDTO.setFechaConsulta(paciente.getFechaConsulta());
-//
-//        UsuarioDTO usuarioDTO = new UsuarioDTO();
-//        usuarioDTO.setId(paciente.getIdUsuario().getId());
-//        usuarioDTO.setNombre(paciente.getIdUsuario().getNombre());
-//        usuarioDTO.setApellido(paciente.getIdUsuario().getApellido());
-//        usuarioDTO.setIdentificacion(paciente.getIdUsuario().getIdentificacion());
-//        usuarioDTO.setTelefono(paciente.getIdUsuario().getTelefono());
-//        usuarioDTO.setEmail(paciente.getIdUsuario().getEmail());
-//
-//        pacienteDTO.setUsuario(usuarioDTO);
-
-//        dto.setPaciente(pacienteDTO);
-
         return dto;
     }
 
     private Historial convertirAEntidad(HistorialDTO dto) {
         Historial historial = new Historial();
+        // Mapea los campos de Usuario
         historial.setId(dto.getId());
+        historial.setUsername(dto.getUsername());
+        historial.setPassword(dto.getPassword());
+        historial.setNombre(dto.getNombre());
+        historial.setApellido(dto.getApellido());
+        historial.setIdentificacion(dto.getIdentificacion());
+        historial.setTelefono(dto.getTelefono());
+        historial.setEmail(dto.getEmail());
+        historial.setEsPaciente(dto.getEsPaciente());
+        historial.setEsEmpleado(dto.getEsEmpleado());
+
+        // Mapea los campos de Paciente
+        historial.setDetalleEps(dto.getDetalleEps());
+        historial.setFechaConsulta(dto.getFechaConsulta());
+
+        // Mapea los campos específicos de Historial
         historial.setMotivoConsulta(dto.getMotivoConsulta());
         historial.setFechaNacimiento(dto.getFechaNacimiento());
         historial.setSexo(dto.getSexo());
@@ -129,27 +138,6 @@ public class HistorialServicio implements IHistorialServicio {
         historial.setGrupoSanguineo(dto.getGrupoSanguineo());
         historial.setNotasAdicionales(dto.getNotasAdicionales());
         historial.setUltimaActualizacion(dto.getUltimaActualizacion());
-
-//        PacienteDTO pacienteDTO = dto.getPaciente();
-//        if (pacienteDTO != null) {
-//            Paciente paciente = new Paciente();
-//            paciente.setId(pacienteDTO.getId());
-//            paciente.setDetalleEps(pacienteDTO.getDetalleEps());
-//            paciente.setFechaConsulta(pacienteDTO.getFechaConsulta());
-//
-//            UsuarioDTO usuarioDTO = pacienteDTO.getUsuario();
-//            if (usuarioDTO != null) {
-//                Usuario usuario = new Usuario();
-//                usuario.setId(usuarioDTO.getId());
-//                usuario.setNombre(usuarioDTO.getNombre());
-//                usuario.setApellido(usuarioDTO.getApellido());
-//                usuario.setIdentificacion(usuarioDTO.getIdentificacion());
-//                usuario.setTelefono(usuarioDTO.getTelefono());
-//                usuario.setEmail(usuarioDTO.getEmail());
-//            }
-//
-//            historial.setIdPaciente(paciente);
-//        }
 
         return historial;
     }
