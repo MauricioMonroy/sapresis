@@ -32,7 +32,7 @@ public class ClientApp {
             System.out.println("17. Salir");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine(); // Integra una nueva línea
 
             switch (choice) {
                 case 1:
@@ -103,7 +103,7 @@ public class ClientApp {
     private static void buscarUsuarioPorId() throws Exception {
         System.out.print("Ingrese el ID del usuario: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine(); // Integra una nueva línea
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/sipress-spring-app/usuarios/" + id))
@@ -116,7 +116,7 @@ public class ClientApp {
     private static void guardarUsuario() throws Exception {
         System.out.print("Ingrese el ID del usuario: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine(); // Integra una nueva línea
         System.out.print("Ingrese el nombre del usuario: ");
         String nombre = scanner.nextLine();
 
@@ -134,7 +134,7 @@ public class ClientApp {
     private static void eliminarUsuario() throws Exception {
         System.out.print("Ingrese el ID del usuario a eliminar: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine(); // Integra una nueva línea
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/sipress-spring-app/usuarios/" + id))
@@ -158,7 +158,7 @@ public class ClientApp {
     private static void buscarPacientePorId() throws Exception {
         System.out.print("Ingrese el ID del paciente: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine(); // Integra una nueva línea
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/sipress-spring-app/pacientes/" + id))
@@ -171,7 +171,7 @@ public class ClientApp {
     private static void guardarPaciente() throws Exception {
         System.out.print("Ingrese el ID del paciente: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine(); // Integra una nueva línea
         System.out.print("Ingrese el detalle de EPS: ");
         String detalleEps = scanner.nextLine();
         System.out.print("Ingrese la fecha de consulta (yyyy-MM-dd): ");
@@ -191,7 +191,7 @@ public class ClientApp {
     private static void eliminarPaciente() throws Exception {
         System.out.print("Ingrese el ID del paciente a eliminar: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine(); // Integra una nueva línea
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/sipress-spring-app/pacientes/" + id))
@@ -215,7 +215,7 @@ public class ClientApp {
     private static void buscarEmpleadoPorId() throws Exception {
         System.out.print("Ingrese el ID del empleado: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine(); // Integra una nueva línea
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/sipress-spring-app/empleados/" + id))
@@ -228,7 +228,7 @@ public class ClientApp {
     private static void guardarEmpleado() throws Exception {
         System.out.print("Ingrese el ID del empleado: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine(); // Integra una nueva línea
         System.out.print("Ingrese el nombre del empleado: ");
         String nombre = scanner.nextLine();
 
@@ -246,7 +246,7 @@ public class ClientApp {
     private static void eliminarEmpleado() throws Exception {
         System.out.print("Ingrese el ID del empleado a eliminar: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine(); // Integra una nueva línea
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/sipress-spring-app/empleados/" + id))
@@ -270,7 +270,7 @@ public class ClientApp {
     private static void buscarHistorialPorId() throws Exception {
         System.out.print("Ingrese el ID del historial: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine(); // Integra una nueva línea
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/sipress-spring-app/historiales/" + id))
@@ -283,7 +283,7 @@ public class ClientApp {
     private static void guardarHistorial() throws Exception {
         System.out.print("Ingrese el ID del historial: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine(); // Integra una nueva línea
         System.out.print("Ingrese la descripción del historial: ");
         String descripcion = scanner.nextLine();
 
@@ -301,7 +301,7 @@ public class ClientApp {
     private static void eliminarHistorial() throws Exception {
         System.out.print("Ingrese el ID del historial a eliminar: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine(); // Integra una nueva línea
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/sipress-spring-app/historiales/" + id))

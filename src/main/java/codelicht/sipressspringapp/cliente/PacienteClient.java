@@ -20,7 +20,7 @@ public class PacienteClient {
             System.out.println("5. Salir");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine(); // Integra una nueva línea
 
             switch (choice) {
                 case 1:
@@ -55,7 +55,7 @@ public class PacienteClient {
     private static void buscarPacientePorId() throws Exception {
         System.out.print("Ingrese el ID del paciente: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine(); // Integra una nueva línea
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/sipress-spring-app/pacientes/" + id))
@@ -68,7 +68,7 @@ public class PacienteClient {
     private static void guardarPaciente() throws Exception {
         System.out.print("Ingrese el ID del paciente: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine(); // Integra una nueva línea
         System.out.print("Ingrese el detalle de EPS: ");
         String detalleEps = scanner.nextLine();
         System.out.print("Ingrese la fecha de consulta (yyyy-MM-dd): ");
@@ -88,7 +88,7 @@ public class PacienteClient {
     private static void eliminarPaciente() throws Exception {
         System.out.print("Ingrese el ID del paciente a eliminar: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine(); // Integra una nueva línea
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/sipress-spring-app/pacientes/" + id))
