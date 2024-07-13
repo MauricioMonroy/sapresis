@@ -30,7 +30,7 @@ public class PacienteControlador {
     // Método para buscar un paciente por ID
     // http://localhost:8080/sipress-spring-app/pacientes/{id}
     @GetMapping("/{id}")
-    public PacienteDTO obtenerPacientePorId(@PathVariable Integer id) {
+    public PacienteDTO buscarPacientePorId(@PathVariable Integer id) {
         return pacienteServicio.buscarRegistroPorId(id);
     }
 
