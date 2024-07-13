@@ -10,18 +10,9 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "paciente")
-public class Paciente {
-
-    // Anotación @Id indica que este campo es la clave primaria de la entidad
-    @Id
-    @Column(name = "id_paciente", nullable = false)
-    private Integer id;
-
-    // Anotación @ManyToOne indica una relación de muchos a uno con la entidad Usuario
-    // fetch = FetchType.LAZY especifica que la relación se cargará cuando se acceda a ella por primera vez
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario")
-    private Usuario idUsuario;
+@PrimaryKeyJoinColumn(name = "id_usuario")
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Paciente extends Usuario {
 
     // Campo detalleEps con una longitud máxima de 45 caracteres
     @Column(name = "detalle_eps", length = 45)
@@ -31,14 +22,5 @@ public class Paciente {
     @Column(name = "fecha_consulta")
     private LocalDate fechaConsulta;
 
-    // Sobrescribimos el método toString para evitar la carga ´lazy´
-    @Override
-    public String toString() {
-        return "Paciente{" +
-                "id=" + id +
-                ", detalleEps='" + detalleEps + '\'' +
-                ", fechaConsulta=" + fechaConsulta +
-                '}';
-    }
-
 }
+

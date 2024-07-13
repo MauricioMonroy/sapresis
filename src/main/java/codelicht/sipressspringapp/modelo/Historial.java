@@ -12,16 +12,8 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "historial")
-public class Historial {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Añadir generación automática de ID
-    @Column(name = "id_historial", nullable = false)
-    private Integer id;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_paciente", nullable = false) // Asegurar que el paciente siempre esté presente
-    private Paciente idPaciente;
+@PrimaryKeyJoinColumn(name = "id_usuario")
+public class Historial extends Paciente {
 
     @Column(name = "motivo_consulta")
     private String motivoConsulta;
@@ -73,25 +65,5 @@ public class Historial {
     @Column(name = "ultima_actualizacion")
     private Instant ultimaActualizacion;
 
-    @Override
-    public String toString() {
-        return "Historial{" +
-                "id=" + id +
-                ", motivoConsulta='" + motivoConsulta + '\'' +
-                ", fechaNacimiento=" + fechaNacimiento +
-                ", sexo='" + sexo + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", ocupacion='" + ocupacion + '\'' +
-                ", contactoEmergencia='" + contactoEmergencia + '\'' +
-                ", nombreContactoEmergencia='" + nombreContactoEmergencia + '\'' +
-                ", alergias='" + alergias + '\'' +
-                ", condicionesPreexistentes='" + condicionesPreexistentes + '\'' +
-                ", medicamentosActuales='" + medicamentosActuales + '\'' +
-                ", historialVacunas='" + historialVacunas + '\'' +
-                ", grupoSanguineo='" + grupoSanguineo + '\'' +
-                ", notasAdicionales='" + notasAdicionales + '\'' +
-                ", ultimaActualizacion=" + ultimaActualizacion +
-                '}';
-    }
 }
 
