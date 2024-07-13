@@ -9,7 +9,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "empleado")
 @PrimaryKeyJoinColumn(name = "id_usuario")
-@PrimaryKeyJoinColumn(name = "id_usuario")
 public class Empleado extends Usuario{
 
     // Campo cargo con una longitud máxima de 45 caracteres
