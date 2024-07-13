@@ -49,6 +49,6 @@ SOFTWARE.
 
 ---
 
-Mauricio Alberto Monroy Calle
+### Mauricio Alberto Monroy Calle
 
-### Contacto: mauricio.monroy0@soy.sena.edu.co
+Contacto: mauricio.monroy0@soy.sena.edu.co
