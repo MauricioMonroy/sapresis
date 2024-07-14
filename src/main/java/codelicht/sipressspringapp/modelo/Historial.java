@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -12,8 +14,16 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "historial")
-@PrimaryKeyJoinColumn(name = "id_usuario")
 public class Historial extends Paciente {
+    @Id
+    @Column(name = "id_usuario", nullable = false)
+    private Integer id;
+
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Paciente paciente;
 
     @Column(name = "motivo_consulta")
     private String motivoConsulta;
@@ -66,4 +76,3 @@ public class Historial extends Paciente {
     private Instant ultimaActualizacion;
 
 }
-

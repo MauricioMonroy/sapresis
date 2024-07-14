@@ -3,6 +3,8 @@ package codelicht.sipressspringapp.modelo;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 
@@ -10,17 +12,24 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "paciente")
-@PrimaryKeyJoinColumn(name = "id_usuario")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class Paciente extends Usuario {
+public class Paciente extends Usuario{
+    @Id
+    @Column(name = "id_usuario", nullable = false)
+    private Integer id;
 
-    // Campo detalleEps con una longitud máxima de 45 caracteres
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
+
     @Column(name = "detalle_eps", length = 45)
     private String detalleEps;
 
-    // Campo fechaConsulta mapeado a la columna fecha_consulta en la base de datos
     @Column(name = "fecha_consulta")
     private LocalDate fechaConsulta;
 
-}
+    @OneToOne(mappedBy = "idUsuario")
+    private Historial historial;
 
+}
