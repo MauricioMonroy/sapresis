@@ -1,7 +1,6 @@
 package codelicht.sipressspringapp.servicio;
 
 import codelicht.sipressspringapp.dto.HistorialDTO;
-import codelicht.sipressspringapp.modelo.Historial;
 
 import java.util.List;
 
@@ -11,32 +10,32 @@ import java.util.List;
 public interface IHistorialServicio {
 
     /**
-     * Lista todos los registros de historiales.
+     * Lista todos los registros de Historial.
      *
-     * @return una lista de todos los historiales.
+     * @return una lista de todos los registros Historial.
      */
     List<HistorialDTO> listarRegistros();
 
     /**
-     * Busca un registro de historial por su ID.
+     * Busca un registro Historial por su ID.
      *
-     * @param idHistorial el ID del historial.
+     * @param idHistorialDTO el ID del registro Historial.
      * @return el historial con el ID especificado, o null si no se encuentra.
      */
-    HistorialDTO buscarRegistroPorId(Integer idHistorial);
+    HistorialDTO buscarRegistroPorId(Integer idHistorialDTO);
 
     /**
-     * Guarda un nuevo registro de historial o actualiza uno existente.
+     * Guarda un nuevo registro Historial o actualiza uno existente.
      *
-     * @param historialDTO el historial a guardar o actualizar.
-     * @return el historial guardado o actualizado.
+     * @param historialDTO el registro Historial a guardar o actualizar.
+     * @return registro Historial guardado o actualizado.
      */
     HistorialDTO guardarRegistro(HistorialDTO historialDTO);
 
     /**
-     * Elimina un registro de historial.
+     * Elimina un registro de Historial.
      *
-     * @param idHistorial el historial a eliminar.
+     * @param idHistorial el ID del registro Historial a eliminar.
      */
     void eliminarRegistro(Integer idHistorial);
 }

@@ -10,32 +10,32 @@ import java.util.List;
 public interface IUsuarioServicio {
 
     /**
-     * Lista todos los registros de usuarioDTOs.
+     * Obtiene todos los registros Usuario.
      *
-     * @return una lista de todos los usuarioDTOs.
+     * @return una lista de todos los registros Usuario.
      */
     List<UsuarioDTO> listarRegistros();
 
     /**
-     * Busca un registro de usuarioDTO por su ID.
+     * Busca un registro Usuario por su ID.
      *
-     * @param idUsuarioDTO el ID del usuarioDTO.
-     * @return el usuarioDTO con el ID especificado, o null si no se encuentra.
+     * @param idUsuarioDTO el ID del registro Usuario.
+     * @return el usuario con el ID especificado, o null si no se encuentra.
      */
     UsuarioDTO buscarRegistroPorId(Integer idUsuarioDTO);
 
     /**
-     * Guarda un nuevo registro de usuarioDTO o actualiza uno existente.
+     * Guarda un nuevo registro Usuario o actualiza uno existente.
      *
-     * @param usuarioDTO el usuarioDTO a guardar o actualizar.
-     * @return el usuarioDTO guardado o actualizado.
+     * @param usuarioDTO el registro Usuario a guardar o actualizar.
+     * @return registro Usuario guardado o actualizado.
      */
     UsuarioDTO guardarRegistro(UsuarioDTO usuarioDTO);
 
     /**
-     * Elimina un registro de usuarioDTO.
+     * Elimina un registro de Usuario.
      *
-     * @param idUsuario el usuarioDTO a eliminar.
+     * @param idUsuario el ID del registro Usuario a eliminar.
      */
     void eliminarRegistro(Integer idUsuario);
 }

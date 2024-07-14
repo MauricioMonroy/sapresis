@@ -10,30 +10,30 @@ import java.util.List;
 public interface IEmpleadoServicio {
 
     /**
-     * Lista todos los registros de empleados.
+     * Lista todos los registros Empleado.
      *
-     * @return una lista de todos los empleados.
+     * @return una lista de todos los registros Empleado.
      */
     List<EmpleadoDTO> listarRegistros();
 
     /**
-     * Busca un registro de empleado por su ID.
+     * Busca un registro Empleado por su ID.
      *
-     * @param idEmpleado el ID del empleado.
+     * @param idEmpleadoDTO el ID del Empleado.
      * @return el empleado con el ID especificado, o null si no se encuentra.
      */
-    EmpleadoDTO buscarRegistroPorId(Integer idEmpleado);
+    EmpleadoDTO buscarRegistroPorId(Integer idEmpleadoDTO);
 
     /**
-     * Guarda un nuevo registro de empleado o actualiza uno existente.
+     * Guarda un nuevo registro Empleado o actualiza uno existente.
      *
-     * @param empleadoDTO el empleado a guardar o actualizar.
-     * @return el empleado guardado o actualizado.
+     * @param empleadoDTO el registro Empleado a guardar o actualizar.
+     * @return registro Empleado guardado o actualizado.
      */
     EmpleadoDTO guardarRegistro(EmpleadoDTO empleadoDTO);
 
     /**
-     * Elimina un registro de empleado.
+     * Elimina un registro de Empleado.
      *
      * @param idEmpleado el empleado a eliminar.
      */

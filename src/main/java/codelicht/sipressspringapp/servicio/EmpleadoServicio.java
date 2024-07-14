@@ -1,10 +1,14 @@
 package codelicht.sipressspringapp.servicio;
 
 import codelicht.sipressspringapp.dto.EmpleadoDTO;
+import codelicht.sipressspringapp.dto.UsuarioDTO;
 import codelicht.sipressspringapp.modelo.Empleado;
+import codelicht.sipressspringapp.modelo.Usuario;
 import codelicht.sipressspringapp.repositorio.EmpleadoRepositorio;
+import codelicht.sipressspringapp.repositorio.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,10 +22,13 @@ public class EmpleadoServicio implements IEmpleadoServicio {
     @Autowired
     private EmpleadoRepositorio empleadoRepositorio;
 
+    @Autowired
+    private UsuarioRepositorio usuarioRepositorio;
+
     /**
-     * Lista todos los registros de empleados.
+     * Lista todos los registros de Empleado.
      *
-     * @return una lista de todos los empleados.
+     * @return una lista de todos los registros de Empleado.
      */
     @Override
     public List<EmpleadoDTO> listarRegistros() {
@@ -31,7 +38,7 @@ public class EmpleadoServicio implements IEmpleadoServicio {
     }
 
     /**
-     * Busca un registro de empleado por su ID.
+     * Busca un registro de Empleado por su ID.
      *
      * @param idEmpleado el ID del empleado.
      * @return el empleado con el ID especificado, o null si no se encuentra.
@@ -50,25 +57,53 @@ public class EmpleadoServicio implements IEmpleadoServicio {
      * @return el empleado guardado o actualizado.
      */
     @Override
+    @Transactional
     public EmpleadoDTO guardarRegistro(EmpleadoDTO empleadoDTO) {
-        Empleado empleado = convertirAEntidad(empleadoDTO);
+        Usuario usuario = convertirUsuarioAEntidad(empleadoDTO);
+        Usuario usuarioGuardado = usuarioRepositorio.save(usuario);
+
+        Empleado empleado = convertirEmpleadoAEntidad(empleadoDTO);
+        empleado.setUsuario(usuarioGuardado);
+
         Empleado empleadoGuardado = empleadoRepositorio.save(empleado);
         return convertirADTO(empleadoGuardado);
     }
 
     /**
-     * Elimina un registro de empleado.
+     * Elimina un registro de Empleado.
      *
      * @param idEmpleado el empleado a eliminar.
      */
     @Override
+    @Transactional
     public void eliminarRegistro(Integer idEmpleado) {
         empleadoRepositorio.deleteById(idEmpleado);
     }
 
+    private Usuario convertirUsuarioAEntidad(UsuarioDTO usuarioDTO) {
+        Usuario usuario = new Usuario();
+        usuario.setId(usuarioDTO.getId());
+        usuario.setUsername(usuarioDTO.getUsername());
+        usuario.setPassword(usuarioDTO.getPassword());
+        usuario.setNombre(usuarioDTO.getNombre());
+        usuario.setApellido(usuarioDTO.getApellido());
+        usuario.setIdentificacion(usuarioDTO.getIdentificacion());
+        usuario.setTelefono(usuarioDTO.getTelefono());
+        usuario.setEmail(usuarioDTO.getEmail());
+        usuario.setEsEmpleado(usuarioDTO.getEsEmpleado());
+        usuario.setEsEmpleado(usuarioDTO.getEsEmpleado());
+        return usuario;
+    }
+
+    private Empleado convertirEmpleadoAEntidad(EmpleadoDTO empleadoDTO) {
+        Empleado empleado = new Empleado();
+        empleado.setCargo(empleadoDTO.getCargo());
+        empleado.setSueldo(empleadoDTO.getSueldo());
+        return empleado;
+    }
+
     private EmpleadoDTO convertirADTO(Empleado empleado) {
         EmpleadoDTO dto = new EmpleadoDTO();
-        // mapea los campos de Usuario
         dto.setId(empleado.getId());
         dto.setUsername(empleado.getUsername());
         dto.setPassword(empleado.getPassword());
@@ -79,29 +114,9 @@ public class EmpleadoServicio implements IEmpleadoServicio {
         dto.setEmail(empleado.getEmail());
         dto.setEsEmpleado(empleado.getEsEmpleado());
         dto.setEsEmpleado(empleado.getEsEmpleado());
-        // mapea los campos específicos de Empleado
         dto.setCargo(empleado.getCargo());
         dto.setSueldo(empleado.getSueldo());
         return dto;
-    }
-
-    private Empleado convertirAEntidad(EmpleadoDTO dto) {
-        Empleado empleado = new Empleado();
-        // mapea los campos de Usuario
-        empleado.setId(dto.getId());
-        empleado.setUsername(dto.getUsername());
-        empleado.setPassword(dto.getPassword());
-        empleado.setNombre(dto.getNombre());
-        empleado.setApellido(dto.getApellido());
-        empleado.setIdentificacion(dto.getIdentificacion());
-        empleado.setTelefono(dto.getTelefono());
-        empleado.setEmail(dto.getEmail());
-        empleado.setEsEmpleado(dto.getEsEmpleado());
-        empleado.setEsEmpleado(dto.getEsEmpleado());
-        // mapea los campos específicos de Empleado
-        empleado.setCargo(dto.getCargo());
-        empleado.setSueldo(dto.getSueldo());
-        return empleado;
     }
 }
 

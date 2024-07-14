@@ -5,37 +5,37 @@ import codelicht.sipressspringapp.dto.PacienteDTO;
 import java.util.List;
 
 /**
- * Interfaz para definir los métodos de servicio relacionados con la entidad Paciente.
+ * Interfaz para definir los métodos de servicio relacionados con la entidad PacienteDTO.
  */
 public interface IPacienteServicio {
 
     /**
-     * Lista todos los registros de pacientes.
+     * Obtiene todos los registros Paciente.
      *
-     * @return una lista de todos los pacientes.
+     * @return una lista de todos los registros Paciente.
      */
     List<PacienteDTO> listarRegistros();
 
     /**
-     * Busca un registro de paciente por su ID.
+     * Busca un registro Paciente por su ID.
      *
-     * @param idPaciente el ID del paciente.
-     * @return el paciente con el ID especificado, o null si no se encuentra.
+     * @param idPacienteDTO el ID del registro Paciente.
+     * @return registro Paciente con el ID especificado, o null si no se encuentra.
      */
-    PacienteDTO buscarRegistroPorId(Integer idPaciente);
+    PacienteDTO buscarRegistroPorId(Integer idPacienteDTO);
 
     /**
-     * Guarda un nuevo registro de paciente o actualiza uno existente.
+     * Guarda un nuevo registro Paciente o actualiza uno existente.
      *
-     * @param pacienteDTO el paciente a guardar o actualizar.
-     * @return el paciente guardado o actualizado.
+     * @param pacienteDTO el registro Paciente a guardar o actualizar.
+     * @return registro Paciente guardado o actualizado.
      */
     PacienteDTO guardarRegistro(PacienteDTO pacienteDTO);
 
     /**
-     * Elimina un registro de paciente.
+     * Elimina un registro de Paciente.
      *
-     * @param idPaciente el ID del paciente a eliminar.
+     * @param idPaciente el ID del registro Paciente a eliminar.
      */
     void eliminarRegistro(Integer idPaciente);
 }
