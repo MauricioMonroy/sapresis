@@ -93,8 +93,8 @@ public class PacienteClient {
         scanner.nextLine(); // Integra una nueva línea
 
         String json = String.format(
-                "{\"detalleEps\": \"%s\", \"fechaConsulta\": \"%s\", \"username\": \"%s\", \"password\": \"%s\", \"nombre\": \"%s\", \"apellido\": \"%s\", \"identificacion\": \"%s\", \"telefono\": \"%s\", \"email\": \"%s\", \"esPaciente\": %b, \"esEmpleado\": %b}",
-                detalleEps, fechaConsulta, username, password, nombre, apellido, identificacion, telefono, email, esPaciente, esEmpleado);
+                "{\"usuario\": {\"username\": \"%s\", \"password\": \"%s\", \"nombre\": \"%s\", \"apellido\": \"%s\", \"identificacion\": \"%s\", \"telefono\": \"%s\", \"email\": \"%s\", \"esPaciente\": %b, \"esEmpleado\": %b}, \"detalleEps\": \"%s\", \"fechaConsulta\": \"%s\"}",
+                username, password, nombre, apellido, identificacion, telefono, email, esPaciente, esEmpleado, detalleEps, fechaConsulta);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/sipress-spring-app/pacientes"))
                 .header("Content-Type", "application/json")
@@ -105,6 +105,7 @@ public class PacienteClient {
         System.out.println("Guardar paciente:");
         prettyPrint(response.body());
     }
+
 
     private static void eliminarPaciente() throws Exception {
         System.out.print("Ingrese el ID del paciente a eliminar: ");

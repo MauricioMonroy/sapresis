@@ -20,7 +20,7 @@ public class UsuarioClient {
             System.out.println("5. Salir");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine(); // Integra una nueva línea
 
             switch (choice) {
                 case 1:
@@ -106,8 +106,7 @@ public class UsuarioClient {
     private static void eliminarUsuario() throws Exception {
         System.out.print("Ingrese el ID del usuario a eliminar: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
-
+        scanner.nextLine(); // Integra una nueva línea
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/sipress-spring-app/usuarios/" + id))
                 .DELETE()
