@@ -18,6 +18,7 @@ public class UsuarioControlador {
     @Autowired
     private IUsuarioServicio usuarioServicio;
 
+    // Método para listar todos los empleados
     @GetMapping("/usuarios")
     public List<UsuarioDTO> listarUsuarios() {
         var usuarios = usuarioServicio.listarRegistros();
@@ -25,16 +26,19 @@ public class UsuarioControlador {
         return usuarios;
     }
 
+    // Método para buscar un usuario por ID
     @GetMapping("/usuarios/{id}")
     public UsuarioDTO buscarUsuarioPorId(@PathVariable Integer id) {
         return usuarioServicio.buscarRegistroPorId(id);
     }
 
+    // Método para guardar o actualizar un usuario
     @PostMapping("/usuarios")
     public UsuarioDTO guardarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
         return usuarioServicio.guardarRegistro(usuarioDTO);
     }
 
+    // Método para eliminar un usuario
     @DeleteMapping("/usuarios/{id}")
     public void eliminarUsuario(@PathVariable Integer id) {
         usuarioServicio.eliminarRegistro(id);

@@ -5,12 +5,14 @@ import codelicht.sipressspringapp.servicio.IEmpleadoServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("sipress-spring-app/empleados")
+@RequestMapping("/empleados")
 @CrossOrigin(value = "http://localhost:3000")
 public class EmpleadoControlador {
     private static final Logger logger =
@@ -20,32 +22,27 @@ public class EmpleadoControlador {
     private IEmpleadoServicio empleadoServicio;
 
     // Método para listar todos los empleados
-    // http://localhost:8080/sipress-spring-app/empleados
     @GetMapping
-    public List<EmpleadoDTO> listarEmpleados() {
-        List<EmpleadoDTO> empleados = empleadoServicio.listarRegistros();
-        empleados.forEach(empleado -> logger.info(empleado.toString()));
-        return empleados;
+    public List<EmpleadoDTO> listarRegistros() {
+        return empleadoServicio.listarRegistros();
     }
 
     // Método para buscar un empleado por ID
-    // http://localhost:8080/sipress-spring-app/empleados/{id}
     @GetMapping("/{id}")
-    public EmpleadoDTO obtenerEmpleadoPorId(@PathVariable Integer id) {
+    public EmpleadoDTO buscarRegistroPorId(@PathVariable Integer id) {
         return empleadoServicio.buscarRegistroPorId(id);
     }
 
     // Método para guardar o actualizar un empleado
-    // http://localhost:8080/sipress-spring-app/empleados
     @PostMapping
-    public EmpleadoDTO guardarEmpleado(@RequestBody EmpleadoDTO empleadoDTO) {
-        return empleadoServicio.guardarRegistro(empleadoDTO);
+    public ResponseEntity<EmpleadoDTO> guardarRegistro(@RequestBody EmpleadoDTO empleadoDTO) {
+        EmpleadoDTO nuevoEmpleado = empleadoServicio.guardarRegistro(empleadoDTO);
+        return new ResponseEntity<>(nuevoEmpleado, HttpStatus.CREATED);
     }
 
     // Método para eliminar un empleado
-    // http://localhost:8080/sipress-spring-app/empleados/{id}
     @DeleteMapping("/{id}")
-    public void eliminarEmpleado(@PathVariable Integer id) {
+    public void eliminarRegistro(@PathVariable Integer id) {
         empleadoServicio.eliminarRegistro(id);
     }
 
