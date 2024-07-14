@@ -10,5 +10,4 @@ import java.time.LocalDate;
 public class PacienteDTO extends UsuarioDTO {
     private String detalleEps;
     private LocalDate fechaConsulta;
-
 }
