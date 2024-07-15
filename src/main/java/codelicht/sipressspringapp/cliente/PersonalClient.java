@@ -6,7 +6,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Scanner;
 
-public class EmpleadoClient {
+public class PersonalClient {
     private static final HttpClient client = HttpClient.newHttpClient();
     private static final Scanner scanner = new Scanner(System.in);
 
