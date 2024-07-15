@@ -4,6 +4,10 @@ import codelicht.sipressspringapp.modelo.Habitacion;
 
 import java.util.List;
 
+/**
+ * Interface para la entidad Habitacion.
+ * Contiene los métodos a implementar en operaciones CRUD básicas.
+ */
 public interface IHabitacionServicio {
     public List<Habitacion> listarHabitaciones();
 

@@ -4,6 +4,10 @@ import codelicht.sipressspringapp.modelo.Formula;
 
 import java.util.List;
 
+/**
+ * Interface para la entidad Formula.
+ * Contiene los métodos a implementar en operaciones CRUD básicas.
+ */
 public interface IFormulaServicio {
     public List<Formula> listarFormulas();
 

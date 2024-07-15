@@ -4,6 +4,10 @@ import codelicht.sipressspringapp.modelo.Consulta;
 
 import java.util.List;
 
+/**
+ * Interface para la entidad Consulta.
+ * Contiene los métodos a implementar en operaciones CRUD básicas.
+ */
 public interface IConsultaServicio {
     public List<Consulta> listarConsultas();
 

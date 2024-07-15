@@ -4,6 +4,10 @@ import codelicht.sipressspringapp.modelo.Doctor;
 
 import java.util.List;
 
+/**
+ * Interface para la entidad Doctor.
+ * Contiene los métodos a implementar en operaciones CRUD básicas.
+ */
 public interface IDoctorServicio {
     public List<Doctor> listarDoctores();
 
