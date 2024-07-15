@@ -7,7 +7,7 @@ SENA. Este sistema está destinado para ser usado por el personal de una Institu
 por varias Entidades que permiten la consulta y la gestión de información básica sobre los empleados de la institución, 
 como el número de identificación, el nombre y datos de contacto. También permite consultar la 
 asignación de habitaciones y pacientes. De igual forma permite almacenar información sobre los pacientes, como el ID, 
-el nombre, dato de contacto, el número de habitación, el personal asignado, las fórmulas médicas y las facturas.
+el nombre, datos de contacto, el número de habitación, el personal asignado, las fórmulas médicas y las facturas.
 
 ### Tecnologías Utilizadas (o que se planean utilizar)
 
