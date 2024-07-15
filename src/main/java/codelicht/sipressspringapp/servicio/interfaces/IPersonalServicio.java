@@ -1,4 +1,4 @@
-package codelicht.sipressspringapp.servicio;
+package codelicht.sipressspringapp.servicio.interfaces;
 
 import codelicht.sipressspringapp.modelo.Personal;
 
