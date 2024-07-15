@@ -5,7 +5,7 @@
 SIPRESS es un proyecto académico desarrollado para la Tecnología de Análisis y Desarrollo de Software (2721455) del
 SENA. Este sistema está destinado para ser usado por el personal de una Institución Prestadora de Salud. Está compuesto 
 por varias Entidades que permiten la consulta y la gestión de información básica sobre los empleados de la institución, 
-como el número de identificación, el nombre, la dirección y el número de teléfono. También permite consultar la 
+como el número de identificación, el nombre y datos de contacto. También permite consultar la 
 asignación de habitaciones y pacientes. De igual forma permite almacenar información sobre los pacientes, como el ID, 
 el nombre, dato de contacto, el número de habitación, el personal asignado, las fórmulas médicas y las facturas.
 
