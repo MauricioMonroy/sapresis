@@ -3,33 +3,44 @@ package codelicht.sipressspringapp.modelo;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
-import java.time.LocalDate;
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "paciente")
-public class Paciente extends Usuario{
+@NamedQueries({
+        @NamedQuery(name = "Paciente.findAll", query = "SELECT p FROM Paciente p")})
+public class Paciente implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
     @Id
-    @Column(name = "id_usuario", nullable = false)
-    private Integer id;
-
-    @MapsId
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario usuario;
-
-    @Column(name = "detalle_eps", length = 45)
-    private String detalleEps;
-
-    @Column(name = "fecha_consulta")
-    private LocalDate fechaConsulta;
-
-    @OneToOne(mappedBy = "idUsuario")
-    private Historial historial;
+    @Basic(optional = false)
+    @Column(name = "id_paciente")
+    private Integer idPaciente;
+    @Column(name = "nombre_paciente")
+    private String nombrePaciente;
+    @Column(name = "apellido_paciente")
+    private String apellidoPaciente;
+    @Column(name = "direccion_paciente")
+    private String direccionPaciente;
+    @Column(name = "telefono_paciente")
+    private String telefonoPaciente;
+    @Column(name = "email_paciente")
+    private String emailPaciente;
+    @OneToMany(mappedBy = "paciente")
+    private List<Factura> facturaList;
+    @JoinColumn(name = "eps_id", referencedColumnName = "id_eps")
+    @ManyToOne
+    private Eps eps;
+    @OneToMany(mappedBy = "paciente")
+    private List<Formula> formulaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente")
+    private List<Consulta> consultaList;
+    @OneToMany(mappedBy = "paciente")
+    private List<Habitacion> habitacionList;
 
 }
