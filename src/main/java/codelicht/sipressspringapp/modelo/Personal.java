@@ -1,5 +1,7 @@
 package codelicht.sipressspringapp.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,8 +33,11 @@ public class Personal implements Serializable {
     private String emailPersonal;
     @JoinColumn(name = "dependencia_id", referencedColumnName = "id_dependencia")
     @ManyToOne
+    @JsonBackReference
     private Dependencia dependencia;
     @OneToMany(mappedBy = "personal")
+    @JsonManagedReference
     private List<Habitacion> habitacionList;
+
 
 }

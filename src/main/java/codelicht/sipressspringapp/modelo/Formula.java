@@ -1,5 +1,6 @@
 package codelicht.sipressspringapp.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,5 +31,7 @@ public class Formula implements Serializable {
     private Double costoMedicacion;
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
     @ManyToOne
+    @JsonBackReference
     private Paciente paciente;
+
 }

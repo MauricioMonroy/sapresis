@@ -39,4 +39,5 @@ public class ConsultaPK implements Serializable {
         }
         return this.doctorId == other.doctorId;
     }
+
 }

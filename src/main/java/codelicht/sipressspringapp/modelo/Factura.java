@@ -1,5 +1,6 @@
 package codelicht.sipressspringapp.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,5 +27,17 @@ public class Factura implements Serializable {
     private Double total;
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
     @ManyToOne
+    @JsonBackReference
     private Paciente paciente;
+
+    @Override
+    public String toString() {
+        return "Factura{" +
+                "numeroFactura=" + numeroFactura +
+                ", descripcionServicio='" + descripcionServicio + '\'' +
+                ", valor=" + valor +
+                ", total=" + total +
+                ", paciente=" + paciente +
+                '}';
+    }
 }

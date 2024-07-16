@@ -1,5 +1,6 @@
 package codelicht.sipressspringapp.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,8 +27,11 @@ public class Habitacion implements Serializable {
     private Date fechaAdmision;
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
     @ManyToOne
+    @JsonBackReference
     private Paciente paciente;
     @JoinColumn(name = "personal_id", referencedColumnName = "id_personal")
     @ManyToOne
+    @JsonBackReference
     private Personal personal;
+
 }
