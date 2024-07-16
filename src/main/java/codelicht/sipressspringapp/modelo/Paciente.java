@@ -1,7 +1,9 @@
 package codelicht.sipressspringapp.modelo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +17,7 @@ import java.util.List;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Paciente.findAll", query = "SELECT p FROM Paciente p")})
+@JsonIgnoreProperties({"facturaList", "formulaList", "consultaList", "consultorioList"})
 public class Paciente implements Serializable {
 
     @Serial
@@ -22,16 +25,22 @@ public class Paciente implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "id_paciente")
+    @JsonProperty("idPaciente")
     private Integer idPaciente;
     @Column(name = "nombre_paciente")
+    @JsonProperty("nombrePaciente")
     private String nombrePaciente;
     @Column(name = "apellido_paciente")
+    @JsonProperty("apellidoPaciente")
     private String apellidoPaciente;
     @Column(name = "direccion_paciente")
+    @JsonProperty("direccionPaciente")
     private String direccionPaciente;
     @Column(name = "telefono_paciente")
+    @JsonProperty("telefonoPaciente")
     private String telefonoPaciente;
     @Column(name = "email_paciente")
+    @JsonProperty("emailPaciente")
     private String emailPaciente;
     @OneToMany(mappedBy = "paciente")
     @JsonManagedReference
@@ -49,5 +58,18 @@ public class Paciente implements Serializable {
     @OneToMany(mappedBy = "paciente")
     @JsonManagedReference
     private List<Consultorio> consultorioList;
+
+    @Override
+    public String toString() {
+        return "Paciente{" +
+                "idPaciente=" + idPaciente +
+                ", nombrePaciente='" + nombrePaciente + '\'' +
+                ", apellidoPaciente='" + apellidoPaciente + '\'' +
+                ", direccionPaciente='" + direccionPaciente + '\'' +
+                ", telefonoPaciente='" + telefonoPaciente + '\'' +
+                ", emailPaciente='" + emailPaciente + '\'' +
+                ", eps='" + eps + '\'' +
+                '}';
+    }
 
 }
