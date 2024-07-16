@@ -13,15 +13,15 @@ import java.util.Date;
 @Setter
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Habitacion.findAll", query = "SELECT h FROM Habitacion h")})
-public class Habitacion implements Serializable {
+        @NamedQuery(name = "Consultorio.findAll", query = "SELECT c FROM Consultorio c")})
+public class Consultorio implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "numero_habitacion")
-    private Integer numeroHabitacion;
+    @Column(name = "numero_consultorio")
+    private Integer numeroConsultorio;
     @Column(name = "fecha_admision")
     @Temporal(TemporalType.DATE)
     private Date fechaAdmision;

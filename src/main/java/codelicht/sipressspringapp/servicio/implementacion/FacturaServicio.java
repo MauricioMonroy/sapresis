@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Implementación del servicio para la entidad Habitacion.
+ * Implementación del servicio para la entidad Consultorio.
  */
 @Service
 public class FacturaServicio implements IFacturaServicio {
