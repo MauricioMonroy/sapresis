@@ -27,36 +27,51 @@ public class Paciente implements Serializable {
     @Column(name = "id_paciente")
     @JsonProperty("idPaciente")
     private Integer idPaciente;
+
     @Column(name = "nombre_paciente")
     @JsonProperty("nombrePaciente")
     private String nombrePaciente;
+
     @Column(name = "apellido_paciente")
     @JsonProperty("apellidoPaciente")
     private String apellidoPaciente;
+
     @Column(name = "direccion_paciente")
     @JsonProperty("direccionPaciente")
     private String direccionPaciente;
+
     @Column(name = "telefono_paciente")
     @JsonProperty("telefonoPaciente")
     private String telefonoPaciente;
+
     @Column(name = "email_paciente")
     @JsonProperty("emailPaciente")
     private String emailPaciente;
+
     @OneToMany(mappedBy = "paciente")
     @JsonManagedReference
+    @JsonProperty("facturaList")
     private List<Factura> facturaList;
+
     @JoinColumn(name = "eps_id", referencedColumnName = "id_eps")
     @ManyToOne
     @JsonBackReference
+    @JsonProperty("eps")
     private Eps eps;
+
     @OneToMany(mappedBy = "paciente")
     @JsonManagedReference
+    @JsonProperty("formulaList")
     private List<Formula> formulaList;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente")
     @JsonManagedReference
+    @JsonProperty("consultaList")
     private List<Consulta> consultaList;
+
     @OneToMany(mappedBy = "paciente")
     @JsonManagedReference
+    @JsonProperty("consultorioList")
     private List<Consultorio> consultorioList;
 
     @Override
@@ -68,7 +83,7 @@ public class Paciente implements Serializable {
                 ", direccionPaciente='" + direccionPaciente + '\'' +
                 ", telefonoPaciente='" + telefonoPaciente + '\'' +
                 ", emailPaciente='" + emailPaciente + '\'' +
-                ", eps='" + eps + '\'' +
+                ", eps='" + eps +
                 '}';
     }
 

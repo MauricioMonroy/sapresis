@@ -1,6 +1,8 @@
 package codelicht.sipressspringapp.modelo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +16,7 @@ import java.util.Date;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Formula.findAll", query = "SELECT f FROM Formula f")})
+@JsonIgnoreProperties({"paciente"})
 public class Formula implements Serializable {
 
     @Serial
@@ -21,17 +24,36 @@ public class Formula implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "numero_formula")
+    @JsonProperty("numeroFormula")
     private Integer numeroFormula;
+
     @Column(name = "nombre_medicacion")
+    @JsonProperty("nombreMedicacion")
     private String nombreMedicacion;
+
     @Column(name = "fecha_medicacion")
     @Temporal(TemporalType.DATE)
+    @JsonProperty("fechaMedicacion")
     private Date fechaMedicacion;
+
     @Column(name = "costo_medicacion")
+    @JsonProperty("costoMedicacion")
     private Double costoMedicacion;
+
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
     @ManyToOne
     @JsonBackReference
+    @JsonProperty("paciente")
     private Paciente paciente;
+
+    @Override
+    public String toString() {
+        return "Formula{" +
+                "numeroFormula=" + numeroFormula +
+                ", nombreMedicacion='" + nombreMedicacion + '\'' +
+                ", fechaMedicacion=" + fechaMedicacion +
+                ", costoMedicacion=" + costoMedicacion +
+                '}';
+    }
 
 }

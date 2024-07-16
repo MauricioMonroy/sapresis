@@ -1,6 +1,8 @@
 package codelicht.sipressspringapp.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +16,7 @@ import java.util.List;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Eps.findAll", query = "SELECT e FROM Eps e")})
+@JsonIgnoreProperties({"pacienteList"})
 public class Eps implements Serializable {
 
     @Serial
@@ -21,18 +24,35 @@ public class Eps implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "id_eps")
+    @JsonProperty("idEps")
     private Integer idEps;
+
     @Basic(optional = false)
     @Column(name = "nombre_eps")
+    @JsonProperty("nombreEps")
     private String nombreEps;
+
     @Basic(optional = false)
     @Column(name = "telefono_eps")
+    @JsonProperty("telefonoEps")
     private String telefonoEps;
+
     @Basic(optional = false)
     @Column(name = "email_eps")
+    @JsonProperty("emailEps")
     private String emailEps;
+
     @OneToMany(mappedBy = "eps")
     @JsonManagedReference
+    @JsonProperty("pacienteList")
     private List<Paciente> pacienteList;
+
+    @Override
+    public String toString() {
+        return "Eps{" +
+                "idEps=" + idEps +
+                ", nombreEps='" + nombreEps + '\'' +
+                '}';
+    }
 
 }
