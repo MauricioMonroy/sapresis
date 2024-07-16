@@ -48,6 +48,6 @@ public class Paciente implements Serializable {
     private List<Consulta> consultaList;
     @OneToMany(mappedBy = "paciente")
     @JsonManagedReference
-    private List<Habitacion> habitacionList;
+    private List<Consultorio> consultorioList;
 
 }

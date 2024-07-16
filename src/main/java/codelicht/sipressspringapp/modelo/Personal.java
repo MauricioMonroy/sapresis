@@ -37,7 +37,7 @@ public class Personal implements Serializable {
     private Dependencia dependencia;
     @OneToMany(mappedBy = "personal")
     @JsonManagedReference
-    private List<Habitacion> habitacionList;
+    private List<Consultorio> consultorioList;
 
 
 }
