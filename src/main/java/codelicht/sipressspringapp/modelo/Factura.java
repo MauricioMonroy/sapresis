@@ -30,14 +30,4 @@ public class Factura implements Serializable {
     @JsonBackReference
     private Paciente paciente;
 
-    @Override
-    public String toString() {
-        return "Factura{" +
-                "numeroFactura=" + numeroFactura +
-                ", descripcionServicio='" + descripcionServicio + '\'' +
-                ", valor=" + valor +
-                ", total=" + total +
-                ", paciente=" + paciente +
-                '}';
-    }
 }
