@@ -5,6 +5,7 @@ import codelicht.sipressspringapp.servicio.interfaces.IDependenciaServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,9 +28,25 @@ public class DependenciaControlador {
         return dependencias;
     }
 
+    @GetMapping("/dependencias/{id}")
+    public Dependencia buscarDependenciaPorId(@PathVariable Integer id) {
+        return dependenciaServicio.buscarDependenciaPorId(id);
+    }
+
     @PostMapping("/dependencias")
     public Dependencia agregarDependencia(@RequestBody Dependencia dependencia) {
         logger.info("Dependencia a agregar: " + dependencia);
         return dependenciaServicio.guardarDependencia(dependencia);
+    }
+
+    @DeleteMapping("/dependencias/{id}")
+    public ResponseEntity<Void> eliminarDependencia(@PathVariable("id") Integer id) {
+        Dependencia dependencia = dependenciaServicio.buscarDependenciaPorId(id);
+        if (dependencia != null) {
+            dependenciaServicio.eliminarDependencia(dependencia);
+            return ResponseEntity.noContent().build(); // Elimina y responde con 204 No Content
+        } else {
+            return ResponseEntity.notFound().build(); // Responde con 404 Not Found si no existe
+        }
     }
 }
