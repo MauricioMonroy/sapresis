@@ -1,7 +1,6 @@
 package codelicht.sipressspringapp.cliente;
 
-import codelicht.sipressspringapp.modelo.Eps;
-import codelicht.sipressspringapp.modelo.Paciente;
+import codelicht.sipressspringapp.modelo.Institucion;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -12,7 +11,7 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Scanner;
 
-public class PacienteApp {
+public class InstitucionApp {
 
     private static final String BASE_URL = "http://localhost:8080/sipress-app";
     private static final HttpClient client = HttpClient.newHttpClient();
@@ -22,10 +21,10 @@ public class PacienteApp {
     public static void main(String[] args) {
         while (true) {
             System.out.println("Seleccione una opción:");
-            System.out.println("1. Listar todos los pacientes");
-            System.out.println("2. Buscar paciente por ID");
-            System.out.println("3. Guardar un nuevo paciente");
-            System.out.println("4. Eliminar un paciente");
+            System.out.println("1. Listar todos las instituciones");
+            System.out.println("2. Buscar institucion por ID");
+            System.out.println("3. Guardar nueva institucion");
+            System.out.println("4. Eliminar una institucion");
             System.out.println("5. Salir");
 
             int opcion = scanner.nextInt();
@@ -33,125 +32,114 @@ public class PacienteApp {
 
             switch (opcion) {
                 case 1:
-                    listarPacientes();
+                    listarInstituciones();
                     break;
                 case 2:
-                    buscarPacientePorId();
+                    buscarInstitucionPorId();
                     break;
                 case 3:
-                    guardarPaciente();
+                    guardarInstitucion();
                     break;
                 case 4:
-                    eliminarPaciente();
+                    eliminarInstitucion();
                     break;
                 case 5:
                     System.out.println("Saliendo...");
                     return;
                 default:
-                    System.out.println("Opción inválida, intente de nuevo.");
+                    System.out.println("Opción inválida, intente de nueva.");
             }
         }
     }
 
-    private static void listarPacientes() {
+    private static void listarInstituciones() {
         try {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/pacientes"))
+                    .uri(URI.create(BASE_URL + "/instituciones"))
                     .GET()
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            List<Paciente> pacientes = mapper.readValue(response.body(), new TypeReference<>() {
+            List<Institucion> instituciones = mapper.readValue(response.body(), new TypeReference<>() {
             });
-            pacientes.forEach(System.out::println);
+            instituciones.forEach(System.out::println);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private static void buscarPacientePorId() {
+    private static void buscarInstitucionPorId() {
         try {
-            System.out.println("Ingrese el ID del paciente:");
+            System.out.println("Ingrese el ID de la institucion:");
             int id = scanner.nextInt();
             scanner.nextLine();  // Consume newline
 
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/pacientes/" + id))
+                    .uri(URI.create(BASE_URL + "/instituciones/" + id))
                     .GET()
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            Paciente paciente = mapper.readValue(response.body(), Paciente.class);
-            System.out.println(paciente);
+            Institucion institucion = mapper.readValue(response.body(), Institucion.class);
+            System.out.println(institucion);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private static void guardarPaciente() {
+    private static void guardarInstitucion() {
         try {
             Scanner scanner = new Scanner(System.in);
             ObjectMapper mapper = new ObjectMapper();
 
-            Paciente paciente = new Paciente();
-            System.out.println("Ingrese el ID del paciente:");
-            paciente.setIdPaciente(scanner.nextInt());
+            Institucion institucion = new Institucion();
+            System.out.println("Ingrese el ID de la institucion:");
+            institucion.setIdInstitucion(scanner.nextInt());
             scanner.nextLine();  // Limpiar el buffer del scanner
-            System.out.println("Ingrese el nombre del paciente:");
-            paciente.setNombrePaciente(scanner.nextLine());
-            System.out.println("Ingrese el apellido del paciente:");
-            paciente.setApellidoPaciente(scanner.nextLine());
-            System.out.println("Ingrese la dirección del paciente:");
-            paciente.setDireccionPaciente(scanner.nextLine());
-            System.out.println("Ingrese el teléfono del paciente:");
-            paciente.setTelefonoPaciente(scanner.nextLine());
-            System.out.println("Ingrese el email del paciente:");
-            paciente.setEmailPaciente(scanner.nextLine());
+            System.out.println("Ingrese el nombre de la institucion:");
+            institucion.setNombreInstitucion(scanner.nextLine());
+            System.out.println("Ingrese la dirección de la institucion:");
+            institucion.setDireccionInstitucion(scanner.nextLine());
+            System.out.println("Ingrese el teléfono de la institucion:");
+            institucion.setTelefonoInstitucion(scanner.nextLine());
+            System.out.println("Ingrese el email del institucion:");
+            institucion.setCodigoPostal(scanner.nextLine());
 
-            // Solicitar el ID de EPS y asignarlo al paciente
-            System.out.println("Ingrese el ID de EPS del paciente:");
-            int epsId = scanner.nextInt();
-            Eps eps = new Eps();
-            eps.setIdEps(epsId);
-            paciente.setEps(eps);
-
-            String requestBody = mapper.writeValueAsString(paciente);
+            String requestBody = mapper.writeValueAsString(institucion);
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/pacientes"))
+                    .uri(URI.create("http://localhost:8080/sipress-app/instituciones"))
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .header("Content-Type", "application/json")
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() / 100 == 2) {  // Verificar si el código de estado es 2xx
-                Paciente nuevoPaciente = mapper.readValue(response.body(), Paciente.class);
-                System.out.println("Paciente guardado: " + nuevoPaciente);
+            if (response.statusCode() == 201) {  // Código 201 indica creación exitosa
+                Institucion nuevaInstitucion = mapper.readValue(response.body(), Institucion.class);
+                System.out.println("Institucion guardada: " + nuevaInstitucion);
             } else {
-                System.out.println("Error al guardar el paciente: " + response.body());
+                System.out.println("Error al guardar la institucion: " + response.body());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private static void eliminarPaciente() {
+    private static void eliminarInstitucion() {
         try {
-            System.out.println("Ingrese el ID del paciente a eliminar:");
+            System.out.println("Ingrese el ID de la institucion a eliminar:");
             int id = scanner.nextInt();
             scanner.nextLine();  // Consume newline
 
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/pacientes/" + id))
+                    .uri(URI.create(BASE_URL + "/instituciones/" + id))
                     .DELETE()
                     .build();
             HttpResponse<Void> response = client.send(request, HttpResponse.BodyHandlers.discarding());
             if (response.statusCode() == 204) {
-                System.out.println("Paciente eliminado.");
+                System.out.println("Institucion eliminada.");
             } else {
-                System.out.println("Error al eliminar el paciente. Código de respuesta: " + response.statusCode());
+                System.out.println("Error al eliminar la institucion. Código de respuesta: " + response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
-
-

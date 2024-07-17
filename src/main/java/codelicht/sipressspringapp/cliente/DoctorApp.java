@@ -1,7 +1,6 @@
 package codelicht.sipressspringapp.cliente;
 
-import codelicht.sipressspringapp.modelo.Eps;
-import codelicht.sipressspringapp.modelo.Paciente;
+import codelicht.sipressspringapp.modelo.Doctor;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -12,7 +11,7 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Scanner;
 
-public class PacienteApp {
+public class DoctorApp {
 
     private static final String BASE_URL = "http://localhost:8080/sipress-app";
     private static final HttpClient client = HttpClient.newHttpClient();
@@ -22,10 +21,10 @@ public class PacienteApp {
     public static void main(String[] args) {
         while (true) {
             System.out.println("Seleccione una opción:");
-            System.out.println("1. Listar todos los pacientes");
-            System.out.println("2. Buscar paciente por ID");
-            System.out.println("3. Guardar un nuevo paciente");
-            System.out.println("4. Eliminar un paciente");
+            System.out.println("1. Listar todos los doctores");
+            System.out.println("2. Buscar doctor por ID");
+            System.out.println("3. Guardar nuevo doctor");
+            System.out.println("4. Eliminar un doctor");
             System.out.println("5. Salir");
 
             int opcion = scanner.nextInt();
@@ -33,16 +32,16 @@ public class PacienteApp {
 
             switch (opcion) {
                 case 1:
-                    listarPacientes();
+                    listarDoctores();
                     break;
                 case 2:
-                    buscarPacientePorId();
+                    buscarDoctorPorId();
                     break;
                 case 3:
-                    guardarPaciente();
+                    guardarDoctor();
                     break;
                 case 4:
-                    eliminarPaciente();
+                    eliminarDoctor();
                     break;
                 case 5:
                     System.out.println("Saliendo...");
@@ -53,105 +52,94 @@ public class PacienteApp {
         }
     }
 
-    private static void listarPacientes() {
+    private static void listarDoctores() {
         try {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/pacientes"))
+                    .uri(URI.create(BASE_URL + "/doctores"))
                     .GET()
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            List<Paciente> pacientes = mapper.readValue(response.body(), new TypeReference<>() {
+            List<Doctor> doctores = mapper.readValue(response.body(), new TypeReference<>() {
             });
-            pacientes.forEach(System.out::println);
+            doctores.forEach(System.out::println);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private static void buscarPacientePorId() {
+    private static void buscarDoctorPorId() {
         try {
-            System.out.println("Ingrese el ID del paciente:");
+            System.out.println("Ingrese el ID del doctor:");
             int id = scanner.nextInt();
             scanner.nextLine();  // Consume newline
 
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/pacientes/" + id))
+                    .uri(URI.create(BASE_URL + "/doctores/" + id))
                     .GET()
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            Paciente paciente = mapper.readValue(response.body(), Paciente.class);
-            System.out.println(paciente);
+            Doctor doctor = mapper.readValue(response.body(), Doctor.class);
+            System.out.println(doctor);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private static void guardarPaciente() {
+    private static void guardarDoctor() {
         try {
             Scanner scanner = new Scanner(System.in);
             ObjectMapper mapper = new ObjectMapper();
 
-            Paciente paciente = new Paciente();
-            System.out.println("Ingrese el ID del paciente:");
-            paciente.setIdPaciente(scanner.nextInt());
+            Doctor doctor = new Doctor();
+            System.out.println("Ingrese el ID del doctor:");
+            doctor.setIdDoctor(scanner.nextInt());
             scanner.nextLine();  // Limpiar el buffer del scanner
-            System.out.println("Ingrese el nombre del paciente:");
-            paciente.setNombrePaciente(scanner.nextLine());
-            System.out.println("Ingrese el apellido del paciente:");
-            paciente.setApellidoPaciente(scanner.nextLine());
-            System.out.println("Ingrese la dirección del paciente:");
-            paciente.setDireccionPaciente(scanner.nextLine());
-            System.out.println("Ingrese el teléfono del paciente:");
-            paciente.setTelefonoPaciente(scanner.nextLine());
-            System.out.println("Ingrese el email del paciente:");
-            paciente.setEmailPaciente(scanner.nextLine());
+            System.out.println("Ingrese el nombre del doctor:");
+            doctor.setNombreDoctor(scanner.nextLine());
+            System.out.println("Ingrese el apellido del doctor:");
+            doctor.setApellidoDoctor(scanner.nextLine());
+            System.out.println("Ingrese el teléfono del doctor:");
+            doctor.setTelefonoDoctor(scanner.nextLine());
+            System.out.println("Ingrese el email del doctor:");
+            doctor.setEmailDoctor(scanner.nextLine());
 
-            // Solicitar el ID de EPS y asignarlo al paciente
-            System.out.println("Ingrese el ID de EPS del paciente:");
-            int epsId = scanner.nextInt();
-            Eps eps = new Eps();
-            eps.setIdEps(epsId);
-            paciente.setEps(eps);
-
-            String requestBody = mapper.writeValueAsString(paciente);
+            String requestBody = mapper.writeValueAsString(doctor);
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/pacientes"))
+                    .uri(URI.create("http://localhost:8080/sipress-app/doctores"))
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .header("Content-Type", "application/json")
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() / 100 == 2) {  // Verificar si el código de estado es 2xx
-                Paciente nuevoPaciente = mapper.readValue(response.body(), Paciente.class);
-                System.out.println("Paciente guardado: " + nuevoPaciente);
+            if (response.statusCode() == 201) {  // Código 201 indica creación exitosa
+                Doctor nuevoDoctor = mapper.readValue(response.body(), Doctor.class);
+                System.out.println("Doctor guardado: " + nuevoDoctor);
             } else {
-                System.out.println("Error al guardar el paciente: " + response.body());
+                System.out.println("Error al guardar el doctor: " + response.body());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private static void eliminarPaciente() {
+    private static void eliminarDoctor() {
         try {
-            System.out.println("Ingrese el ID del paciente a eliminar:");
+            System.out.println("Ingrese el ID del doctor a eliminar:");
             int id = scanner.nextInt();
             scanner.nextLine();  // Consume newline
 
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/pacientes/" + id))
+                    .uri(URI.create(BASE_URL + "/doctores/" + id))
                     .DELETE()
                     .build();
             HttpResponse<Void> response = client.send(request, HttpResponse.BodyHandlers.discarding());
             if (response.statusCode() == 204) {
-                System.out.println("Paciente eliminado.");
+                System.out.println("Doctor eliminado.");
             } else {
-                System.out.println("Error al eliminar el paciente. Código de respuesta: " + response.statusCode());
+                System.out.println("Error al eliminar el doctor. Código de respuesta: " + response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
-
-
