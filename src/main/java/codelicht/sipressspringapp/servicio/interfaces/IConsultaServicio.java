@@ -19,7 +19,4 @@ public interface IConsultaServicio {
 
     public void eliminarConsulta(Consulta consulta);
 
-    public List<Consulta> buscarConsultasPorFecha(Date fechaConsulta);
-
-    public List<Consulta> buscarConsultasPorHora(Date horaConsulta);
 }

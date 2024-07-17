@@ -12,7 +12,4 @@ import java.util.List;
  * Extiende JpaRepository para proporcionar operaciones CRUD básicas.
  */
 public interface ConsultaRepositorio extends JpaRepository<Consulta, ConsultaPK> {
-    List<Consulta> findByFechaConsulta(Date fechaConsulta);
-
-    List<Consulta> findByHoraConsulta(Date horaConsulta);
 }
