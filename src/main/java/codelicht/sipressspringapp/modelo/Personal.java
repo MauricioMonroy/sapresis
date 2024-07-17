@@ -1,6 +1,5 @@
 package codelicht.sipressspringapp.modelo;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -53,13 +52,13 @@ public class Personal implements Serializable {
 
     @Override
     public String toString() {
-        return "Personal{" +
-                "idPersonal=" + idPersonal +
-                ", nombrePersonal='" + nombrePersonal + '\'' +
-                ", apellidoPersonal='" + apellidoPersonal + '\'' +
-                ", telefonoPersonal='" + telefonoPersonal + '\'' +
-                ", emailPersonal='" + emailPersonal + '\'' +
-                ", dependencia=" + dependencia +
-                '}';
+        return "Personal -> {" +
+                " ID del Personal: '" + idPersonal + "'\n" +
+                " Nombre: '" + nombrePersonal + "'\n" +
+                " Apellido: '" + apellidoPersonal + "'\n" +
+                " Teléfono: '" + telefonoPersonal + "'\n" +
+                " Email: '" + emailPersonal + '}' + "'\n" +
+                " | Dependencia -> {" + dependencia + "}" +
+                '\n';
     }
 }

@@ -1,8 +1,6 @@
 package codelicht.sipressspringapp.modelo;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -46,12 +44,11 @@ public class Consulta implements Serializable {
 
     @Override
     public String toString() {
-        return "Consulta{" +
-                "consultaPK=" + consultaPK +
-                ", fechaConsulta=" + fechaConsulta +
-                ", horaConsulta=" + horaConsulta +
-                ", doctor=" + doctor +
-                ", paciente=" + paciente +
-                '}';
+        return "Consulta -> {" +
+                " Fecha de Consulta: '" + fechaConsulta + "'\n" +
+                " Hora de consulta: '" + horaConsulta + '}' + "'\n" +
+                " | Datos del Doctor -> {" + doctor + "}" + "'\n" +
+                " | Datos del Paciente -> {" + paciente + "}" +
+                '\n';
     }
 }

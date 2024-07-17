@@ -1,8 +1,6 @@
 package codelicht.sipressspringapp.modelo;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -45,10 +43,10 @@ public class Dependencia implements Serializable {
 
     @Override
     public String toString() {
-        return "Dependencia{" +
-                "idDependencia=" + idDependencia +
-                ", nombreDependencia='" + nombreDependencia + '\'' +
-                ", institucion=" + institucion +
-                '}';
+        return "Dependencia -> {" +
+                " ID de la Dependencia: '" + idDependencia + "'\n" +
+                " Nombre de la Dependencia: '" + nombreDependencia + '}' + "'\n" +
+                " | Institución Asociada -> {" + institucion + "}" +
+                '\n';
     }
 }

@@ -1,7 +1,5 @@
 package codelicht.sipressspringapp.modelo;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -46,12 +44,12 @@ public class Formula implements Serializable {
 
     @Override
     public String toString() {
-        return "Formula{" +
-                "numeroFormula=" + numeroFormula +
-                ", nombreMedicacion='" + nombreMedicacion + '\'' +
-                ", fechaMedicacion=" + fechaMedicacion +
-                ", costoMedicacion=" + costoMedicacion +
-                ", paciente=" + paciente +
-                '}';
+        return "Formula -> {" +
+                " Número de Fórmula: '" + numeroFormula + "'\n" +
+                " Nombre de la Medicación: '" + nombreMedicacion + "'\n" +
+                " Fecha de Emisión: " + fechaMedicacion + "'\n" +
+                " Costo de la Medicación: " + costoMedicacion + '}' + "'\n" +
+                " | Paciente Vinculado -> {" + paciente + "}" +
+                '\n';
     }
 }

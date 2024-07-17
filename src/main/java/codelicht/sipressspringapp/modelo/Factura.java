@@ -1,7 +1,5 @@
 package codelicht.sipressspringapp.modelo;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -43,12 +41,12 @@ public class Factura implements Serializable {
 
     @Override
     public String toString() {
-        return "Factura{" +
-                "numeroFactura=" + numeroFactura +
-                ", descripcionServicio='" + descripcionServicio + '\'' +
-                ", valor=" + valor +
-                ", total=" + total +
-                ", paciente=" + paciente +
-                '}';
+        return "Factura -> {" +
+                " Número de Factura: '" + numeroFactura + "'\n" +
+                " Descripción del Servicio: '" + descripcionServicio + "'\n" +
+                " Valor: " + valor + "'\n" +
+                " Total: " + total + '}' + "'\n" +
+                " | Paciente Vinculado -> {" + paciente + "}" +
+                '\n';
     }
 }
