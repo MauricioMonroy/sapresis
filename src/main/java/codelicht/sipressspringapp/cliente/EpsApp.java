@@ -69,7 +69,7 @@ public class EpsApp {
 
     private static void buscarEpsPorId() {
         try {
-            System.out.println("Ingrese el ID de la EPS:");
+            System.out.println("Ingrese el ID de la EPS (No. formato 2xx):");
             int id = scanner.nextInt();
             scanner.nextLine();  // Consume newline
 
@@ -122,7 +122,7 @@ public class EpsApp {
 
     private static void eliminarEps() {
         try {
-            System.out.println("Ingrese el ID de la eps a eliminar:");
+            System.out.println("Ingrese el ID de la EPS a eliminar:");
             int id = scanner.nextInt();
             scanner.nextLine();  // Consume newline
 
@@ -132,9 +132,9 @@ public class EpsApp {
                     .build();
             HttpResponse<Void> response = client.send(request, HttpResponse.BodyHandlers.discarding());
             if (response.statusCode() == 204) {
-                System.out.println("Eps eliminada.");
+                System.out.println("EPS eliminada.");
             } else {
-                System.out.println("Error al eliminar la eps. Código de respuesta: " + response.statusCode());
+                System.out.println("Error al eliminar la EPS. Código de respuesta: " + response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();

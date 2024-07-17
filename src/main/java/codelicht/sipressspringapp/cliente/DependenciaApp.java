@@ -1,6 +1,7 @@
 package codelicht.sipressspringapp.cliente;
 
 import codelicht.sipressspringapp.modelo.Dependencia;
+import codelicht.sipressspringapp.modelo.Institucion;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -69,7 +70,7 @@ public class DependenciaApp {
 
     private static void buscarDependenciaPorId() {
         try {
-            System.out.println("Ingrese el ID de la dependencia:");
+            System.out.println("Ingrese el ID de la dependencia (No. formato 14xx):");
             int id = scanner.nextInt();
             scanner.nextLine();  // Consume newline
 
@@ -94,6 +95,14 @@ public class DependenciaApp {
 
             System.out.println("Ingrese el nombre de la dependencia:");
             dependencia.setNombreDependencia(scanner.nextLine());
+
+            // Solicitar el ID de la institución y asignarlo a la dependencia
+            System.out.println("Ingrese el ID de la institución a la que pertenece la dependencia (No. formato 1xx):");
+            int institucionId = scanner.nextInt();
+            Institucion institucion = new Institucion();
+            institucion.setIdInstitucion(institucionId);
+            dependencia.setInstitucion(institucion);
+            scanner.nextLine();  // Limpiar el buffer del scanner
 
             String requestBody = mapper.writeValueAsString(dependencia);
             HttpRequest request = HttpRequest.newBuilder()

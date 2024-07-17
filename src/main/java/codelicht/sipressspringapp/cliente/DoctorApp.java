@@ -1,5 +1,6 @@
 package codelicht.sipressspringapp.cliente;
 
+import codelicht.sipressspringapp.modelo.Dependencia;
 import codelicht.sipressspringapp.modelo.Doctor;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -98,6 +99,15 @@ public class DoctorApp {
             doctor.setNombreDoctor(scanner.nextLine());
             System.out.println("Ingrese el apellido del doctor:");
             doctor.setApellidoDoctor(scanner.nextLine());
+
+            // Solicitar el ID de la dependencia y asignarlo al doctor
+            System.out.println("Ingrese el ID de la dependencia del doctor (No. formato 14xx):");
+            int dependenciaId = scanner.nextInt();
+            Dependencia dependencia = new Dependencia();
+            dependencia.setIdDependencia(dependenciaId);
+            doctor.setDependencia(dependencia);
+            scanner.nextLine();  // Limpiar el buffer del scanner
+
             System.out.println("Ingrese el teléfono del doctor:");
             doctor.setTelefonoDoctor(scanner.nextLine());
             System.out.println("Ingrese el email del doctor:");

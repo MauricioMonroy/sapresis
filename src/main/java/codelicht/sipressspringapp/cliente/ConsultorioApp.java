@@ -1,6 +1,8 @@
 package codelicht.sipressspringapp.cliente;
 
 import codelicht.sipressspringapp.modelo.Consultorio;
+import codelicht.sipressspringapp.modelo.Paciente;
+import codelicht.sipressspringapp.modelo.Personal;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -94,6 +96,22 @@ public class ConsultorioApp {
             Consultorio consultorio = new Consultorio();
             System.out.println("Ingrese el número del consultorio:");
             consultorio.setNumeroConsultorio(scanner.nextInt());
+            scanner.nextLine();  // Limpiar el buffer del scanner
+
+            // Solicitar el ID del paciente y asignarlo al consultorio
+            System.out.println("Ingrese el ID del paciente asociado al consultorio:");
+            int pacienteId = scanner.nextInt();
+            Paciente paciente = new Paciente();
+            paciente.setIdPaciente(pacienteId);
+            consultorio.setPaciente(paciente);
+            scanner.nextLine();  // Limpiar el buffer del scanner
+
+            // Solicitar el ID del paciente y asignarlo al consultorio
+            System.out.println("Ingrese el ID del personal asociado al consultorio:");
+            int personalId = scanner.nextInt();
+            Personal personal = new Personal();
+            personal.setIdPersonal(personalId);
+            consultorio.setPersonal(personal);
             scanner.nextLine();  // Limpiar el buffer del scanner
 
             System.out.println("Ingrese la fecha de admisión (formato: yyyy-MM-dd):");

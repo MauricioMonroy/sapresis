@@ -1,6 +1,7 @@
 package codelicht.sipressspringapp.cliente;
 
 import codelicht.sipressspringapp.modelo.Factura;
+import codelicht.sipressspringapp.modelo.Paciente;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -90,6 +91,14 @@ public class FacturaApp {
             Factura factura = new Factura();
             System.out.println("Ingrese el número de la factura:");
             factura.setNumeroFactura(scanner.nextInt());
+            scanner.nextLine();  // Limpiar el buffer del scanner
+
+            // Solicitar el ID del paciente y asignarlo a la factura
+            System.out.println("Ingrese el ID del paciente asociado a la factura:");
+            int pacienteId = scanner.nextInt();
+            Paciente paciente = new Paciente();
+            paciente.setIdPaciente(pacienteId);
+            factura.setPaciente(paciente);
             scanner.nextLine();  // Limpiar el buffer del scanner
 
             System.out.println("Ingrese la descripción del servicio facturado:");

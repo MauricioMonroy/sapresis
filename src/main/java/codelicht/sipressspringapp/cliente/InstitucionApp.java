@@ -69,7 +69,7 @@ public class InstitucionApp {
 
     private static void buscarInstitucionPorId() {
         try {
-            System.out.println("Ingrese el ID de la institucion:");
+            System.out.println("Ingrese el ID de la institución:");
             int id = scanner.nextInt();
             scanner.nextLine();  // Consume newline
 
@@ -91,14 +91,14 @@ public class InstitucionApp {
             ObjectMapper mapper = new ObjectMapper();
 
             Institucion institucion = new Institucion();
-            System.out.println("Ingrese el ID de la institucion:");
+            System.out.println("Ingrese el ID de la institución (No. formato 1xx):");
             institucion.setIdInstitucion(scanner.nextInt());
             scanner.nextLine();  // Limpiar el buffer del scanner
-            System.out.println("Ingrese el nombre de la institucion:");
+            System.out.println("Ingrese el nombre de la institución:");
             institucion.setNombreInstitucion(scanner.nextLine());
-            System.out.println("Ingrese la dirección de la institucion:");
+            System.out.println("Ingrese la dirección de la institución:");
             institucion.setDireccionInstitucion(scanner.nextLine());
-            System.out.println("Ingrese el teléfono de la institucion:");
+            System.out.println("Ingrese el teléfono de la institución:");
             institucion.setTelefonoInstitucion(scanner.nextLine());
             System.out.println("Ingrese el email del institucion:");
             institucion.setCodigoPostal(scanner.nextLine());
@@ -115,7 +115,7 @@ public class InstitucionApp {
                 Institucion nuevaInstitucion = mapper.readValue(response.body(), Institucion.class);
                 System.out.println("Institucion guardada: " + nuevaInstitucion);
             } else {
-                System.out.println("Error al guardar la institucion: " + response.body());
+                System.out.println("Error al guardar la institución: " + response.body());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,7 +124,7 @@ public class InstitucionApp {
 
     private static void eliminarInstitucion() {
         try {
-            System.out.println("Ingrese el ID de la institucion a eliminar:");
+            System.out.println("Ingrese el ID de la institución a eliminar:");
             int id = scanner.nextInt();
             scanner.nextLine();  // Consume newline
 
@@ -136,7 +136,7 @@ public class InstitucionApp {
             if (response.statusCode() == 204) {
                 System.out.println("Institucion eliminada.");
             } else {
-                System.out.println("Error al eliminar la institucion. Código de respuesta: " + response.statusCode());
+                System.out.println("Error al eliminar la institución. Código de respuesta: " + response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();

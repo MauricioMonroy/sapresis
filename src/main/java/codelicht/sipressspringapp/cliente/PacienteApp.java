@@ -107,7 +107,7 @@ public class PacienteApp {
             paciente.setEmailPaciente(scanner.nextLine());
 
             // Solicitar el ID de EPS y asignarlo al paciente
-            System.out.println("Ingrese el ID de EPS del paciente:");
+            System.out.println("Ingrese el ID de EPS del paciente (No. formato 2xx):");
             int epsId = scanner.nextInt();
             Eps eps = new Eps();
             eps.setIdEps(epsId);

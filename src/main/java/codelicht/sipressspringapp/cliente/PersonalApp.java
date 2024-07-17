@@ -1,5 +1,6 @@
 package codelicht.sipressspringapp.cliente;
 
+import codelicht.sipressspringapp.modelo.Dependencia;
 import codelicht.sipressspringapp.modelo.Personal;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -91,9 +92,18 @@ public class PersonalApp {
             ObjectMapper mapper = new ObjectMapper();
 
             Personal personal = new Personal();
-            System.out.println("Ingrese el ID del personal:");
+            System.out.println("Ingrese el ID del personal (No. formato 41xx):");
             personal.setIdPersonal(scanner.nextInt());
             scanner.nextLine();  // Limpiar el buffer del scanner
+
+            // Solicitar el ID de la dependencia y asignarlo al personal
+            System.out.println("Ingrese el ID de la dependencia del personal (No. formato 14xx):");
+            int dependenciaId = scanner.nextInt();
+            Dependencia dependencia = new Dependencia();
+            dependencia.setIdDependencia(dependenciaId);
+            personal.setDependencia(dependencia);
+            scanner.nextLine();  // Limpiar el buffer del scanner
+
             System.out.println("Ingrese el nombre del personal:");
             personal.setNombrePersonal(scanner.nextLine());
             System.out.println("Ingrese el apellido del personal:");

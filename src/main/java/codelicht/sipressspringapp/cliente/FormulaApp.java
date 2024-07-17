@@ -1,6 +1,7 @@
 package codelicht.sipressspringapp.cliente;
 
 import codelicht.sipressspringapp.modelo.Formula;
+import codelicht.sipressspringapp.modelo.Paciente;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -94,6 +95,14 @@ public class FormulaApp {
             Formula formula = new Formula();
             System.out.println("Ingrese el número de la fórmula:");
             formula.setNumeroFormula(scanner.nextInt());
+            scanner.nextLine();  // Limpiar el buffer del scanner
+
+            // Solicitar el ID del paciente y asignarlo a la fórmula
+            System.out.println("Ingrese el ID del paciente asociado a la fórmula:");
+            int pacienteId = scanner.nextInt();
+            Paciente paciente = new Paciente();
+            paciente.setIdPaciente(pacienteId);
+            formula.setPaciente(paciente);
             scanner.nextLine();  // Limpiar el buffer del scanner
 
             System.out.println("Ingrese el nombre de la medicación:");
