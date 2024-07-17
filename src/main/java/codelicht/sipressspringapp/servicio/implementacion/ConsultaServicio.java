@@ -39,13 +39,4 @@ public class ConsultaServicio implements IConsultaServicio {
         consultaRepositorio.delete(consulta);
     }
 
-    @Override
-    public List<Consulta> buscarConsultasPorFecha(Date fechaConsulta) {
-        return consultaRepositorio.findByFechaConsulta(fechaConsulta);
-    }
-
-    @Override
-    public List<Consulta> buscarConsultasPorHora(Date horaConsulta) {
-        return consultaRepositorio.findByHoraConsulta(horaConsulta);
-    }
 }
