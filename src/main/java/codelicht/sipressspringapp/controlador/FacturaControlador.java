@@ -1,7 +1,9 @@
 package codelicht.sipressspringapp.controlador;
 
 import codelicht.sipressspringapp.modelo.Factura;
+import codelicht.sipressspringapp.modelo.Paciente;
 import codelicht.sipressspringapp.servicio.interfaces.IFacturaServicio;
+import codelicht.sipressspringapp.servicio.interfaces.IPacienteServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class FacturaControlador {
     @Autowired
     private IFacturaServicio facturaServicio;
 
+    @Autowired
+    private IPacienteServicio pacienteServicio;
+
     // http://localhost:8080/sipress-app/facturas
     @GetMapping("/facturas")
     public List<Factura> obtenerFacturas() {
@@ -36,6 +41,10 @@ public class FacturaControlador {
     @PostMapping("/facturas")
     public Factura agregarFactura(@RequestBody Factura factura) {
         logger.info("Factura a agregar: " + factura);
+        if (factura.getPaciente() != null) {
+            Paciente paciente = pacienteServicio.buscarPacientePorId(factura.getPaciente().getIdPaciente());
+            factura.setPaciente(paciente);
+        }
         return facturaServicio.guardarFactura(factura);
     }
 

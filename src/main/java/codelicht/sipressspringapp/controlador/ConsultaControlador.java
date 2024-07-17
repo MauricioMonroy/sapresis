@@ -2,13 +2,16 @@ package codelicht.sipressspringapp.controlador;
 
 import codelicht.sipressspringapp.modelo.Consulta;
 import codelicht.sipressspringapp.modelo.ConsultaPK;
+import codelicht.sipressspringapp.modelo.Doctor;
+import codelicht.sipressspringapp.modelo.Paciente;
 import codelicht.sipressspringapp.servicio.interfaces.IConsultaServicio;
+import codelicht.sipressspringapp.servicio.interfaces.IDoctorServicio;
+import codelicht.sipressspringapp.servicio.interfaces.IPacienteServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -21,22 +24,45 @@ public class ConsultaControlador {
     @Autowired
     private IConsultaServicio consultaServicio;
 
+    @Autowired
+    private IPacienteServicio pacienteServicio;
+
+    @Autowired
+    private IDoctorServicio doctorServicio;
+
     // http://localhost:8080/sipress-app/consultas
     @GetMapping("/consultas")
     public List<Consulta> obtenerConsultas() {
-        return consultaServicio.listarConsultas();
+        var consultas = consultaServicio.listarConsultas();
+        consultas.forEach((consulta -> logger.info(consulta.toString())));
+        return consultas;
     }
 
-    @GetMapping("/consultas/{pacienteId}/{doctorId}")
-    public Consulta buscarConsultaPorId(@PathVariable int pacienteId, @PathVariable int doctorId) {
+    @GetMapping("/consultas/{pacienteId}")
+    public Consulta buscarConsultaPorIdPaciente(@PathVariable int pacienteId) {
         ConsultaPK consultaPK = new ConsultaPK();
         consultaPK.setPacienteId(pacienteId);
+        return consultaServicio.buscarConsultaPorId(consultaPK);
+    }
+
+    @GetMapping("/consultas/{doctorId}")
+    public Consulta buscarConsultaPorIdDoctor(@PathVariable int doctorId) {
+        ConsultaPK consultaPK = new ConsultaPK();
         consultaPK.setDoctorId(doctorId);
         return consultaServicio.buscarConsultaPorId(consultaPK);
     }
 
     @PostMapping("/consultas")
     public Consulta agregarConsulta(@RequestBody Consulta consulta) {
+        logger.info("Consulta a agregar: {}", consulta);
+        if (consulta.getPaciente() != null) {
+            Paciente paciente = pacienteServicio.buscarPacientePorId(consulta.getPaciente().getIdPaciente());
+            consulta.setPaciente(paciente);
+        }
+        if (consulta.getDoctor() != null) {
+            Doctor doctor = doctorServicio.buscarDoctorPorId(consulta.getDoctor().getIdDoctor());
+            consulta.setDoctor(doctor);
+        }
         return consultaServicio.guardarConsulta(consulta);
     }
 
@@ -49,15 +75,5 @@ public class ConsultaControlador {
         if (consulta != null) {
             consultaServicio.eliminarConsulta(consulta);
         }
-    }
-
-    @GetMapping("/consultas/fecha/{fechaConsulta}")
-    public List<Consulta> buscarConsultasPorFecha(@PathVariable Date fechaConsulta) {
-        return consultaServicio.buscarConsultasPorFecha(fechaConsulta);
-    }
-
-    @GetMapping("/consultas/hora/{horaConsulta}")
-    public List<Consulta> buscarConsultasPorHora(@PathVariable Date horaConsulta) {
-        return consultaServicio.buscarConsultasPorHora(horaConsulta);
     }
 }

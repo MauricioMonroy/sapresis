@@ -1,6 +1,8 @@
 package codelicht.sipressspringapp.controlador;
 
+import codelicht.sipressspringapp.modelo.Eps;
 import codelicht.sipressspringapp.modelo.Paciente;
+import codelicht.sipressspringapp.servicio.interfaces.IEpsServicio;
 import codelicht.sipressspringapp.servicio.interfaces.IPacienteServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,9 @@ public class PacienteControlador {
     @Autowired
     private IPacienteServicio pacienteServicio;
 
+    @Autowired
+    private IEpsServicio epsServicio;
+
     // http://localhost:8080/sipress-app/pacientes
     @GetMapping("/pacientes")
     public List<Paciente> obtenerPacientes() {
@@ -36,6 +41,10 @@ public class PacienteControlador {
     @PostMapping("/pacientes")
     public Paciente agregarPaciente(@RequestBody Paciente paciente) {
         logger.info("Paciente a agregar: " + paciente);
+        if (paciente.getEps() != null) {
+            Eps eps = epsServicio.buscarEpsPorId(paciente.getEps().getIdEps());
+            paciente.setEps(eps);
+        }
         return pacienteServicio.guardarPaciente(paciente);
     }
 

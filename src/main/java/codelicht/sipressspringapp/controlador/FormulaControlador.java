@@ -1,7 +1,9 @@
 package codelicht.sipressspringapp.controlador;
 
 import codelicht.sipressspringapp.modelo.Formula;
+import codelicht.sipressspringapp.modelo.Paciente;
 import codelicht.sipressspringapp.servicio.interfaces.IFormulaServicio;
+import codelicht.sipressspringapp.servicio.interfaces.IPacienteServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class FormulaControlador {
     @Autowired
     private IFormulaServicio formulaServicio;
 
+    @Autowired
+    private IPacienteServicio pacienteServicio;
+
     // http://localhost:8080/sipress-app/formulas
     @GetMapping("/formulas")
     public List<Formula> obtenerFormulas() {
@@ -36,6 +41,10 @@ public class FormulaControlador {
     @PostMapping("/formulas")
     public Formula agregarFormula(@RequestBody Formula formula) {
         logger.info("Formula a agregar: " + formula);
+        if (formula.getPaciente() != null) {
+            Paciente paciente = pacienteServicio.buscarPacientePorId(formula.getPaciente().getIdPaciente());
+            formula.setPaciente(paciente);
+        }
         return formulaServicio.guardarFormula(formula);
     }
 

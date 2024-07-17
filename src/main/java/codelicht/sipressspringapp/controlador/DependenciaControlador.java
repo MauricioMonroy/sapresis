@@ -1,6 +1,7 @@
 package codelicht.sipressspringapp.controlador;
 
 import codelicht.sipressspringapp.modelo.Dependencia;
+import codelicht.sipressspringapp.modelo.Institucion;
 import codelicht.sipressspringapp.servicio.interfaces.IDependenciaServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,9 @@ public class DependenciaControlador {
     @Autowired
     private IDependenciaServicio dependenciaServicio;
 
+    @Autowired
+    private InstitucionControlador institucionServicio;
+
     // http://localhost:8080/sipress-app/dependencias
     @GetMapping("/dependencias")
     public List<Dependencia> obtenerDependencias() {
@@ -36,6 +40,10 @@ public class DependenciaControlador {
     @PostMapping("/dependencias")
     public Dependencia agregarDependencia(@RequestBody Dependencia dependencia) {
         logger.info("Dependencia a agregar: " + dependencia);
+        if (dependencia.getInstitucion() != null) {
+            Institucion institucion = institucionServicio.buscarInstitucionPorId(dependencia.getInstitucion().getIdInstitucion());
+            dependencia.setInstitucion(institucion);
+        }
         return dependenciaServicio.guardarDependencia(dependencia);
     }
 

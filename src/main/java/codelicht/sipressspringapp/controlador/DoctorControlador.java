@@ -1,6 +1,8 @@
 package codelicht.sipressspringapp.controlador;
 
+import codelicht.sipressspringapp.modelo.Dependencia;
 import codelicht.sipressspringapp.modelo.Doctor;
+import codelicht.sipressspringapp.servicio.interfaces.IDependenciaServicio;
 import codelicht.sipressspringapp.servicio.interfaces.IDoctorServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,9 @@ public class DoctorControlador {
     @Autowired
     private IDoctorServicio doctorServicio;
 
+    @Autowired
+    private IDependenciaServicio dependenciaServicio;
+
     // http://localhost:8080/sipress-app/doctores
     @GetMapping("/doctores")
     public List<Doctor> obtenerDoctors() {
@@ -36,6 +41,10 @@ public class DoctorControlador {
     @PostMapping("/doctores")
     public Doctor agregarDoctor(@RequestBody Doctor doctor) {
         logger.info("Doctor a agregar: " + doctor);
+        if (doctor.getDependencia() != null) {
+            Dependencia dependencia = dependenciaServicio.buscarDependenciaPorId(doctor.getDependencia().getIdDependencia());
+            doctor.setDependencia(dependencia);
+        }
         return doctorServicio.guardarDoctor(doctor);
     }
 

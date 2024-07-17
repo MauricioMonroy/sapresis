@@ -1,7 +1,11 @@
 package codelicht.sipressspringapp.controlador;
 
 import codelicht.sipressspringapp.modelo.Consultorio;
+import codelicht.sipressspringapp.modelo.Paciente;
+import codelicht.sipressspringapp.modelo.Personal;
 import codelicht.sipressspringapp.servicio.interfaces.IConsultorioServicio;
+import codelicht.sipressspringapp.servicio.interfaces.IPacienteServicio;
+import codelicht.sipressspringapp.servicio.interfaces.IPersonalServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +24,15 @@ public class ConsultorioControlador {
     @Autowired
     private IConsultorioServicio consultorioServicio;
 
+    @Autowired
+    private IPacienteServicio pacienteServicio;
+
+    @Autowired
+    private IPersonalServicio personalServicio;
+
     // http://localhost:8080/sipress-app/consultorios
     @GetMapping("/consultorios")
-    public List<Consultorio> obtenerHabitaciones() {
+    public List<Consultorio> obtenerConsultorios() {
         var consultorios = consultorioServicio.listarConsultorios();
         consultorios.forEach((consultorio -> logger.info(consultorio.toString())));
         return consultorios;
@@ -34,8 +44,16 @@ public class ConsultorioControlador {
     }
 
     @PostMapping("/consultorios")
-    public Consultorio agregarHabitacion(@RequestBody Consultorio consultorio) {
-        logger.info("Consultorio a agregar: " + consultorio);
+    public Consultorio agregarConsultorio(@RequestBody Consultorio consultorio) {
+        logger.info("Consultorio a agregar: {}", consultorio);
+        if (consultorio.getPaciente() != null) {
+            Paciente paciente = pacienteServicio.buscarPacientePorId(consultorio.getPaciente().getIdPaciente());
+            consultorio.setPaciente(paciente);
+        }
+        if (consultorio.getPersonal() != null) {
+            Personal personal = personalServicio.buscarPersonalPorId(consultorio.getPersonal().getIdPersonal());
+            consultorio.setPersonal(personal);
+        }
         return consultorioServicio.guardarConsultorio(consultorio);
     }
 
