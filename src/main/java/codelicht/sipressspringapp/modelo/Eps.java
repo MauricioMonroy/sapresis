@@ -1,7 +1,7 @@
 package codelicht.sipressspringapp.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -43,7 +43,7 @@ public class Eps implements Serializable {
     private String emailEps;
 
     @OneToMany(mappedBy = "eps")
-    @JsonManagedReference
+    @JsonBackReference
     @JsonProperty("pacienteList")
     private List<Paciente> pacienteList;
 
@@ -52,7 +52,8 @@ public class Eps implements Serializable {
         return "Eps{" +
                 "idEps=" + idEps +
                 ", nombreEps='" + nombreEps + '\'' +
+                ", telefonoEps='" + telefonoEps + '\'' +
+                ", emailEps='" + emailEps + '\'' +
                 '}';
     }
-
 }

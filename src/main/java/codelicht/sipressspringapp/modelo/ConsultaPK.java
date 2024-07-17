@@ -40,4 +40,11 @@ public class ConsultaPK implements Serializable {
         return this.doctorId == other.doctorId;
     }
 
+    @Override
+    public String toString() {
+        return "ConsultaPK{" +
+                "pacienteId=" + pacienteId +
+                ", doctorId=" + doctorId +
+                '}';
+    }
 }

@@ -1,7 +1,6 @@
 package codelicht.sipressspringapp.modelo;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -16,7 +15,6 @@ import java.util.Date;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Formula.findAll", query = "SELECT f FROM Formula f")})
-@JsonIgnoreProperties({"paciente"})
 public class Formula implements Serializable {
 
     @Serial
@@ -42,7 +40,7 @@ public class Formula implements Serializable {
 
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
     @ManyToOne
-    @JsonBackReference
+    @JsonManagedReference
     @JsonProperty("paciente")
     private Paciente paciente;
 
@@ -53,7 +51,7 @@ public class Formula implements Serializable {
                 ", nombreMedicacion='" + nombreMedicacion + '\'' +
                 ", fechaMedicacion=" + fechaMedicacion +
                 ", costoMedicacion=" + costoMedicacion +
+                ", paciente=" + paciente +
                 '}';
     }
-
 }

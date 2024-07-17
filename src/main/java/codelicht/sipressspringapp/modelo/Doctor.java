@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Doctor.findAll", query = "SELECT d FROM Doctor d")})
-@JsonIgnoreProperties({"consultaList", "dependencia"})
+@JsonIgnoreProperties({"consultaList"})
 public class Doctor implements Serializable {
 
     @Serial
@@ -46,12 +46,12 @@ public class Doctor implements Serializable {
 
     @JoinColumn(name = "dependencia_id", referencedColumnName = "id_dependencia")
     @ManyToOne
-    @JsonBackReference
+    @JsonManagedReference
     @JsonProperty("dependencia")
     private Dependencia dependencia;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctor")
-    @JsonManagedReference
+    @JsonBackReference
     @JsonProperty("consultaList")
     private List<Consulta> consultaList;
 
@@ -63,8 +63,8 @@ public class Doctor implements Serializable {
                 ", apellidoDoctor='" + apellidoDoctor + '\'' +
                 ", telefonoDoctor='" + telefonoDoctor + '\'' +
                 ", emailDoctor='" + emailDoctor + '\'' +
+                ", dependencia=" + dependencia +
                 '}';
     }
-
 }
 

@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Dependencia.findAll", query = "SELECT d FROM Dependencia d")})
-@JsonIgnoreProperties({"doctorList", "personalList", "institucion"})
+@JsonIgnoreProperties({"doctorList", "personalList"})
 public class Dependencia implements Serializable {
 
     @Serial
@@ -33,18 +33,18 @@ public class Dependencia implements Serializable {
     private String nombreDependencia;
 
     @OneToMany(mappedBy = "dependencia")
-    @JsonManagedReference
+    @JsonBackReference
     @JsonProperty("doctorList")
     private List<Doctor> doctorList;
 
     @OneToMany(mappedBy = "dependencia")
-    @JsonManagedReference
+    @JsonBackReference
     @JsonProperty("personalList")
     private List<Personal> personalList;
 
     @JoinColumn(name = "institucion_id", referencedColumnName = "id_institucion")
     @ManyToOne
-    @JsonBackReference
+    @JsonManagedReference
     @JsonProperty("institucion")
     private Institucion institucion;
 
@@ -53,7 +53,7 @@ public class Dependencia implements Serializable {
         return "Dependencia{" +
                 "idDependencia=" + idDependencia +
                 ", nombreDependencia='" + nombreDependencia + '\'' +
+                ", institucion=" + institucion +
                 '}';
     }
-
 }

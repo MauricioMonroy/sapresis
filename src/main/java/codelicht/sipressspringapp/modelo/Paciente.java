@@ -49,28 +49,28 @@ public class Paciente implements Serializable {
     private String emailPaciente;
 
     @OneToMany(mappedBy = "paciente")
-    @JsonManagedReference
+    @JsonBackReference
     @JsonProperty("facturaList")
     private List<Factura> facturaList;
 
     @JoinColumn(name = "eps_id", referencedColumnName = "id_eps")
     @ManyToOne
-    @JsonBackReference
+    @JsonManagedReference
     @JsonProperty("eps")
     private Eps eps;
 
     @OneToMany(mappedBy = "paciente")
-    @JsonManagedReference
+    @JsonBackReference
     @JsonProperty("formulaList")
     private List<Formula> formulaList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente")
-    @JsonManagedReference
+    @JsonBackReference
     @JsonProperty("consultaList")
     private List<Consulta> consultaList;
 
     @OneToMany(mappedBy = "paciente")
-    @JsonManagedReference
+    @JsonBackReference
     @JsonProperty("consultorioList")
     private List<Consultorio> consultorioList;
 
@@ -83,8 +83,7 @@ public class Paciente implements Serializable {
                 ", direccionPaciente='" + direccionPaciente + '\'' +
                 ", telefonoPaciente='" + telefonoPaciente + '\'' +
                 ", emailPaciente='" + emailPaciente + '\'' +
-                ", eps='" + eps +
+                ", eps=" + eps +
                 '}';
     }
-
 }

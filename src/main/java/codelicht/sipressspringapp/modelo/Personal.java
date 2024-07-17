@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Personal.findAll", query = "SELECT p FROM Personal p")})
-@JsonIgnoreProperties({"consultorioList", "dependencia"})
+@JsonIgnoreProperties({"consultorioList"})
 public class Personal implements Serializable {
 
     @Serial
@@ -46,11 +46,13 @@ public class Personal implements Serializable {
 
     @JoinColumn(name = "dependencia_id", referencedColumnName = "id_dependencia")
     @ManyToOne
-    @JsonBackReference
+    @JsonManagedReference
+    @JsonProperty("dependencia")
     private Dependencia dependencia;
 
     @OneToMany(mappedBy = "personal")
-    @JsonManagedReference
+    @JsonBackReference
+    @JsonProperty("consultorioList")
     private List<Consultorio> consultorioList;
 
     @Override
@@ -64,5 +66,4 @@ public class Personal implements Serializable {
                 ", dependencia=" + dependencia +
                 '}';
     }
-
 }

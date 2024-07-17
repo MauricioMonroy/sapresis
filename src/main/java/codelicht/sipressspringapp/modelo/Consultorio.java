@@ -1,6 +1,7 @@
 package codelicht.sipressspringapp.modelo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -32,13 +33,13 @@ public class Consultorio implements Serializable {
 
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
     @ManyToOne
-    @JsonBackReference
+    @JsonManagedReference
     @JsonProperty("paciente")
     private Paciente paciente;
 
     @JoinColumn(name = "personal_id", referencedColumnName = "id_personal")
     @ManyToOne
-    @JsonBackReference
+    @JsonManagedReference
     @JsonProperty("personal")
     private Personal personal;
 
@@ -47,7 +48,8 @@ public class Consultorio implements Serializable {
         return "Consultorio{" +
                 "numeroConsultorio=" + numeroConsultorio +
                 ", fechaAdmision=" + fechaAdmision +
+                ", paciente=" + paciente +
+                ", personal=" + personal +
                 '}';
     }
-
 }

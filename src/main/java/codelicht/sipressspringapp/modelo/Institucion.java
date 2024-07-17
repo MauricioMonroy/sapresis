@@ -1,7 +1,7 @@
 package codelicht.sipressspringapp.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -44,16 +44,18 @@ public class Institucion implements Serializable {
     private String codigoPostal;
 
     @OneToMany(mappedBy = "institucion")
-    @JsonManagedReference
+    @JsonBackReference
     @JsonProperty("dependenciaList")
     private List<Dependencia> dependenciaList;
 
     @Override
     public String toString() {
         return "Institucion{" +
-                "idInstitucion=" + idInstitucion +
+                "codigoPostal='" + codigoPostal + '\'' +
+                ", telefonoInstitucion='" + telefonoInstitucion + '\'' +
+                ", direccionInstitucion='" + direccionInstitucion + '\'' +
                 ", nombreInstitucion='" + nombreInstitucion + '\'' +
+                ", idInstitucion=" + idInstitucion +
                 '}';
     }
-
 }
