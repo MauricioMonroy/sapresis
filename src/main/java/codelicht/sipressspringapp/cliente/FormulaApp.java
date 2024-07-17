@@ -9,7 +9,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -52,7 +51,7 @@ public class FormulaApp {
                     System.out.println("Saliendo...");
                     return;
                 default:
-                    System.out.println("Opción inválida, intente de nuevo.");
+                    System.out.println("Opción inválida, intente de nueva.");
             }
         }
     }
@@ -74,7 +73,7 @@ public class FormulaApp {
 
     private static void buscarFormulaPorId() {
         try {
-            System.out.println("Ingrese el número de la fórmula:");
+            System.out.println("Ingrese el número de la fórmula (No. formato 80xxx):");
             int id = scanner.nextInt();
             scanner.nextLine();  // Consume newline
 
@@ -93,7 +92,8 @@ public class FormulaApp {
     private static void guardarFormula() {
         try {
             Formula formula = new Formula();
-            System.out.println("Ingrese el número de la fórmula:");
+
+            System.out.println("Ingrese el número de la fórmula (No. formato 80xxx):");
             formula.setNumeroFormula(scanner.nextInt());
             scanner.nextLine();  // Limpiar el buffer del scanner
 
@@ -116,18 +116,23 @@ public class FormulaApp {
             System.out.println("Ingrese el costo de la medicación:");
             formula.setCostoMedicacion(scanner.nextDouble());
 
-            // Convertir el objeto formula a JSON
             String requestBody = mapper.writeValueAsString(formula);
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL))
+                    .uri(URI.create(BASE_URL + "/formulas"))
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .header("Content-Type", "application/json")
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            Formula nuevaFormula = mapper.readValue(response.body(), Formula.class);
-            System.out.println("Fórmula guardada: " + nuevaFormula);
-        } catch (ParseException e) {
-            System.err.println("Formato de fecha incorrecto. Use el formato yyyy-MM-dd.");
+
+            // Imprimir el código de estado de la respuesta
+            System.out.println("Código de estado de la respuesta: " + response.statusCode());
+
+            if (response.statusCode() == 201 || response.statusCode() == 200) {  // Manejar 201 y 200 como respuestas exitosas
+                Formula nuevaFormula = mapper.readValue(response.body(), Formula.class);
+                System.out.println("Fórmula guardada: " + nuevaFormula);
+            } else {
+                System.out.println("Error al guardar la fórmula: " + response.body());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

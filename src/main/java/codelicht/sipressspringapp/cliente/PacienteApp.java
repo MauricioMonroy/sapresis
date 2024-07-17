@@ -88,13 +88,12 @@ public class PacienteApp {
 
     private static void guardarPaciente() {
         try {
-            Scanner scanner = new Scanner(System.in);
-            ObjectMapper mapper = new ObjectMapper();
-
             Paciente paciente = new Paciente();
-            System.out.println("Ingrese el ID del paciente:");
+
+            System.out.println("Ingrese el ID del paciente");
             paciente.setIdPaciente(scanner.nextInt());
             scanner.nextLine();  // Limpiar el buffer del scanner
+
             System.out.println("Ingrese el nombre del paciente:");
             paciente.setNombrePaciente(scanner.nextLine());
             System.out.println("Ingrese el apellido del paciente:");
@@ -121,7 +120,10 @@ public class PacienteApp {
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() / 100 == 2) {  // Verificar si el código de estado es 2xx
+            // Imprimir el código de estado de la respuesta
+            System.out.println("Código de estado de la respuesta: " + response.statusCode());
+
+            if (response.statusCode() == 201 || response.statusCode() == 200) {  // Manejar 201 y 200 como respuestas exitosas
                 Paciente nuevoPaciente = mapper.readValue(response.body(), Paciente.class);
                 System.out.println("Paciente guardado: " + nuevoPaciente);
             } else {

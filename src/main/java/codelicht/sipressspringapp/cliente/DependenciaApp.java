@@ -89,7 +89,8 @@ public class DependenciaApp {
     private static void guardarDependencia() {
         try {
             Dependencia dependencia = new Dependencia();
-            System.out.println("Ingrese el ID de la dependencia:");
+
+            System.out.println("Ingrese el ID de la dependencia (No. formato 14xx):");
             dependencia.setIdDependencia(scanner.nextInt());
             scanner.nextLine();  // Limpiar el buffer del scanner
 
@@ -106,13 +107,16 @@ public class DependenciaApp {
 
             String requestBody = mapper.writeValueAsString(dependencia);
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:8080/sipress-app/dependencias"))
+                    .uri(URI.create(BASE_URL + "/dependencias"))
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .header("Content-Type", "application/json")
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() == 201) {  // Código 201 indica creación exitosa
+            // Imprimir el código de estado de la respuesta
+            System.out.println("Código de estado de la respuesta: " + response.statusCode());
+
+            if (response.statusCode() == 201 || response.statusCode() == 200) {  // Manejar 201 y 200 como respuestas exitosas
                 Dependencia nuevaDependencia = mapper.readValue(response.body(), Dependencia.class);
                 System.out.println("Dependencia guardada: " + nuevaDependencia);
             } else {
@@ -137,7 +141,7 @@ public class DependenciaApp {
             if (response.statusCode() == 204) {
                 System.out.println("Dependencia eliminada.");
             } else {
-                System.out.println("Error al eliminar el dependencia. Código de respuesta: " + response.statusCode());
+                System.out.println("Error al eliminar la dependencia. Código de respuesta: " + response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -70,7 +70,7 @@ public class DoctorApp {
 
     private static void buscarDoctorPorId() {
         try {
-            System.out.println("Ingrese el ID del doctor:");
+            System.out.println("Ingrese el ID del doctor (No. formato 2xxx):");
             int id = scanner.nextInt();
             scanner.nextLine();  // Consume newline
 
@@ -88,13 +88,12 @@ public class DoctorApp {
 
     private static void guardarDoctor() {
         try {
-            Scanner scanner = new Scanner(System.in);
-            ObjectMapper mapper = new ObjectMapper();
-
             Doctor doctor = new Doctor();
-            System.out.println("Ingrese el ID del doctor:");
+
+            System.out.println("Ingrese el ID del doctor (No. formato 2xxx):");
             doctor.setIdDoctor(scanner.nextInt());
             scanner.nextLine();  // Limpiar el buffer del scanner
+
             System.out.println("Ingrese el nombre del doctor:");
             doctor.setNombreDoctor(scanner.nextLine());
             System.out.println("Ingrese el apellido del doctor:");
@@ -115,13 +114,16 @@ public class DoctorApp {
 
             String requestBody = mapper.writeValueAsString(doctor);
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:8080/sipress-app/doctores"))
+                    .uri(URI.create(BASE_URL + "/doctores"))
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .header("Content-Type", "application/json")
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() == 201) {  // Código 201 indica creación exitosa
+            // Imprimir el código de estado de la respuesta
+            System.out.println("Código de estado de la respuesta: " + response.statusCode());
+
+            if (response.statusCode() == 201 || response.statusCode() == 200) {  // Manejar 201 y 200 como respuestas exitosas
                 Doctor nuevoDoctor = mapper.readValue(response.body(), Doctor.class);
                 System.out.println("Doctor guardado: " + nuevoDoctor);
             } else {

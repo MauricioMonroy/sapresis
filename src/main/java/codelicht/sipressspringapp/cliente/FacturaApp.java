@@ -70,7 +70,7 @@ public class FacturaApp {
 
     private static void buscarFacturaPorId() {
         try {
-            System.out.println("Ingrese el número de la factura:");
+            System.out.println("Ingrese el número de la factura (No. formato 50xxx):");
             int id = scanner.nextInt();
             scanner.nextLine();  // Consume newline
 
@@ -89,7 +89,8 @@ public class FacturaApp {
     private static void guardarFactura() {
         try {
             Factura factura = new Factura();
-            System.out.println("Ingrese el número de la factura:");
+
+            System.out.println("Ingrese el número de la factura (No. formato 50xxx):");
             factura.setNumeroFactura(scanner.nextInt());
             scanner.nextLine();  // Limpiar el buffer del scanner
 
@@ -112,13 +113,16 @@ public class FacturaApp {
 
             String requestBody = mapper.writeValueAsString(factura);
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:8080/sipress-app/facturas"))
+                    .uri(URI.create(BASE_URL + "/facturas"))
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .header("Content-Type", "application/json")
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() == 201) {  // Código 201 indica creación exitosa
+            // Imprimir el código de estado de la respuesta
+            System.out.println("Código de estado de la respuesta: " + response.statusCode());
+
+            if (response.statusCode() == 201 || response.statusCode() == 200) {  // Manejar 201 y 200 como respuestas exitosas
                 Factura nuevaFactura = mapper.readValue(response.body(), Factura.class);
                 System.out.println("Factura guardada: " + nuevaFactura);
             } else {

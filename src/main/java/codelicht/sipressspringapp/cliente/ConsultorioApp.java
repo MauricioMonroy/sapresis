@@ -10,7 +10,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -94,6 +93,7 @@ public class ConsultorioApp {
     private static void guardarConsultorio() {
         try {
             Consultorio consultorio = new Consultorio();
+
             System.out.println("Ingrese el número del consultorio:");
             consultorio.setNumeroConsultorio(scanner.nextInt());
             scanner.nextLine();  // Limpiar el buffer del scanner
@@ -107,7 +107,7 @@ public class ConsultorioApp {
             scanner.nextLine();  // Limpiar el buffer del scanner
 
             // Solicitar el ID del paciente y asignarlo al consultorio
-            System.out.println("Ingrese el ID del personal asociado al consultorio:");
+            System.out.println("Ingrese el ID del personal asociado al consultorio (No. Formato 41xx):");
             int personalId = scanner.nextInt();
             Personal personal = new Personal();
             personal.setIdPersonal(personalId);
@@ -119,18 +119,23 @@ public class ConsultorioApp {
             Date fechaAdmision = dateFormat.parse(fechaInput);
             consultorio.setFechaAdmision(fechaAdmision);
 
-            // Convertir el objeto consultorio a JSON
             String requestBody = mapper.writeValueAsString(consultorio);
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL))
+                    .uri(URI.create(BASE_URL + "/consultorios"))
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .header("Content-Type", "application/json")
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            Consultorio nuevoConsultorio = mapper.readValue(response.body(), Consultorio.class);
-            System.out.println("Consultorio guardado: " + nuevoConsultorio);
-        } catch (ParseException e) {
-            System.err.println("Formato de fecha incorrecto. Use el formato yyyy-MM-dd.");
+
+            // Imprimir el código de estado de la respuesta
+            System.out.println("Código de estado de la respuesta: " + response.statusCode());
+
+            if (response.statusCode() == 201 || response.statusCode() == 200) {  // Manejar 201 y 200 como respuestas exitosas
+                Consultorio nuevoConsultorio = mapper.readValue(response.body(), Consultorio.class);
+                System.out.println("Consultorio guardado: " + nuevoConsultorio);
+            } else {
+                System.out.println("Error al guardar el consultorio: " + response.body());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -150,7 +155,7 @@ public class ConsultorioApp {
             if (response.statusCode() == 204) {
                 System.out.println("Consultorio eliminado.");
             } else {
-                System.out.println("Error al eliminar la consultorio. Código de respuesta: " + response.statusCode());
+                System.out.println("Error al eliminar el consultorio. Código de respuesta: " + response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();

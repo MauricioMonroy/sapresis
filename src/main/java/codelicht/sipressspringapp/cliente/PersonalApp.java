@@ -70,7 +70,7 @@ public class PersonalApp {
 
     private static void buscarPersonalPorId() {
         try {
-            System.out.println("Ingrese el ID del personal:");
+            System.out.println("Ingrese el ID del personal (No. formato 41xx):");
             int id = scanner.nextInt();
             scanner.nextLine();  // Consume newline
 
@@ -88,10 +88,8 @@ public class PersonalApp {
 
     private static void guardarPersonal() {
         try {
-            Scanner scanner = new Scanner(System.in);
-            ObjectMapper mapper = new ObjectMapper();
-
             Personal personal = new Personal();
+
             System.out.println("Ingrese el ID del personal (No. formato 41xx):");
             personal.setIdPersonal(scanner.nextInt());
             scanner.nextLine();  // Limpiar el buffer del scanner
@@ -115,13 +113,16 @@ public class PersonalApp {
 
             String requestBody = mapper.writeValueAsString(personal);
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:8080/sipress-app/personalS"))
+                    .uri(URI.create(BASE_URL + "/personalS"))
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .header("Content-Type", "application/json")
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() == 201) {  // Código 201 indica creación exitosa
+            // Imprimir el código de estado de la respuesta
+            System.out.println("Código de estado de la respuesta: " + response.statusCode());
+
+            if (response.statusCode() == 201 || response.statusCode() == 200) {  // Manejar 201 y 200 como respuestas exitosas
                 Personal nuevoPersonal = mapper.readValue(response.body(), Personal.class);
                 System.out.println("Personal guardado: " + nuevoPersonal);
             } else {
@@ -131,7 +132,6 @@ public class PersonalApp {
             e.printStackTrace();
         }
     }
-
 
     private static void eliminarPersonal() {
         try {
@@ -154,5 +154,6 @@ public class PersonalApp {
         }
     }
 }
+
 
 

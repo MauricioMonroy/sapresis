@@ -88,7 +88,7 @@ public class EpsApp {
     private static void guardarEps() {
         try {
             Eps eps = new Eps();
-            System.out.println("Ingrese el ID de la EPS:");
+            System.out.println("Ingrese el ID de la EPS (No. formato 2xx):");
             eps.setIdEps(scanner.nextInt());
             scanner.nextLine();  // Limpiar el buffer del scanner
 
@@ -103,7 +103,7 @@ public class EpsApp {
 
             String requestBody = mapper.writeValueAsString(eps);
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:8080/sipress-app/epsS"))
+                    .uri(URI.create(BASE_URL + "/epsS"))
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .header("Content-Type", "application/json")
                     .build();

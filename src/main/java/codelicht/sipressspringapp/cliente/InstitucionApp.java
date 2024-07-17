@@ -69,7 +69,7 @@ public class InstitucionApp {
 
     private static void buscarInstitucionPorId() {
         try {
-            System.out.println("Ingrese el ID de la institución:");
+            System.out.println("Ingrese el ID de la institución (No. formato 1xx):");
             int id = scanner.nextInt();
             scanner.nextLine();  // Consume newline
 
@@ -87,13 +87,12 @@ public class InstitucionApp {
 
     private static void guardarInstitucion() {
         try {
-            Scanner scanner = new Scanner(System.in);
-            ObjectMapper mapper = new ObjectMapper();
-
             Institucion institucion = new Institucion();
-            System.out.println("Ingrese el ID de la institución (No. formato 1xx):");
+
+            System.out.println("Ingrese el ID del institucion (No. formato 1xx):");
             institucion.setIdInstitucion(scanner.nextInt());
             scanner.nextLine();  // Limpiar el buffer del scanner
+
             System.out.println("Ingrese el nombre de la institución:");
             institucion.setNombreInstitucion(scanner.nextLine());
             System.out.println("Ingrese la dirección de la institución:");
@@ -105,17 +104,20 @@ public class InstitucionApp {
 
             String requestBody = mapper.writeValueAsString(institucion);
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:8080/sipress-app/instituciones"))
+                    .uri(URI.create(BASE_URL + "/instituciones"))
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .header("Content-Type", "application/json")
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() == 201) {  // Código 201 indica creación exitosa
+            // Imprimir el código de estado de la respuesta
+            System.out.println("Código de estado de la respuesta: " + response.statusCode());
+
+            if (response.statusCode() == 201 || response.statusCode() == 200) {  // Manejar 201 y 200 como respuestas exitosas
                 Institucion nuevaInstitucion = mapper.readValue(response.body(), Institucion.class);
                 System.out.println("Institucion guardada: " + nuevaInstitucion);
             } else {
-                System.out.println("Error al guardar la institución: " + response.body());
+                System.out.println("Error al guardar la institucion: " + response.body());
             }
         } catch (Exception e) {
             e.printStackTrace();
