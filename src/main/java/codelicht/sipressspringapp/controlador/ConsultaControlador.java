@@ -1,13 +1,14 @@
 package codelicht.sipressspringapp.controlador;
 
 import codelicht.sipressspringapp.modelo.Consulta;
+import codelicht.sipressspringapp.modelo.ConsultaPK;
 import codelicht.sipressspringapp.servicio.interfaces.IConsultaServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -23,30 +24,40 @@ public class ConsultaControlador {
     // http://localhost:8080/sipress-app/consultas
     @GetMapping("/consultas")
     public List<Consulta> obtenerConsultas() {
-        var consultas = consultaServicio.listarConsultas();
-        consultas.forEach((consulta -> logger.info(consulta.toString())));
-        return consultas;
+        return consultaServicio.listarConsultas();
     }
 
-    @GetMapping("/consultas/{id}")
-    public Consulta buscarConsultaPorId(@PathVariable Integer id) {
-        return consultaServicio.buscarConsultaPorId(id);
+    @GetMapping("/consultas/{pacienteId}/{doctorId}")
+    public Consulta buscarConsultaPorId(@PathVariable int pacienteId, @PathVariable int doctorId) {
+        ConsultaPK consultaPK = new ConsultaPK();
+        consultaPK.setPacienteId(pacienteId);
+        consultaPK.setDoctorId(doctorId);
+        return consultaServicio.buscarConsultaPorId(consultaPK);
     }
 
     @PostMapping("/consultas")
     public Consulta agregarConsulta(@RequestBody Consulta consulta) {
-        logger.info("Consulta a agregar: " + consulta);
         return consultaServicio.guardarConsulta(consulta);
     }
 
-    @DeleteMapping("/consultas/{id}")
-    public ResponseEntity<Void> eliminarConsulta(@PathVariable("id") Integer id) {
-        Consulta consulta = consultaServicio.buscarConsultaPorId(id);
+    @DeleteMapping("/consultas/{pacienteId}/{doctorId}")
+    public void eliminarConsulta(@PathVariable int pacienteId, @PathVariable int doctorId) {
+        ConsultaPK consultaPK = new ConsultaPK();
+        consultaPK.setPacienteId(pacienteId);
+        consultaPK.setDoctorId(doctorId);
+        Consulta consulta = consultaServicio.buscarConsultaPorId(consultaPK);
         if (consulta != null) {
             consultaServicio.eliminarConsulta(consulta);
-            return ResponseEntity.noContent().build(); // Elimina y responde con 204 No Content
-        } else {
-            return ResponseEntity.notFound().build(); // Responde con 404 Not Found si no existe
         }
+    }
+
+    @GetMapping("/consultas/fecha/{fechaConsulta}")
+    public List<Consulta> buscarConsultasPorFecha(@PathVariable Date fechaConsulta) {
+        return consultaServicio.buscarConsultasPorFecha(fechaConsulta);
+    }
+
+    @GetMapping("/consultas/hora/{horaConsulta}")
+    public List<Consulta> buscarConsultasPorHora(@PathVariable Date horaConsulta) {
+        return consultaServicio.buscarConsultasPorHora(horaConsulta);
     }
 }

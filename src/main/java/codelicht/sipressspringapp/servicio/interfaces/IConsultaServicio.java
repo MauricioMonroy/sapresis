@@ -1,7 +1,9 @@
 package codelicht.sipressspringapp.servicio.interfaces;
 
 import codelicht.sipressspringapp.modelo.Consulta;
+import codelicht.sipressspringapp.modelo.ConsultaPK;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -11,9 +13,13 @@ import java.util.List;
 public interface IConsultaServicio {
     public List<Consulta> listarConsultas();
 
-    public Consulta buscarConsultaPorId(Integer idConsulta);
+    public Consulta buscarConsultaPorId(ConsultaPK consultaPK);
 
     public Consulta guardarConsulta(Consulta consulta);
 
     public void eliminarConsulta(Consulta consulta);
+
+    public List<Consulta> buscarConsultasPorFecha(Date fechaConsulta);
+
+    public List<Consulta> buscarConsultasPorHora(Date horaConsulta);
 }

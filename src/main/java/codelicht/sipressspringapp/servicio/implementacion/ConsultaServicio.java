@@ -1,11 +1,13 @@
 package codelicht.sipressspringapp.servicio.implementacion;
 
 import codelicht.sipressspringapp.modelo.Consulta;
+import codelicht.sipressspringapp.modelo.ConsultaPK;
 import codelicht.sipressspringapp.repositorio.ConsultaRepositorio;
 import codelicht.sipressspringapp.servicio.interfaces.IConsultaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,8 +25,8 @@ public class ConsultaServicio implements IConsultaServicio {
     }
 
     @Override
-    public Consulta buscarConsultaPorId(Integer idConsulta) {
-        return consultaRepositorio.findById(idConsulta).orElse(null);
+    public Consulta buscarConsultaPorId(ConsultaPK consultaPK) {
+        return consultaRepositorio.findById(consultaPK).orElse(null);
     }
 
     @Override
@@ -35,5 +37,15 @@ public class ConsultaServicio implements IConsultaServicio {
     @Override
     public void eliminarConsulta(Consulta consulta) {
         consultaRepositorio.delete(consulta);
+    }
+
+    @Override
+    public List<Consulta> buscarConsultasPorFecha(Date fechaConsulta) {
+        return consultaRepositorio.findByFechaConsulta(fechaConsulta);
+    }
+
+    @Override
+    public List<Consulta> buscarConsultasPorHora(Date horaConsulta) {
+        return consultaRepositorio.findByHoraConsulta(horaConsulta);
     }
 }
