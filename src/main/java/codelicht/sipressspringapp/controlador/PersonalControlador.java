@@ -1,6 +1,8 @@
 package codelicht.sipressspringapp.controlador;
 
+import codelicht.sipressspringapp.modelo.Dependencia;
 import codelicht.sipressspringapp.modelo.Personal;
+import codelicht.sipressspringapp.servicio.interfaces.IDependenciaServicio;
 import codelicht.sipressspringapp.servicio.interfaces.IPersonalServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +19,12 @@ public class PersonalControlador {
     private static final Logger logger =
             LoggerFactory.getLogger(PersonalControlador.class);
 
+
     @Autowired
     private IPersonalServicio personalServicio;
+
+    @Autowired
+    private IDependenciaServicio dependenciaServicio;
 
     // http://localhost:8080/sipress-app/personalS
     @GetMapping("/personalS")
@@ -36,6 +42,10 @@ public class PersonalControlador {
     @PostMapping("/personalS")
     public Personal agregarPersonal(@RequestBody Personal personal) {
         logger.info("Personal a agregar: " + personal);
+        if (personal.getDependencia() != null) {
+            Dependencia dependencia = dependenciaServicio.buscarDependenciaPorId(personal.getDependencia().getIdDependencia());
+            personal.setDependencia(dependencia);
+        }
         return personalServicio.guardarPersonal(personal);
     }
 

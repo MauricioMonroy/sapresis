@@ -46,13 +46,10 @@ public class Doctor implements Serializable {
 
     @JoinColumn(name = "dependencia_id", referencedColumnName = "id_dependencia")
     @ManyToOne
-    @JsonManagedReference
     @JsonProperty("dependencia")
     private Dependencia dependencia;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctor")
-    @JsonBackReference
-    @JsonProperty("consultaList")
     private List<Consulta> consultaList;
 
     @Override

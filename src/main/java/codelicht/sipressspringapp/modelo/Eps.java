@@ -43,8 +43,6 @@ public class Eps implements Serializable {
     private String emailEps;
 
     @OneToMany(mappedBy = "eps")
-    @JsonBackReference
-    @JsonProperty("pacienteList")
     private List<Paciente> pacienteList;
 
     @Override

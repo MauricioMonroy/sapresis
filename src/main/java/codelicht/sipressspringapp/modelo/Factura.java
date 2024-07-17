@@ -1,5 +1,6 @@
 package codelicht.sipressspringapp.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Factura.findAll", query = "SELECT f FROM Factura f")})
+// @JsonIgnoreProperties({"paciente"})
 public class Factura implements Serializable {
 
     @Serial
@@ -36,7 +38,6 @@ public class Factura implements Serializable {
 
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
     @ManyToOne
-    @JsonManagedReference
     @JsonProperty("paciente")
     private Paciente paciente;
 

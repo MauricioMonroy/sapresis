@@ -33,18 +33,13 @@ public class Dependencia implements Serializable {
     private String nombreDependencia;
 
     @OneToMany(mappedBy = "dependencia")
-    @JsonBackReference
-    @JsonProperty("doctorList")
     private List<Doctor> doctorList;
 
     @OneToMany(mappedBy = "dependencia")
-    @JsonBackReference
-    @JsonProperty("personalList")
     private List<Personal> personalList;
 
     @JoinColumn(name = "institucion_id", referencedColumnName = "id_institucion")
     @ManyToOne
-    @JsonManagedReference
     @JsonProperty("institucion")
     private Institucion institucion;
 

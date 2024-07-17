@@ -1,7 +1,7 @@
 package codelicht.sipressspringapp.modelo;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -36,13 +36,11 @@ public class Consulta implements Serializable {
 
     @JoinColumn(name = "doctor_id", referencedColumnName = "id_doctor", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    @JsonManagedReference
     @JsonProperty("doctor")
     private Doctor doctor;
 
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    @JsonManagedReference
     @JsonProperty("paciente")
     private Paciente paciente;
 

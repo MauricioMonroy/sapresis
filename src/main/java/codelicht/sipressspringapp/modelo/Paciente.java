@@ -2,7 +2,6 @@ package codelicht.sipressspringapp.modelo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -17,7 +16,7 @@ import java.util.List;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Paciente.findAll", query = "SELECT p FROM Paciente p")})
-@JsonIgnoreProperties({"facturaList", "formulaList", "consultaList", "consultorioList"})
+@JsonIgnoreProperties({"formulaList", "consultaList", "consultorioList"})
 public class Paciente implements Serializable {
 
     @Serial
@@ -55,23 +54,16 @@ public class Paciente implements Serializable {
 
     @JoinColumn(name = "eps_id", referencedColumnName = "id_eps")
     @ManyToOne
-    @JsonManagedReference
     @JsonProperty("eps")
     private Eps eps;
 
     @OneToMany(mappedBy = "paciente")
-    @JsonBackReference
-    @JsonProperty("formulaList")
     private List<Formula> formulaList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente")
-    @JsonBackReference
-    @JsonProperty("consultaList")
     private List<Consulta> consultaList;
 
     @OneToMany(mappedBy = "paciente")
-    @JsonBackReference
-    @JsonProperty("consultorioList")
     private List<Consultorio> consultorioList;
 
     @Override

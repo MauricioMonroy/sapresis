@@ -44,8 +44,6 @@ public class Institucion implements Serializable {
     private String codigoPostal;
 
     @OneToMany(mappedBy = "institucion")
-    @JsonBackReference
-    @JsonProperty("dependenciaList")
     private List<Dependencia> dependenciaList;
 
     @Override
