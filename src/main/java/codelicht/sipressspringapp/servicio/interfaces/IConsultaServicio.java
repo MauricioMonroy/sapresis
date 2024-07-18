@@ -1,9 +1,7 @@
 package codelicht.sipressspringapp.servicio.interfaces;
 
 import codelicht.sipressspringapp.modelo.Consulta;
-import codelicht.sipressspringapp.modelo.ConsultaPK;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -11,12 +9,15 @@ import java.util.List;
  * Contiene los métodos a implementar en operaciones CRUD básicas.
  */
 public interface IConsultaServicio {
-    public List<Consulta> listarConsultas();
 
-    public Consulta buscarConsultaPorId(ConsultaPK consultaPK);
+    List<Consulta> listarConsultas();
 
-    public Consulta guardarConsulta(Consulta consulta);
+    List<Consulta> buscarConsultasPorIdPaciente(int pacienteId);
 
-    public void eliminarConsulta(Consulta consulta);
+    List<Consulta> buscarConsultasPorIdDoctor(int doctorId);
 
+    Consulta guardarConsulta(Consulta consulta);
+
+    void eliminarConsulta(Consulta consulta);
 }
+

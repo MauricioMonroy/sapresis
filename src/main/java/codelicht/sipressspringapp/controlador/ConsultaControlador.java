@@ -10,6 +10,7 @@ import codelicht.sipressspringapp.servicio.interfaces.IPacienteServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +19,7 @@ import java.util.List;
 @RequestMapping("sipress-app")
 @CrossOrigin(value = "http://localhost:3000")
 public class ConsultaControlador {
-    private static final Logger logger =
-            LoggerFactory.getLogger(ConsultaControlador.class);
+    private static final Logger logger = LoggerFactory.getLogger(ConsultaControlador.class);
 
     @Autowired
     private IConsultaServicio consultaServicio;
@@ -34,22 +34,18 @@ public class ConsultaControlador {
     @GetMapping("/consultas")
     public List<Consulta> obtenerConsultas() {
         var consultas = consultaServicio.listarConsultas();
-        consultas.forEach((consulta -> logger.info(consulta.toString())));
+        consultas.forEach(consulta -> logger.info(consulta.toString()));
         return consultas;
     }
 
-    @GetMapping("/consultas/{pacienteId}")
-    public Consulta buscarConsultaPorIdPaciente(@PathVariable int pacienteId) {
-        ConsultaPK consultaPK = new ConsultaPK();
-        consultaPK.setPacienteId(pacienteId);
-        return consultaServicio.buscarConsultaPorId(consultaPK);
+    @GetMapping("/consultas/paciente/{pacienteId}")
+    public List<Consulta> buscarConsultasPorIdPaciente(@PathVariable int pacienteId) {
+        return consultaServicio.buscarConsultasPorIdPaciente(pacienteId);
     }
 
-    @GetMapping("/consultas/{doctorId}")
-    public Consulta buscarConsultaPorIdDoctor(@PathVariable int doctorId) {
-        ConsultaPK consultaPK = new ConsultaPK();
-        consultaPK.setDoctorId(doctorId);
-        return consultaServicio.buscarConsultaPorId(consultaPK);
+    @GetMapping("/consultas/doctor/{doctorId}")
+    public List<Consulta> buscarConsultasPorIdDoctor(@PathVariable int doctorId) {
+        return consultaServicio.buscarConsultasPorIdDoctor(doctorId);
     }
 
     @PostMapping("/consultas")
@@ -67,13 +63,10 @@ public class ConsultaControlador {
     }
 
     @DeleteMapping("/consultas/{pacienteId}/{doctorId}")
-    public void eliminarConsulta(@PathVariable int pacienteId, @PathVariable int doctorId) {
-        ConsultaPK consultaPK = new ConsultaPK();
-        consultaPK.setPacienteId(pacienteId);
-        consultaPK.setDoctorId(doctorId);
-        Consulta consulta = consultaServicio.buscarConsultaPorId(consultaPK);
-        if (consulta != null) {
-            consultaServicio.eliminarConsulta(consulta);
-        }
+    public ResponseEntity<Void> eliminarConsulta(@PathVariable int pacienteId, @PathVariable int doctorId) {
+        Consulta consulta = new Consulta();
+        consulta.setConsultaPK(new ConsultaPK(pacienteId, doctorId));
+        consultaServicio.eliminarConsulta(consulta);
+        return ResponseEntity.noContent().build();
     }
 }

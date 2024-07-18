@@ -4,7 +4,6 @@ import codelicht.sipressspringapp.modelo.Consulta;
 import codelicht.sipressspringapp.modelo.ConsultaPK;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,4 +11,9 @@ import java.util.List;
  * Extiende JpaRepository para proporcionar operaciones CRUD básicas.
  */
 public interface ConsultaRepositorio extends JpaRepository<Consulta, ConsultaPK> {
+
+    List<Consulta> findByConsultaPK_PacienteId(int pacienteId);
+
+    List<Consulta> findByConsultaPK_DoctorId(int doctorId);
 }
+

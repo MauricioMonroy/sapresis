@@ -7,11 +7,11 @@ import codelicht.sipressspringapp.servicio.interfaces.IConsultaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 /**
  * Implementación del servicio para la entidad Consulta.
+ * Implementa los métodos de la interfaz IConsultaServicio.
  */
 @Service
 public class ConsultaServicio implements IConsultaServicio {
@@ -25,8 +25,13 @@ public class ConsultaServicio implements IConsultaServicio {
     }
 
     @Override
-    public Consulta buscarConsultaPorId(ConsultaPK consultaPK) {
-        return consultaRepositorio.findById(consultaPK).orElse(null);
+    public List<Consulta> buscarConsultasPorIdPaciente(int pacienteId) {
+        return consultaRepositorio.findByConsultaPK_PacienteId(pacienteId);
+    }
+
+    @Override
+    public List<Consulta> buscarConsultasPorIdDoctor(int doctorId) {
+        return consultaRepositorio.findByConsultaPK_DoctorId(doctorId);
     }
 
     @Override
@@ -38,5 +43,5 @@ public class ConsultaServicio implements IConsultaServicio {
     public void eliminarConsulta(Consulta consulta) {
         consultaRepositorio.delete(consulta);
     }
-
 }
+

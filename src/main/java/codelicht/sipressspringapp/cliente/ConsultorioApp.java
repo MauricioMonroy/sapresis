@@ -106,7 +106,7 @@ public class ConsultorioApp {
             consultorio.setPaciente(paciente);
             scanner.nextLine();  // Limpiar el buffer del scanner
 
-            // Solicitar el ID del paciente y asignarlo al consultorio
+            // Solicitar el ID del personal y asignarlo al consultorio
             System.out.println("Ingrese el ID del personal asociado al consultorio (No. Formato 41xx):");
             int personalId = scanner.nextInt();
             Personal personal = new Personal();

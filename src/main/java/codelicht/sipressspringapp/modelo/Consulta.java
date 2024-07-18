@@ -1,6 +1,7 @@
 package codelicht.sipressspringapp.modelo;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class Consulta implements Serializable {
 
     @Column(name = "hora_consulta")
     @Temporal(TemporalType.TIME)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     @JsonProperty("horaConsulta")
     private Date horaConsulta;
 
