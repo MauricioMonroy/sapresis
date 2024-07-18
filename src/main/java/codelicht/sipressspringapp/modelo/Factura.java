@@ -20,7 +20,6 @@ public class Factura implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
     @Column(name = "numero_factura")
     @JsonProperty("numeroFactura")
     private Integer numeroFactura;
@@ -47,12 +46,12 @@ public class Factura implements Serializable {
 
     @Override
     public String toString() {
-        return "Factura -> {" +
-                " Número de Factura: '" + numeroFactura + "'\n" +
-                " Descripción del Servicio: '" + descripcionServicio + "'\n" +
-                " Valor: " + valor + "'\n" +
-                " Total: " + total + '}' + "'\n" +
-                " | Paciente Vinculado -> {" + paciente + "}" +
-                '\n';
+        return "Factura{" +
+                "numeroFactura=" + numeroFactura +
+                ", descripcionServicio='" + descripcionServicio + '\'' +
+                ", valor=" + valor +
+                ", total=" + total +
+                ", paciente=" + paciente +
+                '}';
     }
 }

@@ -22,7 +22,6 @@ public class Formula implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Basic(optional = false)
     @Column(name = "numero_formula")
     @JsonProperty("numeroFormula")
     private Integer numeroFormula;
@@ -51,12 +50,12 @@ public class Formula implements Serializable {
 
     @Override
     public String toString() {
-        return "Formula -> {" +
-                " Número de Fórmula: '" + numeroFormula + "'\n" +
-                " Nombre de la Medicación: '" + nombreMedicacion + "'\n" +
-                " Fecha de Emisión: " + fechaMedicacion + "'\n" +
-                " Costo de la Medicación: " + costoMedicacion + '}' + "'\n" +
-                " | Paciente Vinculado -> {" + paciente + "}" +
-                '\n';
+        return "Formula{" +
+                "numeroFormula=" + numeroFormula +
+                ", nombreMedicacion='" + nombreMedicacion + '\'' +
+                ", fechaMedicacion=" + fechaMedicacion +
+                ", costoMedicacion=" + costoMedicacion +
+                ", paciente=" + paciente +
+                '}';
     }
 }

@@ -47,8 +47,8 @@ public class ConsultaPK implements Serializable {
     @Override
     public String toString() {
         return "ConsultaPK{" +
-                "ID del Paciente: " + pacienteId + "\n" +
-                "ID del Doctor: " + doctorId + "}" +
-                '\n';
+                "pacienteId=" + pacienteId +
+                ", doctorId=" + doctorId +
+                '}';
     }
 }

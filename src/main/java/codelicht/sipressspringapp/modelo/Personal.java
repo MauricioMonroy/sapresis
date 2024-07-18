@@ -60,13 +60,13 @@ public class Personal implements Serializable {
 
     @Override
     public String toString() {
-        return "Personal -> {" +
-                " ID del Personal: '" + idPersonal + "'\n" +
-                " Nombre: '" + nombrePersonal + "'\n" +
-                " Apellido: '" + apellidoPersonal + "'\n" +
-                " Teléfono: '" + telefonoPersonal + "'\n" +
-                " Email: '" + emailPersonal + '}' + "'\n" +
-                " | Dependencia -> {" + dependencia + "}" +
-                '\n';
+        return "Personal{" +
+                "idPersonal=" + idPersonal +
+                ", nombrePersonal='" + nombrePersonal + '\'' +
+                ", apellidoPersonal='" + apellidoPersonal + '\'' +
+                ", telefonoPersonal='" + telefonoPersonal + '\'' +
+                ", emailPersonal='" + emailPersonal + '\'' +
+                ", dependencia=" + dependencia +
+                '}';
     }
 }

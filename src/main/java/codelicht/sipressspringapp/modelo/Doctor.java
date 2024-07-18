@@ -57,14 +57,14 @@ public class Doctor implements Serializable {
 
     @Override
     public String toString() {
-        return "Doctor -> {" +
-                " ID del Doctor: '" + idDoctor + "'\n" +
-                " Nombre: '" + nombreDoctor + "'\n" +
-                " Apellido: '" + apellidoDoctor + "'\n" +
-                " Teléfono: '" + telefonoDoctor + "'\n" +
-                " Email: '" + emailDoctor + '}' + "'\n" +
-                " | Dependencia -> {" + dependencia + "}" +
-                '\n';
+        return "Doctor{" +
+                "idDoctor=" + idDoctor +
+                ", nombreDoctor='" + nombreDoctor + '\'' +
+                ", apellidoDoctor='" + apellidoDoctor + '\'' +
+                ", telefonoDoctor='" + telefonoDoctor + '\'' +
+                ", emailDoctor='" + emailDoctor + '\'' +
+                ", dependencia=" + dependencia +
+                '}';
     }
 }
 
