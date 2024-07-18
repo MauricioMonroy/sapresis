@@ -22,6 +22,7 @@ public class Formula implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Basic(optional = false)
     @Column(name = "numero_formula")
     @JsonProperty("numeroFormula")
     private Integer numeroFormula;

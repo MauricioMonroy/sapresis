@@ -20,6 +20,7 @@ public class Factura implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
+    @Basic(optional = false)
     @Column(name = "numero_factura")
     @JsonProperty("numeroFactura")
     private Integer numeroFactura;

@@ -22,6 +22,7 @@ public class Eps implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
+    @Basic(optional = false)
     @Column(name = "id_eps")
     @JsonProperty("idEps")
     private Integer idEps;

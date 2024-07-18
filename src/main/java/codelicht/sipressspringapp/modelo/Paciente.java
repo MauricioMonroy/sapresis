@@ -1,11 +1,10 @@
 package codelicht.sipressspringapp.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +22,6 @@ public class Paciente implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
-
     @Id
     @Basic(optional = false)
     @Column(name = "id_paciente")
@@ -51,12 +49,12 @@ public class Paciente implements Serializable {
     private String telefonoPaciente;
 
     @NotEmpty(message = "El email del paciente no puede estar vacío")
-    @Email(message = "El email debe tener un formato válido")
     @Column(name = "email_paciente")
     @JsonProperty("emailPaciente")
     private String emailPaciente;
 
     @OneToMany(mappedBy = "paciente")
+    @JsonBackReference
     @JsonProperty("facturaList")
     private List<Factura> facturaList;
 
