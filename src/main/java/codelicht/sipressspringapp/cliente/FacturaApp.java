@@ -124,9 +124,15 @@ public class FacturaApp {
 
             if (response.statusCode() == 201 || response.statusCode() == 200) {  // Manejar 201 y 200 como respuestas exitosas
                 Factura nuevaFactura = mapper.readValue(response.body(), Factura.class);
-                System.out.println("Factura guardada: " + nuevaFactura);
+                System.out.println("Factura guardada exitosamente:");
+                System.out.println(nuevaFactura);
+            } else if (response.statusCode() == 400) {
+                List<String> errors = mapper.readValue(response.body(), new TypeReference<>() {
+                });
+                System.out.println("Errores de validación:");
+                errors.forEach(System.out::println);
             } else {
-                System.out.println("Error al guardar la factura: " + response.body());
+                System.out.println("Error al guardar la factura. Código de estado: " + response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -145,9 +151,11 @@ public class FacturaApp {
                     .build();
             HttpResponse<Void> response = client.send(request, HttpResponse.BodyHandlers.discarding());
             if (response.statusCode() == 204) {
-                System.out.println("Factura eliminada.");
+                System.out.println("Factura eliminada exitosamente.");
+            } else if (response.statusCode() == 404) {
+                System.out.println("Factura no encontrado.");
             } else {
-                System.out.println("Error al eliminar el factura. Código de respuesta: " + response.statusCode());
+                System.out.println("Error al eliminar la factura.");
             }
         } catch (Exception e) {
             e.printStackTrace();

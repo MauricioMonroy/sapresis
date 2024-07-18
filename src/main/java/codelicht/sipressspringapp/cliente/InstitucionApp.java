@@ -89,7 +89,7 @@ public class InstitucionApp {
         try {
             Institucion institucion = new Institucion();
 
-            System.out.println("Ingrese el ID del institucion (No. formato 1xx):");
+            System.out.println("Ingrese el ID dla institucion (No. formato 1xx):");
             institucion.setIdInstitucion(scanner.nextInt());
             scanner.nextLine();  // Limpiar el buffer del scanner
 
@@ -99,7 +99,7 @@ public class InstitucionApp {
             institucion.setDireccionInstitucion(scanner.nextLine());
             System.out.println("Ingrese el teléfono de la institución:");
             institucion.setTelefonoInstitucion(scanner.nextLine());
-            System.out.println("Ingrese el email del institucion:");
+            System.out.println("Ingrese el email dla institucion:");
             institucion.setCodigoPostal(scanner.nextLine());
 
             String requestBody = mapper.writeValueAsString(institucion);
@@ -115,9 +115,15 @@ public class InstitucionApp {
 
             if (response.statusCode() == 201 || response.statusCode() == 200) {  // Manejar 201 y 200 como respuestas exitosas
                 Institucion nuevaInstitucion = mapper.readValue(response.body(), Institucion.class);
-                System.out.println("Institucion guardada: " + nuevaInstitucion);
+                System.out.println("Institucion guardada exitosamente:");
+                System.out.println(nuevaInstitucion);
+            } else if (response.statusCode() == 400) {
+                List<String> errors = mapper.readValue(response.body(), new TypeReference<>() {
+                });
+                System.out.println("Errores de validación:");
+                errors.forEach(System.out::println);
             } else {
-                System.out.println("Error al guardar la institucion: " + response.body());
+                System.out.println("Error al guardar la institucion. Código de estado: " + response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -136,9 +142,11 @@ public class InstitucionApp {
                     .build();
             HttpResponse<Void> response = client.send(request, HttpResponse.BodyHandlers.discarding());
             if (response.statusCode() == 204) {
-                System.out.println("Institucion eliminada.");
+                System.out.println("Institucion eliminada exitosamente.");
+            } else if (response.statusCode() == 404) {
+                System.out.println("Institucion no encontrado.");
             } else {
-                System.out.println("Error al eliminar la institución. Código de respuesta: " + response.statusCode());
+                System.out.println("Error al eliminar la institucion.");
             }
         } catch (Exception e) {
             e.printStackTrace();

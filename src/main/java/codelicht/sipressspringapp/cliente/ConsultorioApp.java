@@ -98,8 +98,8 @@ public class ConsultorioApp {
             consultorio.setNumeroConsultorio(scanner.nextInt());
             scanner.nextLine();  // Limpiar el buffer del scanner
 
-            // Solicitar el ID del paciente y asignarlo al consultorio
-            System.out.println("Ingrese el ID del paciente asociado al consultorio:");
+            // Solicitar el ID del consultorio y asignarlo al consultorio
+            System.out.println("Ingrese el ID del consultorio asociado al consultorio:");
             int pacienteId = scanner.nextInt();
             Paciente paciente = new Paciente();
             paciente.setIdPaciente(pacienteId);
@@ -132,9 +132,15 @@ public class ConsultorioApp {
 
             if (response.statusCode() == 201 || response.statusCode() == 200) {  // Manejar 201 y 200 como respuestas exitosas
                 Consultorio nuevoConsultorio = mapper.readValue(response.body(), Consultorio.class);
-                System.out.println("Consultorio guardado: " + nuevoConsultorio);
+                System.out.println("Consultorio guardado exitosamente:");
+                System.out.println(nuevoConsultorio);
+            } else if (response.statusCode() == 400) {
+                List<String> errors = mapper.readValue(response.body(), new TypeReference<>() {
+                });
+                System.out.println("Errores de validación:");
+                errors.forEach(System.out::println);
             } else {
-                System.out.println("Error al guardar el consultorio: " + response.body());
+                System.out.println("Error al guardar el consultorio. Código de estado: " + response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -153,9 +159,11 @@ public class ConsultorioApp {
                     .build();
             HttpResponse<Void> response = client.send(request, HttpResponse.BodyHandlers.discarding());
             if (response.statusCode() == 204) {
-                System.out.println("Consultorio eliminado.");
+                System.out.println("Consultorio eliminado exitosamente.");
+            } else if (response.statusCode() == 404) {
+                System.out.println("Consultorio no encontrado.");
             } else {
-                System.out.println("Error al eliminar el consultorio. Código de respuesta: " + response.statusCode());
+                System.out.println("Error al eliminar el consultorio.");
             }
         } catch (Exception e) {
             e.printStackTrace();

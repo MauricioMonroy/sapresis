@@ -124,9 +124,15 @@ public class PersonalApp {
 
             if (response.statusCode() == 201 || response.statusCode() == 200) {  // Manejar 201 y 200 como respuestas exitosas
                 Personal nuevoPersonal = mapper.readValue(response.body(), Personal.class);
-                System.out.println("Personal guardado: " + nuevoPersonal);
+                System.out.println("Personal guardado exitosamente:");
+                System.out.println(nuevoPersonal);
+            } else if (response.statusCode() == 400) {
+                List<String> errors = mapper.readValue(response.body(), new TypeReference<>() {
+                });
+                System.out.println("Errores de validación:");
+                errors.forEach(System.out::println);
             } else {
-                System.out.println("Error al guardar el personal: " + response.body());
+                System.out.println("Error al guardar el personal. Código de estado: " + response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -145,9 +151,11 @@ public class PersonalApp {
                     .build();
             HttpResponse<Void> response = client.send(request, HttpResponse.BodyHandlers.discarding());
             if (response.statusCode() == 204) {
-                System.out.println("Personal eliminado.");
+                System.out.println("Personal eliminado exitosamente.");
+            } else if (response.statusCode() == 404) {
+                System.out.println("Personal no encontrado.");
             } else {
-                System.out.println("Error al eliminar el personal. Código de respuesta: " + response.statusCode());
+                System.out.println("Error al eliminar el personal.");
             }
         } catch (Exception e) {
             e.printStackTrace();

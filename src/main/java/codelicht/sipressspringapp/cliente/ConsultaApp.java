@@ -1,7 +1,6 @@
 package codelicht.sipressspringapp.cliente;
 
 import codelicht.sipressspringapp.modelo.Consulta;
-import codelicht.sipressspringapp.modelo.ConsultaPK;
 import codelicht.sipressspringapp.modelo.Doctor;
 import codelicht.sipressspringapp.modelo.Paciente;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -43,7 +42,7 @@ public class ConsultaApp {
                     listarConsultas();
                     break;
                 case 2:
-                    buscarConsultasPorIdPaciente();
+                    buscarConsultasPorIdConsulta();
                     break;
                 case 3:
                     buscarConsultasPorIdDoctor();
@@ -78,7 +77,7 @@ public class ConsultaApp {
         }
     }
 
-    private static void buscarConsultasPorIdPaciente() {
+    private static void buscarConsultasPorIdConsulta() {
         try {
             System.out.println("Ingrese el ID del paciente:");
             int pacienteId = scanner.nextInt();
@@ -159,9 +158,15 @@ public class ConsultaApp {
 
             if (response.statusCode() == 201 || response.statusCode() == 200) {  // Manejar 201 y 200 como respuestas exitosas
                 Consulta nuevaConsulta = mapper.readValue(response.body(), Consulta.class);
-                System.out.println("Consulta consulta: " + nuevaConsulta);
+                System.out.println("Consulta guardada exitosamente:");
+                System.out.println(nuevaConsulta);
+            } else if (response.statusCode() == 400) {
+                List<String> errors = mapper.readValue(response.body(), new TypeReference<>() {
+                });
+                System.out.println("Errores de validación:");
+                errors.forEach(System.out::println);
             } else {
-                System.out.println("Error al guardar la consulta: " + response.body());
+                System.out.println("Error al guardar la consulta. Código de estado: " + response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -182,8 +187,14 @@ public class ConsultaApp {
                     .uri(URI.create(BASE_URL + "/consultas/" + pacienteId + "/" + doctorId))
                     .DELETE()
                     .build();
-            client.send(request, HttpResponse.BodyHandlers.discarding());
-            System.out.println("Consulta eliminada.");
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 204) {
+                System.out.println("Consulta eliminada exitosamente.");
+            } else if (response.statusCode() == 404) {
+                System.out.println("Consulta no encontrada.");
+            } else {
+                System.out.println("Error al eliminar la consulta.");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

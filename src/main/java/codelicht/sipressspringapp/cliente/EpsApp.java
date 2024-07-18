@@ -111,9 +111,15 @@ public class EpsApp {
 
             if (response.statusCode() == 201) {  // Código 201 indica creación exitosa
                 Eps nuevaEps = mapper.readValue(response.body(), Eps.class);
-                System.out.println("Eps guardada: " + nuevaEps);
+                System.out.println("EPS guardada exitosamente:");
+                System.out.println(nuevaEps);
+            } else if (response.statusCode() == 400) {
+                List<String> errors = mapper.readValue(response.body(), new TypeReference<>() {
+                });
+                System.out.println("Errores de validación:");
+                errors.forEach(System.out::println);
             } else {
-                System.out.println("Error al guardar la EPS: " + response.body());
+                System.out.println("Error al guardar la EPS. Código de estado: " + response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,9 +138,11 @@ public class EpsApp {
                     .build();
             HttpResponse<Void> response = client.send(request, HttpResponse.BodyHandlers.discarding());
             if (response.statusCode() == 204) {
-                System.out.println("EPS eliminada.");
+                System.out.println("EPS eliminada exitosamente.");
+            } else if (response.statusCode() == 404) {
+                System.out.println("EPS no encontrado.");
             } else {
-                System.out.println("Error al eliminar la EPS. Código de respuesta: " + response.statusCode());
+                System.out.println("Error al eliminar la EPS.");
             }
         } catch (Exception e) {
             e.printStackTrace();

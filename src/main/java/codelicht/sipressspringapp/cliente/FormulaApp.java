@@ -129,9 +129,15 @@ public class FormulaApp {
 
             if (response.statusCode() == 201 || response.statusCode() == 200) {  // Manejar 201 y 200 como respuestas exitosas
                 Formula nuevaFormula = mapper.readValue(response.body(), Formula.class);
-                System.out.println("Fórmula guardada: " + nuevaFormula);
+                System.out.println("Fórmula guardada exitosamente:");
+                System.out.println(nuevaFormula);
+            } else if (response.statusCode() == 400) {
+                List<String> errors = mapper.readValue(response.body(), new TypeReference<>() {
+                });
+                System.out.println("Errores de validación:");
+                errors.forEach(System.out::println);
             } else {
-                System.out.println("Error al guardar la fórmula: " + response.body());
+                System.out.println("Error al guardar la fórmula. Código de estado: " + response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -140,7 +146,7 @@ public class FormulaApp {
 
     private static void eliminarFormula() {
         try {
-            System.out.println("Ingrese el número de la formula a eliminar:");
+            System.out.println("Ingrese el número de la fórmula a eliminar:");
             int id = scanner.nextInt();
             scanner.nextLine();  // Consume newline
 
@@ -150,9 +156,11 @@ public class FormulaApp {
                     .build();
             HttpResponse<Void> response = client.send(request, HttpResponse.BodyHandlers.discarding());
             if (response.statusCode() == 204) {
-                System.out.println("Formula eliminada.");
+                System.out.println("Fórmula eliminada exitosamente.");
+            } else if (response.statusCode() == 404) {
+                System.out.println("Fórmula no encontrada.");
             } else {
-                System.out.println("Error al eliminar la formula. Código de respuesta: " + response.statusCode());
+                System.out.println("Error al eliminar la fórmula.");
             }
         } catch (Exception e) {
             e.printStackTrace();

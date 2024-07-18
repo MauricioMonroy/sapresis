@@ -118,9 +118,15 @@ public class DependenciaApp {
 
             if (response.statusCode() == 201 || response.statusCode() == 200) {  // Manejar 201 y 200 como respuestas exitosas
                 Dependencia nuevaDependencia = mapper.readValue(response.body(), Dependencia.class);
-                System.out.println("Dependencia guardada: " + nuevaDependencia);
+                System.out.println("Dependencia guardada exitosamente:");
+                System.out.println(nuevaDependencia);
+            } else if (response.statusCode() == 400) {
+                List<String> errors = mapper.readValue(response.body(), new TypeReference<>() {
+                });
+                System.out.println("Errores de validación:");
+                errors.forEach(System.out::println);
             } else {
-                System.out.println("Error al guardar la dependencia: " + response.body());
+                System.out.println("Error al guardar la dependencia. Código de estado: " + response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -139,9 +145,11 @@ public class DependenciaApp {
                     .build();
             HttpResponse<Void> response = client.send(request, HttpResponse.BodyHandlers.discarding());
             if (response.statusCode() == 204) {
-                System.out.println("Dependencia eliminada.");
+                System.out.println("Dependencia eliminada exitosamente.");
+            } else if (response.statusCode() == 404) {
+                System.out.println("Dependencia no encontrada.");
             } else {
-                System.out.println("Error al eliminar la dependencia. Código de respuesta: " + response.statusCode());
+                System.out.println("Error al eliminar la dependencia.");
             }
         } catch (Exception e) {
             e.printStackTrace();

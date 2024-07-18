@@ -125,9 +125,15 @@ public class DoctorApp {
 
             if (response.statusCode() == 201 || response.statusCode() == 200) {  // Manejar 201 y 200 como respuestas exitosas
                 Doctor nuevoDoctor = mapper.readValue(response.body(), Doctor.class);
-                System.out.println("Doctor guardado: " + nuevoDoctor);
+                System.out.println("Doctor guardado exitosamente:");
+                System.out.println(nuevoDoctor);
+            } else if (response.statusCode() == 400) {
+                List<String> errors = mapper.readValue(response.body(), new TypeReference<>() {
+                });
+                System.out.println("Errores de validación:");
+                errors.forEach(System.out::println);
             } else {
-                System.out.println("Error al guardar el doctor: " + response.body());
+                System.out.println("Error al guardar el doctor. Código de estado: " + response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -146,9 +152,11 @@ public class DoctorApp {
                     .build();
             HttpResponse<Void> response = client.send(request, HttpResponse.BodyHandlers.discarding());
             if (response.statusCode() == 204) {
-                System.out.println("Doctor eliminado.");
+                System.out.println("Doctor eliminado exitosamente.");
+            } else if (response.statusCode() == 404) {
+                System.out.println("Doctor no encontrado.");
             } else {
-                System.out.println("Error al eliminar el doctor. Código de respuesta: " + response.statusCode());
+                System.out.println("Error al eliminar el doctor.");
             }
         } catch (Exception e) {
             e.printStackTrace();
