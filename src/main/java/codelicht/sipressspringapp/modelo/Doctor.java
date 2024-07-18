@@ -1,10 +1,11 @@
 package codelicht.sipressspringapp.modelo;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,26 +27,32 @@ public class Doctor implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_doctor")
     @JsonProperty("idDoctor")
+    @Pattern(regexp = "\\d+", message = "El ID del doctor debe ser un número")
     private Integer idDoctor;
 
+    @NotEmpty(message = "El nombre del doctor no puede estar vacío")
     @Column(name = "nombre_doctor")
     @JsonProperty("nombreDoctor")
     private String nombreDoctor;
 
+    @NotEmpty(message = "El apellido del doctor no puede estar vacío")
     @Column(name = "apellido_doctor")
     @JsonProperty("apellidoDoctor")
     private String apellidoDoctor;
 
+    @NotEmpty(message = "El teléfono del doctor no puede estar vacío")
     @Column(name = "telefono_doctor")
     @JsonProperty("telefonoDoctor")
     private String telefonoDoctor;
 
+    @NotEmpty(message = "El email del doctor no puede estar vacío")
     @Column(name = "email_doctor")
     @JsonProperty("emailDoctor")
     private String emailDoctor;
 
     @JoinColumn(name = "dependencia_id", referencedColumnName = "id_dependencia")
     @ManyToOne
+    @NotNull(message = "El campo de ID Dependencia no puede estar vacío")
     @JsonProperty("dependencia")
     private Dependencia dependencia;
 

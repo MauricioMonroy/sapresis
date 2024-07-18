@@ -2,6 +2,8 @@ package codelicht.sipressspringapp.modelo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,8 +24,10 @@ public class Consultorio implements Serializable {
     @Basic(optional = false)
     @Column(name = "numero_consultorio")
     @JsonProperty("numeroConsultorio")
+    @Pattern(regexp = "\\d+", message = "El número del consultorio debe tener un formato válido")
     private Integer numeroConsultorio;
 
+    @NotNull(message = "La fecha de admisión no puede estar vacía")
     @Column(name = "fecha_admision")
     @Temporal(TemporalType.DATE)
     @JsonProperty("fechaAdmision")
@@ -31,11 +35,13 @@ public class Consultorio implements Serializable {
 
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
     @ManyToOne
+    @NotNull(message = "El campo de ID Paciente no puede estar vacío")
     @JsonProperty("paciente")
     private Paciente paciente;
 
     @JoinColumn(name = "personal_id", referencedColumnName = "id_personal")
     @ManyToOne
+    @NotNull(message = "El campo de ID Personal no puede estar vacío")
     @JsonProperty("personal")
     private Personal personal;
 

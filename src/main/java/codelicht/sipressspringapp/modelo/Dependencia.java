@@ -3,6 +3,9 @@ package codelicht.sipressspringapp.modelo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,8 +27,10 @@ public class Dependencia implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_dependencia")
     @JsonProperty("idDependencia")
+    @Pattern(regexp = "\\d+", message = "El ID de la dependencia debe ser un número")
     private Integer idDependencia;
 
+    @NotEmpty(message = "El nombre de la dependencia no puede estar vacío")
     @Column(name = "nombre_dependencia")
     @JsonProperty("nombreDependencia")
     private String nombreDependencia;
@@ -38,6 +43,7 @@ public class Dependencia implements Serializable {
 
     @JoinColumn(name = "institucion_id", referencedColumnName = "id_institucion")
     @ManyToOne
+    @NotNull(message = "El campo de ID Institución no puede estar vacío")
     @JsonProperty("institucion")
     private Institucion institucion;
 
