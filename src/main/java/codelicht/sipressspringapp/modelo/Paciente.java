@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
@@ -49,6 +50,7 @@ public class Paciente implements Serializable {
     private String telefonoPaciente;
 
     @NotEmpty(message = "El email del paciente no puede estar vacío")
+    @Email(message = "El email debe tener un formato válido")
     @Column(name = "email_paciente")
     @JsonProperty("emailPaciente")
     private String emailPaciente;
