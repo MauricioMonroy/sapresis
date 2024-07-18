@@ -125,9 +125,15 @@ public class PacienteApp {
 
             if (response.statusCode() == 201 || response.statusCode() == 200) {  // Manejar 201 y 200 como respuestas exitosas
                 Paciente nuevoPaciente = mapper.readValue(response.body(), Paciente.class);
-                System.out.println("Paciente guardado: " + nuevoPaciente);
+                System.out.println("Paciente guardado exitosamente:");
+                System.out.println(nuevoPaciente);
+            } else if (response.statusCode() == 400) {
+                List<String> errors = mapper.readValue(response.body(), new TypeReference<>() {
+                });
+                System.out.println("Errores de validación:");
+                errors.forEach(System.out::println);
             } else {
-                System.out.println("Error al guardar el paciente: " + response.body());
+                System.out.println("Error al guardar el paciente. Código de estado: " + response.statusCode());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -144,11 +150,14 @@ public class PacienteApp {
                     .uri(URI.create(BASE_URL + "/pacientes/" + id))
                     .DELETE()
                     .build();
-            HttpResponse<Void> response = client.send(request, HttpResponse.BodyHandlers.discarding());
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
             if (response.statusCode() == 204) {
-                System.out.println("Paciente eliminado.");
+                System.out.println("Paciente eliminado exitosamente.");
+            } else if (response.statusCode() == 404) {
+                System.out.println("Paciente no encontrado.");
             } else {
-                System.out.println("Error al eliminar el paciente. Código de respuesta: " + response.statusCode());
+                System.out.println("Error al eliminar el paciente.");
             }
         } catch (Exception e) {
             e.printStackTrace();
