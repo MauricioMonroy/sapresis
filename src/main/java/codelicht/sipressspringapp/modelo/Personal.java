@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,7 +27,6 @@ public class Personal implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_personal")
     @JsonProperty("idPersonal")
-    @Pattern(regexp = "\\d+", message = "El ID del personal debe ser un número")
     private Integer idPersonal;
 
     @NotEmpty(message = "El nombre del personal no puede estar vacío")
@@ -54,7 +52,6 @@ public class Personal implements Serializable {
 
     @JoinColumn(name = "dependencia_id", referencedColumnName = "id_dependencia")
     @ManyToOne
-    @NotNull(message = "El campo de ID Dependencia no puede estar vacío")
     @JsonProperty("dependencia")
     private Dependencia dependencia;
 

@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,7 +25,6 @@ public class Doctor implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_doctor")
     @JsonProperty("idDoctor")
-    @Pattern(regexp = "\\d+", message = "El ID del doctor debe ser un número")
     private Integer idDoctor;
 
     @NotEmpty(message = "El nombre del doctor no puede estar vacío")
@@ -52,7 +49,6 @@ public class Doctor implements Serializable {
 
     @JoinColumn(name = "dependencia_id", referencedColumnName = "id_dependencia")
     @ManyToOne
-    @NotNull(message = "El campo de ID Dependencia no puede estar vacío")
     @JsonProperty("dependencia")
     private Dependencia dependencia;
 

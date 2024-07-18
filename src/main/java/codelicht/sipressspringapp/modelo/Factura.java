@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,7 +23,6 @@ public class Factura implements Serializable {
     @Basic(optional = false)
     @Column(name = "numero_factura")
     @JsonProperty("numeroFactura")
-    @Pattern(regexp = "\\d+", message = "El número de la fórmula debe tener un formato válido")
     private Integer numeroFactura;
 
     @NotEmpty(message = "La descripción no puede estar vacía")
@@ -33,19 +30,18 @@ public class Factura implements Serializable {
     @JsonProperty("descripcionServicio")
     private String descripcionServicio;
 
-    @NotNull(message = "El campo de valor no puede estar vacío")
+    @NotEmpty(message = "El campo de valor no puede estar vacío")
     @DecimalMin(value = "0.0", inclusive = false, message = "El campo de valor debe ser positivo")
     @JsonProperty("valor")
     private Double valor;
 
-    @NotNull(message = "El campo de total no puede estar vacío")
+    @NotEmpty(message = "El campo de total no puede estar vacío")
     @DecimalMin(value = "0.0", inclusive = false, message = "El campo de total debe ser positivo")
     @JsonProperty("total")
     private Double total;
 
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
     @ManyToOne
-    @NotNull(message = "El campo de ID Paciente no puede estar vacío")
     @JsonProperty("paciente")
     private Paciente paciente;
 

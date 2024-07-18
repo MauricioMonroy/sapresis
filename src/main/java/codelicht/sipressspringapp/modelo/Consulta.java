@@ -4,7 +4,7 @@ package codelicht.sipressspringapp.modelo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,13 +24,13 @@ public class Consulta implements Serializable {
     @EmbeddedId
     protected ConsultaPK consultaPK;
 
-    @NotNull(message = "La fecha de consulta no puede estar vacía")
+    @NotEmpty(message = "La fecha de consulta no puede estar vacía")
     @Column(name = "fecha_consulta")
     @Temporal(TemporalType.DATE)
     @JsonProperty("fechaConsulta")
     private Date fechaConsulta;
 
-    @NotNull(message = "La hora de consulta no puede estar vacía")
+    @NotEmpty(message = "La hora de consulta no puede estar vacía")
     @Column(name = "hora_consulta")
     @Temporal(TemporalType.TIME)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
@@ -39,13 +39,11 @@ public class Consulta implements Serializable {
 
     @JoinColumn(name = "doctor_id", referencedColumnName = "id_doctor", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    @NotNull(message = "El campo de ID Doctor no puede estar vacío")
     @JsonProperty("doctor")
     private Doctor doctor;
 
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    @NotNull(message = "El campo de ID Paciente no puede estar vacío")
     @JsonProperty("paciente")
     private Paciente paciente;
 

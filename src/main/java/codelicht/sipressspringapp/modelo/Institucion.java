@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,7 +25,6 @@ public class Institucion implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_institucion")
     @JsonProperty("idInstitucion")
-    @Pattern(regexp = "\\d+", message = "El ID de la institución debe ser un número")
     private Integer idInstitucion;
 
     @NotEmpty(message = "El nombre de la institución no puede estar vacío")

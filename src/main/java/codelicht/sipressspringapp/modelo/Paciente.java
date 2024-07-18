@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,7 +28,6 @@ public class Paciente implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_paciente")
     @JsonProperty("idPaciente")
-    @Pattern(regexp = "\\d+", message = "El ID del paciente debe ser un número")
     private Integer idPaciente;
 
     @NotEmpty(message = "El nombre del paciente no puede estar vacío")
@@ -64,7 +62,6 @@ public class Paciente implements Serializable {
 
     @JoinColumn(name = "eps_id", referencedColumnName = "id_eps")
     @ManyToOne
-    @NotNull(message = "El campo de ID EPS no puede estar vacío")
     @JsonProperty("eps")
     private Eps eps;
 

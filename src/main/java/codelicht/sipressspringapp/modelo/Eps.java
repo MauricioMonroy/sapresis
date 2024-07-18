@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,7 +24,6 @@ public class Eps implements Serializable {
     @Id
     @Column(name = "id_eps")
     @JsonProperty("idEps")
-    @Pattern(regexp = "\\d+", message = "El ID de la EPS debe ser un número")
     private Integer idEps;
 
     @NotEmpty(message = "El nombre de la EPS no puede estar vacío")
