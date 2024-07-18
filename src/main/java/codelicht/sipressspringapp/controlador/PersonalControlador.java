@@ -4,13 +4,17 @@ import codelicht.sipressspringapp.modelo.Dependencia;
 import codelicht.sipressspringapp.modelo.Personal;
 import codelicht.sipressspringapp.servicio.interfaces.IDependenciaServicio;
 import codelicht.sipressspringapp.servicio.interfaces.IPersonalServicio;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("sipress-app")
@@ -18,7 +22,6 @@ import java.util.List;
 public class PersonalControlador {
     private static final Logger logger =
             LoggerFactory.getLogger(PersonalControlador.class);
-
 
     @Autowired
     private IPersonalServicio personalServicio;
@@ -40,13 +43,20 @@ public class PersonalControlador {
     }
 
     @PostMapping("/personalS")
-    public Personal agregarPersonal(@RequestBody Personal personal) {
+    public ResponseEntity<?> agregarPersonal(@Valid @RequestBody Personal personal, BindingResult result) {
+        if (result.hasErrors()) {
+            List<String> errors = result.getFieldErrors().stream()
+                    .map(FieldError::getDefaultMessage)
+                    .collect(Collectors.toList());
+            return ResponseEntity.badRequest().body(errors);
+        }
         logger.info("Personal a agregar: " + personal);
         if (personal.getDependencia() != null) {
             Dependencia dependencia = dependenciaServicio.buscarDependenciaPorId(personal.getDependencia().getIdDependencia());
             personal.setDependencia(dependencia);
         }
-        return personalServicio.guardarPersonal(personal);
+        Personal nuevoPersonal = personalServicio.guardarPersonal(personal);
+        return ResponseEntity.ok(nuevoPersonal);
     }
 
     @DeleteMapping("/personalS/{id}")

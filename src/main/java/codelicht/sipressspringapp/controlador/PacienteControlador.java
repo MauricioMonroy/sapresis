@@ -4,13 +4,17 @@ import codelicht.sipressspringapp.modelo.Eps;
 import codelicht.sipressspringapp.modelo.Paciente;
 import codelicht.sipressspringapp.servicio.interfaces.IEpsServicio;
 import codelicht.sipressspringapp.servicio.interfaces.IPacienteServicio;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("sipress-app")
@@ -39,13 +43,20 @@ public class PacienteControlador {
     }
 
     @PostMapping("/pacientes")
-    public Paciente agregarPaciente(@RequestBody Paciente paciente) {
+    public ResponseEntity<?> agregarPaciente(@Valid @RequestBody Paciente paciente, BindingResult result) {
+        if (result.hasErrors()) {
+            List<String> errors = result.getFieldErrors().stream()
+                    .map(FieldError::getDefaultMessage)
+                    .collect(Collectors.toList());
+            return ResponseEntity.badRequest().body(errors);
+        }
         logger.info("Paciente a agregar: " + paciente);
         if (paciente.getEps() != null) {
             Eps eps = epsServicio.buscarEpsPorId(paciente.getEps().getIdEps());
             paciente.setEps(eps);
         }
-        return pacienteServicio.guardarPaciente(paciente);
+        Paciente nuevoPaciente = pacienteServicio.guardarPaciente(paciente);
+        return ResponseEntity.ok(nuevoPaciente);
     }
 
     @DeleteMapping("/pacientes/{id}")
@@ -59,4 +70,3 @@ public class PacienteControlador {
         }
     }
 }
-

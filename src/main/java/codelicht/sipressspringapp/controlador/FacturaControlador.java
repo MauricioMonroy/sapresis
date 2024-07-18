@@ -4,13 +4,17 @@ import codelicht.sipressspringapp.modelo.Factura;
 import codelicht.sipressspringapp.modelo.Paciente;
 import codelicht.sipressspringapp.servicio.interfaces.IFacturaServicio;
 import codelicht.sipressspringapp.servicio.interfaces.IPacienteServicio;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("sipress-app")
@@ -39,13 +43,20 @@ public class FacturaControlador {
     }
 
     @PostMapping("/facturas")
-    public Factura agregarFactura(@RequestBody Factura factura) {
+    public ResponseEntity<?> agregarFactura(@Valid @RequestBody Factura factura, BindingResult result) {
+        if (result.hasErrors()) {
+            List<String> errors = result.getFieldErrors().stream()
+                    .map(FieldError::getDefaultMessage)
+                    .collect(Collectors.toList());
+            return ResponseEntity.badRequest().body(errors);
+        }
         logger.info("Factura a agregar: " + factura);
         if (factura.getPaciente() != null) {
             Paciente paciente = pacienteServicio.buscarPacientePorId(factura.getPaciente().getIdPaciente());
             factura.setPaciente(paciente);
         }
-        return facturaServicio.guardarFactura(factura);
+        Factura nuevaFactura = facturaServicio.guardarFactura(factura);
+        return ResponseEntity.ok(nuevaFactura);
     }
 
     @DeleteMapping("/facturas/{id}")
