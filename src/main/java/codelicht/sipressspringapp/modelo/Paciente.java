@@ -76,14 +76,14 @@ public class Paciente implements Serializable {
 
     @Override
     public String toString() {
-        return "Paciente{" +
-                "idPaciente=" + idPaciente +
-                ", nombrePaciente='" + nombrePaciente + '\'' +
-                ", apellidoPaciente='" + apellidoPaciente + '\'' +
-                ", direccionPaciente='" + direccionPaciente + '\'' +
-                ", telefonoPaciente='" + telefonoPaciente + '\'' +
-                ", emailPaciente='" + emailPaciente + '\'' +
-                ", eps=" + eps +
+        return "Paciente{\n" +
+                "idPaciente=" + idPaciente + ",\n" +
+                "nombrePaciente='" + nombrePaciente + "',\n" +
+                "apellidoPaciente='" + apellidoPaciente + "',\n" +
+                "direccionPaciente='" + direccionPaciente + "',\n" +
+                "telefonoPaciente='" + telefonoPaciente + "',\n" +
+                "emailPaciente='" + emailPaciente + "',\n" +
+                "eps=" + eps + "\n" +
                 '}';
     }
 }

@@ -47,11 +47,11 @@ public class Eps implements Serializable {
 
     @Override
     public String toString() {
-        return "Eps{" +
-                "idEps=" + idEps +
-                ", nombreEps='" + nombreEps + '\'' +
-                ", telefonoEps='" + telefonoEps + '\'' +
-                ", emailEps='" + emailEps + '\'' +
+        return "Eps{\n" +
+                "idEps=" + idEps + ",\n" +
+                "nombreEps='" + nombreEps + "',\n" +
+                "telefonoEps='" + telefonoEps + "',\n" +
+                "emailEps='" + emailEps + "'\n" +
                 '}';
     }
 }

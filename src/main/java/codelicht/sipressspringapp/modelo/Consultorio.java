@@ -44,11 +44,11 @@ public class Consultorio implements Serializable {
 
     @Override
     public String toString() {
-        return "Consultorio{" +
-                "numeroConsultorio=" + numeroConsultorio +
-                ", fechaAdmision=" + fechaAdmision +
-                ", paciente=" + paciente +
-                ", personal=" + personal +
+        return "Consultorio{\n" +
+                "numeroConsultorio=" + numeroConsultorio + ",\n" +
+                "fechaAdmision=" + fechaAdmision + ",\n" +
+                "paciente=" + paciente + ",\n" +
+                "personal=" + personal + "\n" +
                 '}';
     }
 }

@@ -52,12 +52,12 @@ public class Institucion implements Serializable {
 
     @Override
     public String toString() {
-        return "Institucion{" +
-                "idInstitucion=" + idInstitucion +
-                ", nombreInstitucion='" + nombreInstitucion + '\'' +
-                ", direccionInstitucion='" + direccionInstitucion + '\'' +
-                ", telefonoInstitucion='" + telefonoInstitucion + '\'' +
-                ", codigoPostal='" + codigoPostal + '\'' +
+        return "Institucion{\n" +
+                "idInstitucion=" + idInstitucion + ",\n" +
+                "nombreInstitucion='" + nombreInstitucion + "',\n" +
+                "direccionInstitucion='" + direccionInstitucion + "',\n" +
+                "telefonoInstitucion='" + telefonoInstitucion + "',\n" +
+                "codigoPostal='" + codigoPostal + "'\n" +
                 '}';
     }
 }

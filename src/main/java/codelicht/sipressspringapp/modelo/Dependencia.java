@@ -45,10 +45,10 @@ public class Dependencia implements Serializable {
 
     @Override
     public String toString() {
-        return "Dependencia{" +
-                "idDependencia=" + idDependencia +
-                ", nombreDependencia='" + nombreDependencia + '\'' +
-                ", institucion=" + institucion +
+        return "Dependencia{\n" +
+                "idDependencia=" + idDependencia + ",\n" +
+                "nombreDependencia='" + nombreDependencia + "',\n" +
+                "institucion=" + institucion + "\n" +
                 '}';
     }
 }

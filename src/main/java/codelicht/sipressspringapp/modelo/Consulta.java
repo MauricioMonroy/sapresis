@@ -49,11 +49,11 @@ public class Consulta implements Serializable {
 
     @Override
     public String toString() {
-        return "Consulta{" +
-                "fechaConsulta=" + fechaConsulta +
-                ", horaConsulta=" + horaConsulta +
-                ", doctor=" + doctor +
-                ", paciente=" + paciente +
+        return "Consulta{\n" +
+                "fechaConsulta=" + fechaConsulta + ",\n" +
+                "horaConsulta=" + horaConsulta + ",\n" +
+                "doctor=" + doctor + ",\n" +
+                "paciente=" + paciente + "\n" +
                 '}';
     }
 }

@@ -51,12 +51,12 @@ public class Formula implements Serializable {
 
     @Override
     public String toString() {
-        return "Formula{" +
-                "numeroFormula=" + numeroFormula +
-                ", nombreMedicacion='" + nombreMedicacion + '\'' +
-                ", fechaMedicacion=" + fechaMedicacion +
-                ", costoMedicacion=" + costoMedicacion +
-                ", paciente=" + paciente +
+        return "Formula{\n" +
+                "numeroFormula=" + numeroFormula + ",\n" +
+                "nombreMedicacion='" + nombreMedicacion + "',\n" +
+                "fechaMedicacion=" + fechaMedicacion + ",\n" +
+                "costoMedicacion=" + costoMedicacion + ",\n" +
+                "paciente=" + paciente + "\n" +
                 '}';
     }
 }

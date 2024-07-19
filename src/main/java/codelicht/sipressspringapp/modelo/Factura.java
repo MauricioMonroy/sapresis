@@ -47,12 +47,12 @@ public class Factura implements Serializable {
 
     @Override
     public String toString() {
-        return "Factura{" +
-                "numeroFactura=" + numeroFactura +
-                ", descripcionServicio='" + descripcionServicio + '\'' +
-                ", valor=" + valor +
-                ", total=" + total +
-                ", paciente=" + paciente +
+        return "Factura{\n" +
+                "numeroFactura=" + numeroFactura + ",\n" +
+                "descripcionServicio='" + descripcionServicio + "',\n" +
+                "valor=" + valor + ",\n" +
+                "total=" + total + ",\n" +
+                "paciente=" + paciente + "\n" +
                 '}';
     }
 }

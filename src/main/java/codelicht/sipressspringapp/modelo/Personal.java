@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -60,13 +59,13 @@ public class Personal implements Serializable {
 
     @Override
     public String toString() {
-        return "Personal{" +
-                "idPersonal=" + idPersonal +
-                ", nombrePersonal='" + nombrePersonal + '\'' +
-                ", apellidoPersonal='" + apellidoPersonal + '\'' +
-                ", telefonoPersonal='" + telefonoPersonal + '\'' +
-                ", emailPersonal='" + emailPersonal + '\'' +
-                ", dependencia=" + dependencia +
+        return "Personal{\n" +
+                "idPersonal=" + idPersonal + ",\n" +
+                "nombrePersonal='" + nombrePersonal + "',\n" +
+                "apellidoPersonal='" + apellidoPersonal + "',\n" +
+                "telefonoPersonal='" + telefonoPersonal + "',\n" +
+                "emailPersonal='" + emailPersonal + "',\n" +
+                "dependencia=" + dependencia + "\n" +
                 '}';
     }
 }
