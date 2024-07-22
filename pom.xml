@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>codelicht</groupId>
-    <artifactId>SipressSpringApp</artifactId>
+    <artifactId>sipress-spring-app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SipressSpringApp</name>
     <description>SipressSpringApp</description>
