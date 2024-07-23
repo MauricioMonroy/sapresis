@@ -4,7 +4,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg fixed-top navbar-dark" id="menu">
       <div className="container-md">
-        <a className="navbar-brand" href="index.jsp">
+        <a className="navbar-brand" href="/">
           <img
             src={`${process.env.PUBLIC_URL}/images/nb-logo.png`}
             width="384"
@@ -25,47 +25,71 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <a className="nav-link" aria-current="page" href="index.jsp">
-                Inicio
+            <li className="nav-item dropdown">
+              <a
+                className="nav-link dropdown-toggle"
+                href="/instituciones"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Institución
               </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a className="dropdown-item" href="/instituciones">
+                    Sedes
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="/dependencias">
+                    Dependencias
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="/consultorios">
+                    Consultorios
+                  </a>
+                </li>
+              </ul>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="ServletUsuario">
-                Usuarios
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="ServletPaciente">
-                Pacientes
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="ServletEmpleado">
+              <a className="nav-link" href="/personalS">
                 Personal
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/doctores">
+                Doctores
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/pacientes">
+                Pacientes
               </a>
             </li>
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
-                href="#"
+                href="/funciones"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false">
-                Servicios
+                Otras Funciones
               </a>
               <ul className="dropdown-menu">
                 <li>
-                  <a className="dropdown-item" href="ServletHistorial">
-                    Gestión de Historias Clínicas
+                  <a className="dropdown-item" href="/consultas">
+                    Consultas
                   </a>
                 </li>
                 <li>
-                  <a
-                    className="dropdown-item disabled"
-                    aria-disabled="true"
-                    href="#">
-                    Gestión de Citas médicas
+                  <a className="dropdown-item" href="/formulas">
+                    Fórmulas médicas
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="/facturas">
+                    Facturación
                   </a>
                 </li>
               </ul>
@@ -74,7 +98,7 @@ const Navbar = () => {
           <form
             className="d-flex"
             role="search"
-            action="ServletBuscar"
+            action="buscar"
             method="GET">
             <input
               className="form-control me-2"

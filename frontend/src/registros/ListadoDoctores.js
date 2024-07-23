@@ -1,15 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-export default function Listadodoctores() {
+export default function ListadoDoctores() {
   const urlBase = "http://localhost:8080/sipress-app/doctores";
   const [doctores, setDoctores] = useState([]);
 
   useEffect(() => {
-    cargardoctores();
+    cargarDoctores();
   }, []);
 
-  const cargardoctores = async () => {
+  const cargarDoctores = async () => {
     const resultado = await axios.get(urlBase);
     console.log("Resultado de cargar registros");
     console.log(resultado.data);
