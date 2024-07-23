@@ -940,62 +940,7 @@ textarea {
     display: block;
 }
 
-/* Reglas para la sección de contacto */
-#bg-contacto {
-    position: relative;
-}
-
-#seccion-contacto {
-    background: url('/src/assets/support.png') no-repeat center;
-    background-size: 81%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 400px;
-}
-
-#contenedor-formulario-contacto {
-    background: rgba(251, 250, 250, 0.8);
-    border-radius: 5px;
-    max-width: 60%;
-    height: 450px;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    /* Centrar horizontalmente */
-    align-items: center;
-    /* Centrar verticalmente */
-}
-
-#titulo-formulario-contacto {
-    color: #3f3f3f;
-    font-size: 1.75rem;
-    font-weight: bold;
-}
-
-form {
-    width: 100%;
-}
-
-.btn-contact {
-    width: auto;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-}
-
-.hidden {
-    display: none;
-}
-
-p.text-light {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #ffffff;
-    text-align: center;
-}
-
 /* Reglas para el formulario del modal de historial médico */
-
 #registrarHistorialModal .modal-content {
     padding: 20px;
     border-radius: 10px;
