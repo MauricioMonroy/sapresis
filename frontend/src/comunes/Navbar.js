@@ -95,11 +95,7 @@ const Navbar = () => {
               </ul>
             </li>
           </ul>
-          <form
-            className="d-flex"
-            role="search"
-            action="buscar"
-            method="GET">
+          <form className="d-flex" role="search" action="buscar" method="GET">
             <input
               className="form-control me-2"
               type="search"

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import BotonesNavegacion from "../comunes/BotonesNavegacion";
 
 export default function ListadoInstituciones() {
   const urlBase = "http://localhost:8080/sipress-app/instituciones";
@@ -18,6 +19,7 @@ export default function ListadoInstituciones() {
 
   return (
     <div className="container">
+      <BotonesNavegacion />
       <div className="row">
         <div className="col-md-9">
           <div className="card" id="contenedor-lista">
