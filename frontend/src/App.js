@@ -16,9 +16,9 @@ import ListadoConsultas from "./registros/ListadoConsultas";
 function App() {
   return (
     <Router>
-      <div classNameName="App">
+      <div className="App">
         <Navbar />
-        <div classNameName="container">
+        <div className="container">
           <Routes>
             <Route path="/" element={<Inicio />} />
             <Route path="/pacientes" element={<ListadoPacientes />} />
