@@ -3,11 +3,12 @@
 ## Descripción del Proyecto
 
 SIPRESS es un proyecto académico desarrollado para la Tecnología de Análisis y Desarrollo de Software (2721455) del
-SENA. Este sistema está destinado para ser usado por el personal de una Institución Prestadora de Salud. Está compuesto 
-por varias Entidades que permiten la consulta y la gestión de información básica sobre los empleados de la institución, 
-como el número de identificación, el nombre y datos de contacto. También permite consultar la 
-asignación de habitaciones y pacientes. De igual forma permite almacenar información sobre los pacientes, como el ID, 
-el nombre, datos de contacto, el número de habitación, el personal asignado, las fórmulas médicas y las facturas.
+SENA. Este sistema está destinado a ser usado por el personal de una institución prestadora de salud. Está compuesto por
+varias entidades que permiten consultar y gestionar información básica sobre los empleados de la institución, como el
+número de identificación, el nombre y los datos de contacto. También permite la asignación de consultas, consultorios y
+pacientes, y la recuperación dinámica de ID, nombres, datos de contacto, fórmulas médicas, detalles de facturación y los
+profesionales vinculados. , nombres, datos de contacto, recetas médicas, detalles de facturación y los profesionales
+vinculados.
 
 ### Tecnologías Utilizadas (o que se planean utilizar)
 
