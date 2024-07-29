@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import BotonesNavegacion from "../comunes/BotonesNavegacion";
+import AgregarInstitucion from "../formularios/AgregarInstitucion";
+import { Link } from "react-router-dom";
 
 export default function ListadoInstituciones() {
   const urlBase = "http://localhost:8080/sipress-app/instituciones";
@@ -19,14 +20,33 @@ export default function ListadoInstituciones() {
 
   return (
     <div className="container">
-      <BotonesNavegacion />
+      <section id="actions">
+        <AgregarInstitucion onInstitucionAdded={cargarInstituciones} />
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-12 col-md-4 d-flex justify-content-center">
+              <a href="/" className="btn btn-info">
+                <i className="fa-solid fa-arrow-left-long"></i> Regresar
+              </a>
+            </div>
+            <div className="col-12 col-md-4 d-flex justify-content-center">
+              <Link
+                to="#"
+                className="btn btn-success"
+                data-bs-toggle="modal"
+                data-bs-target="#AgregarInstitucionModal">
+                <i className="fa-regular fa-square-plus"></i> Agregar Registro
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
       <div className="row">
         <div className="col-md-9">
           <div className="card" id="contenedor-lista">
             <div className="card-header">
               <h3 className="text-center">
-                <i className="fa-solid fa-clipboard-list"></i> Lista de
-                instituciones
+                <i class="fa-regular fa-hospital"></i> Lista de instituciones
               </h3>
             </div>
             <div className="table-responsive">
