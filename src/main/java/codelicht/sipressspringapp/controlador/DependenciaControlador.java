@@ -2,6 +2,7 @@ package codelicht.sipressspringapp.controlador;
 
 import codelicht.sipressspringapp.modelo.Dependencia;
 import codelicht.sipressspringapp.modelo.Institucion;
+import codelicht.sipressspringapp.servicio.implementacion.InstitucionServicio;
 import codelicht.sipressspringapp.servicio.interfaces.IDependenciaServicio;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -26,7 +27,7 @@ public class DependenciaControlador {
     private IDependenciaServicio dependenciaServicio;
 
     @Autowired
-    private InstitucionControlador institucionServicio;
+    private InstitucionServicio institucionServicio;
 
     // http://localhost:8080/sipress-app/dependencias
     @GetMapping("/dependencias")
