@@ -1,5 +1,6 @@
 package codelicht.sipressspringapp.controlador;
 
+import codelicht.sipressspringapp.excepcion.RecursoNoEncontradoExcepcion;
 import codelicht.sipressspringapp.modelo.Institucion;
 import codelicht.sipressspringapp.servicio.interfaces.IInstitucionServicio;
 import jakarta.validation.Valid;
@@ -34,9 +35,13 @@ public class InstitucionControlador {
     }
 
     @GetMapping("/instituciones/{id}")
-    public Institucion buscarInstitucionPorId(@PathVariable Integer id) {
-        return institucionServicio.buscarInstitucionPorId(id);
+    public ResponseEntity<Institucion> buscarInstitucionPorId(@PathVariable Integer id) {
+        Institucion institucion = institucionServicio.buscarInstitucionPorId(id);
+        if (institucion == null)
+            throw new RecursoNoEncontradoExcepcion("Institucion no encontrada con el id: " + id);
+        return ResponseEntity.ok(institucion);
     }
+
 
     @PostMapping("/instituciones")
     public ResponseEntity<?> agregarInstitucion(@Valid @RequestBody Institucion institucion, BindingResult result) {
