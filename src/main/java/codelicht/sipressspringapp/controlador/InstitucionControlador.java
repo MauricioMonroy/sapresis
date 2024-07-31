@@ -54,6 +54,21 @@ public class InstitucionControlador {
         return ResponseEntity.ok(nuevaInstitucion);
     }
 
+    @PutMapping("/instituciones/{id}")
+    public ResponseEntity<Institucion> actualizarInstitucion(@PathVariable Integer id,
+                                                             @RequestBody Institucion institucionRecuperada) {
+        Institucion institucion = institucionServicio.buscarInstitucionPorId(id);
+        if (institucion == null)
+            throw new RecursoNoEncontradoExcepcion("Institucion no encontrada con el id: " + id);
+        institucion.setIdInstitucion(institucionRecuperada.getIdInstitucion());
+        institucion.setNombreInstitucion(institucionRecuperada.getNombreInstitucion());
+        institucion.setDireccionInstitucion(institucionRecuperada.getDireccionInstitucion());
+        institucion.setTelefonoInstitucion(institucionRecuperada.getTelefonoInstitucion());
+        institucion.setCodigoPostal(institucionRecuperada.getCodigoPostal());
+        institucionServicio.guardarInstitucion(institucion);
+        return ResponseEntity.ok(institucion);
+    }
+
     @DeleteMapping("/instituciones/{id}")
     public ResponseEntity<Void> eliminarInstitucion(@PathVariable("id") Integer id) {
         Institucion institucion = institucionServicio.buscarInstitucionPorId(id);
