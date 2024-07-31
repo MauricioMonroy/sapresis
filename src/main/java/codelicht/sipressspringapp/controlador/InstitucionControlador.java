@@ -12,7 +12,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -70,13 +72,13 @@ public class InstitucionControlador {
     }
 
     @DeleteMapping("/instituciones/{id}")
-    public ResponseEntity<Void> eliminarInstitucion(@PathVariable("id") Integer id) {
+    public ResponseEntity<Map<String, Boolean>> eliminarInstitucion(@PathVariable Integer id) {
         Institucion institucion = institucionServicio.buscarInstitucionPorId(id);
-        if (institucion != null) {
-            institucionServicio.eliminarInstitucion(institucion);
-            return ResponseEntity.noContent().build(); // Elimina y responde con 204 No Content
-        } else {
-            return ResponseEntity.notFound().build(); // Responde con 404 Not Found si no existe
-        }
+        if (institucion == null)
+            throw new RecursoNoEncontradoExcepcion("Institucion no encontrada con el id: " + id);
+        institucionServicio.eliminarInstitucion(institucion);
+        Map<String, Boolean> respuesta = new HashMap<>();
+        respuesta.put("Eliminado", Boolean.TRUE);
+        return ResponseEntity.ok(respuesta);
     }
 }
