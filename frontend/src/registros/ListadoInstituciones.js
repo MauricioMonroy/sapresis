@@ -18,15 +18,23 @@ export default function ListadoInstituciones() {
     setInstituciones(resultado.data);
   };
 
+  const eliminarInstitucion = async (id) => {
+    const confirmacion = window.confirm("¿Estás seguro de que deseas eliminar esta institución?");
+    if (confirmacion) {
+      await axios.delete(`${urlBase}/${id}`);
+      cargarInstituciones();
+    }
+  }
+
   return (
-    <div className="container">
-      <section id="actions">
+    <div className="p-2">
+      <section>
         <AgregarInstitucion onInstitucionAdded={cargarInstituciones} />
-        <div className="container">
+        <div id="actions">
           <div className="row justify-content-center">
             <div className="col-12 col-md-4 d-flex justify-content-center">
               <a href="/" className="btn btn-info">
-                <i className="fa-solid fa-arrow-left-long"></i> Regresar
+                <i className="fa-solid fa-arrow-left-long"></i> Ir a la página de inicio
               </a>
             </div>
             <div className="col-12 col-md-4 d-flex justify-content-center">
@@ -46,7 +54,8 @@ export default function ListadoInstituciones() {
           <div className="card" id="contenedor-lista">
             <div className="card-header">
               <h3 className="text-center">
-                <i class="fa-regular fa-hospital"></i> Lista de instituciones
+                <i className="fa-regular fa-hospital"></i> Lista de
+                instituciones
               </h3>
             </div>
             <div className="table-responsive">
@@ -58,6 +67,7 @@ export default function ListadoInstituciones() {
                     <th>Dirección</th>
                     <th>Teléfono</th>
                     <th>Código Postal</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -70,6 +80,19 @@ export default function ListadoInstituciones() {
                         <td>{institucion.direccionInstitucion}</td>
                         <td>{institucion.telefonoInstitucion}</td>
                         <td>{institucion.codigoPostal}</td>
+                        <td className="text-center">
+                          <div>
+                            <Link
+                              to={`/editar/${institucion.idInstitucion}`}
+                              className="btn btn-warning btn-sm me-2">
+                              <i className="fa-regular fa-pen-to-square"></i> Editar
+                            </Link>
+                            <button onClick={() => eliminarInstitucion(institucion.idInstitucion)} 
+                            className="btn btn-danger btn-sm">
+                              <i className="fa-regular fa-trash-can"></i> Eliminar
+                            </button>
+                          </div>
+                        </td>
                       </tr>
                     ))
                   }
