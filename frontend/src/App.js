@@ -12,6 +12,7 @@ import ListadoConsultorios from "./registros/ListadoConsultorios";
 import ListadoFormulas from "./registros/ListadoFormulas";
 import ListadoFacturas from "./registros/ListadoFacturas";
 import ListadoConsultas from "./registros/ListadoConsultas";
+import EditarInstitucion from "./formularios/EditarInstitucion";
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
             <Route path="/formulas" element={<ListadoFormulas />} />
             <Route path="/facturas" element={<ListadoFacturas />} />
             <Route path="/consultas" element={<ListadoConsultas />} />
+            <Route
+              path="/editar/:id"
+              element={<EditarInstitucion />}/>
           </Routes>
         </div>
         <Footer />

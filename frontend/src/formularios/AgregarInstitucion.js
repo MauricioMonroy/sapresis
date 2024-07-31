@@ -148,7 +148,7 @@ export default function AgregarInstitucion({ onInstitucionAdded }) {
                 <i className="fa-regular fa-rectangle-xmark"></i> Cerrar
               </button>
               <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">
-                <i className="fa-regular fa-floppy-disk"></i> Guardar cambios
+                <i className="fa-solid fa-folder-plus"></i> Guardar registro
               </button>
             </div>
           </form>
