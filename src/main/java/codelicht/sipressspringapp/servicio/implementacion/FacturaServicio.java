@@ -3,7 +3,6 @@ package codelicht.sipressspringapp.servicio.implementacion;
 import codelicht.sipressspringapp.modelo.Factura;
 import codelicht.sipressspringapp.repositorio.FacturaRepositorio;
 import codelicht.sipressspringapp.servicio.interfaces.IFacturaServicio;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +13,12 @@ import java.util.List;
 @Service
 public class FacturaServicio implements IFacturaServicio {
 
-    @Autowired
-    private FacturaRepositorio facturaRepositorio;
+    private final FacturaRepositorio facturaRepositorio;
+
+    // Inyección de dependencias por constructor
+    public FacturaServicio(FacturaRepositorio facturaRepositorio) {
+        this.facturaRepositorio = facturaRepositorio;
+    }
 
     @Override
     public List<Factura> listarFacturas() {

@@ -1,5 +1,6 @@
 package codelicht.sipressspringapp.controlador;
 
+import codelicht.sipressspringapp.excepcion.RecursoNoEncontradoExcepcion;
 import codelicht.sipressspringapp.modelo.Dependencia;
 import codelicht.sipressspringapp.modelo.Doctor;
 import codelicht.sipressspringapp.servicio.interfaces.IDependenciaServicio;
@@ -7,13 +8,14 @@ import codelicht.sipressspringapp.servicio.interfaces.IDoctorServicio;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -23,11 +25,14 @@ public class DoctorControlador {
     private static final Logger logger =
             LoggerFactory.getLogger(DoctorControlador.class);
 
-    @Autowired
-    private IDoctorServicio doctorServicio;
+    private final IDoctorServicio doctorServicio;
+    private final IDependenciaServicio dependenciaServicio;
 
-    @Autowired
-    private IDependenciaServicio dependenciaServicio;
+    // Constructor para inyectar las dependencias
+    public DoctorControlador(IDoctorServicio doctorServicio, IDependenciaServicio dependenciaServicio) {
+        this.doctorServicio = doctorServicio;
+        this.dependenciaServicio = dependenciaServicio;
+    }
 
     // http://localhost:8080/sipress-app/doctores
     @GetMapping("/doctores")
@@ -38,8 +43,11 @@ public class DoctorControlador {
     }
 
     @GetMapping("/doctores/{id}")
-    public Doctor buscarDoctorPorId(@PathVariable Integer id) {
-        return doctorServicio.buscarDoctorPorId(id);
+    public ResponseEntity<Doctor> buscarDoctorPorId(@PathVariable Integer id) {
+        Doctor doctor = doctorServicio.buscarDoctorPorId(id);
+        if (doctor == null)
+            throw new RecursoNoEncontradoExcepcion("Doctor no encontrado con el id: " + id);
+        return ResponseEntity.ok(doctor);
     }
 
     @PostMapping("/doctores")
@@ -50,7 +58,7 @@ public class DoctorControlador {
                     .collect(Collectors.toList());
             return ResponseEntity.badRequest().body(errors);
         }
-        logger.info("Doctor a agregar: " + doctor);
+        logger.info("Doctor a agregar: {}", doctor);
         if (doctor.getDependencia() != null) {
             Dependencia dependencia = dependenciaServicio.buscarDependenciaPorId(doctor.getDependencia().getIdDependencia());
             doctor.setDependencia(dependencia);
@@ -59,14 +67,30 @@ public class DoctorControlador {
         return ResponseEntity.ok(nuevoDoctor);
     }
 
-    @DeleteMapping("/doctores/{id}")
-    public ResponseEntity<Void> eliminarDoctor(@PathVariable("id") Integer id) {
+    @PutMapping("/doctores/{id}")
+    public ResponseEntity<Doctor> actualizarDoctor(@PathVariable Integer id,
+                                                   @RequestBody Doctor doctorRecuperado) {
         Doctor doctor = doctorServicio.buscarDoctorPorId(id);
-        if (doctor != null) {
-            doctorServicio.eliminarDoctor(doctor);
-            return ResponseEntity.noContent().build(); // Elimina y responde con 204 No Content
-        } else {
-            return ResponseEntity.notFound().build(); // Responde con 404 Not Found si no existe
-        }
+        if (doctor == null)
+            throw new RecursoNoEncontradoExcepcion("Doctor no encontrado con el id: " + id);
+        doctor.setIdDoctor(doctorRecuperado.getIdDoctor());
+        doctor.setNombreDoctor(doctorRecuperado.getNombreDoctor());
+        doctor.setApellidoDoctor(doctorRecuperado.getApellidoDoctor());
+        doctor.setDependencia(doctorRecuperado.getDependencia());
+        doctor.setTelefonoDoctor(doctorRecuperado.getTelefonoDoctor());
+        doctor.setEmailDoctor(doctorRecuperado.getEmailDoctor());
+        doctorServicio.guardarDoctor(doctor);
+        return ResponseEntity.ok(doctor);
+    }
+
+    @DeleteMapping("/doctores/{id}")
+    public ResponseEntity<Map<String, Boolean>> eliminarDoctor(@PathVariable Integer id) {
+        Doctor doctor = doctorServicio.buscarDoctorPorId(id);
+        if (doctor == null)
+            throw new RecursoNoEncontradoExcepcion("Doctor no encontrado con el id: " + id);
+        doctorServicio.eliminarDoctor(doctor);
+        Map<String, Boolean> respuesta = new HashMap<>();
+        respuesta.put("eliminado", Boolean.TRUE);
+        return ResponseEntity.ok(respuesta);
     }
 }

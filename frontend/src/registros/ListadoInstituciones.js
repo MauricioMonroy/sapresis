@@ -19,22 +19,25 @@ export default function ListadoInstituciones() {
   };
 
   const eliminarInstitucion = async (id) => {
-    const confirmacion = window.confirm("¿Estás seguro de que deseas eliminar esta institución?");
+    const confirmacion = window.confirm(
+      "¿Está seguro de que desea eliminar este registro?"
+    );
     if (confirmacion) {
       await axios.delete(`${urlBase}/${id}`);
       cargarInstituciones();
     }
-  }
+  };
 
   return (
-    <div className="p-2">
+    <div className="p-3">
       <section>
         <AgregarInstitucion onInstitucionAdded={cargarInstituciones} />
         <div id="actions">
           <div className="row justify-content-center">
             <div className="col-12 col-md-4 d-flex justify-content-center">
               <a href="/" className="btn btn-info">
-                <i className="fa-solid fa-arrow-left-long"></i> Ir a la página de inicio
+                <i className="fa-solid fa-arrow-left-long"></i> Ir a la página
+                de inicio
               </a>
             </div>
             <div className="col-12 col-md-4 d-flex justify-content-center">
@@ -83,13 +86,18 @@ export default function ListadoInstituciones() {
                         <td className="text-center">
                           <div>
                             <Link
-                              to={`/editar/${institucion.idInstitucion}`}
+                              to={`/instituciones/editar/${institucion.idInstitucion}`}
                               className="btn btn-warning btn-sm me-2">
-                              <i className="fa-regular fa-pen-to-square"></i> Editar
+                              <i className="fa-regular fa-pen-to-square"></i>{" "}
+                              Editar
                             </Link>
-                            <button onClick={() => eliminarInstitucion(institucion.idInstitucion)} 
-                            className="btn btn-danger btn-sm">
-                              <i className="fa-regular fa-trash-can"></i> Eliminar
+                            <button
+                              onClick={() =>
+                                eliminarInstitucion(institucion.idInstitucion)
+                              }
+                              className="btn btn-danger btn-sm">
+                              <i className="fa-regular fa-trash-can"></i>{" "}
+                              Eliminar
                             </button>
                           </div>
                         </td>

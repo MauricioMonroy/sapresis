@@ -9,11 +9,11 @@ import java.util.List;
  * Contiene los métodos a implementar en operaciones CRUD básicas.
  */
 public interface IInstitucionServicio {
-    public List<Institucion> listarInstituciones();
+    List<Institucion> listarInstituciones();
 
-    public Institucion buscarInstitucionPorId(Integer idInstitucion);
+    Institucion buscarInstitucionPorId(Integer idInstitucion);
 
-    public Institucion guardarInstitucion(Institucion institucion);
+    Institucion guardarInstitucion(Institucion institucion);
 
-    public void eliminarInstitucion(Institucion institucion);
+    void eliminarInstitucion(Institucion institucion);
 }

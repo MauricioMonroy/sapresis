@@ -1,19 +1,21 @@
 package codelicht.sipressspringapp.controlador;
 
+import codelicht.sipressspringapp.excepcion.RecursoNoEncontradoExcepcion;
 import codelicht.sipressspringapp.modelo.Dependencia;
 import codelicht.sipressspringapp.modelo.Institucion;
-import codelicht.sipressspringapp.servicio.implementacion.InstitucionServicio;
 import codelicht.sipressspringapp.servicio.interfaces.IDependenciaServicio;
+import codelicht.sipressspringapp.servicio.interfaces.IInstitucionServicio;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -23,11 +25,14 @@ public class DependenciaControlador {
     private static final Logger logger =
             LoggerFactory.getLogger(DependenciaControlador.class);
 
-    @Autowired
-    private IDependenciaServicio dependenciaServicio;
+    private final IDependenciaServicio dependenciaServicio;
+    private final IInstitucionServicio institucionServicio;
 
-    @Autowired
-    private InstitucionServicio institucionServicio;
+    // Constructor para inyectar las dependencias
+    public DependenciaControlador(IDependenciaServicio dependenciaServicio, IInstitucionServicio institucionServicio) {
+        this.dependenciaServicio = dependenciaServicio;
+        this.institucionServicio = institucionServicio;
+    }
 
     // http://localhost:8080/sipress-app/dependencias
     @GetMapping("/dependencias")
@@ -38,8 +43,11 @@ public class DependenciaControlador {
     }
 
     @GetMapping("/dependencias/{id}")
-    public Dependencia buscarDependenciaPorId(@PathVariable Integer id) {
-        return dependenciaServicio.buscarDependenciaPorId(id);
+    public ResponseEntity<Dependencia> buscarDependenciaPorId(@PathVariable Integer id) {
+        Dependencia dependencia = dependenciaServicio.buscarDependenciaPorId(id);
+        if (dependencia == null)
+            throw new RecursoNoEncontradoExcepcion("Dependencia no encontrada con el id: " + id);
+        return ResponseEntity.ok(dependencia);
     }
 
     @PostMapping("/dependencias")
@@ -50,7 +58,7 @@ public class DependenciaControlador {
                     .collect(Collectors.toList());
             return ResponseEntity.badRequest().body(errors);
         }
-        logger.info("Dependencia a agregar: " + dependencia);
+        logger.info("Dependencia a agregar: {}", dependencia);
         if (dependencia.getInstitucion() != null) {
             Institucion institucion = institucionServicio.buscarInstitucionPorId(dependencia.getInstitucion().getIdInstitucion());
             dependencia.setInstitucion(institucion);
@@ -59,14 +67,27 @@ public class DependenciaControlador {
         return ResponseEntity.ok(nuevaDependencia);
     }
 
-    @DeleteMapping("/dependencias/{id}")
-    public ResponseEntity<Void> eliminarDependencia(@PathVariable("id") Integer id) {
+    @PutMapping("/dependencias/{id}")
+    public ResponseEntity<Dependencia> actualizarDependencia(@PathVariable Integer id,
+                                                             @RequestBody Dependencia dependenciaRecuperada) {
         Dependencia dependencia = dependenciaServicio.buscarDependenciaPorId(id);
-        if (dependencia != null) {
-            dependenciaServicio.eliminarDependencia(dependencia);
-            return ResponseEntity.noContent().build(); // Elimina y responde con 204 No Content
-        } else {
-            return ResponseEntity.notFound().build(); // Responde con 404 Not Found si no existe
-        }
+        if (dependencia == null)
+            throw new RecursoNoEncontradoExcepcion("Dependencia no encontrada con el id: " + id);
+        dependencia.setIdDependencia(dependenciaRecuperada.getIdDependencia());
+        dependencia.setNombreDependencia(dependenciaRecuperada.getNombreDependencia());
+        dependencia.setInstitucion(dependenciaRecuperada.getInstitucion());
+        dependenciaServicio.guardarDependencia(dependencia);
+        return ResponseEntity.ok(dependencia);
+    }
+
+    @DeleteMapping("/dependencias/{id}")
+    public ResponseEntity<Map<String, Boolean>> eliminarDependencia(@PathVariable Integer id) {
+        Dependencia dependencia = dependenciaServicio.buscarDependenciaPorId(id);
+        if (dependencia == null)
+            throw new RecursoNoEncontradoExcepcion("Dependencia no encontrada con el id: " + id);
+        dependenciaServicio.eliminarDependencia(dependencia);
+        Map<String, Boolean> respuesta = new HashMap<>();
+        respuesta.put("Eliminado", Boolean.TRUE);
+        return ResponseEntity.ok(respuesta);
     }
 }

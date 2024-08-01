@@ -62,7 +62,7 @@ export default function AgregarInstitucion({ onInstitucionAdded }) {
               <span></span>
             </button>
           </div>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={(e) => onSubmit(e)}>
             <div className="modal-body">
               <div className="form-floating form-group mb-3">
                 <input
@@ -73,7 +73,7 @@ export default function AgregarInstitucion({ onInstitucionAdded }) {
                   placeholder="ID Institución"
                   required={true}
                   value={idInstitucion}
-                  onChange={onInputChange}
+                  onChange={(e)=>onInputChange(e)}
                 />
                 <label htmlFor="idInstitucion">ID de la Institución</label>
               </div>
@@ -87,7 +87,7 @@ export default function AgregarInstitucion({ onInstitucionAdded }) {
                   placeholder="Nombre de la Institución"
                   required={true}
                   value={nombreInstitucion}
-                  onChange={onInputChange}
+                  onChange={(e)=>onInputChange(e)}
                 />
                 <label htmlFor="nombreInstitucion">
                   Nombre de la Institución
@@ -103,7 +103,7 @@ export default function AgregarInstitucion({ onInstitucionAdded }) {
                   placeholder="Dirección"
                   required={true}
                   value={direccionInstitucion}
-                  onChange={onInputChange}
+                  onChange={(e)=>onInputChange(e)}
                 />
                 <label htmlFor="direccionInstitucion">
                   Dirección de la Institución
@@ -119,7 +119,7 @@ export default function AgregarInstitucion({ onInstitucionAdded }) {
                   placeholder="Teléfono de la Institución"
                   required={true}
                   value={telefonoInstitucion}
-                  onChange={onInputChange}
+                  onChange={(e)=>onInputChange(e)}
                 />
                 <label htmlFor="telefonoInstitucion">
                   Teléfono de la Institución
@@ -135,7 +135,7 @@ export default function AgregarInstitucion({ onInstitucionAdded }) {
                   placeholder="Código Postal"
                   required={true}
                   value={codigoPostal}
-                  onChange={onInputChange}
+                  onChange={(e)=>onInputChange(e)}
                 />
                 <label htmlFor="codigoPostal">Código Postal</label>
               </div>

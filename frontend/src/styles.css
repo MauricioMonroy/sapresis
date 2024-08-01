@@ -84,9 +84,11 @@
     }
 }
 
+html,
 body {
+    height: 100%;
     margin: 0;
-    padding-top: 75px;
+    padding-top: 50px;
     font-family: var(--bs-font-sans-serif), 'Monserrat', sans-serif;
     font-size: var(--bs-body-font-size);
     font-weight: var(--bs-body-font-weight);
@@ -95,6 +97,22 @@ body {
     text-align: var(--bs-body-text-align);
     overflow-x: hidden;
     background: url("/src/assets/bg-pattern.png"), linear-gradient(75deg, #008a8a 10%, #55a78d);
+}
+
+/* Contenedor principal */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Contenido principal que puede crecer */
+.content {
+    flex: 1;
+}
+
+.footer {
+    padding: 1em 0;
 }
 
 /* Estilos personalizados para las tarjetas de index.jsp */
@@ -245,7 +263,7 @@ body {
     width: 250px;
     display: inline-flexbox;
     align-items: center;
-    justify-content: center;    
+    justify-content: center;
 }
 
 #actions .btn i {
@@ -542,7 +560,7 @@ footer {
     max-height: -moz-fit-content;
     max-height: fit-content;
     min-height: -moz-fit-content;
-    min-height: fit-content;
+    min-height: fit-content;    
 }
 
 footer p {
@@ -754,7 +772,7 @@ body .btn-primary {
     background-image: linear-gradient(to right, #0056b3 0%, #2787ec 100%);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     display: block;
-    margin: 0 auto 5px;    
+    margin: 0 auto 5px;
 }
 
 /* Icono en el botón */

@@ -3,7 +3,6 @@ package codelicht.sipressspringapp.servicio.implementacion;
 import codelicht.sipressspringapp.modelo.Personal;
 import codelicht.sipressspringapp.repositorio.PersonalRepositorio;
 import codelicht.sipressspringapp.servicio.interfaces.IPersonalServicio;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +13,12 @@ import java.util.List;
 @Service
 public class PersonalServicio implements IPersonalServicio {
 
-    @Autowired
-    private PersonalRepositorio personalRepositorio;
+    private final PersonalRepositorio personalRepositorio;
+
+    // Inyección de dependencias por constructor
+    public PersonalServicio(PersonalRepositorio personalRepositorio) {
+        this.personalRepositorio = personalRepositorio;
+    }
 
     @Override
     public List<Personal> listarPersonalS() {

@@ -3,7 +3,6 @@ package codelicht.sipressspringapp.servicio.implementacion;
 import codelicht.sipressspringapp.modelo.Eps;
 import codelicht.sipressspringapp.repositorio.EpsRepositorio;
 import codelicht.sipressspringapp.servicio.interfaces.IEpsServicio;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +13,12 @@ import java.util.List;
 @Service
 public class EpsServicio implements IEpsServicio {
 
-    @Autowired
-    private EpsRepositorio formulaRepositorio;
+    private final EpsRepositorio formulaRepositorio;
+
+    // Inyección de dependencias por constructor
+    public EpsServicio(EpsRepositorio formulaRepositorio) {
+        this.formulaRepositorio = formulaRepositorio;
+    }
 
     @Override
     public List<Eps> listarEpsS() {

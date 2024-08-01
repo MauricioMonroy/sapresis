@@ -3,7 +3,6 @@ package codelicht.sipressspringapp.servicio.implementacion;
 import codelicht.sipressspringapp.modelo.Dependencia;
 import codelicht.sipressspringapp.repositorio.DependenciaRepositorio;
 import codelicht.sipressspringapp.servicio.interfaces.IDependenciaServicio;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +13,12 @@ import java.util.List;
 @Service
 public class DependenciaServicio implements IDependenciaServicio {
 
-    @Autowired
-    private DependenciaRepositorio dependenciaRepositorio;
+    private final DependenciaRepositorio dependenciaRepositorio;
+
+    // Inyección de dependencias por constructor
+    public DependenciaServicio(DependenciaRepositorio dependenciaRepositorio) {
+        this.dependenciaRepositorio = dependenciaRepositorio;
+    }
 
     @Override
     public List<Dependencia> listarDependencias() {

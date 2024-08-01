@@ -31,7 +31,7 @@ export default function EditarInstitucion() {
 
   useEffect(() => {
     cargarInstitucion();
-  }, [id, cargarInstitucion]); // Proporciona 'id' y 'cargarInstitucion' como dependencias
+  }, [id, cargarInstitucion]); 
 
   const onInputChange = (e) => {
     setInstitucion({ ...institucion, [e.target.name]: e.target.value });

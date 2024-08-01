@@ -12,8 +12,8 @@ import java.util.List;
  */
 public interface ConsultaRepositorio extends JpaRepository<Consulta, ConsultaPK> {
 
-    List<Consulta> findByConsultaPK_PacienteId(int pacienteId);
+    List<Consulta> findByConsultaPK_PacienteId(Integer idPaciente);
 
-    List<Consulta> findByConsultaPK_DoctorId(int doctorId);
+    List<Consulta> findByConsultaPK_DoctorId(Integer idDoctor);
 }
 

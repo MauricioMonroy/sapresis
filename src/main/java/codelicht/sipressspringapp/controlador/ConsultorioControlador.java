@@ -1,5 +1,6 @@
 package codelicht.sipressspringapp.controlador;
 
+import codelicht.sipressspringapp.excepcion.RecursoNoEncontradoExcepcion;
 import codelicht.sipressspringapp.modelo.Consultorio;
 import codelicht.sipressspringapp.modelo.Paciente;
 import codelicht.sipressspringapp.modelo.Personal;
@@ -9,13 +10,14 @@ import codelicht.sipressspringapp.servicio.interfaces.IPersonalServicio;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -25,14 +27,16 @@ public class ConsultorioControlador {
     private static final Logger logger =
             LoggerFactory.getLogger(ConsultorioControlador.class);
 
-    @Autowired
-    private IConsultorioServicio consultorioServicio;
+    private final IConsultorioServicio consultorioServicio;
+    private final IPacienteServicio pacienteServicio;
+    private final IPersonalServicio personalServicio;
 
-    @Autowired
-    private IPacienteServicio pacienteServicio;
-
-    @Autowired
-    private IPersonalServicio personalServicio;
+    // Constructor para inyección de dependencias
+    public ConsultorioControlador(IConsultorioServicio consultorioServicio, IPacienteServicio pacienteServicio, IPersonalServicio personalServicio) {
+        this.consultorioServicio = consultorioServicio;
+        this.pacienteServicio = pacienteServicio;
+        this.personalServicio = personalServicio;
+    }
 
     // http://localhost:8080/sipress-app/consultorios
     @GetMapping("/consultorios")
@@ -43,8 +47,11 @@ public class ConsultorioControlador {
     }
 
     @GetMapping("/consultorios/{id}")
-    public Consultorio buscarConsultorioPorId(@PathVariable Integer id) {
-        return consultorioServicio.buscarConsultorioPorId(id);
+    public ResponseEntity<Consultorio> buscarConsultorioPorId(@PathVariable Integer id) {
+        Consultorio consultorio = consultorioServicio.buscarConsultorioPorId(id);
+        if (consultorio == null)
+            throw new RecursoNoEncontradoExcepcion("Consultorio no encontrado con el número: " + id);
+        return ResponseEntity.ok(consultorio);
     }
 
     @PostMapping("/consultorios")
@@ -68,14 +75,28 @@ public class ConsultorioControlador {
         return ResponseEntity.ok(nuevoConsultorio);
     }
 
-    @DeleteMapping("/consultorios/{id}")
-    public ResponseEntity<Void> eliminarConsultorio(@PathVariable("id") Integer id) {
+    @PutMapping("/consultorios/{id}")
+    public ResponseEntity<Consultorio> actualizarConsultorio(@PathVariable Integer id,
+                                                             @RequestBody Consultorio consultorioRecuperado) {
         Consultorio consultorio = consultorioServicio.buscarConsultorioPorId(id);
-        if (consultorio != null) {
-            consultorioServicio.eliminarConsultorio(consultorio);
-            return ResponseEntity.noContent().build(); // Elimina y responde con 204 No Content
-        } else {
-            return ResponseEntity.notFound().build(); // Responde con 404 Not Found si no existe
-        }
+        if (consultorio == null)
+            throw new RecursoNoEncontradoExcepcion("Consultorio no encontrado con el número: " + id);
+        consultorio.setNumeroConsultorio(consultorioRecuperado.getNumeroConsultorio());
+        consultorio.setPaciente(consultorioRecuperado.getPaciente());
+        consultorio.setPersonal(consultorioRecuperado.getPersonal());
+        consultorio.setFechaAdmision(consultorioRecuperado.getFechaAdmision());
+        consultorioServicio.guardarConsultorio(consultorio);
+        return ResponseEntity.ok(consultorio);
+    }
+
+    @DeleteMapping("/consultorios/{id}")
+    public ResponseEntity<Map<String, Boolean>> eliminarConsultorio(@PathVariable Integer id) {
+        Consultorio consultorio = consultorioServicio.buscarConsultorioPorId(id);
+        if (consultorio == null)
+            throw new RecursoNoEncontradoExcepcion("Consultorio no encontrado con el número: " + id);
+        consultorioServicio.eliminarConsultorio(consultorio);
+        Map<String, Boolean> respuesta = new HashMap<>();
+        respuesta.put("eliminado", Boolean.TRUE);
+        return ResponseEntity.ok(respuesta);
     }
 }

@@ -13,6 +13,7 @@ import ListadoFormulas from "./registros/ListadoFormulas";
 import ListadoFacturas from "./registros/ListadoFacturas";
 import ListadoConsultas from "./registros/ListadoConsultas";
 import EditarInstitucion from "./formularios/EditarInstitucion";
+import EditarPersonal from "./formularios/EditarPersonal";
 
 function App() {
   return (
@@ -31,9 +32,8 @@ function App() {
             <Route path="/formulas" element={<ListadoFormulas />} />
             <Route path="/facturas" element={<ListadoFacturas />} />
             <Route path="/consultas" element={<ListadoConsultas />} />
-            <Route
-              path="/editar/:id"
-              element={<EditarInstitucion />}/>
+            <Route path="/instituciones/editar/:id" element={<EditarInstitucion />} />
+            <Route path="/personalS/editar/:id" element={<EditarPersonal />} />
           </Routes>
         </div>
         <Footer />
@@ -44,12 +44,12 @@ function App() {
 
 function Inicio() {
   return (
-    <div>
+    <div className="py-2 mb-5">
       {/* Encabezado */}
-      <header className="py-3">
+      <header>
         <div className="container">
-          <div className="row bg-light rounded-3 text-center">
-            <div className="m-2 m-lg-3">
+          <div className="row bg-light rounded-3 text-center m-5">
+            <div className="m-2">
               <h1 className="fs-3 fw-bold">
                 Bienvenido a{" "}
                 <span className="text-success fw-bold fs-2">SIPRESS</span>
