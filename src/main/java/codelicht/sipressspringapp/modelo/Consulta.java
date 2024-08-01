@@ -24,13 +24,11 @@ public class Consulta implements Serializable {
     @EmbeddedId
     protected ConsultaPK consultaPK;
 
-    @NotEmpty(message = "La fecha de consulta no puede estar vacía")
     @Column(name = "fecha_consulta")
     @Temporal(TemporalType.DATE)
     @JsonProperty("fechaConsulta")
     private Date fechaConsulta;
 
-    @NotEmpty(message = "La hora de consulta no puede estar vacía")
     @Column(name = "hora_consulta")
     @Temporal(TemporalType.TIME)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")

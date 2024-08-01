@@ -4,7 +4,6 @@ import codelicht.sipressspringapp.modelo.Consulta;
 import codelicht.sipressspringapp.modelo.ConsultaPK;
 import codelicht.sipressspringapp.repositorio.ConsultaRepositorio;
 import codelicht.sipressspringapp.servicio.interfaces.IConsultaServicio;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +15,12 @@ import java.util.List;
 @Service
 public class ConsultaServicio implements IConsultaServicio {
 
-    @Autowired
-    private ConsultaRepositorio consultaRepositorio;
+    private final ConsultaRepositorio consultaRepositorio;
+
+    // Inyección de dependencias por constructor
+    public ConsultaServicio(ConsultaRepositorio consultaRepositorio) {
+        this.consultaRepositorio = consultaRepositorio;
+    }
 
     @Override
     public List<Consulta> listarConsultas() {
@@ -25,13 +28,18 @@ public class ConsultaServicio implements IConsultaServicio {
     }
 
     @Override
-    public List<Consulta> buscarConsultasPorIdPaciente(int pacienteId) {
-        return consultaRepositorio.findByConsultaPK_PacienteId(pacienteId);
+    public List<Consulta> buscarConsultaPorIdPaciente(Integer idPaciente) {
+        return consultaRepositorio.findByConsultaPK_PacienteId(idPaciente);
     }
 
     @Override
-    public List<Consulta> buscarConsultasPorIdDoctor(int doctorId) {
-        return consultaRepositorio.findByConsultaPK_DoctorId(doctorId);
+    public List<Consulta> buscarConsultaPorIdDoctor(Integer idDoctor) {
+        return consultaRepositorio.findByConsultaPK_DoctorId(idDoctor);
+    }
+
+    @Override
+    public Consulta buscarConsultaPorId(ConsultaPK consultaPK) {
+        return consultaRepositorio.findById(consultaPK).orElse(null);
     }
 
     @Override

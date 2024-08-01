@@ -1,6 +1,7 @@
 package codelicht.sipressspringapp.servicio.interfaces;
 
 import codelicht.sipressspringapp.modelo.Consulta;
+import codelicht.sipressspringapp.modelo.ConsultaPK;
 
 import java.util.List;
 
@@ -12,12 +13,13 @@ public interface IConsultaServicio {
 
     List<Consulta> listarConsultas();
 
-    List<Consulta> buscarConsultasPorIdPaciente(int pacienteId);
+    List<Consulta> buscarConsultaPorIdPaciente(Integer idPaciente);
 
-    List<Consulta> buscarConsultasPorIdDoctor(int doctorId);
+    List<Consulta> buscarConsultaPorIdDoctor(Integer idDoctor);
+
+    Consulta buscarConsultaPorId(ConsultaPK consultaPK);
 
     Consulta guardarConsulta(Consulta consulta);
 
     void eliminarConsulta(Consulta consulta);
 }
-
