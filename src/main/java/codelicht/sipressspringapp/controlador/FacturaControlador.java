@@ -1,5 +1,6 @@
 package codelicht.sipressspringapp.controlador;
 
+import codelicht.sipressspringapp.excepcion.RecursoNoEncontradoExcepcion;
 import codelicht.sipressspringapp.modelo.Factura;
 import codelicht.sipressspringapp.modelo.Paciente;
 import codelicht.sipressspringapp.servicio.interfaces.IFacturaServicio;
@@ -7,13 +8,14 @@ import codelicht.sipressspringapp.servicio.interfaces.IPacienteServicio;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -23,11 +25,14 @@ public class FacturaControlador {
     private static final Logger logger =
             LoggerFactory.getLogger(FacturaControlador.class);
 
-    @Autowired
-    private IFacturaServicio facturaServicio;
+    private final IFacturaServicio facturaServicio;
+    private final IPacienteServicio pacienteServicio;
 
-    @Autowired
-    private IPacienteServicio pacienteServicio;
+    // Constructor para inyección de dependencias
+    public FacturaControlador(IFacturaServicio facturaServicio, IPacienteServicio pacienteServicio) {
+        this.facturaServicio = facturaServicio;
+        this.pacienteServicio = pacienteServicio;
+    }
 
     // http://localhost:8080/sipress-app/facturas
     @GetMapping("/facturas")
@@ -38,8 +43,11 @@ public class FacturaControlador {
     }
 
     @GetMapping("/facturas/{id}")
-    public Factura buscarFacturaPorId(@PathVariable Integer id) {
-        return facturaServicio.buscarFacturaPorId(id);
+    public ResponseEntity<Factura> buscarFacturaPorId(@PathVariable Integer id) {
+        Factura factura = facturaServicio.buscarFacturaPorId(id);
+        if (factura == null)
+            throw new RecursoNoEncontradoExcepcion("Factura no encontrada con el número: " + id);
+        return ResponseEntity.ok(factura);
     }
 
     @PostMapping("/facturas")
@@ -50,7 +58,7 @@ public class FacturaControlador {
                     .collect(Collectors.toList());
             return ResponseEntity.badRequest().body(errors);
         }
-        logger.info("Factura a agregar: " + factura);
+        logger.info("Factura a agregar: {}", factura);
         if (factura.getPaciente() != null) {
             Paciente paciente = pacienteServicio.buscarPacientePorId(factura.getPaciente().getIdPaciente());
             factura.setPaciente(paciente);
@@ -59,14 +67,29 @@ public class FacturaControlador {
         return ResponseEntity.ok(nuevaFactura);
     }
 
-    @DeleteMapping("/facturas/{id}")
-    public ResponseEntity<Void> eliminarFactura(@PathVariable("id") Integer id) {
+    @PutMapping("/facturas/{id}")
+    public ResponseEntity<Factura> actualizarFactura(@PathVariable Integer id,
+                                                     @RequestBody Factura facturaRecuperada) {
         Factura factura = facturaServicio.buscarFacturaPorId(id);
-        if (factura != null) {
-            facturaServicio.eliminarFactura(factura);
-            return ResponseEntity.noContent().build(); // Elimina y responde con 204 No Content
-        } else {
-            return ResponseEntity.notFound().build(); // Responde con 404 Not Found si no existe
-        }
+        if (factura == null)
+            throw new RecursoNoEncontradoExcepcion("Factura no encontrada con el número: " + id);
+        factura.setNumeroFactura(facturaRecuperada.getNumeroFactura());
+        factura.setPaciente(facturaRecuperada.getPaciente());
+        factura.setDescripcionServicio(facturaRecuperada.getDescripcionServicio());
+        factura.setValor(facturaRecuperada.getValor());
+        factura.setTotal(facturaRecuperada.getTotal());
+        facturaServicio.guardarFactura(factura);
+        return ResponseEntity.ok(factura);
+    }
+
+    @DeleteMapping("/facturas/{id}")
+    public ResponseEntity<Map<String, Boolean>> eliminarFactura(@PathVariable Integer id) {
+        Factura factura = facturaServicio.buscarFacturaPorId(id);
+        if (factura == null)
+            throw new RecursoNoEncontradoExcepcion("Factura no encontrada con el número: " + id);
+        facturaServicio.eliminarFactura(factura);
+        Map<String, Boolean> respuesta = new HashMap<>();
+        respuesta.put("Eliminado", Boolean.TRUE);
+        return ResponseEntity.ok(respuesta);
     }
 }

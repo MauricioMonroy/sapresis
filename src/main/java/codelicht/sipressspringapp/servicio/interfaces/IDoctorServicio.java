@@ -9,11 +9,11 @@ import java.util.List;
  * Contiene los métodos a implementar en operaciones CRUD básicas.
  */
 public interface IDoctorServicio {
-    public List<Doctor> listarDoctores();
+    List<Doctor> listarDoctores();
 
-    public Doctor buscarDoctorPorId(Integer idDoctor);
+    Doctor buscarDoctorPorId(Integer idDoctor);
 
-    public Doctor guardarDoctor(Doctor doctor);
+    Doctor guardarDoctor(Doctor doctor);
 
-    public void eliminarDoctor(Doctor doctor);
+    void eliminarDoctor(Doctor doctor);
 }

@@ -1,17 +1,19 @@
 package codelicht.sipressspringapp.controlador;
 
+import codelicht.sipressspringapp.excepcion.RecursoNoEncontradoExcepcion;
 import codelicht.sipressspringapp.modelo.Eps;
 import codelicht.sipressspringapp.servicio.interfaces.IEpsServicio;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -21,8 +23,12 @@ public class EpsControlador {
     private static final Logger logger =
             LoggerFactory.getLogger(EpsControlador.class);
 
-    @Autowired
-    private IEpsServicio epsServicio;
+    private final IEpsServicio epsServicio;
+
+    // Constructor para inyección de dependencias
+    public EpsControlador(IEpsServicio epsServicio) {
+        this.epsServicio = epsServicio;
+    }
 
     // http://localhost:8080/sipress-app/epsS
     @GetMapping("/epsS")
@@ -33,8 +39,11 @@ public class EpsControlador {
     }
 
     @GetMapping("/epsS/{id}")
-    public Eps buscarEpsPorId(@PathVariable Integer id) {
-        return epsServicio.buscarEpsPorId(id);
+    public ResponseEntity<Eps> buscarEpsPorId(@PathVariable Integer id) {
+        Eps eps = epsServicio.buscarEpsPorId(id);
+        if (eps == null)
+            throw new RecursoNoEncontradoExcepcion("Eps no encontrada con el id: " + id);
+        return ResponseEntity.ok(eps);
     }
 
     @PostMapping("/epsS")
@@ -45,19 +54,32 @@ public class EpsControlador {
                     .collect(Collectors.toList());
             return ResponseEntity.badRequest().body(errors);
         }
-        logger.info("Eps a agregar: " + eps);
+        logger.info("Eps a agregar: {}", eps);
         Eps nuevaEps = epsServicio.guardarEps(eps);
         return ResponseEntity.ok(nuevaEps);
     }
 
-    @DeleteMapping("/epsS/{id}")
-    public ResponseEntity<Void> eliminarEps(@PathVariable("id") Integer id) {
+    @PutMapping("/epsS/{id}")
+    public ResponseEntity<Eps> actualizarEps(@PathVariable Integer id, @RequestBody Eps epsRecuperada) {
         Eps eps = epsServicio.buscarEpsPorId(id);
-        if (eps != null) {
-            epsServicio.eliminarEps(eps);
-            return ResponseEntity.noContent().build(); // Elimina y responde con 204 No Content
-        } else {
-            return ResponseEntity.notFound().build(); // Responde con 404 Not Found si no existe
-        }
+        if (eps == null)
+            throw new RecursoNoEncontradoExcepcion("Eps no encontrada con el id: " + id);
+        eps.setIdEps(epsRecuperada.getIdEps());
+        eps.setNombreEps(epsRecuperada.getNombreEps());
+        eps.setTelefonoEps(epsRecuperada.getTelefonoEps());
+        eps.setTelefonoEps(epsRecuperada.getTelefonoEps());
+        epsServicio.guardarEps(eps);
+        return ResponseEntity.ok(eps);
+    }
+
+    @DeleteMapping("/epsS/{id}")
+    public ResponseEntity<Map<String, Boolean>> eliminarEps(@PathVariable Integer id) {
+        Eps eps = epsServicio.buscarEpsPorId(id);
+        if (eps == null)
+            throw new RecursoNoEncontradoExcepcion("Eps no encontrada con el id: " + id);
+        epsServicio.eliminarEps(eps);
+        Map<String, Boolean> respuesta = new HashMap<>();
+        respuesta.put("Eliminado", Boolean.TRUE);
+        return ResponseEntity.ok(respuesta);
     }
 }

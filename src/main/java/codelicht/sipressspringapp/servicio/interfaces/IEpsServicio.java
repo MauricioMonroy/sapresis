@@ -9,11 +9,11 @@ import java.util.List;
  * Contiene los métodos a implementar en operaciones CRUD básicas.
  */
 public interface IEpsServicio {
-    public List<Eps> listarEpsS();
+    List<Eps> listarEpsS();
 
-    public Eps buscarEpsPorId(Integer idEps);
+    Eps buscarEpsPorId(Integer idEps);
 
-    public Eps guardarEps(Eps eps);
+    Eps guardarEps(Eps eps);
 
-    public void eliminarEps(Eps eps);
+    void eliminarEps(Eps eps);
 }

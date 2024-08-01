@@ -1,5 +1,6 @@
 package codelicht.sipressspringapp.controlador;
 
+import codelicht.sipressspringapp.excepcion.RecursoNoEncontradoExcepcion;
 import codelicht.sipressspringapp.modelo.Formula;
 import codelicht.sipressspringapp.modelo.Paciente;
 import codelicht.sipressspringapp.servicio.interfaces.IFormulaServicio;
@@ -7,13 +8,14 @@ import codelicht.sipressspringapp.servicio.interfaces.IPacienteServicio;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -23,11 +25,14 @@ public class FormulaControlador {
     private static final Logger logger =
             LoggerFactory.getLogger(FormulaControlador.class);
 
-    @Autowired
-    private IFormulaServicio formulaServicio;
+    private final IFormulaServicio formulaServicio;
+    private final IPacienteServicio pacienteServicio;
 
-    @Autowired
-    private IPacienteServicio pacienteServicio;
+    // Constructor para inyección de dependencias
+    public FormulaControlador(IFormulaServicio formulaServicio, IPacienteServicio pacienteServicio) {
+        this.formulaServicio = formulaServicio;
+        this.pacienteServicio = pacienteServicio;
+    }
 
     // http://localhost:8080/sipress-app/formulas
     @GetMapping("/formulas")
@@ -38,8 +43,11 @@ public class FormulaControlador {
     }
 
     @GetMapping("/formulas/{id}")
-    public Formula buscarFormulaPorId(@PathVariable Integer id) {
-        return formulaServicio.buscarFormulaPorId(id);
+    public ResponseEntity<Formula> buscarFormulaPorId(@PathVariable Integer id) {
+        Formula formula = formulaServicio.buscarFormulaPorId(id);
+        if (formula == null)
+            throw new RecursoNoEncontradoExcepcion("Formula no encontrada con el número: " + id);
+        return ResponseEntity.ok(formula);
     }
 
     @PostMapping("/formulas")
@@ -50,7 +58,7 @@ public class FormulaControlador {
                     .collect(Collectors.toList());
             return ResponseEntity.badRequest().body(errors);
         }
-        logger.info("Formula a agregar: " + formula);
+        logger.info("Formula a agregar: {}", formula);
         if (formula.getPaciente() != null) {
             Paciente paciente = pacienteServicio.buscarPacientePorId(formula.getPaciente().getIdPaciente());
             formula.setPaciente(paciente);
@@ -59,14 +67,29 @@ public class FormulaControlador {
         return ResponseEntity.ok(nuevaFormula);
     }
 
-    @DeleteMapping("/formulas/{id}")
-    public ResponseEntity<Void> eliminarFormula(@PathVariable("id") Integer id) {
+    @PutMapping("/formulas/{id}")
+    public ResponseEntity<Formula> actualizarFormula(@PathVariable Integer id,
+                                                     @RequestBody Formula formulaRecuperada) {
         Formula formula = formulaServicio.buscarFormulaPorId(id);
-        if (formula != null) {
-            formulaServicio.eliminarFormula(formula);
-            return ResponseEntity.noContent().build(); // Elimina y responde con 204 No Content
-        } else {
-            return ResponseEntity.notFound().build(); // Responde con 404 Not Found si no existe
-        }
+        if (formula == null)
+            throw new RecursoNoEncontradoExcepcion("Formula no encontrada con el número: " + id);
+        formula.setNumeroFormula(formulaRecuperada.getNumeroFormula());
+        formula.setPaciente(formulaRecuperada.getPaciente());
+        formula.setNombreMedicacion(formulaRecuperada.getNombreMedicacion());
+        formula.setFechaMedicacion(formulaRecuperada.getFechaMedicacion());
+        formula.setCostoMedicacion(formulaRecuperada.getCostoMedicacion());
+        formulaServicio.guardarFormula(formula);
+        return ResponseEntity.ok(formula);
+    }
+
+    @DeleteMapping("/formulas/{id}")
+    public ResponseEntity<Map<String, Boolean>> eliminarFormula(@PathVariable Integer id) {
+        Formula formula = formulaServicio.buscarFormulaPorId(id);
+        if (formula == null)
+            throw new RecursoNoEncontradoExcepcion("Formula no encontrada con el número: " + id);
+        formulaServicio.eliminarFormula(formula);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("Eliminado", Boolean.TRUE);
+        return ResponseEntity.ok(response);
     }
 }

@@ -3,19 +3,22 @@ package codelicht.sipressspringapp.servicio.implementacion;
 import codelicht.sipressspringapp.modelo.Formula;
 import codelicht.sipressspringapp.repositorio.FormulaRepositorio;
 import codelicht.sipressspringapp.servicio.interfaces.IFormulaServicio;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
- * Implementación del servicio para la entidad Formula.
+ * Implementación del servicio para la entidad Fórmula.
  */
 @Service
 public class FormulaServicio implements IFormulaServicio {
 
-    @Autowired
-    private FormulaRepositorio formulaRepositorio;
+    private final FormulaRepositorio formulaRepositorio;
+
+    // Inyección de dependencias por constructor
+    public FormulaServicio(FormulaRepositorio formulaRepositorio) {
+        this.formulaRepositorio = formulaRepositorio;
+    }
 
     @Override
     public List<Formula> listarFormulas() {
