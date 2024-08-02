@@ -50,6 +50,11 @@ const Navbar = () => {
                     Consultorios
                   </a>
                 </li>
+                <li>
+                  <a className="dropdown-item" href="/epsS">
+                    EPS
+                  </a>
+                </li>
               </ul>
             </li>
             <li className="nav-item">

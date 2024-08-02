@@ -57,7 +57,7 @@ export default function ListadoPersonal() {
           <div className="card" id="contenedor-lista">
             <div className="card-header">
               <h3 className="text-center">
-              <i className="fa-solid fa-user-nurse"></i> Lista de personal
+                <i className="fa-solid fa-user-nurse"></i> Lista de personal
               </h3>
             </div>
             <div className="table-responsive">
@@ -85,20 +85,16 @@ export default function ListadoPersonal() {
                         <td>{personal.emailPersonal}</td>
                         <td>
                           {personal.dependencia && (
-                            <div>                              
-                              <div>                                
-                                {personal.dependencia.nombreDependencia}
-                              </div>
+                            <div>
+                              {personal.dependencia.nombreDependencia}
                               <div>
                                 Sede:{" "}
                                 {personal.dependencia.institucion && (
-                                  <div>                                    
-                                    <div>                                      
-                                      {
-                                        personal.dependencia.institucion
-                                          .nombreInstitucion
-                                      }
-                                    </div>                                    
+                                  <div>
+                                    {
+                                      personal.dependencia.institucion
+                                        .nombreInstitucion
+                                    }
                                   </div>
                                 )}
                               </div>

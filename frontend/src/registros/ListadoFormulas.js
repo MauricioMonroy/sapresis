@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { NumericFormat } from "react-number-format";
+import AgregarFormula from "../formularios/AgregarFormula";
+import { Link } from "react-router-dom";
 
 export default function ListadoFormulas() {
   const urlBase = "http://localhost:8080/sipress-app/formulas";
@@ -17,14 +18,46 @@ export default function ListadoFormulas() {
     setFormulas(resultado.data);
   };
 
+  const eliminarFormula = async (id) => {
+    const confirmacion = window.confirm(
+      "¿Está seguro de que desea eliminar este registro?"
+    );
+    if (confirmacion) {
+      await axios.delete(`${urlBase}/${id}`);
+      cargarFormulas();
+    }
+  };
+
   return (
-    <div className="container">
+    <div className="p-3">
+      <section>
+        <AgregarFormula onFormulaAdded={cargarFormulas} />
+        <div id="actions">
+          <div className="row justify-content-center">
+            <div className="col-12 col-md-4 d-flex justify-content-center">
+              <a href="/" className="btn btn-info">
+                <i className="fa-solid fa-arrow-left-long"></i> Ir a la página
+                de inicio
+              </a>
+            </div>
+            <div className="col-12 col-md-4 d-flex justify-content-center">
+              <Link
+                to="#"
+                className="btn btn-success"
+                data-bs-toggle="modal"
+                data-bs-target="#AgregarFormulaModal">
+                <i className="fa-regular fa-square-plus"></i> Agregar Registro
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
       <div className="row">
         <div className="col-md-9">
           <div className="card" id="contenedor-lista">
             <div className="card-header">
               <h3 className="text-center">
-                <i className="fa-solid fa-clipboard-list"></i> Lista de Fórmulas
+                <i className="fa-solid fa-pills"></i> Lista de Fórmulas Médicas
               </h3>
             </div>
             <div className="table-responsive">
@@ -33,50 +66,50 @@ export default function ListadoFormulas() {
                   <tr>
                     <th>Número de fórmula</th>
                     <th>Paciente</th>
-                    <th>Medicación</th>
                     <th>Fecha de formulación</th>
-                    <th>Valor de la medicación</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                    // Iterar sobre el arreglo de formulas
-                    formulas.map((formula, indice) => (
-                      <tr key={indice}>
-                        <th scope="row">{formula.numeroFormula}</th>
-                        <td>
-                          {formula.paciente && (
+                  {formulas.map((formula, indice) => (
+                    <tr key={indice}>
+                      <th scope="row">{formula.numeroFormula}</th>
+                      <td>
+                        {formula.paciente && (
+                          <div>
                             <div>
-                              <div>ID: {formula.paciente.idPaciente}</div>
-                              <div>
-                                Nombre: {formula.paciente.nombrePaciente}{" "}
-                                {formula.paciente.apellidoPaciente}
-                              </div>
-                              <div>
-                                Dirección: {formula.paciente.direccionPaciente}
-                              </div>
-                              <div>
-                                Teléfono: {formula.paciente.telefonoPaciente}
-                              </div>
-                              <div>Email: {formula.paciente.emailPaciente}</div>
+                              {formula.paciente.nombrePaciente}{" "}
+                              {formula.paciente.apellidoPaciente}
                             </div>
-                          )}
-                        </td>
-                        <td>{formula.nombreMedicacion}</td>
-                        <td>{formula.fechaMedicacion}</td>
-                        <td>
-                          <NumericFormat
-                            value={formula.costoMedicacion}
-                            displayType={"text"}
-                            thousandSeparator=","
-                            prefix={"$"}
-                            decimalScale={2}
-                            fixedDecimalScale
-                          />
-                        </td>
-                      </tr>
-                    ))
-                  }
+                            <div>ID: {formula.paciente.idPaciente}</div>
+                          </div>
+                        )}
+                      </td>
+                      <td>{formula.fechaMedicacion}</td>
+                      <td className="textCenter">
+                        <div>
+                          <Link
+                            to={`/formulas/detalle/${formula.numeroFormula}`}
+                            className="btn btn-info btn-sm me-2">
+                            <i className="fa-regular fa-eye"></i> Detalle
+                          </Link>
+                          <Link
+                            to={`/formulas/editar/${formula.numeroFormula}`}
+                            className="btn btn-warning btn-sm me-2">
+                            <i className="fa-regular fa-pen-to-square"></i>{" "}
+                            Editar
+                          </Link>
+                          <button
+                            onClick={() =>
+                              eliminarFormula(formula.numeroFormula)
+                            }
+                            className="btn btn-danger btn-sm">
+                            <i className="fa-regular fa-trash-can"></i> Eliminar
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

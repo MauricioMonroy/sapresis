@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import AgregarDoctor from "../formularios/AgregarDoctor";
+import { Link } from "react-router-dom";
 
 export default function ListadoDoctores() {
   const urlBase = "http://localhost:8080/sipress-app/doctores";
@@ -16,14 +18,46 @@ export default function ListadoDoctores() {
     setDoctores(resultado.data);
   };
 
+  const eliminarDoctor = async (id) => {
+    const confirmacion = window.confirm(
+      "¿Está seguro de que desea eliminar este registro?"
+    );
+    if (confirmacion) {
+      await axios.delete(`${urlBase}/${id}`);
+      cargarDoctores();
+    }
+  };
+
   return (
-    <div className="container">
+    <div className="p-3">
+      <section>
+        <AgregarDoctor onDoctorAdded={cargarDoctores} />
+        <div id="actions">
+          <div className="row justify-content-center">
+            <div className="col-12 col-md-4 d-flex justify-content-center">
+              <a href="/" className="btn btn-info">
+                <i className="fa-solid fa-arrow-left-long"></i> Ir a la página
+                de inicio
+              </a>
+            </div>
+            <div className="col-12 col-md-4 d-flex justify-content-center">
+              <Link
+                to="#"
+                className="btn btn-success"
+                data-bs-toggle="modal"
+                data-bs-target="#AgregarDoctorModal">
+                <i className="fa-regular fa-square-plus"></i> Agregar Registro
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
       <div className="row">
         <div className="col-md-9">
           <div className="card" id="contenedor-lista">
             <div className="card-header">
               <h3 className="text-center">
-                <i className="fa-solid fa-clipboard-list"></i> Lista de doctores
+                <i class="fa-solid fa-user-doctor"></i> Lista de doctores
               </h3>
             </div>
             <div className="table-responsive">
@@ -31,10 +65,11 @@ export default function ListadoDoctores() {
                 <thead className="table-dark">
                   <tr>
                     <th>ID Doctor</th>
-                    <th>Nombre completo</th>                    
+                    <th>Nombre completo</th>
                     <th>Teléfono</th>
                     <th>Email</th>
                     <th>Dependencia</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -45,64 +80,42 @@ export default function ListadoDoctores() {
                         <th scope="row">{doctor.idDoctor}</th>
                         <td>
                           {doctor.nombreDoctor} {doctor.apellidoDoctor}
-                        </td>                        
+                        </td>
                         <td>{doctor.telefonoDoctor}</td>
                         <td>{doctor.emailDoctor}</td>
                         <td>
                           {doctor.dependencia && (
                             <div>
+                              {doctor.dependencia.nombreDependencia}
                               <div>
-                                ID Dependencia:{" "}
-                                {doctor.dependencia.idDependencia}
-                              </div>
-                              <div>
-                                Nombre de la dependencia:{" "}
-                                {doctor.dependencia.nombreDependencia}
-                              </div>
-                              <div>
-                                Institución:{" "}
+                                Sede:{" "}
                                 {doctor.dependencia.institucion && (
                                   <div>
-                                    <div>
-                                      ID Institución:{" "}
-                                      {
-                                        doctor.dependencia.institucion
-                                          .idInstitucion
-                                      }
-                                    </div>
-                                    <div>
-                                      Nombre de la institución:{" "}
-                                      {
-                                        doctor.dependencia.institucion
-                                          .nombreInstitucion
-                                      }
-                                    </div>
-                                    <div>
-                                      Dirección:{" "}
-                                      {
-                                        doctor.dependencia.institucion
-                                          .direccionInstitucion
-                                      }
-                                    </div>
-                                    <div>
-                                      Teléfono:{" "}
-                                      {
-                                        doctor.dependencia.institucion
-                                          .telefonoInstitucion
-                                      }
-                                    </div>
-                                    <div>
-                                      Código postal:{" "}
-                                      {
-                                        doctor.dependencia.institucion
-                                          .codigoPostal
-                                      }
-                                    </div>
+                                    {
+                                      doctor.dependencia.institucion
+                                        .nombreInstitucion
+                                    }
                                   </div>
                                 )}
                               </div>
                             </div>
                           )}
+                        </td>
+                        <td className="text-center">
+                          <div>
+                            <Link
+                              to={`/doctores/editar/${doctor.idDoctor}`}
+                              className="btn btn-warning btn-sm me-2">
+                              <i className="fa-regular fa-pen-to-square"></i>{" "}
+                              Editar
+                            </Link>
+                            <button
+                              onClick={() => eliminarDoctor(doctor.idDoctor)}
+                              className="btn btn-danger btn-sm">
+                              <i className="fa-regular fa-trash-can"></i>{" "}
+                              Eliminar
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))
