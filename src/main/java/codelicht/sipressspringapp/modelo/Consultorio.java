@@ -1,15 +1,14 @@
 package codelicht.sipressspringapp.modelo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -26,11 +25,11 @@ public class Consultorio implements Serializable {
     @JsonProperty("numeroConsultorio")
     private Integer numeroConsultorio;
 
-    @NotEmpty(message = "La fecha de admisión no puede estar vacía")
     @Column(name = "fecha_admision")
     @Temporal(TemporalType.DATE)
     @JsonProperty("fechaAdmision")
-    private Date fechaAdmision;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate fechaAdmision;
 
     @JoinColumn(name = "paciente_id", referencedColumnName = "id_paciente")
     @ManyToOne

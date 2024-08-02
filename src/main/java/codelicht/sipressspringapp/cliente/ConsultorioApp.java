@@ -11,7 +11,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -116,7 +116,7 @@ public class ConsultorioApp {
 
             System.out.println("Ingrese la fecha de admisión (formato: yyyy-MM-dd):");
             String fechaInput = scanner.nextLine();
-            Date fechaAdmision = dateFormat.parse(fechaInput);
+            LocalDate fechaAdmision = LocalDate.parse(fechaInput);
             consultorio.setFechaAdmision(fechaAdmision);
 
             String requestBody = mapper.writeValueAsString(consultorio);
