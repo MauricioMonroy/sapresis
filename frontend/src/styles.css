@@ -935,3 +935,49 @@ textarea {
 .table-hover tbody tr:hover {
     background-color: rgba(0, 0, 0, 0.075);
 }
+
+/* Reglas para detalle de registros */
+#detalle .card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+#detalle .card-header {
+    background-color: var(--bs-dark-teal);
+    border-bottom: 1px solid #ddd;
+    color: #f3f3f3;
+    padding: 10px 20px;
+}
+
+#detalle .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+#detalle .card-text {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+#detalle .card-body {
+    background-color: #f3f3f3;
+    color: #000000;
+}
+
+#detalle .btn {
+    margin-top: 20px;
+}
+
+@media print {
+    #detalle .card {
+        border: none;
+        box-shadow: none;
+    }
+
+    #detalle .btn {
+        display: none;
+    }
+}
