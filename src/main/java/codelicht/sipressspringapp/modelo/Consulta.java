@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -26,7 +27,8 @@ public class Consulta implements Serializable {
     @Column(name = "fecha_consulta")
     @Temporal(TemporalType.DATE)
     @JsonProperty("fechaConsulta")
-    private Date fechaConsulta;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    private LocalDate fechaConsulta;
 
     @Column(name = "hora_consulta")
     @Temporal(TemporalType.TIME)

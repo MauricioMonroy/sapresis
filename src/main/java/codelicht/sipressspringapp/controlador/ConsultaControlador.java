@@ -45,6 +45,16 @@ public class ConsultaControlador {
         return consultas;
     }
 
+    @GetMapping("/consultas/{pacienteId}/{doctorId}")
+    public ResponseEntity<Consulta> obtenerConsultaPorId(@PathVariable Integer pacienteId, @PathVariable Integer doctorId) {
+        ConsultaPK consultaPK = new ConsultaPK(pacienteId, doctorId);
+        Consulta consulta = consultaServicio.buscarConsultaPorId(consultaPK);
+        if (consulta == null) {
+            throw new RecursoNoEncontradoExcepcion("Consulta no encontrada con el id de paciente: " + pacienteId + " y id de doctor: " + doctorId);
+        }
+        return ResponseEntity.ok(consulta);
+    }
+
     @GetMapping("/consultas/paciente/{id}")
     public ResponseEntity<List<Consulta>> buscarConsultaPorIdPaciente(@PathVariable("id") Integer idPaciente) {
         List<Consulta> consultas = consultaServicio.buscarConsultaPorIdPaciente(idPaciente);

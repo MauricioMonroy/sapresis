@@ -11,6 +11,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -137,7 +138,7 @@ public class ConsultaApp {
 
             System.out.println("Ingrese la fecha de consulta (formato: yyyy-MM-dd):");
             String fechaInput = scanner.nextLine();
-            Date fechaConsulta = dateFormat.parse(fechaInput);
+            LocalDate fechaConsulta = LocalDate.parse(fechaInput);
             consulta.setFechaConsulta(fechaConsulta);
 
             System.out.println("Ingrese la hora de consulta (formato: HH:mm:ss):");
