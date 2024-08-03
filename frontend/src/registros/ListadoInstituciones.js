@@ -83,8 +83,8 @@ export default function ListadoInstituciones() {
                         <td>{institucion.direccionInstitucion}</td>
                         <td>{institucion.telefonoInstitucion}</td>
                         <td>{institucion.codigoPostal}</td>
-                        <td className="text-center">
-                          <div>
+                        <td>
+                          <div className="textCenter">
                             <Link
                               to={`/instituciones/editar/${institucion.idInstitucion}`}
                               className="btn btn-warning btn-sm me-2">

@@ -101,8 +101,8 @@ export default function ListadoPersonal() {
                             </div>
                           )}
                         </td>
-                        <td className="text-center">
-                          <div>
+                        <td>
+                          <div className="textCenter">
                             <Link
                               to={`/personalS/editar/${personal.idPersonal}`}
                               className="btn btn-warning btn-sm me-2">

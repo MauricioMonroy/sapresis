@@ -57,7 +57,7 @@ export default function ListadoDoctores() {
           <div className="card" id="contenedor-lista">
             <div className="card-header">
               <h3 className="text-center">
-                <i class="fa-solid fa-user-doctor"></i> Lista de doctores
+                <i className="fa-solid fa-user-doctor"></i> Lista de doctores
               </h3>
             </div>
             <div className="table-responsive">
@@ -101,8 +101,8 @@ export default function ListadoDoctores() {
                             </div>
                           )}
                         </td>
-                        <td className="text-center">
-                          <div>
+                        <td>
+                          <div className="textCenter">
                             <Link
                               to={`/doctores/editar/${doctor.idDoctor}`}
                               className="btn btn-warning btn-sm me-2">

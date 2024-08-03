@@ -57,7 +57,7 @@ export default function ListadoEps() {
           <div className="card" id="contenedor-lista">
             <div className="card-header">
               <h3 className="text-center">
-                <i class="fa-solid fa-staff-snake"></i> Lista de EPS
+                <i className="fa-solid fa-staff-snake"></i> Lista de EPS
               </h3>
             </div>
             <div className="table-responsive">
@@ -80,8 +80,8 @@ export default function ListadoEps() {
                         <td>{eps.nombreEps}</td>
                         <td>{eps.telefonoEps}</td>
                         <td>{eps.emailEps}</td>
-                        <td className="text-center">
-                          <div>
+                        <td>
+                          <div className="textCenter">
                             <Link
                               to={`/epsS/editar/${eps.idEps}`}
                               className="btn btn-warning btn-sm me-2">

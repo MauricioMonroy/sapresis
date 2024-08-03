@@ -86,8 +86,8 @@ export default function ListadoFormulas() {
                         )}
                       </td>
                       <td>{formula.fechaMedicacion}</td>
-                      <td className="textCenter">
-                        <div>
+                      <td>
+                        <div className="textCenter">
                           <Link
                             to={`/formulas/detalle/${formula.numeroFormula}`}
                             className="btn btn-info btn-sm me-2">

@@ -57,7 +57,8 @@ export default function ListadoDependencias() {
           <div className="card" id="contenedor-lista">
             <div className="card-header">
               <h3 className="text-center">
-                <i class="fa-solid fa-house-medical"></i> Lista de Dependencias
+                <i className="fa-solid fa-house-medical"></i> Lista de
+                Dependencias
               </h3>
             </div>
             <div className="table-responsive">
@@ -84,8 +85,8 @@ export default function ListadoDependencias() {
                             </div>
                           )}
                         </td>
-                        <td className="text-center">
-                          <div>
+                        <td>
+                          <div className="textCenter">
                             <Link
                               to={`/dependencias/editar/${dependencia.idDependencia}`}
                               className="btn btn-warning btn-sm me-2">

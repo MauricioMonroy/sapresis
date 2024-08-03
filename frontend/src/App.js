@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./comunes/Navbar";
 import Footer from "./comunes/Footer";
 import "./styles.css";
+import "primereact/resources/themes/saga-blue/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
 import ListadoPacientes from "./registros/ListadoPacientes";
 import ListadoDoctores from "./registros/ListadoDoctores";
 import ListadoPersonal from "./registros/ListadoPersonal";
@@ -24,6 +27,7 @@ import DetalleFormula from "./registros/DetalleFormula";
 import EditarFactura from "./formularios/EditarFactura";
 import DetalleFactura from "./registros/DetalleFactura";
 import EditarConsultorio from "./formularios/EditarConsultorio";
+import EditarConsulta from "./formularios/EditarConsulta";
 
 function App() {
   return (
@@ -62,6 +66,10 @@ function App() {
             <Route
               path="/consultorios/editar/:id"
               element={<EditarConsultorio />}
+            />
+            <Route
+              path="/consultas/editar/:pacienteId/:doctorId"
+              element={<EditarConsulta />}
             />
           </Routes>
         </div>

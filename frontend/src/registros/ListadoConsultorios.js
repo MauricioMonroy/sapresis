@@ -57,7 +57,8 @@ export default function ListadoConsultorios() {
           <div className="card" id="contenedor-lista">
             <div className="card-header">
               <h3 className="text-center">
-                <i class="fa-solid fa-stethoscope"></i> Lista de Consultorios
+                <i className="fa-solid fa-stethoscope"></i> Lista de
+                Consultorios
               </h3>
             </div>
             <div className="table-responsive">
@@ -88,7 +89,6 @@ export default function ListadoConsultorios() {
                         <td>
                           {consultorio.paciente && (
                             <div>
-                              
                               <div>
                                 {consultorio.paciente.nombrePaciente}{" "}
                                 {consultorio.paciente.apellidoPaciente}
@@ -96,10 +96,10 @@ export default function ListadoConsultorios() {
                               <div>ID: {consultorio.paciente.idPaciente}</div>
                             </div>
                           )}
-                        </td>                        
+                        </td>
                         <td>{consultorio.fechaAdmision}</td>
-                        <td className="text-center">
-                          <div>
+                        <td>
+                          <div className="textCenter">
                             <Link
                               to={`/consultorios/editar/${consultorio.numeroConsultorio}`}
                               className="btn btn-warning btn-sm me-2">
@@ -108,7 +108,9 @@ export default function ListadoConsultorios() {
                             </Link>
                             <button
                               onClick={() =>
-                                eliminarConsultorio(consultorio.numeroConsultorio)
+                                eliminarConsultorio(
+                                  consultorio.numeroConsultorio
+                                )
                               }
                               className="btn btn-danger btn-sm">
                               <i className="fa-regular fa-trash-can"></i>{" "}

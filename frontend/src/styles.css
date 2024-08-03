@@ -560,7 +560,7 @@ footer {
     max-height: -moz-fit-content;
     max-height: fit-content;
     min-height: -moz-fit-content;
-    min-height: fit-content;    
+    min-height: fit-content;
 }
 
 footer p {
@@ -980,4 +980,18 @@ textarea {
     #detalle .btn {
         display: none;
     }
+}
+
+/* Calendario */
+.p-calendar {
+    width: 100%;
+}
+
+.p-calendar .p-inputtext {
+    width: 100%;
+}
+
+.p-calendar .p-datepicker {
+    width: auto;
+    max-width: none;
 }
