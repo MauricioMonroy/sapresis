@@ -57,7 +57,7 @@ export default function ListadoPacientes() {
           <div className="card" id="contenedor-lista">
             <div className="card-header">
               <h3 className="text-center">
-                <i class="fa-solid fa-hospital-user"></i> Lista de Pacientes
+                <i className="fa-solid fa-hospital-user"></i> Lista de Pacientes
               </h3>
             </div>
             <div className="table-responsive">
@@ -86,10 +86,10 @@ export default function ListadoPacientes() {
                         <td>{paciente.telefonoPaciente}</td>
                         <td>{paciente.emailPaciente}</td>
                         <td>
-                          {paciente.eps && (<div>{paciente.eps.nombreEps}</div>)}
+                          {paciente.eps && <div>{paciente.eps.nombreEps}</div>}
                         </td>
-                        <td className="text-center">
-                          <div>
+                        <td>
+                          <div className="textCenter">
                             <Link
                               to={`/pacientes/editar/${paciente.idPaciente}`}
                               className="btn btn-warning btn-sm me-2">

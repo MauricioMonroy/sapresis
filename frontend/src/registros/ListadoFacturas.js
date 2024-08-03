@@ -57,7 +57,8 @@ export default function ListadoFacturas() {
           <div className="card" id="contenedor-lista">
             <div className="card-header">
               <h3 className="text-center">
-              <i class="fa-solid fa-file-invoice-dollar"></i> Lista de Fórmulas
+                <i className="fa-solid fa-file-invoice-dollar"></i> Lista de
+                Fórmulas
               </h3>
             </div>
             <div className="table-responsive">
@@ -86,8 +87,8 @@ export default function ListadoFacturas() {
                             </div>
                           )}
                         </td>
-                        <td className="textCenter">
-                          <div>
+                        <td>
+                          <div className="textCenter">
                             <Link
                               to={`/facturas/detalle/${factura.numeroFactura}`}
                               className="btn btn-info btn-sm me-2">
