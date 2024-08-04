@@ -10,6 +10,22 @@
           "scroll-behavior"
         ]
       }
+    ],
+    "compat-api/html": [
+      "default",
+      {
+        "ignore": [
+          "meta[name=theme-color]"
+        ]
+      }
     ]
-  }
+  },
+  "browserslist": [
+    "defaults",
+    "not ie 11",
+    "not and_ff <= 125",
+    "not firefox <= 125",
+    "not ios_saf <= 12.5",
+    "not opera <= 108"
+  ]
 }
