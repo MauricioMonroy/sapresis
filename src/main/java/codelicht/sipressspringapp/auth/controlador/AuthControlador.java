@@ -7,10 +7,7 @@ import codelicht.sipressspringapp.auth.entidad.Usuario;
 import codelicht.sipressspringapp.auth.servicio.AuthenticationService;
 import codelicht.sipressspringapp.auth.servicio.JwtService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Controlador para la autenticación de usuarios
@@ -18,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RequestMapping("/sipress-app/auth")
 @RestController
+@CrossOrigin(value = "http://localhost:3000")
 public class AuthControlador {
     private final JwtService jwtService;
     private final AuthenticationService authenticationService;
