@@ -55,7 +55,7 @@ public class Paciente implements Serializable {
     @JsonProperty("emailPaciente")
     private String emailPaciente;
 
-    @OneToMany(mappedBy = "paciente")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente")
     @JsonBackReference
     @JsonProperty("facturaList")
     private List<Factura> facturaList;
@@ -65,13 +65,13 @@ public class Paciente implements Serializable {
     @JsonProperty("eps")
     private Eps eps;
 
-    @OneToMany(mappedBy = "paciente")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente")
     private List<Formula> formulaList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente")
     private List<Consulta> consultaList;
 
-    @OneToMany(mappedBy = "paciente")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente")
     private List<Consultorio> consultorioList;
 
     @Override

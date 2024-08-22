@@ -17,8 +17,14 @@ export default function AgregarDependencia({ onDependenciaAdded }) {
   useEffect(() => {
     // Cargar las instituciones al montar el componente
     const cargarInstituciones = async () => {
+      const token = localStorage.getItem("token");
       const resultado = await axios.get(
-        "http://localhost:8080/sipress-app/instituciones"
+        "http://localhost:8080/sipress-app/instituciones",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setInstituciones(resultado.data);
     };

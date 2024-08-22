@@ -30,12 +30,10 @@ public class Factura implements Serializable {
     @JsonProperty("descripcionServicio")
     private String descripcionServicio;
 
-    @NotEmpty(message = "El campo de valor no puede estar vacío")
     @DecimalMin(value = "0.0", inclusive = false, message = "El campo de valor debe ser positivo")
     @JsonProperty("valor")
     private Double valor;
 
-    @NotEmpty(message = "El campo de total no puede estar vacío")
     @DecimalMin(value = "0.0", inclusive = false, message = "El campo de total debe ser positivo")
     @JsonProperty("total")
     private Double total;

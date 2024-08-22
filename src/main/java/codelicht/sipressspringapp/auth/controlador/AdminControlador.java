@@ -5,10 +5,7 @@ import codelicht.sipressspringapp.auth.entidad.Usuario;
 import codelicht.sipressspringapp.auth.servicio.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Gestiona las peticiones de los administradores
@@ -16,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/sipress-app/admin")
+@CrossOrigin(value = "http://localhost:3000")
 public class AdminControlador {
 
     private final UserService userService;
