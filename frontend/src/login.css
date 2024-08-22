@@ -1,0 +1,50 @@
+/* Estilos específicos para la pantalla de login */
+
+.login-page body {
+    padding-top: 0; 
+}
+
+.login-page .login {
+    min-height: 100vh;
+}
+
+.login-page .bg-image {
+    background-image: url('/public/images/Logo_SIPRESS.png');
+    background-color: #113733;
+    background-repeat: no-repeat;
+    background-size: 450px;
+    background-position: center;
+    height: 100vh; 
+}
+
+/* Media queries para ajustar el formulario en pantallas más pequeñas */
+@media (max-width: 768px) {
+    .login-page .form-control {
+        padding: 1rem 0.5rem; 
+    }
+
+    .login-page .btn-login {
+        padding: 0.5rem 1rem; 
+    }
+}
+
+@media (max-width: 576px) {
+    .login-page .form-control {
+        padding: 0.75rem 0.5rem; 
+    }
+
+    .login-page .btn-login {
+        padding: 0.5rem 0.75rem; 
+        font-size: 0.8rem; 
+    }
+}
+
+.login-page .login-heading {
+    font-weight: 300;
+}
+
+.login-page .btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+}
