@@ -29,8 +29,14 @@ export default function AgregarPaciente({ onPacienteAdded }) {
   useEffect(() => {
     // Cargar las epsS al montar el componente
     const cargarEpsS = async () => {
+      const token = localStorage.getItem("token");
       const resultado = await axios.get(
-        "http://localhost:8080/sipress-app/epsS"
+        "http://localhost:8080/sipress-app/epsS",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setEpsS(resultado.data);
     };

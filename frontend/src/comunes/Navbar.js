@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get(`/api/buscar`, {
+        params: { query }
+      });
+      console.log("Resultados de búsqueda:", response.data);
+      // Navegar a la página de resultados de búsqueda con los resultados
+      navigate("/resultados-busqueda", { state: { resultados: response.data } });
+    } catch (error) {
+      console.error("Error al buscar:", error);
+    }
+  };
   return (
     <nav className="navbar navbar-expand-lg fixed-top navbar-dark" id="menu">
       <div className="container-md">
-        <a className="navbar-brand" href="/">
+        <a className="navbar-brand" href="/inicio">
           <img
             src={`${process.env.PUBLIC_URL}/images/nb-logo.png`}
             width="384"
@@ -100,13 +118,15 @@ const Navbar = () => {
               </ul>
             </li>
           </ul>
-          <form className="d-flex" role="search" action="buscar" method="GET">
+          <form className="d-flex" role="search" onSubmit={handleSearch}>
             <input
               className="form-control me-2"
               type="search"
               name="query"
               placeholder="Buscar registro..."
               aria-label="Search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
             />
             <button className="btn btn-outline-success" type="submit">
               <i className="fa-solid fa-magnifying-glass"></i>
@@ -119,3 +139,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

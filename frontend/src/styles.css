@@ -88,7 +88,7 @@ html,
 body {
     height: 100%;
     margin: 0;
-    padding-top: 50px;
+    /*padding-top: 50px;*/
     font-family: var(--bs-font-sans-serif), 'Monserrat', sans-serif;
     font-size: var(--bs-body-font-size);
     font-weight: var(--bs-body-font-weight);
@@ -240,6 +240,34 @@ body {
         max-height: 30px;
     }
 }
+
+/*FOOTER*/
+footer {
+    background: #113733;
+    min-height: 80px;
+  }
+  
+  footer p {
+    color: #f3f3f3;
+    text-align: center;
+  }
+  
+  #iconos i {
+    font-size: 26px;
+    padding: 0 8px;
+    color: #f3f3f3;
+  }
+  
+  .blockquote-footer {
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+    font-size: 0.875em;
+    color: #6c757d;
+  }
+  
+  .blockquote-footer::before {
+    content: "— ";
+  }
 
 /* Reglas para la sección de botones de navegación */
 #actions {

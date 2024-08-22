@@ -27,8 +27,14 @@ export default function AgregarPersonal({ onPersonalAdded }) {
   useEffect(() => {
     // Cargar las dependencias al montar el componente
     const cargarDependencias = async () => {
+      const token = localStorage.getItem("token");
       const resultado = await axios.get(
-        "http://localhost:8080/sipress-app/dependencias"
+        "http://localhost:8080/sipress-app/dependencias",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setDependencias(resultado.data);
     };

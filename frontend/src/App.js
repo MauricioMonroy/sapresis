@@ -1,7 +1,14 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import Navbar from "./comunes/Navbar";
 import Footer from "./comunes/Footer";
+import Login from "./comunes/Login";
+import ResultadosBusqueda from "./comunes/ResultadosBusqueda";
 import "./styles.css";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -32,56 +39,70 @@ import EditarConsulta from "./formularios/EditarConsulta";
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Navbar />
-        <div className="container">
-          <Routes>
-            <Route path="/" element={<Inicio />} />
-            <Route path="/pacientes" element={<ListadoPacientes />} />
-            <Route path="/doctores" element={<ListadoDoctores />} />
-            <Route path="/personalS" element={<ListadoPersonal />} />
-            <Route path="/instituciones" element={<ListadoInstituciones />} />
-            <Route path="/dependencias" element={<ListadoDependencias />} />
-            <Route path="/epsS" element={<ListadoEps />} />
-            <Route path="/consultorios" element={<ListadoConsultorios />} />
-            <Route path="/formulas" element={<ListadoFormulas />} />
-            <Route path="/facturas" element={<ListadoFacturas />} />
-            <Route path="/consultas" element={<ListadoConsultas />} />
-            <Route
-              path="/instituciones/editar/:id"
-              element={<EditarInstitucion />}
-            />
-            <Route path="/personalS/editar/:id" element={<EditarPersonal />} />
-            <Route path="/epsS/editar/:id" element={<EditarEps />} />
-            <Route path="/doctores/editar/:id" element={<EditarDoctor />} />
-            <Route path="/pacientes/editar/:id" element={<EditarPaciente />} />
-            <Route
-              path="/dependencias/editar/:id"
-              element={<EditarDependencia />}
-            />
-            <Route path="/formulas/editar/:id" element={<EditarFormula />} />
-            <Route path="/formulas/detalle/:id" element={<DetalleFormula />} />
-            <Route path="/facturas/editar/:id" element={<EditarFactura />} />
-            <Route path="/facturas/detalle/:id" element={<DetalleFactura />} />
-            <Route
-              path="/consultorios/editar/:id"
-              element={<EditarConsultorio />}
-            />
-            <Route
-              path="/consultas/editar/:pacienteId/:doctorId"
-              element={<EditarConsulta />}
-            />
-          </Routes>
-        </div>
-        <Footer />
-      </div>
+      <Main />
     </Router>
+  );
+}
+
+function Main() {
+  const location = useLocation();
+  const noNavAndFooterRoutes = ["/", "/login"];
+
+  return (
+    <div className="App">
+      {/* Renderiza Navbar solo si la ruta actual no está en noNavAndFooterRoutes */}
+      {!noNavAndFooterRoutes.includes(location.pathname) && <Navbar />}
+
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/inicio" element={<Inicio />} />
+        <Route path="/pacientes" element={<ListadoPacientes />} />
+        <Route path="/doctores" element={<ListadoDoctores />} />
+        <Route path="/personalS" element={<ListadoPersonal />} />
+        <Route path="/instituciones" element={<ListadoInstituciones />} />
+        <Route path="/dependencias" element={<ListadoDependencias />} />
+        <Route path="/epsS" element={<ListadoEps />} />
+        <Route path="/consultorios" element={<ListadoConsultorios />} />
+        <Route path="/formulas" element={<ListadoFormulas />} />
+        <Route path="/facturas" element={<ListadoFacturas />} />
+        <Route path="/consultas" element={<ListadoConsultas />} />
+        <Route
+          path="/instituciones/editar/:id"
+          element={<EditarInstitucion />}
+        />
+        <Route path="/personalS/editar/:id" element={<EditarPersonal />} />
+        <Route path="/epsS/editar/:id" element={<EditarEps />} />
+        <Route path="/doctores/editar/:id" element={<EditarDoctor />} />
+        <Route path="/pacientes/editar/:id" element={<EditarPaciente />} />
+        <Route
+          path="/dependencias/editar/:id"
+          element={<EditarDependencia />}
+        />
+        <Route path="/formulas/editar/:id" element={<EditarFormula />} />
+        <Route path="/formulas/detalle/:id" element={<DetalleFormula />} />
+        <Route path="/facturas/editar/:id" element={<EditarFactura />} />
+        <Route path="/facturas/detalle/:id" element={<DetalleFactura />} />
+        <Route
+          path="/consultorios/editar/:id"
+          element={<EditarConsultorio />}
+        />
+        <Route
+          path="/consultas/editar/:pacienteId/:doctorId"
+          element={<EditarConsulta />}
+        />
+        <Route path="/resultados-busqueda" element={<ResultadosBusqueda />} />
+      </Routes>
+
+      {/* Renderiza Footer solo si la ruta actual no está en noNavAndFooterRoutes */}
+      {!noNavAndFooterRoutes.includes(location.pathname) && <Footer />}
+    </div>
   );
 }
 
 function Inicio() {
   return (
-    <div className="py-2 mb-5">
+    <div className="py-2 mb-5 mt-5">
       {/* Encabezado */}
       <header>
         <div className="container">
