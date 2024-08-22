@@ -27,7 +27,7 @@ public class Consulta implements Serializable {
     @Column(name = "fecha_consulta")
     @Temporal(TemporalType.DATE)
     @JsonProperty("fechaConsulta")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate fechaConsulta;
 
     @Column(name = "hora_consulta")

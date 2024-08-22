@@ -32,13 +32,11 @@ public class Formula implements Serializable {
     @JsonProperty("nombreMedicacion")
     private String nombreMedicacion;
 
-    @NotEmpty(message = "La fecha de medicación no puede estar vacía")
     @Column(name = "fecha_medicacion")
     @Temporal(TemporalType.DATE)
     @JsonProperty("fechaMedicacion")
     private Date fechaMedicacion;
 
-    @NotEmpty(message = "El costo de la medicación no puede estar vacío")
     @DecimalMin(value = "0.0", inclusive = false, message = "El costo de la medicación debe ser un valor positivo")
     @Column(name = "costo_medicacion")
     @JsonProperty("costoMedicacion")
