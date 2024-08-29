@@ -47,7 +47,16 @@ export default function AgregarDependencia({ onDependenciaAdded }) {
   const onSubmit = async (e) => {
     e.preventDefault();
     const urlBase = "http://localhost:8080/sipress-app/dependencias";
-    await axios.post(urlBase, dependencia);
+    const token = localStorage.getItem("token");
+    await axios.post(
+      urlBase,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+      dependencia
+    );
 
     // Cerrar el modal manualmente
     const modalElement = modalRef.current;

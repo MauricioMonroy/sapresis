@@ -1,24 +1,7 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import {} from "react-router-dom";
 
 const Navbar = () => {
-  const [query, setQuery] = useState("");
-  const navigate = useNavigate();
-
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.get(`/api/buscar`, {
-        params: { query }
-      });
-      console.log("Resultados de búsqueda:", response.data);
-      // Navegar a la página de resultados de búsqueda con los resultados
-      navigate("/resultados-busqueda", { state: { resultados: response.data } });
-    } catch (error) {
-      console.error("Error al buscar:", error);
-    }
-  };
   return (
     <nav className="navbar navbar-expand-lg fixed-top navbar-dark" id="menu">
       <div className="container-md">
@@ -118,20 +101,13 @@ const Navbar = () => {
               </ul>
             </li>
           </ul>
-          <form className="d-flex" role="search" onSubmit={handleSearch}>
-            <input
-              className="form-control me-2"
-              type="search"
-              name="query"
-              placeholder="Buscar registro..."
-              aria-label="Search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-            <button className="btn btn-outline-success" type="submit">
-              <i className="fa-solid fa-magnifying-glass"></i>
-            </button>
-          </form>
+          <div className="container">          
+            <button
+              onClick={() => (window.location.href = "/sipress-app/logout")}
+              className="btn btn-outline-light">              
+              <i className="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión 
+            </button>            
+          </div>
         </div>
       </div>
     </nav>
@@ -139,4 +115,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

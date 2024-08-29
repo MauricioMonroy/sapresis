@@ -1,38 +1,62 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import AgregarConsultorio from "../formularios/AgregarConsultorio";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function ListadoConsultorios() {
   const urlBase = "http://localhost:8080/sipress-app/consultorios";
   const [consultorios, setConsultorios] = useState([]);
+  const [error, setError] = useState(null);
+  let navigate = useNavigate();
+
+  const cargarConsultorios = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.get(urlBase, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setConsultorios(response.data);
+      setError(null);
+    } catch (error) {
+      setError("Error al cargar los registros");
+      console.error("Error al cargar registros:", error);
+    }
+  };
 
   useEffect(() => {
     cargarConsultorios();
   }, []);
 
-  const cargarConsultorios = async () => {
-    const resultado = await axios.get(urlBase);
-    console.log("Resultado de cargar registros");
-    console.log(resultado.data);
-    setConsultorios(resultado.data);
-  };
-
   const eliminarConsultorio = async (id) => {
     const confirmacion = window.confirm(
-      "¿Está seguro de eliminar el registro?"
+      "¿Está seguro de que desea eliminar este registro?"
     );
     if (confirmacion) {
-      await axios.delete(`${urlBase}/${id}`);
-      cargarConsultorios();
+      const token = localStorage.getItem("token");
+      try {
+        await axios.delete(`${urlBase}/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        cargarConsultorios();
+      } catch (error) {
+        console.error("Error al eliminar el registro", error);
+        if (error.response && error.response.status === 401) {
+          navigate("/login");
+        }
+      }
     }
   };
 
   return (
-    <div className="p-3">
+    <div className="p-3 mb-2 mt-5">
       <section>
         <AgregarConsultorio onConsultorioAdded={cargarConsultorios} />
-        <div id="actions">
+        {error && <p>Error al cargar los registros: {error.message}</p>}
+        <div id="actions" className="mt-3">
           <div className="row justify-content-center">
             <div className="col-12 col-md-4 d-flex justify-content-center">
               <a href="/" className="btn btn-info">

@@ -11,12 +11,7 @@ export default function AgregarEps({ onEpsAdded }) {
     emailEps: "",
   });
 
-  const {
-    idEps,
-    nombreEps,
-    telefonoEps,
-    emailEps,
-  } = eps;
+  const { idEps, nombreEps, telefonoEps, emailEps } = eps;
 
   const onInputChange = (e) => {
     setEps({ ...eps, [e.target.name]: e.target.value });
@@ -25,7 +20,16 @@ export default function AgregarEps({ onEpsAdded }) {
   const onSubmit = async (e) => {
     e.preventDefault();
     const urlBase = "http://localhost:8080/sipress-app/epsS";
-    await axios.post(urlBase, eps);
+    const token = localStorage.getItem("token");
+    await axios.post(
+      urlBase,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+      eps
+    );
 
     // Cerrar el modal manualmente
     const modalElement = modalRef.current;
@@ -71,7 +75,7 @@ export default function AgregarEps({ onEpsAdded }) {
                   placeholder="ID EPS"
                   required={true}
                   value={idEps}
-                  onChange={(e)=>onInputChange(e)}
+                  onChange={(e) => onInputChange(e)}
                 />
                 <label htmlFor="idEps">ID de la EPS</label>
               </div>
@@ -85,12 +89,10 @@ export default function AgregarEps({ onEpsAdded }) {
                   placeholder="Nombre de la EPS"
                   required={true}
                   value={nombreEps}
-                  onChange={(e)=>onInputChange(e)}
+                  onChange={(e) => onInputChange(e)}
                 />
-                <label htmlFor="nombreEps">
-                  Nombre de la EPS
-                </label>
-              </div>             
+                <label htmlFor="nombreEps">Nombre de la EPS</label>
+              </div>
 
               <div className="form-floating form-group mb-3">
                 <input
@@ -101,11 +103,9 @@ export default function AgregarEps({ onEpsAdded }) {
                   placeholder="Teléfono de la EPS"
                   required={true}
                   value={telefonoEps}
-                  onChange={(e)=>onInputChange(e)}
+                  onChange={(e) => onInputChange(e)}
                 />
-                <label htmlFor="telefonoEps">
-                  Teléfono de la EPS
-                </label>
+                <label htmlFor="telefonoEps">Teléfono de la EPS</label>
               </div>
 
               <div className="form-floating form-group mb-3">
@@ -117,7 +117,7 @@ export default function AgregarEps({ onEpsAdded }) {
                   placeholder="Email"
                   required={true}
                   value={emailEps}
-                  onChange={(e)=>onInputChange(e)}
+                  onChange={(e) => onInputChange(e)}
                 />
                 <label htmlFor="emailEps">Email</label>
               </div>
@@ -129,7 +129,10 @@ export default function AgregarEps({ onEpsAdded }) {
                 data-bs-dismiss="modal">
                 <i className="fa-regular fa-rectangle-xmark"></i> Cerrar
               </button>
-              <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                data-bs-dismiss="modal">
                 <i className="fa-solid fa-folder-plus"></i> Guardar registro
               </button>
             </div>

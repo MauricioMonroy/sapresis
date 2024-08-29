@@ -103,8 +103,8 @@ export default function EditarPersonal() {
   };
 
   return (
-    <div className="p-4" id="details">
-      <div className="row justify-content-center">
+    <div className="p-3 mt-5 mb-2" id="details">
+      <div className="row justify-content-center mt-5">
         <div className="col-lg-9">
           <div className="card">
             <div className="card-header">

@@ -57,7 +57,7 @@ export default function ListadoPersonal() {
       <section>
         {error && <p>Error al cargar registros: {error.message}</p>}
         <AgregarPersonal onPersonalAdded={cargarPersonalS} />
-        <div id="actions">
+        <div id="actions" className="mt-3">
           <div className="row justify-content-center">
             <div className="col-12 col-md-4 d-flex justify-content-center">
               <a href="/inicio" className="btn btn-info">

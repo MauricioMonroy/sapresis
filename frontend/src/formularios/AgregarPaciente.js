@@ -59,7 +59,16 @@ export default function AgregarPaciente({ onPacienteAdded }) {
   const onSubmit = async (e) => {
     e.preventDefault();
     const urlBase = "http://localhost:8080/sipress-app/pacientes";
-    await axios.post(urlBase, paciente);
+    const token = localStorage.getItem("token");
+    await axios.post(
+      urlBase,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+      paciente
+    );
 
     // Cerrar el modal manualmente
     const modalElement = modalRef.current;

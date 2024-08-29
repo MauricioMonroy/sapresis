@@ -21,9 +21,15 @@ export default function AgregarConsulta({ onConsultaAdded }) {
 
   useEffect(() => {
     const cargarPacientes = async () => {
-      try {
+      const token = localStorage.getItem("token");
+      try {        
         const resultado = await axios.get(
-          "http://localhost:8080/sipress-app/pacientes"
+          "http://localhost:8080/sipress-app/pacientes",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setPacientes(resultado.data);
       } catch (error) {
@@ -35,9 +41,15 @@ export default function AgregarConsulta({ onConsultaAdded }) {
 
   useEffect(() => {
     const cargarDoctores = async () => {
+      const token = localStorage.getItem("token");
       try {
         const resultado = await axios.get(
-          "http://localhost:8080/sipress-app/doctores"
+          "http://localhost:8080/sipress-app/doctores",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setDoctores(resultado.data);
       } catch (error) {
@@ -84,10 +96,19 @@ export default function AgregarConsulta({ onConsultaAdded }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(consulta); // Añadir esta línea para verificar los valores
+    console.log(consulta); // Verificar los datos a enviar
     const urlBase = "http://localhost:8080/sipress-app/consultas";
+    const token = localStorage.getItem("token");
     try {
-      await axios.post(urlBase, consulta);
+      await axios.post(
+        urlBase,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+        consulta
+      );
       if (modalRef.current) {
         const modalInstance = new window.bootstrap.Modal(modalRef.current);
         modalInstance.hide();

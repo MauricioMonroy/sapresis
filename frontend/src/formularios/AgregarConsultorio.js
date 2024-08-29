@@ -18,9 +18,15 @@ export default function AgregarConsultorio({ onConsultorioAdded }) {
 
   useEffect(() => {
     const cargarPacientes = async () => {
-      try {
+      const token = localStorage.getItem("token");
+      try {        
         const resultado = await axios.get(
-          "http://localhost:8080/sipress-app/pacientes"
+          "http://localhost:8080/sipress-app/pacientes",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setPacientes(resultado.data);
       } catch (error) {
@@ -32,9 +38,15 @@ export default function AgregarConsultorio({ onConsultorioAdded }) {
 
   useEffect(() => {
     const cargarPersonalS = async () => {
-      try {
+      const token = localStorage.getItem("token");
+      try {        
         const resultado = await axios.get(
-          "http://localhost:8080/sipress-app/personalS"
+          "http://localhost:8080/sipress-app/personalS",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setPersonalS(resultado.data);
       } catch (error) {
@@ -60,8 +72,17 @@ export default function AgregarConsultorio({ onConsultorioAdded }) {
   const onSubmit = async (e) => {
     e.preventDefault();
     const urlBase = "http://localhost:8080/sipress-app/consultorios";
-    try {
-      await axios.post(urlBase, consultorio);
+    const token = localStorage.getItem("token");
+    try {      
+      await axios.post(
+        urlBase,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+        consultorio
+      );
       if (modalRef.current) {
         const modalInstance = new window.bootstrap.Modal(modalRef.current);
         modalInstance.hide();

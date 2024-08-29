@@ -39,9 +39,15 @@ export default function EditarDoctor() {
   const [dependencias, setDependencias] = useState([]);
 
   const cargarDependencias = useCallback(async () => {
+    const token = localStorage.getItem("token");
     try {
       const resultado = await axios.get(
-        "http://localhost:8080/sipress-app/dependencias"
+        "http://localhost:8080/sipress-app/dependencias",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setDependencias(resultado.data);
     } catch (error) {
@@ -50,8 +56,13 @@ export default function EditarDoctor() {
   }, []);
 
   const cargarDoctor = useCallback(async () => {
+    const token = localStorage.getItem("token");
     try {
-      const resultado = await axios.get(`${urlBase}/${id}`);
+      const resultado = await axios.get(`${urlBase}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setDoctor(resultado.data);
     } catch (error) {
       console.error("Error al cargar el doctor:", error);
@@ -93,9 +104,18 @@ export default function EditarDoctor() {
   };
 
   const onSubmit = async (e) => {
+    const token = localStorage.getItem("token");
     e.preventDefault();
     try {
-      await axios.put(`${urlBase}/${id}`, doctor);
+      await axios.put(
+        `${urlBase}/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+        doctor
+      );
       navigate("/doctores");
     } catch (error) {
       console.error("Error al actualizar el doctor:", error);
@@ -103,10 +123,10 @@ export default function EditarDoctor() {
   };
 
   return (
-    <div className="p-4" id="details">
+    <div className="p-4 mb-2 mt-5">
       <div className="row justify-content-center">
         <div className="col-lg-9">
-          <div className="card">
+          <div className="card mt-3" id="details">
             <div className="card-header">
               <h4>Modificar Registro</h4>
             </div>

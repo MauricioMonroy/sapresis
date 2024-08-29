@@ -22,33 +22,53 @@ export default function EditarConsulta() {
   const [doctores, setDoctores] = useState([]);
 
   const cargarPacientes = useCallback(async () => {
+    const token = localStorage.getItem("token");
     try {
       const resultado = await axios.get(
-        "http://localhost:8080/sipress-app/pacientes"
+        "http://localhost:8080/sipress-app/pacientes",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setPacientes(resultado.data);
     } catch (error) {
-      console.error("Error al cargar los pacientes:", error);
+      console.error("Error al cargar los registros:", error);
     }
   }, []);
 
   const cargarDoctores = useCallback(async () => {
+    const token = localStorage.getItem("token");
     try {
       const resultado = await axios.get(
-        "http://localhost:8080/sipress-app/doctores"
+        "http://localhost:8080/sipress-app/doctores",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setDoctores(resultado.data);
     } catch (error) {
-      console.error("Error al cargar los doctores:", error);
+      console.error("Error al cargar los registros:", error);
     }
   }, []);
 
   const cargarConsulta = useCallback(async () => {
+    const token = localStorage.getItem("token");
     try {
-      const resultado = await axios.get(`${urlBase}/${pacienteId}/${doctorId}`);
+      const resultado = await axios.get(
+        `${urlBase}/${pacienteId}/${doctorId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setConsulta(resultado.data);
     } catch (error) {
-      console.error("Error al cargar la consulta:", error);
+      console.error("Error al cargar el registro:", error);
     }
   }, [pacienteId, doctorId]);
 
@@ -94,20 +114,29 @@ export default function EditarConsulta() {
   };
 
   const onSubmit = async (e) => {
+    const token = localStorage.getItem("token");
     e.preventDefault();
     try {
-      await axios.put(`${urlBase}/${pacienteId}/${doctorId}`, consulta);
+      await axios.put(
+        `${urlBase}/${pacienteId}/${doctorId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+        consulta
+      );
       navigate("/consultas");
     } catch (error) {
-      console.error("Error al actualizar la consulta:", error);
+      console.error("Error al actualizar el registroa:", error);
     }
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 mb-2 mt-5">
       <div className="row justify-content-center">
         <div className="col-lg-9">
-          <div className="card" id="details">
+          <div className="card mt-3" id="details">
             <div className="card-header">
               <h4>Modificar Consulta</h4>
             </div>

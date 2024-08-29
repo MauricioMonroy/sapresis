@@ -36,9 +36,15 @@ export default function EditarPaciente() {
   const [epsS, setEpsS] = useState([]);
 
   const cargarEpsS = useCallback(async () => {
+    const token = localStorage.getItem("token");
     try {
       const resultado = await axios.get(
-        "http://localhost:8080/sipress-app/epsS"
+        "http://localhost:8080/sipress-app/epsS",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setEpsS(resultado.data);
     } catch (error) {
@@ -47,8 +53,13 @@ export default function EditarPaciente() {
   }, []);
 
   const cargarPaciente = useCallback(async () => {
+    const token = localStorage.getItem("token");
     try {
-      const resultado = await axios.get(`${urlBase}/${id}`);
+      const resultado = await axios.get(`${urlBase}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setPaciente(resultado.data);
     } catch (error) {
       console.error("Error al cargar el paciente:", error);
@@ -86,9 +97,18 @@ export default function EditarPaciente() {
   };
 
   const onSubmit = async (e) => {
+    const token = localStorage.getItem("token");
     e.preventDefault();
     try {
-      await axios.put(`${urlBase}/${id}`, paciente);
+      await axios.put(
+        `${urlBase}/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+        paciente
+      );
       navigate("/pacientes");
     } catch (error) {
       console.error("Error al actualizar el paciente:", error);
@@ -96,10 +116,10 @@ export default function EditarPaciente() {
   };
 
   return (
-    <div className="p-4" id="details">
+    <div className="p-4 mb-2 mt-5">
       <div className="row justify-content-center">
         <div className="col-lg-9">
-          <div className="card">
+          <div className="card mt-3" id="details">
             <div className="card-header">
               <h4>Modificar Registro</h4>
             </div>
