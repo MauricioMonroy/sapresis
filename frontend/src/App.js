@@ -8,7 +8,7 @@ import {
 import Navbar from "./comunes/Navbar";
 import Footer from "./comunes/Footer";
 import Login from "./comunes/Login";
-import ResultadosBusqueda from "./comunes/ResultadosBusqueda";
+import Logout from "./comunes/Logout";
 import "./styles.css";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -46,7 +46,7 @@ function App() {
 
 function Main() {
   const location = useLocation();
-  const noNavAndFooterRoutes = ["/", "/login"];
+  const noNavAndFooterRoutes = ["/", "/login", "/logout", "/logout-success"];
 
   return (
     <div className="App">
@@ -56,6 +56,8 @@ function Main() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
+        <Route path="/logout-success" element={<Logout />} />
         <Route path="/inicio" element={<Inicio />} />
         <Route path="/pacientes" element={<ListadoPacientes />} />
         <Route path="/doctores" element={<ListadoDoctores />} />
@@ -91,7 +93,6 @@ function Main() {
           path="/consultas/editar/:pacienteId/:doctorId"
           element={<EditarConsulta />}
         />
-        <Route path="/resultados-busqueda" element={<ResultadosBusqueda />} />
       </Routes>
 
       {/* Renderiza Footer solo si la ruta actual no está en noNavAndFooterRoutes */}

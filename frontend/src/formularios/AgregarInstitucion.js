@@ -27,7 +27,16 @@ export default function AgregarInstitucion({ onInstitucionAdded }) {
   const onSubmit = async (e) => {
     e.preventDefault();
     const urlBase = "http://localhost:8080/sipress-app/instituciones";
-    await axios.post(urlBase, institucion);
+    const token = localStorage.getItem("token");
+    await axios.post(
+      urlBase,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+      institucion
+    );
 
     // Cerrar el modal manualmente
     const modalElement = modalRef.current;
@@ -73,7 +82,7 @@ export default function AgregarInstitucion({ onInstitucionAdded }) {
                   placeholder="ID Institución"
                   required={true}
                   value={idInstitucion}
-                  onChange={(e)=>onInputChange(e)}
+                  onChange={(e) => onInputChange(e)}
                 />
                 <label htmlFor="idInstitucion">ID de la Institución</label>
               </div>
@@ -87,7 +96,7 @@ export default function AgregarInstitucion({ onInstitucionAdded }) {
                   placeholder="Nombre de la Institución"
                   required={true}
                   value={nombreInstitucion}
-                  onChange={(e)=>onInputChange(e)}
+                  onChange={(e) => onInputChange(e)}
                 />
                 <label htmlFor="nombreInstitucion">
                   Nombre de la Institución
@@ -103,7 +112,7 @@ export default function AgregarInstitucion({ onInstitucionAdded }) {
                   placeholder="Dirección"
                   required={true}
                   value={direccionInstitucion}
-                  onChange={(e)=>onInputChange(e)}
+                  onChange={(e) => onInputChange(e)}
                 />
                 <label htmlFor="direccionInstitucion">
                   Dirección de la Institución
@@ -119,7 +128,7 @@ export default function AgregarInstitucion({ onInstitucionAdded }) {
                   placeholder="Teléfono de la Institución"
                   required={true}
                   value={telefonoInstitucion}
-                  onChange={(e)=>onInputChange(e)}
+                  onChange={(e) => onInputChange(e)}
                 />
                 <label htmlFor="telefonoInstitucion">
                   Teléfono de la Institución
@@ -135,7 +144,7 @@ export default function AgregarInstitucion({ onInstitucionAdded }) {
                   placeholder="Código Postal"
                   required={true}
                   value={codigoPostal}
-                  onChange={(e)=>onInputChange(e)}
+                  onChange={(e) => onInputChange(e)}
                 />
                 <label htmlFor="codigoPostal">Código Postal</label>
               </div>
@@ -147,7 +156,10 @@ export default function AgregarInstitucion({ onInstitucionAdded }) {
                 data-bs-dismiss="modal">
                 <i className="fa-regular fa-rectangle-xmark"></i> Cerrar
               </button>
-              <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                data-bs-dismiss="modal">
                 <i className="fa-solid fa-folder-plus"></i> Guardar registro
               </button>
             </div>

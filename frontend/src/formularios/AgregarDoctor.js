@@ -29,7 +29,7 @@ export default function AgregarDoctor({ onDoctorAdded }) {
     const cargarDependencias = async () => {
       const token = localStorage.getItem("token");
       const resultado = await axios.get(
-        "http://localhost:8080/sipress-app/dependencias", 
+        "http://localhost:8080/sipress-app/dependencias",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -57,7 +57,16 @@ export default function AgregarDoctor({ onDoctorAdded }) {
   const onSubmit = async (e) => {
     e.preventDefault();
     const urlBase = "http://localhost:8080/sipress-app/doctores";
-    await axios.post(urlBase, doctor);
+    const token = localStorage.getItem("token");
+    await axios.post(
+      urlBase,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+      doctor
+    );
 
     // Cerrar el modal manualmente
     const modalElement = modalRef.current;

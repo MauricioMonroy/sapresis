@@ -9,7 +9,6 @@ export default function ListadoPacientes() {
   const [error, setError] = useState(null);
   let navigate = useNavigate();
 
-
   const cargarPacientes = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -19,7 +18,7 @@ export default function ListadoPacientes() {
         },
       });
       setPacientes(response.data);
-      setError(null); 
+      setError(null);
     } catch (error) {
       setError("Error al cargar los pacientes");
       console.error("Error al cargar pacientes:", error);
@@ -29,19 +28,18 @@ export default function ListadoPacientes() {
   useEffect(() => {
     cargarPacientes();
   }, []);
-   
 
   const eliminarPaciente = async (id) => {
     const confirmacion = window.confirm(
       "¿Está seguro de que desea eliminar este registro?"
     );
     if (confirmacion) {
-      const token = localStorage.getItem("token"); 
+      const token = localStorage.getItem("token");
       try {
         await axios.delete(`${urlBase}/${id}`, {
           headers: {
-            Authorization: `Bearer ${token}` 
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
         cargarPacientes();
       } catch (error) {
@@ -58,7 +56,7 @@ export default function ListadoPacientes() {
       <section>
         <AgregarPaciente onPacienteAdded={cargarPacientes} />
         {error && <p>Error al cargar registros: {error.message}</p>}
-        <div id="actions">
+        <div id="actions" className="mt-3">
           <div className="row justify-content-center">
             <div className="col-12 col-md-4 d-flex justify-content-center">
               <a href="/inicio" className="btn btn-info">

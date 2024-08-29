@@ -53,6 +53,11 @@ public class SecurityConfiguration {
                         // Cualquier otra ruta requiere autenticación
                         .anyRequest()
                         .authenticated()
+                ).logout(logout -> logout
+                        .logoutUrl("/sipress-app/logout")
+                        .logoutSuccessUrl("/logout-success")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
                 ).sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 

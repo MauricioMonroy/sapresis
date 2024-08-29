@@ -18,7 +18,12 @@ export default function EditarEps() {
   const { idEps, nombreEps, telefonoEps, emailEps } = eps;
 
   const cargarEps = useCallback(async () => {
-    const resultado = await axios.get(`${urlBase}/${id}`);
+    const token = localStorage.getItem("token");
+    const resultado = await axios.get(`${urlBase}/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     setEps(resultado.data);
   }, [id]);
 
@@ -31,16 +36,25 @@ export default function EditarEps() {
   };
 
   const onSubmit = async (e) => {
+    const token = localStorage.getItem("token");
     e.preventDefault();
-    await axios.put(`${urlBase}/${id}`, eps);
+    await axios.put(
+      `${urlBase}/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+      eps
+    );
     navigate("/epsS");
   };
 
   return (
-    <div className="p-4" id="details">
+    <div className="p-4 mb-2 mt-5">
       <div className="row justify-content-center">
         <div className="col-lg-9">
-          <div className="card">
+          <div className="card mt-3" id="details">
             <div className="card-header">
               <h4>Modificar Registro</h4>
             </div>

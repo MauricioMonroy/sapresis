@@ -34,7 +34,7 @@ export default function Login() {
       }
       
       const loginResponse = await response.json();
-      const token = loginResponse.token; // Asegúrate de que este sea el campo correcto en la respuesta
+      const token = loginResponse.token; 
       localStorage.setItem("token", token);
       navigate("/inicio");
     } catch (error) {

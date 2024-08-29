@@ -25,8 +25,14 @@ export default function AgregarFormula({ onFormulaAdded }) {
   useEffect(() => {
     // Cargar los pacientes al montar el componente
     const cargarPacientes = async () => {
+      const token = localStorage.getItem("token");
       const resultado = await axios.get(
-        "http://localhost:8080/sipress-app/pacientes"
+        "http://localhost:8080/sipress-app/pacientes",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setPacientes(resultado.data);
     };
@@ -49,7 +55,16 @@ export default function AgregarFormula({ onFormulaAdded }) {
   const onSubmit = async (e) => {
     e.preventDefault();
     const urlBase = "http://localhost:8080/sipress-app/formulas";
-    await axios.post(urlBase, formula);
+    const token = localStorage.getItem("token");
+    await axios.post(
+      urlBase,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+      formula
+    );
 
     // Cerrar el modal manualmente
     const modalElement = modalRef.current;

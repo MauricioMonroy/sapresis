@@ -39,7 +39,12 @@ export default function DetalleFactura() {
 
   const cargarFactura = useCallback(async () => {
     try {
-      const resultado = await axios.get(`${urlBase}/${id}`);
+      const token = localStorage.getItem("token");
+      const resultado = await axios.get(`${urlBase}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setFactura(resultado.data);
     } catch (error) {
       console.error("Error al cargar la factura:", error);
@@ -64,10 +69,10 @@ export default function DetalleFactura() {
   };
 
   return (
-    <div className="p-4" id="detalle">
+    <div className="p-4 mb-2 mt-5" id="detalle">
       <div className="row justify-content-center">
         <div className="col-lg-9">
-          <div className="card">
+          <div className="card mt-3">
             <div className="card-header">
               <h1 className="modal-title fs-5">
                 Detalles de la Factura Médica

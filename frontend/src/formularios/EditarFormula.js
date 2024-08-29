@@ -16,10 +16,10 @@ export default function EditarFormula() {
     paciente: {
       idPaciente: "",
       nombrePaciente: "",
-        apellidoPaciente: "",
-        direccionPaciente: "",
-        telefonoPaciente: "",
-        emailPaciente: "",
+      apellidoPaciente: "",
+      direccionPaciente: "",
+      telefonoPaciente: "",
+      emailPaciente: "",
       eps: {
         idEps: "",
         nombreEps: "",
@@ -40,9 +40,15 @@ export default function EditarFormula() {
   const [pacientes, setPacientes] = useState([]);
 
   const cargarPacientes = useCallback(async () => {
+    const token = localStorage.getItem("token");
     try {
       const resultado = await axios.get(
-        "http://localhost:8080/sipress-app/pacientes"
+        "http://localhost:8080/sipress-app/pacientes",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setPacientes(resultado.data);
     } catch (error) {
@@ -51,8 +57,13 @@ export default function EditarFormula() {
   }, []);
 
   const cargarFormula = useCallback(async () => {
+    const token = localStorage.getItem("token");
     try {
-      const resultado = await axios.get(`${urlBase}/${id}`);
+      const resultado = await axios.get(`${urlBase}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setFormula(resultado.data);
     } catch (error) {
       console.error("Error al cargar la fórmula:", error);
@@ -94,9 +105,18 @@ export default function EditarFormula() {
   };
 
   const onSubmit = async (e) => {
+    const token = localStorage.getItem("token");
     e.preventDefault();
     try {
-      await axios.put(`${urlBase}/${id}`, formula);
+      await axios.put(
+        `${urlBase}/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+        formula
+      );
       navigate("/formulas");
     } catch (error) {
       console.error("Error al actualizar la fórmula:", error);
@@ -104,10 +124,10 @@ export default function EditarFormula() {
   };
 
   return (
-    <div className="p-4" id="details">
+    <div className="p-4 mb-2 mt-5">
       <div className="row justify-content-center">
         <div className="col-lg-9">
-          <div className="card">
+          <div className="card mt-3" id="details">
             <div className="card-header">
               <h4>Modificar Registro</h4>
             </div>
@@ -124,7 +144,9 @@ export default function EditarFormula() {
                     value={numeroFormula}
                     onChange={(e) => onInputChange(e)}
                   />
-                  <label htmlFor="numeroFormula">Número de Fórmula Médica</label>
+                  <label htmlFor="numeroFormula">
+                    Número de Fórmula Médica
+                  </label>
                 </div>
 
                 <div className="form-floating form-group mb-3">
@@ -138,7 +160,9 @@ export default function EditarFormula() {
                     value={nombreMedicacion}
                     onChange={(e) => onInputChange(e)}
                   />
-                  <label htmlFor="nombreMedicacion">Nombre de la Medicación</label>
+                  <label htmlFor="nombreMedicacion">
+                    Nombre de la Medicación
+                  </label>
                 </div>
 
                 <div className="form-floating form-group mb-3">
@@ -152,7 +176,9 @@ export default function EditarFormula() {
                     value={fechaMedicacion}
                     onChange={(e) => onInputChange(e)}
                   />
-                  <label htmlFor="fechaMedicacion">Fecha de la Medicación</label>
+                  <label htmlFor="fechaMedicacion">
+                    Fecha de la Medicación
+                  </label>
                 </div>
 
                 <div className="form-floating form-group mb-3">
@@ -167,7 +193,9 @@ export default function EditarFormula() {
                     value={costoMedicacion}
                     onChange={(e) => onInputChange(e)}
                   />
-                  <label htmlFor="costoMedicacion">Costo de la Medicación</label>
+                  <label htmlFor="costoMedicacion">
+                    Costo de la Medicación
+                  </label>
                 </div>
 
                 <div className="form-floating form-group mb-3">

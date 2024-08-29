@@ -29,9 +29,15 @@ export default function EditarDependencia() {
   const [instituciones, setInstituciones] = useState([]);
 
   const cargarInstituciones = useCallback(async () => {
+    const token = localStorage.getItem("token");
     try {
       const resultado = await axios.get(
-        "http://localhost:8080/sipress-app/instituciones"
+        "http://localhost:8080/sipress-app/instituciones",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setInstituciones(resultado.data);
     } catch (error) {
@@ -40,8 +46,13 @@ export default function EditarDependencia() {
   }, []);
 
   const cargarDependencia = useCallback(async () => {
+    const token = localStorage.getItem("token");
     try {
-      const resultado = await axios.get(`${urlBase}/${id}`);
+      const resultado = await axios.get(`${urlBase}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setDependencia(resultado.data);
     } catch (error) {
       console.error("Error al cargar el dependencia:", error);
@@ -79,9 +90,18 @@ export default function EditarDependencia() {
   };
 
   const onSubmit = async (e) => {
+    const token = localStorage.getItem("token");
     e.preventDefault();
     try {
-      await axios.put(`${urlBase}/${id}`, dependencia);
+      await axios.put(
+        `${urlBase}/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+        dependencia
+      );
       navigate("/dependencias");
     } catch (error) {
       console.error("Error al actualizar el dependencia:", error);
@@ -89,10 +109,10 @@ export default function EditarDependencia() {
   };
 
   return (
-    <div className="p-4" id="details">
+    <div className="p-4 mb-2 mt-5">
       <div className="row justify-content-center">
         <div className="col-lg-9">
-          <div className="card">
+          <div className="card mt-3" id="details">
             <div className="card-header">
               <h4>Modificar Registro</h4>
             </div>
