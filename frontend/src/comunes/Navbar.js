@@ -101,12 +101,17 @@ const Navbar = () => {
               </ul>
             </li>
           </ul>
-          <div className="container">          
+          <div className="container">
             <button
-              onClick={() => (window.location.href = "/sipress-app/logout")}
-              className="btn btn-outline-light">              
-              <i className="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión 
-            </button>            
+              onClick={() => {
+                localStorage.removeItem("token");
+                sessionStorage.removeItem("token");
+                window.location.href = "/logout-success";
+              }}
+              className="btn btn-outline-light">
+              <i className="fa-solid fa-arrow-right-from-bracket"></i> Cerrar
+              Sesión
+            </button>
           </div>
         </div>
       </div>
