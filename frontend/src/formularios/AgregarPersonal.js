@@ -58,15 +58,11 @@ export default function AgregarPersonal({ onPersonalAdded }) {
     e.preventDefault();
     const urlBase = "http://localhost:8080/sipress-app/personalS";
     const token = localStorage.getItem("token");
-    await axios.post(
-      urlBase,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    await axios.post(urlBase, personal, {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-      personal
-    );
+    });
 
     // Cerrar el modal manualmente
     const modalElement = modalRef.current;

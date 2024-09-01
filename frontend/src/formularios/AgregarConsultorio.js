@@ -19,7 +19,7 @@ export default function AgregarConsultorio({ onConsultorioAdded }) {
   useEffect(() => {
     const cargarPacientes = async () => {
       const token = localStorage.getItem("token");
-      try {        
+      try {
         const resultado = await axios.get(
           "http://localhost:8080/sipress-app/pacientes",
           {
@@ -39,7 +39,7 @@ export default function AgregarConsultorio({ onConsultorioAdded }) {
   useEffect(() => {
     const cargarPersonalS = async () => {
       const token = localStorage.getItem("token");
-      try {        
+      try {
         const resultado = await axios.get(
           "http://localhost:8080/sipress-app/personalS",
           {
@@ -73,16 +73,12 @@ export default function AgregarConsultorio({ onConsultorioAdded }) {
     e.preventDefault();
     const urlBase = "http://localhost:8080/sipress-app/consultorios";
     const token = localStorage.getItem("token");
-    try {      
-      await axios.post(
-        urlBase,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+    try {
+      await axios.post(urlBase, consultorio, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        consultorio
-      );
+      });
       if (modalRef.current) {
         const modalInstance = new window.bootstrap.Modal(modalRef.current);
         modalInstance.hide();

@@ -58,15 +58,11 @@ export default function AgregarDoctor({ onDoctorAdded }) {
     e.preventDefault();
     const urlBase = "http://localhost:8080/sipress-app/doctores";
     const token = localStorage.getItem("token");
-    await axios.post(
-      urlBase,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    await axios.post(urlBase, doctor, {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-      doctor
-    );
+    });
 
     // Cerrar el modal manualmente
     const modalElement = modalRef.current;

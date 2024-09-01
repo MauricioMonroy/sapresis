@@ -22,7 +22,7 @@ export default function AgregarConsulta({ onConsultaAdded }) {
   useEffect(() => {
     const cargarPacientes = async () => {
       const token = localStorage.getItem("token");
-      try {        
+      try {
         const resultado = await axios.get(
           "http://localhost:8080/sipress-app/pacientes",
           {
@@ -74,10 +74,10 @@ export default function AgregarConsulta({ onConsultaAdded }) {
 
   const onDateClick = (date) => {
     const dateStr = date
-      .toLocaleDateString("es-ES", {
-        day: "2-digit",
-        month: "2-digit",
+      .toLocaleDateString("es-CO", {
         year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
       })
       .replace(/\//g, "-"); // Reemplazar '/' con '-'
     setConsulta((prevConsulta) => ({
@@ -87,7 +87,8 @@ export default function AgregarConsulta({ onConsultaAdded }) {
   };
 
   const onTimeChange = (newValue) => {
-    const timeStr = newValue ? newValue.format("HH:mm:ss") : "";
+    const date = new Date(newValue);
+    const timeStr = date.toLocaleTimeString("es-CO");
     setConsulta((prevConsulta) => ({
       ...prevConsulta,
       horaConsulta: timeStr,
@@ -100,15 +101,11 @@ export default function AgregarConsulta({ onConsultaAdded }) {
     const urlBase = "http://localhost:8080/sipress-app/consultas";
     const token = localStorage.getItem("token");
     try {
-      await axios.post(
-        urlBase,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      await axios.post(urlBase, consulta, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        consulta
-      );
+      });
       if (modalRef.current) {
         const modalInstance = new window.bootstrap.Modal(modalRef.current);
         modalInstance.hide();

@@ -108,15 +108,11 @@ export default function EditarFactura() {
     const token = localStorage.getItem("token");
     e.preventDefault();
     try {
-      await axios.put(
-        `${urlBase}/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      await axios.put(`${urlBase}/${id}`, factura, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        factura
-      );
+      });
       navigate("/facturas");
     } catch (error) {
       console.error("Error al actualizar la factura:", error);

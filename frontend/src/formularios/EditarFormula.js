@@ -108,15 +108,11 @@ export default function EditarFormula() {
     const token = localStorage.getItem("token");
     e.preventDefault();
     try {
-      await axios.put(
-        `${urlBase}/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      await axios.put(`${urlBase}/${id}`, formula, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        formula
-      );
+      });
       navigate("/formulas");
     } catch (error) {
       console.error("Error al actualizar la fórmula:", error);

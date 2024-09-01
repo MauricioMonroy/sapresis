@@ -28,15 +28,11 @@ export default function AgregarInstitucion({ onInstitucionAdded }) {
     e.preventDefault();
     const urlBase = "http://localhost:8080/sipress-app/instituciones";
     const token = localStorage.getItem("token");
-    await axios.post(
-      urlBase,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    await axios.post(urlBase, institucion, {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-      institucion
-    );
+    });
 
     // Cerrar el modal manualmente
     const modalElement = modalRef.current;

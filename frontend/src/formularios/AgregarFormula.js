@@ -56,15 +56,11 @@ export default function AgregarFormula({ onFormulaAdded }) {
     e.preventDefault();
     const urlBase = "http://localhost:8080/sipress-app/formulas";
     const token = localStorage.getItem("token");
-    await axios.post(
-      urlBase,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    await axios.post(urlBase, formula, {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-      formula
-    );
+    });
 
     // Cerrar el modal manualmente
     const modalElement = modalRef.current;

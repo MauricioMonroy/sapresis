@@ -58,12 +58,27 @@ export default function DetalleFactura() {
   const imprimirFactura = () => {
     const content = document.getElementById("detalle").innerHTML;
     const printWindow = window.open("", "", "height=600,width=800");
-    printWindow.document.write(
-      "<html><head><title>Detalles de la Factura</title>"
-    );
-    printWindow.document.write("</head><body>");
-    printWindow.document.write(content);
-    printWindow.document.write("</body></html>");
+    printWindow.document.write(`
+      <html>
+        <head>
+         <style>            
+            .logo {
+              width: 150px;
+              height: auto;
+              margin-bottom: 20px;
+              justify-content: center;
+              content-align: center;
+              display: block;
+            }
+          </style>
+        <img src="/images/print-logo.png" alt="Logotipo" class="logo" />
+        <title clasname="text-center">Detalles de la Factura</title>         
+        </head>
+        <body>          
+          ${content}
+        </body>
+      </html>
+    `);
     printWindow.document.close();
     printWindow.print();
   };
@@ -78,7 +93,7 @@ export default function DetalleFactura() {
                 Detalles de la Factura Médica
               </h1>
             </div>
-            <div className="card-body">
+            <div className="card-body">              
               <h5 className="card-title">Número de Factura: {numeroFactura}</h5>
               <p className="card-text">
                 Descripción del servicio: {descripcionServicio}

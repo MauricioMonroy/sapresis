@@ -58,12 +58,27 @@ export default function DetalleFormula() {
   const imprimirFormula = () => {
     const content = document.getElementById("detalle").innerHTML;
     const printWindow = window.open("", "", "height=600,width=800");
-    printWindow.document.write(
-      "<html><head><title>Detalles de la Fórmula</title>"
-    );
-    printWindow.document.write("</head><body>");
-    printWindow.document.write(content);
-    printWindow.document.write("</body></html>");
+    printWindow.document.write(`
+      <html>
+        <head>
+         <style>            
+            .logo {
+              width: 150px;
+              height: auto;
+              margin-bottom: 20px;
+              justify-content: center;
+              content-align: center;
+              display: block;
+            }
+          </style>
+        <img src="/images/print-logo.png" alt="Logotipo" class="logo" />
+        <title clasname="text-center">Detalles de la Factura</title>         
+        </head>
+        <body>          
+          ${content}
+        </body>
+      </html>
+    `);
     printWindow.document.close();
     printWindow.print();
   };
