@@ -56,7 +56,6 @@ function Main() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Logout />} />
         <Route path="/logout-success" element={<Logout />} />
         <Route path="/inicio" element={<Inicio />} />
         <Route path="/pacientes" element={<ListadoPacientes />} />

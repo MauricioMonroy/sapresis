@@ -79,43 +79,46 @@ export default function EditarDoctor() {
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
-    if (name.startsWith("institucion")) {
-      setDoctor({
-        ...doctor,
+  
+    if (name === "dependencia.idDependencia") {
+      // Actualiza solo la dependencia
+      setDoctor((prevDoctor) => ({
+        ...prevDoctor,
         dependencia: {
-          ...doctor.dependencia,
+          ...prevDoctor.dependencia,
+          idDependencia: value,
+        },
+      }));
+    } else if (name === "institucion.idInstitucion") {
+      // Actualiza la institución dentro de la dependencia
+      setDoctor((prevDoctor) => ({
+        ...prevDoctor,
+        dependencia: {
+          ...prevDoctor.dependencia,
           institucion: {
-            ...doctor.dependencia.institucion,
-            [name.split(".")[1]]: value,
+            ...prevDoctor.dependencia.institucion,
+            idInstitucion: value,
           },
         },
-      });
-    } else if (name.startsWith("dependencia")) {
-      setDoctor({
-        ...doctor,
-        dependencia: {
-          ...doctor.dependencia,
-          [name.split(".")[1]]: value,
-        },
-      });
+      }));
     } else {
-      setDoctor({ ...doctor, [name]: value });
+      // Actualiza los demás campos directamente en el doctor
+      setDoctor((prevDoctor) => ({
+        ...prevDoctor,
+        [name]: value,
+      }));
     }
-  };
+  };  
 
   const onSubmit = async (e) => {
     const token = localStorage.getItem("token");
     e.preventDefault();
     try {
-      await axios.put(
-        `${urlBase}/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      await axios.put(`${urlBase}/${id}`, doctor, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        doctor
-      );
+      });
       navigate("/doctores");
     } catch (error) {
       console.error("Error al actualizar el doctor:", error);

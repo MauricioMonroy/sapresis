@@ -54,7 +54,7 @@ public class SecurityConfiguration {
                         .anyRequest()
                         .authenticated()
                 ).logout(logout -> logout
-                        .logoutUrl("/sipress-app/logout")
+                        .logoutUrl("/sipress-app/auth/logout")
                         .logoutSuccessUrl("/logout-success")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")

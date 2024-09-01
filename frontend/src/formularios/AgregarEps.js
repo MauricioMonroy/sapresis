@@ -21,15 +21,11 @@ export default function AgregarEps({ onEpsAdded }) {
     e.preventDefault();
     const urlBase = "http://localhost:8080/sipress-app/epsS";
     const token = localStorage.getItem("token");
-    await axios.post(
-      urlBase,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    await axios.post(urlBase, eps, {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-      eps
-    );
+    });
 
     // Cerrar el modal manualmente
     const modalElement = modalRef.current;

@@ -51,15 +51,11 @@ export default function AgregarFactura({ onFacturaAdded }) {
     e.preventDefault();
     const urlBase = "http://localhost:8080/sipress-app/facturas";
     const token = localStorage.getItem("token");
-    await axios.post(
-      urlBase,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    await axios.post(urlBase, factura, {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-      factura
-    );
+    });
 
     // Cerrar el modal manualmente
     const modalElement = modalRef.current;

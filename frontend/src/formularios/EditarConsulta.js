@@ -82,18 +82,33 @@ export default function EditarConsulta() {
     const { name, value } = e.target;
     setConsulta((prevConsulta) => {
       if (name === "idPaciente") {
-        return { ...prevConsulta, paciente: { idPaciente: value } };
+        return {
+          ...prevConsulta,
+          paciente: {
+            ...prevConsulta.paciente, 
+            idPaciente: value,        
+          },
+        };
       } else if (name === "idDoctor") {
-        return { ...prevConsulta, doctor: { idDoctor: value } };
+        return {
+          ...prevConsulta,
+          doctor: {
+            ...prevConsulta.doctor, 
+            idDoctor: value,        
+          },
+        };
       } else {
-        return { ...prevConsulta, [name]: value };
+        return {
+          ...prevConsulta,
+          [name]: value,
+        };
       }
     });
   };
 
   const onDateClick = (date) => {
     const dateStr = date
-      .toLocaleDateString("es-ES", {
+      .toLocaleDateString("es-CO", {
         day: "2-digit",
         month: "2-digit",
         year: "numeric",
@@ -106,7 +121,8 @@ export default function EditarConsulta() {
   };
 
   const onTimeChange = (newValue) => {
-    const timeStr = newValue.format("HH:mm:ss");
+    const date = new Date(newValue);
+    const timeStr = date.toLocaleTimeString("es-CO");
     setConsulta((prevConsulta) => ({
       ...prevConsulta,
       horaConsulta: timeStr,
@@ -117,18 +133,14 @@ export default function EditarConsulta() {
     const token = localStorage.getItem("token");
     e.preventDefault();
     try {
-      await axios.put(
-        `${urlBase}/${pacienteId}/${doctorId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      await axios.put(`${urlBase}/${pacienteId}/${doctorId}`, consulta, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        consulta
-      );
+      });
       navigate("/consultas");
     } catch (error) {
-      console.error("Error al actualizar el registroa:", error);
+      console.error("Error al actualizar el registro:", error);
     }
   };
 

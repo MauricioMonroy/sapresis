@@ -29,14 +29,14 @@ export default function ListadoConsultas() {
     cargarConsultas();
   }, []);
 
-  const eliminarConsulta = async (id) => {
+  const eliminarConsulta = async (pacienteId, doctorId) => {
     const confirmacion = window.confirm(
       "¿Está seguro de que desea eliminar este registro?"
     );
     if (confirmacion) {
       const token = localStorage.getItem("token");
       try {
-        await axios.delete(`${urlBase}/${id}`, {
+        await axios.delete(`${urlBase}/${pacienteId}/${doctorId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

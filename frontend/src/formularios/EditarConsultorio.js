@@ -104,15 +104,11 @@ export default function EditarConsultorio() {
     const token = localStorage.getItem("token");
     e.preventDefault();
     try {
-      await axios.put(
-        `${urlBase}/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      await axios.put(`${urlBase}/${id}`, consultorio, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        consultorio
-      );
+      });
       navigate("/consultorios");
     } catch (error) {
       console.error("Error al actualizar el registro:", error);

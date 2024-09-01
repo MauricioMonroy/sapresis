@@ -39,9 +39,15 @@ export default function EditarPersonal() {
   const [dependencias, setDependencias] = useState([]);
 
   const cargarDependencias = useCallback(async () => {
+    const token = localStorage.getItem("token");
     try {
       const resultado = await axios.get(
-        "http://localhost:8080/sipress-app/dependencias"
+        "http://localhost:8080/sipress-app/dependencias",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setDependencias(resultado.data);
     } catch (error) {
@@ -50,8 +56,13 @@ export default function EditarPersonal() {
   }, []);
 
   const cargarPersonal = useCallback(async () => {
+    const token = localStorage.getItem("token");
     try {
-      const resultado = await axios.get(`${urlBase}/${id}`);
+      const resultado = await axios.get(`${urlBase}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setPersonal(resultado.data);
     } catch (error) {
       console.error("Error al cargar el personal:", error);
@@ -68,34 +79,46 @@ export default function EditarPersonal() {
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
-    if (name.startsWith("institucion")) {
-      setPersonal({
-        ...personal,
+
+    if (name === "dependencia.idDependencia") {
+      // Actualiza solo la dependencia
+      setPersonal((prevPersonal) => ({
+        ...prevPersonal,
         dependencia: {
-          ...personal.dependencia,
+          ...prevPersonal.dependencia,
+          idDependencia: value,
+        },
+      }));
+    } else if (name === "institucion.idInstitucion") {
+      // Actualiza la institución dentro de la dependencia
+      setPersonal((prevPersonal) => ({
+        ...prevPersonal,
+        dependencia: {
+          ...prevPersonal.dependencia,
           institucion: {
-            ...personal.dependencia.institucion,
-            [name.split(".")[1]]: value,
+            ...prevPersonal.dependencia.institucion,
+            idInstitucion: value,
           },
         },
-      });
-    } else if (name.startsWith("dependencia")) {
-      setPersonal({
-        ...personal,
-        dependencia: {
-          ...personal.dependencia,
-          [name.split(".")[1]]: value,
-        },
-      });
+      }));
     } else {
-      setPersonal({ ...personal, [name]: value });
+      // Actualiza los demás campos directamente en el personal
+      setPersonal((prevPersonal) => ({
+        ...prevPersonal,
+        [name]: value,
+      }));
     }
   };
 
   const onSubmit = async (e) => {
+    const token = localStorage.getItem("token");
     e.preventDefault();
     try {
-      await axios.put(`${urlBase}/${id}`, personal);
+      await axios.put(`${urlBase}/${id}`, personal, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       navigate("/personalS");
     } catch (error) {
       console.error("Error al actualizar el personal:", error);

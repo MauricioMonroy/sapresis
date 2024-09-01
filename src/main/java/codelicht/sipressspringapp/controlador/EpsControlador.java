@@ -67,7 +67,7 @@ public class EpsControlador {
         eps.setIdEps(epsRecuperada.getIdEps());
         eps.setNombreEps(epsRecuperada.getNombreEps());
         eps.setTelefonoEps(epsRecuperada.getTelefonoEps());
-        eps.setTelefonoEps(epsRecuperada.getTelefonoEps());
+        eps.setEmailEps(epsRecuperada.getEmailEps());
         epsServicio.guardarEps(eps);
         return ResponseEntity.ok(eps);
     }

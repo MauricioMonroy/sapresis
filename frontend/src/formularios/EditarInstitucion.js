@@ -39,21 +39,21 @@ export default function EditarInstitucion() {
   }, [id, cargarInstitucion]);
 
   const onInputChange = (e) => {
-    setInstitucion({ ...institucion, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setInstitucion((prevInstitucion) => ({
+      ...prevInstitucion,
+      [name]: value,
+    }));
   };
 
   const onSubmit = async (e) => {
     const token = localStorage.getItem("token");
     e.preventDefault();
-    await axios.put(
-      `${urlBase}/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    await axios.put(`${urlBase}/${id}`, institucion, {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-      institucion
-    );
+    });
     navigate("/instituciones");
   };
 

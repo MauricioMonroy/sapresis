@@ -32,21 +32,21 @@ export default function EditarEps() {
   }, [id, cargarEps]);
 
   const onInputChange = (e) => {
-    setEps({ ...eps, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setEps((prevEps) => ({
+      ...prevEps,
+      [name]: value,
+    }));
   };
 
   const onSubmit = async (e) => {
     const token = localStorage.getItem("token");
     e.preventDefault();
-    await axios.put(
-      `${urlBase}/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    await axios.put(`${urlBase}/${id}`, eps, {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-      eps
-    );
+    });
     navigate("/epsS");
   };
 

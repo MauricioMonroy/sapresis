@@ -76,23 +76,19 @@ export default function EditarPaciente() {
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
-    if (name.startsWith("eps")) {
-      setPaciente({
-        ...paciente,
+    if (name === "eps.idEps") {
+      setPaciente((prevPaciente) => ({
+        ...prevPaciente,
         eps: {
-          ...paciente.eps,
+          ...prevPaciente.eps,
+          idEps: value,
         },
-      });
-    } else if (name.startsWith("eps")) {
-      setPaciente({
-        ...paciente,
-        eps: {
-          ...paciente.eps,
-          [name.split(".")[1]]: value,
-        },
-      });
+      }));
     } else {
-      setPaciente({ ...paciente, [name]: value });
+      setPaciente((prevPaciente) => ({
+        ...prevPaciente,
+        [name]: value,
+      }));
     }
   };
 
@@ -100,15 +96,11 @@ export default function EditarPaciente() {
     const token = localStorage.getItem("token");
     e.preventDefault();
     try {
-      await axios.put(
-        `${urlBase}/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      await axios.put(`${urlBase}/${id}`, paciente, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        paciente
-      );
+      });
       navigate("/pacientes");
     } catch (error) {
       console.error("Error al actualizar el paciente:", error);

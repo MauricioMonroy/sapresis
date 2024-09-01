@@ -1,5 +1,6 @@
 package codelicht.sipressspringapp.modelo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
@@ -9,7 +10,7 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -35,7 +36,8 @@ public class Formula implements Serializable {
     @Column(name = "fecha_medicacion")
     @Temporal(TemporalType.DATE)
     @JsonProperty("fechaMedicacion")
-    private Date fechaMedicacion;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate fechaMedicacion;
 
     @DecimalMin(value = "0.0", inclusive = false, message = "El costo de la medicación debe ser un valor positivo")
     @Column(name = "costo_medicacion")

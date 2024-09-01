@@ -10,7 +10,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -110,7 +110,7 @@ public class FormulaApp {
 
             System.out.println("Ingrese la fecha de la medicación (formato: yyyy-MM-dd):");
             String fechaInput = scanner.nextLine();
-            Date fechaMedicacion = dateFormat.parse(fechaInput);
+            LocalDate fechaMedicacion = LocalDate.parse(fechaInput);
             formula.setFechaMedicacion(fechaMedicacion);
 
             System.out.println("Ingrese el costo de la medicación:");

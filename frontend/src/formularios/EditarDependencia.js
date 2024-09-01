@@ -69,39 +69,34 @@ export default function EditarDependencia() {
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
-    if (name.startsWith("institucion")) {
-      setDependencia({
-        ...dependencia,
+  
+    // Manejo del campo relacionado con Institución
+    if (name === "institucion.idInstitucion") {
+      setDependencia((prevDependencia) => ({
+        ...prevDependencia,
         institucion: {
-          ...dependencia.institucion,
+          ...prevDependencia.institucion,
+          idInstitucion: value,
         },
-      });
-    } else if (name.startsWith("institucion")) {
-      setDependencia({
-        ...dependencia,
-        institucion: {
-          ...dependencia.institucion,
-          [name.split(".")[1]]: value,
-        },
-      });
+      }));
     } else {
-      setDependencia({ ...dependencia, [name]: value });
+      // Manejo de otros campos de Dependencia
+      setDependencia((prevDependencia) => ({
+        ...prevDependencia,
+        [name]: value,
+      }));
     }
-  };
+  };  
 
   const onSubmit = async (e) => {
     const token = localStorage.getItem("token");
     e.preventDefault();
     try {
-      await axios.put(
-        `${urlBase}/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      await axios.put(`${urlBase}/${id}`, dependencia, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        dependencia
-      );
+      });
       navigate("/dependencias");
     } catch (error) {
       console.error("Error al actualizar el dependencia:", error);
