@@ -9,6 +9,8 @@ import Navbar from "./comunes/Navbar";
 import Footer from "./comunes/Footer";
 import Login from "./comunes/Login";
 import Logout from "./comunes/Logout";
+import RegistroUsuario from "./formularios/RegistroUsuario";
+import GestionUsuarios from "./registros/GestionUsuarios";
 import "./styles.css";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -46,7 +48,13 @@ function App() {
 
 function Main() {
   const location = useLocation();
-  const noNavAndFooterRoutes = ["/", "/login", "/logout", "/logout-success"];
+  const noNavAndFooterRoutes = [
+    "/",
+    "/login",
+    "/logout",
+    "/logout-success",
+    "/registro",
+  ];
 
   return (
     <div className="App">
@@ -56,6 +64,8 @@ function Main() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/registro" element={<RegistroUsuario />} />
+        <Route path="/gestion-usuarios" element={<GestionUsuarios />} />
         <Route path="/logout-success" element={<Logout />} />
         <Route path="/inicio" element={<Inicio />} />
         <Route path="/pacientes" element={<ListadoPacientes />} />

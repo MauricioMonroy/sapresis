@@ -6,10 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,11 +35,34 @@ public class UsuarioControlador {
         return ResponseEntity.ok(usuarioActual);
     }
 
-    @GetMapping("/")
-    @PreAuthorize("hasAnyRole('ADMIN', 'SUPERADMIN')")
+    @GetMapping("/todos")
+    @PreAuthorize("hasAnyRole('SUPERADMIN')")
     public ResponseEntity<List<Usuario>> allUsers() {
         List<Usuario> usuarios = userService.allUsers();
 
         return ResponseEntity.ok(usuarios);
     }
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN')")
+    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Integer id, @RequestBody Usuario usuarioActualizado) {
+        Usuario usuarioExistente = userService.findById(id);
+
+        if (usuarioExistente == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        usuarioExistente.setNombreCompleto(usuarioActualizado.getNombreCompleto());
+        usuarioExistente.setEmail(usuarioActualizado.getEmail());
+        usuarioExistente.setRole(usuarioActualizado.getRole());
+        if (usuarioActualizado.getPassword() != null && !usuarioActualizado.getPassword().isEmpty()) {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            usuarioExistente.setPassword(passwordEncoder.encode(usuarioActualizado.getPassword()));
+        }
+
+        Usuario usuarioGuardado = userService.saveUsuario(usuarioExistente);
+
+        return ResponseEntity.ok(usuarioGuardado);
+    }
+
 }

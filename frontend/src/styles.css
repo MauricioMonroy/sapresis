@@ -842,7 +842,7 @@ textarea {
 }
 
 /* Centrado del contenedor del formulario */
-#contenedor-formulario-pacientes {
+#contenedor-formulario {
     max-width: 1000px;
     margin: 0 auto;
     padding: 20px;

@@ -22,19 +22,19 @@ export default function Login() {
     e.preventDefault();
     try {
       const response = await fetch(urlBase, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(usuario),
       });
-      
+
       if (!response.ok) {
-        throw new Error('Error en la autenticación');
+        throw new Error("Error en la autenticación");
       }
-      
+
       const loginResponse = await response.json();
-      const token = loginResponse.token; 
+      const token = loginResponse.token;
       localStorage.setItem("token", token);
       navigate("/inicio");
     } catch (error) {
@@ -54,7 +54,10 @@ export default function Login() {
                   <div className="col-md-9 col-lg-8 mx-auto">
                     <h3 className="login-heading mb-4">Bienvenido a Sipress</h3>
                     <p>Por favor ingrese sus credenciales</p>
-                    <form onSubmit={handleSubmit} id="loginForm">
+                    <form
+                      onSubmit={handleSubmit}
+                      id="loginForm"
+                      autoComplete="off">
                       <div className="form-floating mb-3 text-dark">
                         <input
                           type="email"
@@ -65,6 +68,8 @@ export default function Login() {
                           required={true}
                           value={email}
                           onChange={handleChange}
+                          autoComplete="off"
+                          inputMode="email"
                         />
                         <label htmlFor="floatingInput">
                           Correo electrónico
@@ -81,6 +86,8 @@ export default function Login() {
                           required={true}
                           value={password}
                           onChange={handleChange}
+                          autoComplete="off"
+                          inputMode="password"
                         />
                         <label htmlFor="floatingPassword">Contraseña</label>
                       </div>
@@ -91,8 +98,8 @@ export default function Login() {
                           Ingresar
                         </button>
                         <div className="text-center">
-                          <a className="small" href="help">
-                            ¿Olvidó su contraseña?
+                          <a className="small" href="/registro">
+                            Registrarse
                           </a>
                         </div>
                       </div>
