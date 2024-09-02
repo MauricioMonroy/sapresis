@@ -39,6 +39,15 @@ public class UserService {
         return usuarios;
     }
 
+    public Usuario findById(Integer id) {
+        return usuarioRepositorio.findById(id).orElse(null);
+    }
+
+    public Usuario saveUsuario(Usuario usuario) {
+        // Aquí puedes agregar lógica adicional si es necesario
+        return usuarioRepositorio.save(usuario);
+    }
+
     public Usuario crearAdministrador(RegistrarUsuarioDto input) {
         Optional<Role> optionalRole = roleRepositorio.findByNombre(RoleEnum.ADMIN);
 
