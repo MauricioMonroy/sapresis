@@ -1,7 +1,28 @@
 import React from "react";
-import {} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Navbar = () => {
+  const [role, setRole] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    axios
+      .get("http://localhost:8080/sipress-app/usuarios/perfil", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setRole(response.data.role);
+        console.log("Rol del usuario:", response.data.role);
+      })
+      .catch((error) => {
+        console.error("Error al obtener el rol del usuario", error);
+      });
+  }, []);
+
   return (
     <nav className="navbar navbar-expand-lg fixed-top navbar-dark" id="menu">
       <div className="container-md">
@@ -100,6 +121,13 @@ const Navbar = () => {
                 </li>
               </ul>
             </li>
+            {role.nombre === "SUPERADMIN" && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/gestion-usuarios">
+                  Usuarios
+                </Link>
+              </li>
+            )}
           </ul>
           <div className="container">
             <button
