@@ -21,23 +21,23 @@ import java.util.Optional;
 @Service
 public class AuthenticationService {
     private final UsuarioRepositorio usuarioRepositorio;
-    private final RoleRepositorio RoleRepositorio;
+    private final RoleRepositorio roleRepositorio;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationService(UsuarioRepositorio usuarioRepositorio,
-                                 RoleRepositorio RoleRepositorio,
+                                 RoleRepositorio roleRepositorio,
                                  PasswordEncoder passwordEncoder,
                                  AuthenticationManager authenticationManager) {
         this.usuarioRepositorio = usuarioRepositorio;
-        this.RoleRepositorio = RoleRepositorio;
+        this.roleRepositorio = roleRepositorio;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
     }
 
     // Métodos de registro y autenticación
     public Usuario registrar(RegistrarUsuarioDto input) {
-        Optional<Role> optionalRole = RoleRepositorio.findByNombre(RoleEnum.USER);
+        Optional<Role> optionalRole = roleRepositorio.findByNombre(RoleEnum.USER);
 
         if (optionalRole.isEmpty()) {
             return null;

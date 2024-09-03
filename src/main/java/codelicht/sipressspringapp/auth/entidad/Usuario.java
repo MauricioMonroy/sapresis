@@ -46,7 +46,7 @@ public class Usuario implements UserDetails {
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     private Role role;
 

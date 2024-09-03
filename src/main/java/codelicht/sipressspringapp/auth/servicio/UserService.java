@@ -72,8 +72,8 @@ public class UserService {
 
     }
 
-    public void eliminarUsuario(Integer id) {
-        usuarioRepositorio.deleteById(id);
+    public void eliminarUsuario(Usuario usuario) {
+        usuarioRepositorio.delete(usuario);
     }
 
 }
