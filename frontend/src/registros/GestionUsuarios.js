@@ -30,13 +30,14 @@ const GestionUsuarios = () => {
   }, []);
 
   const eliminarUsuario = async (id) => {
+    const urlPath = "http://localhost:8080/sipress-app/usuarios";
     const confirmacion = window.confirm(
       "¿Está seguro de que desea eliminar este registro?"
     );
     if (confirmacion) {
       const token = localStorage.getItem("token");
       try {
-        await axios.delete(`${urlBase}/${id}`, {
+        await axios.delete(`${urlPath}/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -81,8 +82,11 @@ const GestionUsuarios = () => {
           <div className="card" id="contenedor-lista">
             <div className="card-header">
               {error && <p>Error al cargar los registros: {error.message}</p>}
-              <h3 className="text-center">Gestión de Usuarios</h3>
-              <table className="table">
+              <h3 className="text-center">
+                <i class="fa-solid fa-users"></i> Gestión de Usuarios
+              </h3>
+            <div className="table-responsive">
+              <table className="table table-striped table-hover align-middle">
                 <thead>
                   <tr>
                     <th>ID</th>
@@ -122,6 +126,7 @@ const GestionUsuarios = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

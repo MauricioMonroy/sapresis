@@ -37,6 +37,7 @@ import EditarFactura from "./formularios/EditarFactura";
 import DetalleFactura from "./registros/DetalleFactura";
 import EditarConsultorio from "./formularios/EditarConsultorio";
 import EditarConsulta from "./formularios/EditarConsulta";
+import EditarUsuario from "./formularios/EditarUsuario";
 
 function App() {
   return (
@@ -102,6 +103,7 @@ function Main() {
           path="/consultas/editar/:pacienteId/:doctorId"
           element={<EditarConsulta />}
         />
+        <Route path="/usuarios/editar/:id" element={<EditarUsuario />} />
       </Routes>
 
       {/* Renderiza Footer solo si la ruta actual no está en noNavAndFooterRoutes */}

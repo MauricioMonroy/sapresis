@@ -13,9 +13,15 @@ export default function EditarUsuario() {
     nombreCompleto: "",
     email: "",
     password: "",
-    rol: {
+    confirmPassword: "",
+    createdAt: "",
+    updatedAt: "",
+    role: {
       id: "",
       nombre: "",
+      descripcion: "",
+      createdAt: "",
+      updatedAt: "",
     },
   });
 
@@ -23,27 +29,10 @@ export default function EditarUsuario() {
     nombreCompleto,
     email,
     password,
-    rol: { nombre },
+    confirmPassword,
+    createdAt,
+    role: { nombre },
   } = usuario;
-
-  const [roles, setRoles] = useState([]);
-
-  const cargarRoles = useCallback(async () => {
-    const token = localStorage.getItem("token");
-    try {
-      const resultado = await axios.get(
-        "http://localhost:8080/sipress-app/roles",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setRoles(resultado.data);
-    } catch (error) {
-      console.error("Error al cargar los roles:", error);
-    }
-  }, []);
 
   const cargarUsuario = useCallback(async () => {
     const token = localStorage.getItem("token");
@@ -53,34 +42,56 @@ export default function EditarUsuario() {
           Authorization: `Bearer ${token}`,
         },
       });
-      setUsuario(resultado.data);
+
+      setUsuario({ ...resultado.data, password: "", confirmPassword: "" });
     } catch (error) {
       console.error("Error al cargar el usuario:", error);
     }
   }, [id]);
 
   useEffect(() => {
-    cargarRoles();
     cargarUsuario();
-  }, [cargarRoles, cargarUsuario]);
+  }, [cargarUsuario]);
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
-    setUsuario((prevUsuario) => ({
-      ...prevUsuario,
-      [name]: value,
-    }));
+    if (name === "role.nombre") {
+      setUsuario((prevUsuario) => ({
+        ...prevUsuario,
+        role: {
+          ...prevUsuario.role,
+          nombre: value,
+        },
+      }));
+    } else {
+      setUsuario((prevUsuario) => ({
+        ...prevUsuario,
+        [name]: value,
+      }));
+    }
   };
 
   const onSubmit = async (e) => {
-    const token = localStorage.getItem("token");
     e.preventDefault();
-    await axios.put(`${urlBase}/${id}`, usuario, {
+    const token = localStorage.getItem("token");
+
+    if (password !== confirmPassword) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
+
+    const usuarioActualizado = { ...usuario };
+    if (!password) {
+      delete usuarioActualizado.password;
+    }
+
+    await axios.put(`${urlBase}/${id}`, usuarioActualizado, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    navigate("/usuarios");
+
+    navigate("/gestion-usuarios");
   };
 
   return (
@@ -91,8 +102,23 @@ export default function EditarUsuario() {
             <div className="card-header">
               <h4>Modificar Registro</h4>
             </div>
-            <form onSubmit={(e) => onSubmit(e)}>
+            <form onSubmit={(e) => onSubmit(e)} autoComplete="off">
               <div className="card-body">
+                <div className="form-floating form-group mb-3">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="idUsuario"
+                    name="id"
+                    placeholder="ID Usuario"
+                    required={true}
+                    value={id}
+                    onChange={(e) => onInputChange(e)}
+                    readOnly={true}
+                  />
+                  <label htmlFor="idUsuario">ID del Usuario</label>
+                </div>
+
                 <div className="form-floating form-group mb-3">
                   <input
                     type="text"
@@ -130,28 +156,69 @@ export default function EditarUsuario() {
                     id="password"
                     name="password"
                     placeholder="Contraseña"
-                    required={true}
                     value={password}
                     onChange={(e) => onInputChange(e)}
+                    autoComplete="off"
                   />
-                  <label htmlFor="password">Contraseña</label>
+                  <label htmlFor="password">Nueva Contraseña</label>
+                </div>
+
+                <div className="form-floating form-group mb-3">
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    placeholder="Confirmar Contraseña"
+                    value={confirmPassword}
+                    onChange={(e) => onInputChange(e)}
+                    autoComplete="off"
+                  />
+                  <label htmlFor="confirmPassword">Confirmar Nueva Contraseña</label>
+                </div>
+
+                <div className="form-floating form-group mb-3">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="createdAt"
+                    name="createdAt"
+                    placeholder="Fecha de Creación"
+                    required={true}
+                    value={createdAt}
+                    onChange={(e) => onInputChange(e)}
+                    readOnly={true}
+                  />
+                  <label htmlFor="createdAt">Fecha de Creación</label>
+                </div>
+
+                <div className="form-floating form-group mb-3">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="updatedAt"
+                    name="updatedAt"
+                    placeholder="Fecha de Modificación"
+                    required={true}
+                    value={new Date().toLocaleString()}
+                    onChange={(e) => onInputChange(e)}
+                    readOnly={true}
+                  />
+                  <label htmlFor="updatedAt">Fecha de Modificación</label>
                 </div>
 
                 <div className="form-floating form-group mb-3">
                   <select
                     className="form-select"
-                    id="rol"
-                    name="rol"
+                    id="role"
+                    name="role.nombre"
                     value={nombre}
                     onChange={(e) => onInputChange(e)}>
-                    <option value="">Seleccione un Rol</option>
-                    {roles.map((rol) => (
-                      <option key={rol.id} value={rol.nombre}>
-                        {rol.nombre}
-                      </option>
-                    ))}
+                    <option value="USER">USER</option>
+                    <option value="ADMIN">ADMIN</option>
+                    <option value="SUPERADMIN">SUPERADMIN</option>
                   </select>
-                  <label htmlFor="rol">Rol</label>
+                  <label htmlFor="role">Rol</label>
                 </div>
 
                 <button type="submit" className="btn btn-primary">
