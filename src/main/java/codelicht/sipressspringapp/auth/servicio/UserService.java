@@ -39,12 +39,19 @@ public class UserService {
         return usuarios;
     }
 
+    public List<Role> allRoles() {
+        List<Role> roles = new ArrayList<>();
+
+        roleRepositorio.findAll().forEach(roles::add);
+
+        return roles;
+    }
+
     public Usuario findById(Integer id) {
         return usuarioRepositorio.findById(id).orElse(null);
     }
 
     public Usuario saveUsuario(Usuario usuario) {
-        // Aquí puedes agregar lógica adicional si es necesario
         return usuarioRepositorio.save(usuario);
     }
 
@@ -64,4 +71,9 @@ public class UserService {
         return usuarioRepositorio.save(usuario);
 
     }
+
+    public void eliminarUsuario(Integer id) {
+        usuarioRepositorio.deleteById(id);
+    }
+
 }
