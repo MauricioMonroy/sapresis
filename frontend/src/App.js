@@ -124,15 +124,11 @@ function Inicio() {
       <header>
         <div className="container">
           <div className="row bg-light rounded-3 text-center m-5">
-            <div className="m-2">
-              <img
-                src={`${process.env.PUBLIC_URL}/favicon.ico`}
-                alt="sipress-icon"
-              />
-              <h5 className="fw-bold">
+            <div className="m-2">              
+              <h3 className="fw-bold">
                 Sistema Integral para la Prestación de Servicios de Salud -{" "}
-                <span className="text-success fw-bold fs-5">SIPRESS</span>
-              </h5>
+                <span className="text-success fw-bold fs-3">SIPRESS</span>
+              </h3>
               <p className="fs-6">
                 El SIPRESS es una aplicación diseñada para simplificar la
                 gestión de las Instituciones Prestadoras de Salud (IPS),
@@ -144,11 +140,11 @@ function Inicio() {
               </p>
             </div>
           </div>
-        </div>
-      </header>
+        </div>        
+      </header>      
       {/* Contenido */}
-      <section className="index">
-        <div className="container">
+      <section className="index">        
+        <div className="container mb-5">
           <div className="row gx-lg-5">
             <div className="col-md-3 col-sm-6">
               <a href="/instituciones" className="text-decoration-none">
@@ -158,7 +154,7 @@ function Inicio() {
                   </div>
                   <div className="card-body">
                     <img
-                      src="images/institucion.png"
+                      src={`${process.env.PUBLIC_URL}images/institucion.png`}
                       alt="institucion.png"
                       className="card-img-top"
                     />
@@ -174,7 +170,7 @@ function Inicio() {
                   </div>
                   <div className="card-body">
                     <img
-                      src="images/personal.png"
+                      src={`${process.env.PUBLIC_URL}images/personal.png`}
                       alt="personal.png"
                       className="card-img-top"
                     />
@@ -190,7 +186,7 @@ function Inicio() {
                   </div>
                   <div className="card-body">
                     <img
-                      src="images/equipo-medico.png"
+                      src={`${process.env.PUBLIC_URL}images/equipo-medico.png`}
                       alt="equipo-medico.png"
                       className="card-img-top"
                     />
@@ -207,7 +203,7 @@ function Inicio() {
 
                   <div className="card-body">
                     <img
-                      src="images/patients.png"
+                      src={`${process.env.PUBLIC_URL}images/patients.png`}
                       alt="patients.png"
                       className="card-img-top"
                     />
