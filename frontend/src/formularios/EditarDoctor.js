@@ -232,7 +232,7 @@ export default function EditarDoctor() {
                 <button type="submit" className="btn btn-primary">
                   <i className="fa-regular fa-floppy-disk"></i> Guardar Cambios
                 </button>
-                <Link to="/doctores">
+                <Link to="../doctores">
                   <i className="fa-solid fa-triangle-exclamation"></i> Cancelar
                 </Link>
               </div>

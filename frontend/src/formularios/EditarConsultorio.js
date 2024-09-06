@@ -204,7 +204,7 @@ export default function EditarConsultorio() {
                 <button type="submit" className="btn btn-primary">
                   Guardar Cambios
                 </button>
-                <Link to="/consultorios">
+                <Link to="../consultorios">
                   <i className="fa-solid fa-triangle-exclamation"></i> Cancelar
                 </Link>
               </div>

@@ -101,7 +101,7 @@ const GestionUsuarios = () => {
             <div className="card-header">
               {error && <p>Error al cargar los registros: {error.message}</p>}
               <h3 className="text-center">
-                <i class="fa-solid fa-users"></i> Gestión de Usuarios
+                <i className="fa-solid fa-users"></i> Gestión de Usuarios
               </h3>
             </div>
             <div className="table-responsive">
