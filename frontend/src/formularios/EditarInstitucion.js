@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function EditarInstitucion() {
   const urlBase = "http://localhost:8080/sipress-app/instituciones";
@@ -26,12 +27,17 @@ export default function EditarInstitucion() {
 
   const cargarInstitucion = useCallback(async () => {
     const token = localStorage.getItem("token");
-    const resultado = await axios.get(`${urlBase}/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    setInstitucion(resultado.data);
+    try {
+      const resultado = await axios.get(`${urlBase}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setInstitucion(resultado.data);
+    } catch (error) {
+      console.error("Error al cargar los registros:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
+    }
   }, [id]);
 
   useEffect(() => {
@@ -49,12 +55,18 @@ export default function EditarInstitucion() {
   const onSubmit = async (e) => {
     const token = localStorage.getItem("token");
     e.preventDefault();
-    await axios.put(`${urlBase}/${id}`, institucion, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    navigate("/instituciones");
+    try {
+      await axios.put(`${urlBase}/${id}`, institucion, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      toast.success("Registro actualizado con éxito");
+      navigate("/instituciones");
+    } catch (error) {
+      console.error("Error al actualizar el registro:", error);
+      toast.error("Error al actualizar el registro");
+    }
   };
 
   return (

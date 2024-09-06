@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
+import { toast } from "react-toastify";
 
 export default function AgregarFormula({ onFormulaAdded }) {
   const modalRef = useRef(null);
@@ -71,6 +72,7 @@ export default function AgregarFormula({ onFormulaAdded }) {
 
     // Llamar a la función de actualización de la lista
     onFormulaAdded();
+    toast.success("Registro agregado correctamente");
   };
 
   return (

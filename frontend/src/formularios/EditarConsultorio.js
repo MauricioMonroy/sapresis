@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function EditarConsultorio() {
   const urlBase = "http://localhost:8080/sipress-app/consultorios";
@@ -31,7 +32,8 @@ export default function EditarConsultorio() {
       );
       setPacientes(resultado.data);
     } catch (error) {
-      console.error("Error al cargar los registros:", error);
+      console.error("Error al cargar los registros de Paciente:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, []);
 
@@ -48,7 +50,8 @@ export default function EditarConsultorio() {
       );
       setPersonalS(resultado.data);
     } catch (error) {
-      console.error("Error al cargar el registro:", error);
+      console.error("Error al cargar los registros de Personal:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, []);
 
@@ -63,6 +66,7 @@ export default function EditarConsultorio() {
       setConsultorio(resultado.data);
     } catch (error) {
       console.error("Error al cargar el regitro:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, [id]);
 
@@ -109,9 +113,11 @@ export default function EditarConsultorio() {
           Authorization: `Bearer ${token}`,
         },
       });
+      toast.success("Registro actualizado con éxito");
       navigate("/consultorios");
     } catch (error) {
       console.error("Error al actualizar el registro:", error);
+      toast.error("Error al actualizar el registro");
     }
   };
 

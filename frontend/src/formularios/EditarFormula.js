@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function EditarFormula() {
   const urlBase = "http://localhost:8080/sipress-app/formulas";
@@ -52,7 +53,8 @@ export default function EditarFormula() {
       );
       setPacientes(resultado.data);
     } catch (error) {
-      console.error("Error al cargar los pacientes:", error);
+      console.error("Error al cargar los registros de Paciente:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, []);
 
@@ -66,7 +68,8 @@ export default function EditarFormula() {
       });
       setFormula(resultado.data);
     } catch (error) {
-      console.error("Error al cargar la fórmula:", error);
+      console.error("Error al cargar los registros de Fórmula:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, [id]);
 
@@ -113,9 +116,11 @@ export default function EditarFormula() {
           Authorization: `Bearer ${token}`,
         },
       });
+      toast.success("Registro actualizado con éxito");
       navigate("/formulas");
     } catch (error) {
-      console.error("Error al actualizar la fórmula:", error);
+      console.error("Error al actualizar el registro:", error);
+      toast.error("Error al actualizar el registro");
     }
   };
 

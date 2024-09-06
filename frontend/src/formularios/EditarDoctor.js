@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function EditarDoctor() {
   const urlBase = "http://localhost:8080/sipress-app/doctores";
@@ -51,7 +52,8 @@ export default function EditarDoctor() {
       );
       setDependencias(resultado.data);
     } catch (error) {
-      console.error("Error al cargar las dependencias:", error);
+      console.error("Error al cargar los registros de Dependencia:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, []);
 
@@ -65,7 +67,8 @@ export default function EditarDoctor() {
       });
       setDoctor(resultado.data);
     } catch (error) {
-      console.error("Error al cargar el doctor:", error);
+      console.error("Error al cargar los registros de Doctor:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, [id]);
 
@@ -79,7 +82,7 @@ export default function EditarDoctor() {
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
-  
+
     if (name === "dependencia.idDependencia") {
       // Actualiza solo la dependencia
       setDoctor((prevDoctor) => ({
@@ -108,7 +111,7 @@ export default function EditarDoctor() {
         [name]: value,
       }));
     }
-  };  
+  };
 
   const onSubmit = async (e) => {
     const token = localStorage.getItem("token");
@@ -119,9 +122,11 @@ export default function EditarDoctor() {
           Authorization: `Bearer ${token}`,
         },
       });
+      toast.success("Registro actualizado con éxito");
       navigate("/doctores");
     } catch (error) {
       console.error("Error al actualizar el doctor:", error);
+      toast.error("Error al actualizar el registro");
     }
   };
 

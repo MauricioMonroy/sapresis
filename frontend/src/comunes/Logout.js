@@ -22,7 +22,7 @@ const Logout = () => {
     <div className="container">
       <div className="row bg-light rounded-3 text-center m-5">
         <div className="m-2">
-          <h1 className="fs-4 fw-bold">
+          <h1 className="fs-5">
             Ha salido correctamente de la aplicación. Redirigiendo al login...
           </h1>
           <p className="fs-6">

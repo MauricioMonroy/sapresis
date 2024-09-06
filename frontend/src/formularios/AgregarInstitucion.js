@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useRef } from "react";
+import { toast } from "react-toastify";
 
 export default function AgregarInstitucion({ onInstitucionAdded }) {
   const modalRef = useRef(null);
@@ -43,6 +44,7 @@ export default function AgregarInstitucion({ onInstitucionAdded }) {
 
     // Llamar a la función de actualización de la lista
     onInstitucionAdded();
+    toast.success("Registro agregado correctamente");
   };
 
   return (

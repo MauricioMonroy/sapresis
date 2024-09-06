@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function EditarPersonal() {
   const urlBase = "http://localhost:8080/sipress-app/personalS";
@@ -51,7 +52,8 @@ export default function EditarPersonal() {
       );
       setDependencias(resultado.data);
     } catch (error) {
-      console.error("Error al cargar las dependencias:", error);
+      console.error("Error al cargar los registros de Dependencia:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, []);
 
@@ -65,7 +67,8 @@ export default function EditarPersonal() {
       });
       setPersonal(resultado.data);
     } catch (error) {
-      console.error("Error al cargar el personal:", error);
+      console.error("Error al cargar los registros de Personal:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, [id]);
 
@@ -119,9 +122,11 @@ export default function EditarPersonal() {
           Authorization: `Bearer ${token}`,
         },
       });
+      toast.success("Registro actualizado con éxito");
       navigate("/personalS");
     } catch (error) {
-      console.error("Error al actualizar el personal:", error);
+      console.error("Error al actualizar el registro:", error);
+      toast.error("Error al actualizar el registro");
     }
   };
 

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
+import { toast } from "react-toastify";
 
 export default function AgregarConsultorio({ onConsultorioAdded }) {
   const modalRef = useRef(null);
@@ -30,7 +31,8 @@ export default function AgregarConsultorio({ onConsultorioAdded }) {
         );
         setPacientes(resultado.data);
       } catch (error) {
-        console.error("Error al cargar los pacientes:", error);
+        console.error("Error al cargar los registros de Paciente:", error);
+        toast.error("Error al cargar los datos del registro solicitado");
       }
     };
     cargarPacientes();
@@ -50,7 +52,8 @@ export default function AgregarConsultorio({ onConsultorioAdded }) {
         );
         setPersonalS(resultado.data);
       } catch (error) {
-        console.error("Error al cargar el personal:", error);
+        console.error("Error al cargar los registros de Personal:", error);
+        toast.error("Error al cargar los datos del registro solicitado");
       }
     };
     cargarPersonalS();
@@ -84,8 +87,10 @@ export default function AgregarConsultorio({ onConsultorioAdded }) {
         modalInstance.hide();
       }
       onConsultorioAdded();
+      toast.success("Registro agregado correctamente");
     } catch (error) {
-      console.error("Error al agregar el consultorio:", error);
+      console.error("Error al agregar el registro:", error);
+      toast.error("Error al agregar el registro");
     }
   };
 

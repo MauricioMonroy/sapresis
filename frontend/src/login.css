@@ -37,6 +37,10 @@
         padding: 0.5rem 0.75rem; 
         font-size: 0.8rem; 
     }
+
+    .login-page .bg-image {
+        background-size: 200px; 
+    }
 }
 
 .login-page .login-heading {

@@ -11,6 +11,7 @@ import Login from "./comunes/Login";
 import Logout from "./comunes/Logout";
 import RegistroUsuario from "./formularios/RegistroUsuario";
 import GestionUsuarios from "./registros/GestionUsuarios";
+import { Notificaciones } from "./comunes/Notificaciones";
 import "./styles.css";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -62,6 +63,10 @@ function Main() {
       {/* Renderiza Navbar solo si la ruta actual no está en noNavAndFooterRoutes */}
       {!noNavAndFooterRoutes.includes(location.pathname) && <Navbar />}
 
+      {/* Renderiza notificaciones en todas las rutas */}
+      <Notificaciones />
+
+      {/* Rutas de la aplicación */}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
@@ -120,18 +125,22 @@ function Inicio() {
         <div className="container">
           <div className="row bg-light rounded-3 text-center m-5">
             <div className="m-2">
-              <h1 className="fs-3 fw-bold">
-                Bienvenido a{" "}
-                <span className="text-success fw-bold fs-2">SIPRESS</span>
-              </h1>
+              <img
+                src={`${process.env.PUBLIC_URL}/favicon.ico`}
+                alt="sipress-icon"
+              />
+              <h5 className="fw-bold">
+                Sistema Integral para la Prestación de Servicios de Salud -{" "}
+                <span className="text-success fw-bold fs-5">SIPRESS</span>
+              </h5>
               <p className="fs-6">
-                El Sistema Integral para la Prestación de Servicios de Salud
-                -SIPRESS es una aplicación diseñada para simplificar la gestión
-                de las Instituciones Prestadoras de Salud (IPS), facilitando el
-                manejo de la información de los pacientes, personal médico y
-                administrativo, así como de los servicios que se prestan en la
-                institución. Su objetivo principal es mejorar la atención y la
-                eficiencia en la prestación de servicios hospitalarios.
+                El SIPRESS es una aplicación diseñada para simplificar la
+                gestión de las Instituciones Prestadoras de Salud (IPS),
+                facilitando el manejo de la información de los pacientes,
+                personal médico y administrativo, así como de los servicios que
+                se prestan en la institución. Su objetivo principal es mejorar
+                la atención y la eficiencia en la prestación de servicios
+                hospitalarios.
               </p>
             </div>
           </div>

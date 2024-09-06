@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useRef } from "react";
+import { toast } from "react-toastify";
 
 export default function AgregarEps({ onEpsAdded }) {
   const modalRef = useRef(null);
@@ -36,6 +37,7 @@ export default function AgregarEps({ onEpsAdded }) {
 
     // Llamar a la función de actualización de la lista
     onEpsAdded();
+    toast.success("Registro agregado correctamente");
   };
 
   return (

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function EditarUsuario() {
   const urlBase = "http://localhost:8080/sipress-app/usuarios";
@@ -45,7 +46,8 @@ export default function EditarUsuario() {
 
       setUsuario({ ...resultado.data, password: "", confirmPassword: "" });
     } catch (error) {
-      console.error("Error al cargar el usuario:", error);
+      console.error("Error al cargar los registros de Usuario:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, [id]);
 
@@ -76,7 +78,7 @@ export default function EditarUsuario() {
     const token = localStorage.getItem("token");
 
     if (password !== confirmPassword) {
-      alert("Las contraseñas no coinciden");
+      toast.warning("Las contraseñas no coinciden");
       return;
     }
 
@@ -84,14 +86,18 @@ export default function EditarUsuario() {
     if (!password) {
       delete usuarioActualizado.password;
     }
-
-    await axios.put(`${urlBase}/${id}`, usuarioActualizado, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    navigate("/gestion-usuarios");
+    try {
+      await axios.put(`${urlBase}/${id}`, usuarioActualizado, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      toast.success("Registro actualizado con éxito");
+      navigate("/gestion-usuarios");
+    } catch (error) {
+      console.error("Error al actualizar el registro:", error);
+      toast.error("Error al actualizar el registro");
+    }
   };
 
   return (
@@ -174,7 +180,9 @@ export default function EditarUsuario() {
                     onChange={(e) => onInputChange(e)}
                     autoComplete="off"
                   />
-                  <label htmlFor="confirmPassword">Confirmar Nueva Contraseña</label>
+                  <label htmlFor="confirmPassword">
+                    Confirmar Nueva Contraseña
+                  </label>
                 </div>
 
                 <div className="form-floating form-group mb-3">

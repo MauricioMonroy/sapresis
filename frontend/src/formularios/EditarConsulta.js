@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import Calendario from "../comunes/Calendario";
 import BasicTimePicker from "../comunes/BasicTimePicker";
 import dayjs from "dayjs";
@@ -34,7 +35,8 @@ export default function EditarConsulta() {
       );
       setPacientes(resultado.data);
     } catch (error) {
-      console.error("Error al cargar los registros:", error);
+      console.error("Error al cargar los registros de Paciente:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, []);
 
@@ -51,7 +53,8 @@ export default function EditarConsulta() {
       );
       setDoctores(resultado.data);
     } catch (error) {
-      console.error("Error al cargar los registros:", error);
+      console.error("Error al cargar los registros de Doctor:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, []);
 
@@ -69,6 +72,7 @@ export default function EditarConsulta() {
       setConsulta(resultado.data);
     } catch (error) {
       console.error("Error al cargar el registro:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, [pacienteId, doctorId]);
 
@@ -85,16 +89,16 @@ export default function EditarConsulta() {
         return {
           ...prevConsulta,
           paciente: {
-            ...prevConsulta.paciente, 
-            idPaciente: value,        
+            ...prevConsulta.paciente,
+            idPaciente: value,
           },
         };
       } else if (name === "idDoctor") {
         return {
           ...prevConsulta,
           doctor: {
-            ...prevConsulta.doctor, 
-            idDoctor: value,        
+            ...prevConsulta.doctor,
+            idDoctor: value,
           },
         };
       } else {
@@ -138,9 +142,11 @@ export default function EditarConsulta() {
           Authorization: `Bearer ${token}`,
         },
       });
+      toast.success("Registro actualizado con éxito");
       navigate("/consultas");
     } catch (error) {
       console.error("Error al actualizar el registro:", error);
+      toast.error("Error al actualizar el registro");
     }
   };
 
