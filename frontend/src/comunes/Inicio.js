@@ -1,5 +1,11 @@
 import React from "react";
 
+/**
+ * Componente que muestra la página de inicio de la aplicación.
+ * @returns El componente de la página de inicio.
+ * @version 1.0
+ */
+
 function Inicio() {
   return (
     <div className="py-2 mb-5 mt-5">

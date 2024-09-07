@@ -3,6 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../login.css";
 
+/**
+ * Componente funcional que representa la vista de inicio de sesión
+ * @returns El componente con la interfaz de inicio de sesión
+ * @requires react, useNavigate, toast
+ * @version 1.0
+ */
+
 export default function Login() {
   const urlBase = "http://localhost:8080/sipress-app/auth/login";
   let navigate = useNavigate();

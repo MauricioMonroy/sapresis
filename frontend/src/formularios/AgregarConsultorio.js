@@ -1,6 +1,14 @@
-import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import { toast } from "react-toastify";
+
+/** Componente funcional que renderiza el modal para agregar un consultorio
+ * @param {Object} props Las propiedades del componente
+ * @param {Function} props.onConsultorioAdded Función que se ejecuta cuando se agrega un consultorio
+ * @returns El componente de formulario para agregar un consultorio
+ * @requires react, axios, react-toastify
+ * @version 1.0
+ * */
 
 export default function AgregarConsultorio({ onConsultorioAdded }) {
   const modalRef = useRef(null);

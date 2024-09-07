@@ -1,3 +1,10 @@
+/**
+ * @file App.js
+ * @brief Archivo de configuración de rutas de la aplicación.
+ * @requires react
+ * @requires react-router-dom, useLocation
+ * */
+
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -66,7 +73,7 @@ function Main() {
       {!noNavAndFooterRoutes.includes(location.pathname) && <Navbar />}
 
       {/* Renderiza notificaciones en todas las rutas */}
-      <Notificaciones />     
+      <Notificaciones />
 
       {/* Rutas de la aplicación */}
       <Routes>

@@ -1,3 +1,5 @@
+/* Estilos generales de la aplicación */
+
 @charset "UTF-8";
 
 :root {
@@ -191,7 +193,7 @@ body {
     background: var(--bs-dark-teal);
 }
 
-#menu li > a {
+#menu li>a {
     font-size: 17px;
     font-weight: normal;
     color: rgba(255, 255, 255, 0.9);
@@ -207,7 +209,7 @@ body {
     padding-left: 150px;
 }
 
-#menu form > button {
+#menu form>button {
     font-size: 15px;
     font-weight: normal;
     color: rgba(255, 255, 255, 0.9);
@@ -215,15 +217,15 @@ body {
     transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-#menu form > input {
+#menu form>input {
     max-width: 275px;
     max-height: -moz-fit-content;
     max-height: fit-content;
 }
 
 /* Efecto on-hover */
-#menu li > a:hover,
-#menu form > button:hover {
+#menu li>a:hover,
+#menu form>button:hover {
     color: #fff;
     background-color: rgba(255, 255, 255, 0.1);
 }
@@ -748,7 +750,7 @@ textarea {
     overflow-x: auto;
 }
 
-.table-responsive > .table {
+.table-responsive>.table {
     margin-bottom: 0;
 }
 

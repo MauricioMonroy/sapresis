@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+/**
+ * Componente funcional que representa la barra de navegación de la aplicación.
+ * @returns El componente con la barra de navegación
+ * @requires react, Link, useEffect, useState, axios
+ * @version 1.0
+ */
+
 const Navbar = () => {
   const [role, setRole] = useState("");
 

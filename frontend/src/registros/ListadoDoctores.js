@@ -6,6 +6,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { confirmarEliminacion } from "../comunes/Notificaciones";
 import { toast } from "react-toastify";
 
+/**
+ * Componente funcional que muestra la lista de doctores registrados en el sistema.
+ * @param {Function} props.cargarDoctores - Función que carga la lista de doctores.
+ * @param {Array} props.doctores - Lista de doctores registrados en el sistema.
+ * @param {String} props.role - Rol del usuario autenticado.
+ * @param {String} props.error - Mensaje de error al cargar los registros.
+ * @param {Number} props.currentPage - Página actual de la lista de doctores.
+ * @param {Function} props.setCurrentPage - Función que establece la página actual de la lista de doctores.
+ * @param {Function} props.navigate - Función de navegación entre componentes.
+ * @param {String} urlBase - URL base para obtener la lista de doctores.
+ * @param {Number} PageSize - Número de registros por página.
+ * @returns {string} HTML con la lista de doctores.
+ * @requires react, axios, AgregarDoctor, Pagination, Link, useNavigate, confirmarEliminacion, toast.
+ * @version 1.0
+ */
+
 const PageSize = 5;
 
 export default function ListadoDoctores() {

@@ -1,7 +1,20 @@
-import axios from "axios";
 import React, { useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
+/**
+ * Componente funcional que permite registrar un usuario
+ * @param {Function} props.handleChange - Función para manejar el cambio en los campos del formulario
+ * @param {Function} props.handleSubmit - Función para manejar el envío del formulario
+ * @param {Function} props.showPassword - Función para mostrar u ocultar la contraseña
+ * @param {Function} props.showConfirmPassword - Función para mostrar u ocultar la confirmación de contraseña
+ * @param {Function} props.response - Respuesta de la petición al servidor
+ * @param {Object} props.formData - Objeto con los datos del formulario
+ * @returns El componente de formulario para registrar un usuario
+ * @requires react, axios, react-toastify, useNavigate, useState
+ * @version 1.0
+ * */
 
 export default function Registro() {
   const navigate = useNavigate();

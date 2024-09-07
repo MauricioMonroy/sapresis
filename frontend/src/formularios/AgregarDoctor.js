@@ -1,6 +1,15 @@
-import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import { toast } from "react-toastify";
+
+/**
+ * Componente funcional que renderiza el modal para agregar un doctor
+ * @param {Object} props Las propiedades del componente
+ * @param {Function} props.onDoctorAdded Función que se ejecuta cuando se agrega un doctor
+ * @returns El componente de formulario para agregar un doctor
+ * @requires react, axios, react-toastify, useRef, useState, useEffect
+ * @version 1.0
+ * */
 
 export default function AgregarDoctor({ onDoctorAdded }) {
   const modalRef = useRef(null);

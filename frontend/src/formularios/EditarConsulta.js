@@ -1,10 +1,18 @@
-import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+import axios from "axios";
 import Calendario from "../comunes/Calendario";
 import BasicTimePicker from "../comunes/BasicTimePicker";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import dayjs from "dayjs";
+
+/**
+ * Componente funcional que permite editar una consulta
+ * @returns El componente de formulario para editar una consulta
+ * @requires react, axios, react-toastify, useNavigate, useParams, Calendario, BasicTimePicker, dayjs
+ * useEfect, useState, useCallback
+ * @version 1.0
+ * */
 
 export default function EditarConsulta() {
   const urlBase = "http://localhost:8080/sipress-app/consultas";

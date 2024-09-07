@@ -1,5 +1,14 @@
 import { useMemo } from "react";
 
+/**
+ * Componente auxiliar para la paginación.
+ * @param {number} start El índice de inicio del rango
+ * @param {number} end El índice final del rango
+ * @returns Un arreglo con el rango de páginas
+ * @requires useMemo Para memorizar el rango de páginas
+ * @version 1.0
+ */
+
 export const DOTS = "...";
 
 const range = (start, end) => {

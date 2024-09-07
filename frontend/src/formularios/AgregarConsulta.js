@@ -1,9 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
 import Calendario from "../comunes/Calendario";
 import BasicTimePicker from "../comunes/BasicTimePicker";
 import dayjs from "dayjs";
+import { toast } from "react-toastify";
+
+/**
+ * Componente funcional que renderiza el modal para agregar una consulta
+ * @param {Object} props Las propiedades del componente
+ * @param {Function} props.onConsultaAdded Función que se ejecuta cuando se agrega una consulta
+ * @returns El componente de formulario para agregar una consulta
+ * @requires react, axios, react-toastify, Calendario, BasicTimePicker, dayjs
+ * @version 1.0
+ */
 
 export default function AgregarConsulta({ onConsultaAdded }) {
   const modalRef = useRef(null);

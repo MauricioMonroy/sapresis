@@ -3,6 +3,8 @@ import { mostrarNotificacion } from "./Notificaciones";
 
 /**
  * Configuración de axios para la intercepción de errores.
+ * @requires axios
+ * @version 1.0
  */
 
 axios.interceptors.response.use(

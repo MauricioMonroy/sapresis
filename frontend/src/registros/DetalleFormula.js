@@ -3,6 +3,14 @@ import React, { useEffect, useState, useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
 import { NumericFormat } from "react-number-format";
 
+/**
+ * Componente funcional que permite ver los detalles de una fórmula médica
+ * @param {Function} props.imprimirFormula - Función para imprimir la fórmula
+ * @returns El componente de detalles de fórmula médica
+ * @requires react, axios, react-router-dom, react-number-format
+ * @version 1.0
+ * */
+
 export default function DetalleFormula() {
   const urlBase = "http://localhost:8080/sipress-app/formulas";
 

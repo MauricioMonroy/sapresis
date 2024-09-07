@@ -1,6 +1,15 @@
-import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import { toast } from "react-toastify";
+
+/**
+ * Componente funcional que renderiza el modal para agregar un personal
+ * @param {Object} props Las propiedades del componente
+ * @param {Function} props.onPersonalAdded Función que se ejecuta cuando se agrega un personal
+ * @returns El componente de formulario para agregar un personal
+ * @requires react, axios, react-toastify, useRef, useState, useEffect
+ * @version 1.0
+ * */
 
 export default function AgregarPersonal({ onPersonalAdded }) {
   const modalRef = useRef(null);

@@ -6,6 +6,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { confirmarEliminacion } from "../comunes/Notificaciones";
 import { toast } from "react-toastify";
 
+/**
+ * Componente funcional que muestra la lista de instituciones registradas en el sistema.
+ * @param {Function} props.cargarInstituciones - Función que carga la lista de instituciones.
+ * @param {Array} props.instituciones - Lista de instituciones registradas en el sistema.
+ * @param {String} props.role - Rol del usuario autenticado.
+ * @param {String} props.error - Mensaje de error al cargar los registros.
+ * @param {Number} props.currentPage - Página actual de la lista de instituciones.
+ * @param {Function} props.setCurrentPage - Función que establece la página actual de la lista de instituciones.
+ * @param {Function} props.navigate - Función de navegación entre componentes.
+ * @param {String} urlBase - URL base para obtener la lista de instituciones.
+ * @param {Number} PageSize - Número de registros por página.
+ * @returns {string} HTML con la lista de instituciones.
+ * @requires react, axios, AgregarInstitucion, Pagination, Link, useNavigate, confirmarEliminacion, toast.
+ * @version 1.0
+ * */
+
 const PageSize = 5;
 
 export default function ListadoInstituciones() {
@@ -125,14 +141,14 @@ export default function ListadoInstituciones() {
       <div className="row">
         <div className="col-md-9">
           <div className="card" id="contenedor-lista">
-            <div className="card-header">              
+            <div className="card-header">
               <h3 className="text-center">
                 <i className="fa-regular fa-hospital"></i> Lista de
                 instituciones
               </h3>
             </div>
             <div className="table-responsive">
-            {error && <p className="fs-5">{error}</p>}
+              {error && <p className="fs-5">{error}</p>}
               <table className="table table-striped table-hover align-middle">
                 <thead className="table-dark">
                   <tr>

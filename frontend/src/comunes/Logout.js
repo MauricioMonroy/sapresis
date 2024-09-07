@@ -1,6 +1,13 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Componente que muestra un mensaje de salida y redirige al login
+ * @returns JSX Element
+ * @requires react useEffect useNavigate
+ * @version 1.0
+ */
+
 const Logout = () => {
   const navigate = useNavigate();
 
