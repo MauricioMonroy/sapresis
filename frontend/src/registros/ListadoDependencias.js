@@ -1,15 +1,19 @@
+import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
 import AgregarDependencia from "../formularios/AgregarDependencia";
+import Pagination from "../comunes/Pagination";
 import { Link, useNavigate } from "react-router-dom";
 import { confirmarEliminacion } from "../comunes/Notificaciones";
 import { toast } from "react-toastify";
+
+const PageSize = 5;
 
 export default function ListadoDependencias() {
   const urlBase = "http://localhost:8080/sipress-app/dependencias";
   const [dependencias, setDependencias] = useState([]);
   const [role, setRole] = useState("");
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
   let navigate = useNavigate();
 
   const cargarDependencias = async () => {
@@ -70,6 +74,12 @@ export default function ListadoDependencias() {
       });
   }, []);
 
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return dependencias.slice(firstPageIndex, lastPageIndex);
+  }, [dependencias, currentPage]);
+
   return (
     <div className="p-3 mb-2 mt-5">
       <section>
@@ -94,7 +104,7 @@ export default function ListadoDependencias() {
                 }
                 data-bs-target={
                   role.nombre === "SUPERADMIN" || role.nombre === "ADMIN"
-                    ? "#AgregarConsultorioModal"
+                    ? "#AgregarDependenciaModal"
                     : ""
                 }
                 onClick={() => {
@@ -130,50 +140,54 @@ export default function ListadoDependencias() {
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                    // Iterar sobre el arreglo de dependencias
-                    dependencias.map((dependencia, indice) => (
-                      <tr key={indice}>
-                        <th scope="row">{dependencia.idDependencia}</th>
-                        <td>{dependencia.nombreDependencia}</td>
-                        <td>
-                          {dependencia.institucion && (
-                            <div>
-                              {dependencia.institucion.nombreInstitucion}
-                            </div>
+                  {currentTableData.map((dependencia, indice) => (
+                    <tr key={indice}>
+                      <th scope="row">{dependencia.idDependencia}</th>
+                      <td>{dependencia.nombreDependencia}</td>
+                      <td>
+                        {dependencia.institucion && (
+                          <div>{dependencia.institucion.nombreInstitucion}</div>
+                        )}
+                      </td>
+                      <td>
+                        <div className="textCenter">
+                          {(role.nombre === "SUPERADMIN" ||
+                            role.nombre === "ADMIN") && (
+                            <Link
+                              to={`/dependencias/editar/${dependencia.idDependencia}`}
+                              className="btn btn-warning btn-sm me-2">
+                              <i className="fa-regular fa-pen-to-square"></i>{" "}
+                              Editar
+                            </Link>
                           )}
-                        </td>
-                        <td>
-                          <div className="textCenter">
-                            {(role.nombre === "SUPERADMIN" ||
-                              role.nombre === "ADMIN") && (
-                              <Link
-                                to={`/dependencias/editar/${dependencia.idDependencia}`}
-                                className="btn btn-warning btn-sm me-2">
-                                <i className="fa-regular fa-pen-to-square"></i>{" "}
-                                Editar
-                              </Link>
-                            )}
-                            {role.nombre === "SUPERADMIN" && (
-                              <button
-                                onClick={() =>
-                                  confirmarEliminacion(
-                                    dependencia.idDependencia,
-                                    eliminarDependencia
-                                  )
-                                }
-                                className="btn btn-danger btn-sm">
-                                <i className="fa-regular fa-trash-can"></i>{" "}
-                                Eliminar
-                              </button>
-                            )}
-                          </div>
-                        </td>
-                      </tr>
-                    ))
-                  }
+                          {role.nombre === "SUPERADMIN" && (
+                            <button
+                              onClick={() =>
+                                confirmarEliminacion(
+                                  dependencia.idDependencia,
+                                  eliminarDependencia
+                                )
+                              }
+                              className="btn btn-danger btn-sm">
+                              <i className="fa-regular fa-trash-can"></i>{" "}
+                              Eliminar
+                            </button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
+            </div>
+            <div className="card-footer d-flex justify-content-center">
+              <Pagination
+                className="pagination-bar"
+                currentPage={currentPage}
+                totalCount={dependencias.length}
+                pageSize={PageSize}
+                onPageChange={(page) => setCurrentPage(page)}
+              />
             </div>
           </div>
         </div>

@@ -1,15 +1,19 @@
+import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
 import AgregarPaciente from "../formularios/AgregarPaciente";
+import Pagination from "../comunes/Pagination";
 import { Link, useNavigate } from "react-router-dom";
 import { confirmarEliminacion } from "../comunes/Notificaciones";
 import { toast } from "react-toastify";
+
+const PageSize = 5;
 
 export default function ListadoPacientes() {
   const urlBase = "http://localhost:8080/sipress-app/pacientes";
   const [pacientes, setPacientes] = useState([]);
   const [role, setRole] = useState("");
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
   let navigate = useNavigate();
 
   const cargarPacientes = async () => {
@@ -70,6 +74,12 @@ export default function ListadoPacientes() {
       });
   }, []);
 
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return pacientes.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, pacientes]);
+
   return (
     <div className="p-3 mb-2 mt-5">
       <section>
@@ -94,7 +104,7 @@ export default function ListadoPacientes() {
                 }
                 data-bs-target={
                   role.nombre === "SUPERADMIN" || role.nombre === "ADMIN"
-                    ? "#AgregarConsultorioModal"
+                    ? "#AgregarPacienteModal"
                     : ""
                 }
                 onClick={() => {
@@ -132,51 +142,57 @@ export default function ListadoPacientes() {
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                    // Iterar sobre el arreglo de pacientes
-                    pacientes.map((paciente, indice) => (
-                      <tr key={indice}>
-                        <th scope="row">{paciente.idPaciente}</th>
-                        <td>
-                          {paciente.nombrePaciente} {paciente.apellidoPaciente}
-                        </td>
-                        <td>{paciente.direccionPaciente}</td>
-                        <td>{paciente.telefonoPaciente}</td>
-                        <td>{paciente.emailPaciente}</td>
-                        <td>
-                          {paciente.eps && <div>{paciente.eps.nombreEps}</div>}
-                        </td>
-                        <td>
-                          <div className="textCenter">
-                            {(role.nombre === "SUPERADMIN" ||
-                              role.nombre === "ADMIN") && (
-                              <Link
-                                to={`/pacientes/editar/${paciente.idPaciente}`}
-                                className="btn btn-warning btn-sm me-2">
-                                <i className="fa-regular fa-pen-to-square"></i>{" "}
-                                Editar
-                              </Link>
-                            )}
-                            {role.nombre === "SUPERADMIN" && (
-                              <button
-                                onClick={() =>
-                                  confirmarEliminacion(
-                                    paciente.idPaciente,
-                                    eliminarPaciente
-                                  )
-                                }
-                                className="btn btn-danger btn-sm">
-                                <i className="fa-regular fa-trash-can"></i>{" "}
-                                Eliminar
-                              </button>
-                            )}
-                          </div>
-                        </td>
-                      </tr>
-                    ))
-                  }
+                  {currentTableData.map((paciente, indice) => (
+                    <tr key={indice}>
+                      <th scope="row">{paciente.idPaciente}</th>
+                      <td>
+                        {paciente.nombrePaciente} {paciente.apellidoPaciente}
+                      </td>
+                      <td>{paciente.direccionPaciente}</td>
+                      <td>{paciente.telefonoPaciente}</td>
+                      <td>{paciente.emailPaciente}</td>
+                      <td>
+                        {paciente.eps && <div>{paciente.eps.nombreEps}</div>}
+                      </td>
+                      <td>
+                        <div className="textCenter">
+                          {(role.nombre === "SUPERADMIN" ||
+                            role.nombre === "ADMIN") && (
+                            <Link
+                              to={`/pacientes/editar/${paciente.idPaciente}`}
+                              className="btn btn-warning btn-sm me-2">
+                              <i className="fa-regular fa-pen-to-square"></i>{" "}
+                              Editar
+                            </Link>
+                          )}
+                          {role.nombre === "SUPERADMIN" && (
+                            <button
+                              onClick={() =>
+                                confirmarEliminacion(
+                                  paciente.idPaciente,
+                                  eliminarPaciente
+                                )
+                              }
+                              className="btn btn-danger btn-sm">
+                              <i className="fa-regular fa-trash-can"></i>{" "}
+                              Eliminar
+                            </button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
+            </div>
+            <div className="card-footer d-flex justify-content-center">
+              <Pagination
+                className="pagination-bar"
+                currentPage={currentPage}
+                totalCount={pacientes.length}
+                pageSize={PageSize}
+                onPageChange={(page) => setCurrentPage(page)}
+              />
             </div>
           </div>
         </div>

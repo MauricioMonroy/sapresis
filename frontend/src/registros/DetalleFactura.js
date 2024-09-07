@@ -59,7 +59,7 @@ export default function DetalleFactura() {
     const content = document.getElementById("detalle").innerHTML;
     const printWindow = window.open("", "", "height=600,width=800");
     printWindow.document.write(`
-      <htmlFor>
+      <html>
         <head>
          <style>            
             .logo {
@@ -71,13 +71,13 @@ export default function DetalleFactura() {
               display: block;
             }
           </style>
-        <img src="/images/print-logo.png" alt="Logotipo" className="logo" />
+        <img src="/images/print-logo.png" alt="Logotipo" class="logo" />
         <title clasname="text-center">Detalles de la Factura</title>         
         </head>
         <body>          
           ${content}
         </body>
-      </htmlFor>
+      </html>
     `);
     printWindow.document.close();
     printWindow.print();

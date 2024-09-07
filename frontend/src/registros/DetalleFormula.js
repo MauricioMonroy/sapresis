@@ -59,7 +59,7 @@ export default function DetalleFormula() {
     const content = document.getElementById("detalle").innerHTML;
     const printWindow = window.open("", "", "height=600,width=800");
     printWindow.document.write(`
-      <htmlFor>
+      <html>
         <head>
          <style>            
             .logo {
@@ -71,13 +71,13 @@ export default function DetalleFormula() {
               display: block;
             }
           </style>
-        <img src="/images/print-logo.png" alt="Logotipo" className="logo" />
+        <img src="/images/print-logo.png" alt="Logotipo" class="logo" />
         <title clasname="text-center">Detalles de la Factura</title>         
         </head>
         <body>          
           ${content}
         </body>
-      </htmlFor>
+      </html>
     `);
     printWindow.document.close();
     printWindow.print();
@@ -86,20 +86,24 @@ export default function DetalleFormula() {
   return (
     <div className="p-4 mb-2 mt-5" id="detalle">
       <div className="row justify-content-center">
-        <div className="col-lg-9">
+        <div className="col-lg-9 col-md-12">
           <div className="card mt-3">
             <div className="card-header">
-              <h1 className="modal-title fs-5">
+              <h1 className="modal-title fs-5 text-center">
                 Detalles de la Fórmula Médica
               </h1>
             </div>
             <div className="card-body">
-              <h5 className="card-title">Número de Fórmula: {numeroFormula}</h5>
-              <p className="card-text">Medicamento: {nombreMedicacion}</p>
-              <p className="card-text">
+              <h5 className="card-title text-wrap">
+                Número de Fórmula: {numeroFormula}
+              </h5>
+              <p className="card-text text-wrap">
+                Medicamento: {nombreMedicacion}
+              </p>
+              <p className="card-text text-wrap">
                 Fecha de formulación: {fechaMedicacion}
               </p>
-              <p className="card-text">
+              <p className="card-text text-wrap">
                 Costo de la medicación:{" "}
                 <NumericFormat
                   value={costoMedicacion}
@@ -108,29 +112,29 @@ export default function DetalleFormula() {
                   prefix={"$"}
                 />
               </p>
-              <h6>Detalles del Paciente</h6>
-              <p className="card-text">ID: {idPaciente}</p>
-              <p className="card-text">
+              <h6 className="text-wrap">Detalles del Paciente</h6>
+              <p className="card-text text-wrap">ID: {idPaciente}</p>
+              <p className="card-text text-wrap">
                 Nombre: {formula.paciente.nombrePaciente}{" "}
                 {formula.paciente.apellidoPaciente}
               </p>
-              <p className="card-text">
+              <p className="card-text text-wrap">
                 Dirección: {formula.paciente.direccionPaciente}
               </p>
-              <p className="card-text">
+              <p className="card-text text-wrap">
                 Teléfono: {formula.paciente.telefonoPaciente}
               </p>
-              <p className="card-text">
+              <p className="card-text text-wrap">
                 Email: {formula.paciente.emailPaciente}
               </p>
-              <h6>EPS</h6>
-              <p className="card-text">
+              <h6 className="text-wrap">EPS</h6>
+              <p className="card-text text-wrap">
                 Nombre EPS: {formula.paciente.eps.nombreEps}
               </p>
-              <p className="card-text">
+              <p className="card-text text-wrap">
                 Teléfono EPS: {formula.paciente.eps.telefonoEps}
               </p>
-              <p className="card-text">
+              <p className="card-text text-wrap">
                 Email EPS: {formula.paciente.eps.emailEps}
               </p>
 

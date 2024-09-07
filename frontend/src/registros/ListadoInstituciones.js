@@ -1,15 +1,19 @@
+import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
 import AgregarInstitucion from "../formularios/AgregarInstitucion";
+import Pagination from "../comunes/Pagination";
 import { Link, useNavigate } from "react-router-dom";
 import { confirmarEliminacion } from "../comunes/Notificaciones";
 import { toast } from "react-toastify";
+
+const PageSize = 5;
 
 export default function ListadoInstituciones() {
   const urlBase = "http://localhost:8080/sipress-app/instituciones";
   const [instituciones, setInstituciones] = useState([]);
   const [role, setRole] = useState("");
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
   let navigate = useNavigate();
 
   const cargarInstituciones = async () => {
@@ -70,6 +74,12 @@ export default function ListadoInstituciones() {
       });
   }, []);
 
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return instituciones.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, instituciones]);
+
   return (
     <div className="p-3 mb-2 mt-5">
       <section>
@@ -93,7 +103,7 @@ export default function ListadoInstituciones() {
                 }
                 data-bs-target={
                   role.nombre === "SUPERADMIN" || role.nombre === "ADMIN"
-                    ? "#AgregarConsultorioModal"
+                    ? "#AgregarInstitucionModal"
                     : ""
                 }
                 onClick={() => {
@@ -132,46 +142,51 @@ export default function ListadoInstituciones() {
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                    // Iterar sobre el arreglo de instituciones
-                    instituciones.map((institucion, indice) => (
-                      <tr key={indice}>
-                        <th scope="row">{institucion.idInstitucion}</th>
-                        <td>{institucion.nombreInstitucion}</td>
-                        <td>{institucion.direccionInstitucion}</td>
-                        <td>{institucion.telefonoInstitucion}</td>
-                        <td>{institucion.codigoPostal}</td>
-                        <td>
-                          <div className="textCenter">
-                            {(role.nombre === "SUPERADMIN" ||
-                              role.nombre === "ADMIN") && (
-                              <Link
-                                to={`/instituciones/editar/${institucion.idInstitucion}`}
-                                className="btn btn-warning btn-sm me-2">
-                                <i className="fa-regular fa-pen-to-square"></i>{" "}
-                                Editar
-                              </Link>
-                            )}
-                            {role.nombre === "SUPERADMIN" && (
-                              <button
-                                onClick={() =>
-                                  confirmarEliminacion(
-                                    institucion.idInstitucion,
-                                    eliminarInstitucion
-                                  )
-                                }
-                                className="btn btn-danger btn-sm">
-                                <i className="fa-regular fa-trash-can"></i>{" "}
-                                Eliminar
-                              </button>
-                            )}
-                          </div>
-                        </td>
-                      </tr>
-                    ))
-                  }
+                  {currentTableData.map((institucion, indice) => (
+                    <tr key={indice}>
+                      <th scope="row">{institucion.idInstitucion}</th>
+                      <td>{institucion.nombreInstitucion}</td>
+                      <td>{institucion.direccionInstitucion}</td>
+                      <td>{institucion.telefonoInstitucion}</td>
+                      <td>{institucion.codigoPostal}</td>
+                      <td>
+                        <div className="textCenter">
+                          {(role.nombre === "SUPERADMIN" ||
+                            role.nombre === "ADMIN") && (
+                            <Link
+                              to={`/instituciones/editar/${institucion.idInstitucion}`}
+                              className="btn btn-warning btn-sm me-2">
+                              <i className="fa-regular fa-pen-to-square"></i>{" "}
+                              Editar
+                            </Link>
+                          )}
+                          {role.nombre === "SUPERADMIN" && (
+                            <button
+                              onClick={() =>
+                                confirmarEliminacion(
+                                  institucion.idInstitucion,
+                                  eliminarInstitucion
+                                )
+                              }
+                              className="btn btn-danger btn-sm">
+                              <i className="fa-regular fa-trash-can"></i>{" "}
+                              Eliminar
+                            </button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
+            </div>
+            <div className="card-footer d-flex justify-content-center">
+              <Pagination
+                currentPage={currentPage}
+                totalCount={instituciones.length}
+                pageSize={PageSize}
+                onPageChange={(page) => setCurrentPage(page)}
+              />
             </div>
           </div>
         </div>

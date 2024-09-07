@@ -1,15 +1,19 @@
+import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
 import AgregarEps from "../formularios/AgregarEps";
+import Pagination from "../comunes/Pagination";
 import { Link, useNavigate } from "react-router-dom";
 import { confirmarEliminacion } from "../comunes/Notificaciones";
 import { toast } from "react-toastify";
+
+const PageSize = 5;
 
 export default function ListadoEps() {
   const urlBase = "http://localhost:8080/sipress-app/epsS";
   const [eps, setEpsS] = useState([]);
   const [role, setRole] = useState("");
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
   let navigate = useNavigate();
 
   const cargarEpsS = async () => {
@@ -70,6 +74,12 @@ export default function ListadoEps() {
       });
   }, []);
 
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return eps.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, eps]);
+
   return (
     <div className="p-3 mb-2 mt-5">
       <section>
@@ -94,7 +104,7 @@ export default function ListadoEps() {
                 }
                 data-bs-target={
                   role.nombre === "SUPERADMIN" || role.nombre === "ADMIN"
-                    ? "#AgregarConsultorioModal"
+                    ? "#AgregarEpsModal"
                     : ""
                 }
                 onClick={() => {
@@ -130,42 +140,48 @@ export default function ListadoEps() {
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                    // Iterar sobre el arreglo de EPS
-                    eps.map((eps, indice) => (
-                      <tr key={indice}>
-                        <th scope="row">{eps.idEps}</th>
-                        <td>{eps.nombreEps}</td>
-                        <td>{eps.telefonoEps}</td>
-                        <td>{eps.emailEps}</td>
-                        <td>
-                          <div className="textCenter">
-                            {(role.nombre === "SUPERADMIN" ||
-                              role.nombre === "ADMIN") && (
-                              <Link
-                                to={`/epsS/editar/${eps.idEps}`}
-                                className="btn btn-warning btn-sm me-2">
-                                <i className="fa-regular fa-pen-to-square"></i>{" "}
-                                Editar
-                              </Link>
-                            )}
-                            {role.nombre === "SUPERADMIN" && (
-                              <button
-                                onClick={() =>
-                                  confirmarEliminacion(eps.idEps, eliminarEps)
-                                }
-                                className="btn btn-danger btn-sm">
-                                <i className="fa-regular fa-trash-can"></i>{" "}
-                                Eliminar
-                              </button>
-                            )}
-                          </div>
-                        </td>
-                      </tr>
-                    ))
-                  }
+                  {currentTableData.map((eps, indice) => (
+                    <tr key={indice}>
+                      <th scope="row">{eps.idEps}</th>
+                      <td>{eps.nombreEps}</td>
+                      <td>{eps.telefonoEps}</td>
+                      <td>{eps.emailEps}</td>
+                      <td>
+                        <div className="textCenter">
+                          {(role.nombre === "SUPERADMIN" ||
+                            role.nombre === "ADMIN") && (
+                            <Link
+                              to={`/epsS/editar/${eps.idEps}`}
+                              className="btn btn-warning btn-sm me-2">
+                              <i className="fa-regular fa-pen-to-square"></i>{" "}
+                              Editar
+                            </Link>
+                          )}
+                          {role.nombre === "SUPERADMIN" && (
+                            <button
+                              onClick={() =>
+                                confirmarEliminacion(eps.idEps, eliminarEps)
+                              }
+                              className="btn btn-danger btn-sm">
+                              <i className="fa-regular fa-trash-can"></i>{" "}
+                              Eliminar
+                            </button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
+            </div>
+            <div className="card-footer d-flex justify-content-center">
+              <Pagination
+                className="pagination-bar"
+                currentPage={currentPage}
+                totalCount={eps.length}
+                pageSize={PageSize}
+                onPageChange={(page) => setCurrentPage(page)}
+              />
             </div>
           </div>
         </div>
