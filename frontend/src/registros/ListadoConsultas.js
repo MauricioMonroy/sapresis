@@ -28,7 +28,7 @@ export default function ListadoConsultas() {
       setError(null);
     } catch (error) {
       setError("Error al cargar los registros");
-      console.error("Error al cargar registros:", error);
+      console.error("Error al cargar registros", error);
     }
   };
 
@@ -84,7 +84,7 @@ export default function ListadoConsultas() {
     <div className="p-3 mb-2 mt-5">
       <section>
         <AgregarConsulta onConsultaAdded={cargarConsultas} />
-        {error && <p>Error al cargar los registros: {error.message}</p>}
+
         <div id="actions" className="mt-3">
           <div className="row justify-content-center">
             <div className="col-12 col-md-4 d-flex justify-content-center">
@@ -130,6 +130,7 @@ export default function ListadoConsultas() {
               </h3>
             </div>
             <div className="table-responsive">
+            {error && <p className="fs-5">{error}</p>}
               <table className="table table-striped table-hover align-middle">
                 <thead className="table-dark">
                   <tr>

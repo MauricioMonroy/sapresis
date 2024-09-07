@@ -4,11 +4,12 @@ import { toast } from "react-toastify";
 
 export default function AgregarDependencia({ onDependenciaAdded }) {
   const modalRef = useRef(null);
+  const [error, setError] = useState(null);
 
   const [dependencia, setDependencia] = useState({
     idDependencia: "",
     nombreDependencia: "",
-    institucion: { idInstitucion: "" }, 
+    institucion: { idInstitucion: "" },
   });
 
   const { idDependencia, nombreDependencia, institucion } = dependencia;
@@ -17,16 +18,22 @@ export default function AgregarDependencia({ onDependenciaAdded }) {
 
   useEffect(() => {
     const cargarInstituciones = async () => {
-      const token = localStorage.getItem("token");
-      const resultado = await axios.get(
-        "http://localhost:8080/sipress-app/instituciones",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setInstituciones(resultado.data);
+      try {
+        const token = localStorage.getItem("token");
+        const resultado = await axios.get(
+          "http://localhost:8080/sipress-app/instituciones",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setInstituciones(resultado.data);
+        setError(null);
+      } catch (error) {
+        setError("Error al cargar los registros de Institucion");
+        console.error("Error al cargar registros", error);
+      }
     };
 
     cargarInstituciones();
@@ -90,6 +97,7 @@ export default function AgregarDependencia({ onDependenciaAdded }) {
           </div>
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="modal-body">
+              {error && <p className="fs-5">{error}</p>}
               <div className="form-floating form-group mb-3">
                 <input
                   type="text"

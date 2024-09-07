@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 export default function AgregarFactura({ onFacturaAdded }) {
   const modalRef = useRef(null);
+  const [error, setError] = useState(null);
 
   const [factura, setFactura] = useState({
     numeroFactura: "",
@@ -21,16 +22,22 @@ export default function AgregarFactura({ onFacturaAdded }) {
   useEffect(() => {
     // Cargar los pacientes al montar el componente
     const cargarPacientes = async () => {
-      const token = localStorage.getItem("token");
-      const resultado = await axios.get(
-        "http://localhost:8080/sipress-app/pacientes",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setPacientes(resultado.data);
+      try {
+        const token = localStorage.getItem("token");
+        const resultado = await axios.get(
+          "http://localhost:8080/sipress-app/pacientes",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setPacientes(resultado.data);
+        setError(null);
+      } catch (error) {
+        setError("Error al cargar los registros de Paciente");
+        console.error("Error al cargar registros", error);
+      }
     };
 
     cargarPacientes();
@@ -94,6 +101,7 @@ export default function AgregarFactura({ onFacturaAdded }) {
           </div>
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="modal-body">
+              {error && <p className="fs-5">{error}</p>}
               <div className="form-floating form-group mb-3">
                 <input
                   type="text"

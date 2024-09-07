@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 
 export default function AgregarConsulta({ onConsultaAdded }) {
   const modalRef = useRef(null);
+  const [error, setError] = useState(null);
 
   const [consulta, setConsulta] = useState({
     fechaConsulta: "",
@@ -33,9 +34,10 @@ export default function AgregarConsulta({ onConsultaAdded }) {
           }
         );
         setPacientes(resultado.data);
+        setError(null);
       } catch (error) {
-        console.error("Error al cargar los registros de Paciente:", error);
-        toast.error("Error al cargar los datos del registro solicitado");
+        setError("Error al cargar los registros de Paciente");
+        console.error("Error al cargar los registros de Paciente", error);
       }
     };
     cargarPacientes();
@@ -54,9 +56,10 @@ export default function AgregarConsulta({ onConsultaAdded }) {
           }
         );
         setDoctores(resultado.data);
+        setError(null);
       } catch (error) {
-        console.error("Error al cargar los registros de Doctor:", error);
-        toast.error("Error al cargar los datos del registro solicitado");
+        setError("Error al cargar los registros de Doctor");
+        console.error("Error al cargar los registros de Doctor", error);
       }
     };
     cargarDoctores();
@@ -145,6 +148,7 @@ export default function AgregarConsulta({ onConsultaAdded }) {
           </div>
           <form onSubmit={onSubmit}>
             <div className="modal-body">
+              {error && <p className="fs-5">{error}</p>}
               <div className="form-floating form-group mb-3">
                 <select
                   className="form-control"

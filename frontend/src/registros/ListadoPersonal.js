@@ -28,7 +28,7 @@ export default function ListadoPersonal() {
       setError(null);
     } catch (error) {
       setError("Error al cargar los registros");
-      console.error("Error al cargar registros:", error);
+      console.error("Error al cargar registros", error);
     }
   };
 
@@ -82,7 +82,6 @@ export default function ListadoPersonal() {
   return (
     <div className="p-3 mt-5 mb-2">
       <section>
-        {error && <p>Error al cargar registros: {error}</p>}
         <AgregarPersonal onPersonalAdded={cargarPersonalS} />
         <div id="actions" className="mt-3">
           <div className="row justify-content-center">
@@ -128,6 +127,7 @@ export default function ListadoPersonal() {
               </h3>
             </div>
             <div className="table-responsive">
+              {error && <p className="fs-5">{error}</p>}
               <table className="table table-striped table-hover align-middle">
                 <thead className="table-dark">
                   <tr>

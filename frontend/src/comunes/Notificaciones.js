@@ -1,18 +1,33 @@
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// Función genérica para mostrar notificaciones
-export const mostrarNotificacion = (mensaje, tipo = "info") => {
-  toast(mensaje, {
-    type: tipo, 
-    position: "top-center",
-    autoClose: 3000, 
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
+// Función que notifica al usuario que su sesión ha expirado
+let notificacionMostrada = false;
+export const mostrarNotificacion = () => {
+  if (!notificacionMostrada) {
+    notificacionMostrada = true;
+    toast.warn(
+      ({ closeToast }) => (
+        <div>
+          <p className="text-danger h3">Su sesión ha expirado.</p>
+          <div className="mt-4">
+            <Link to="/login" className="btn btn-success fs-5" onClick={() => {
+              closeToast();
+              notificacionMostrada = false;
+            }}>
+              Ingresar nuevamente
+            </Link>
+          </div>
+        </div>
+      ),
+      {
+        position: "top-center",
+        autoClose: false,
+        closeOnClick: false,
+      }
+    );
+  }
 };
 
 // Función para confirmar la eliminación con una notificación

@@ -28,7 +28,7 @@ export default function ListadoInstituciones() {
       setError(null);
     } catch (error) {
       setError("Error al cargar los registros");
-      console.error("Error al cargar registros:", error);
+      console.error("Error al cargar registros", error);
     }
   };
 
@@ -48,7 +48,10 @@ export default function ListadoInstituciones() {
       toast.success("Registro eliminado correctamente");
     } catch (error) {
       console.error("Error al eliminar el registro", error);
-      if (error.response && error.response.status === 401) {
+      if (
+        error.response &&
+        (error.response.status === 403 || error.response.status === 401)
+      ) {
         navigate("/login");
       } else {
         toast.error("Hubo un error al eliminar el registro");
@@ -122,14 +125,14 @@ export default function ListadoInstituciones() {
       <div className="row">
         <div className="col-md-9">
           <div className="card" id="contenedor-lista">
-            <div className="card-header">
-              {error && <p>Error al cargar los registros: {error.message}</p>}
+            <div className="card-header">              
               <h3 className="text-center">
                 <i className="fa-regular fa-hospital"></i> Lista de
                 instituciones
               </h3>
             </div>
             <div className="table-responsive">
+            {error && <p className="fs-5">{error}</p>}
               <table className="table table-striped table-hover align-middle">
                 <thead className="table-dark">
                   <tr>

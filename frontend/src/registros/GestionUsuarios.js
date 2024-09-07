@@ -28,7 +28,7 @@ const GestionUsuarios = () => {
       setError(null);
     } catch (error) {
       setError("Error al cargar los registros");
-      console.error("Error al cargar registros:", error);
+      console.error("Error al cargar los registros", error);
     }
   };
 
@@ -115,6 +115,7 @@ const GestionUsuarios = () => {
               </h3>
             </div>
             <div className="table-responsive">
+              {error && <p className="fs-5">{error}</p>}
               <table className="table table-striped table-hover align-middle">
                 <thead className="table-dark">
                   <tr>

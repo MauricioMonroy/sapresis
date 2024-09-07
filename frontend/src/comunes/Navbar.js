@@ -137,8 +137,10 @@ const Navbar = () => {
                 window.location.href = "/logout-success";
               }}
               className="btn btn-outline-light">
-              <i className="fa-solid fa-arrow-right-from-bracket"></i> Cerrar
-              Sesión
+              <span className="h6">
+                Salir de la aplicación{" "}
+                <i className="fa-solid fa-arrow-right-from-bracket"></i>{" "}
+              </span>
             </button>
           </div>
         </div>

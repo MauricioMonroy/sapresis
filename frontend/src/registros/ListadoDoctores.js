@@ -84,7 +84,6 @@ export default function ListadoDoctores() {
     <div className="p-3 mb-2 mt-5">
       <section>
         <AgregarDoctor onDoctorAdded={cargarDoctores} />
-        {error && <p>Error al cargar los registros: {error.message}</p>}
         <div id="actions" className="mt-3">
           <div className="row justify-content-center">
             <div className="col-12 col-md-4 d-flex justify-content-center">
@@ -129,6 +128,7 @@ export default function ListadoDoctores() {
               </h3>
             </div>
             <div className="table-responsive">
+              {error && <p className="fs-5">{error}</p>}
               <table className="table table-striped table-hover align-middle">
                 <thead className="table-dark">
                   <tr>
