@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
+import { toast } from "react-toastify";
 
 export default function AgregarPersonal({ onPersonalAdded }) {
   const modalRef = useRef(null);
@@ -10,7 +11,7 @@ export default function AgregarPersonal({ onPersonalAdded }) {
     apellidoPersonal: "",
     telefonoPersonal: "",
     emailPersonal: "",
-    dependencia: { idDependencia: "" }, // Cambiar a objeto Dependencia
+    dependencia: { idDependencia: "" },
   });
 
   const {
@@ -47,7 +48,7 @@ export default function AgregarPersonal({ onPersonalAdded }) {
     if (name === "idDependencia") {
       setPersonal((prevPersonal) => ({
         ...prevPersonal,
-        dependencia: { idDependencia: value }, // Actualizar el objeto Dependencia
+        dependencia: { idDependencia: value },
       }));
     } else {
       setPersonal({ ...personal, [name]: value });
@@ -73,6 +74,7 @@ export default function AgregarPersonal({ onPersonalAdded }) {
 
     // Llamar a la función de actualización de la lista
     onPersonalAdded();
+    toast.success("Registro agregado correctamente");
   };
 
   return (

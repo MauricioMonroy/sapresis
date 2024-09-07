@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useRef } from "react";
+import { toast } from "react-toastify";
 
 export default function Registro({ onUsuarioAdded }) {
   const modalRef = useRef(null);
@@ -13,6 +14,9 @@ export default function Registro({ onUsuarioAdded }) {
 
   const { nombreCompleto, email, password, confirmPassword } = usuario;
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const onInputChange = (e) => {
     setUsuario({
       ...usuario,
@@ -22,6 +26,11 @@ export default function Registro({ onUsuarioAdded }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    // Verificación de que las contraseñas coincidan
+    if (password !== confirmPassword) {
+      toast.warning("Las contraseñas no coinciden");
+      return;
+    }
     const urlBase = "http://localhost:8080/sipress-app/auth/registro";
     const token = localStorage.getItem("token");
     await axios.post(urlBase, usuario, {
@@ -39,6 +48,7 @@ export default function Registro({ onUsuarioAdded }) {
 
     // Llamar a la función de actualización de la lista
     onUsuarioAdded();
+    toast.success("Registro agregado correctamente");
   };
 
   return (
@@ -64,68 +74,98 @@ export default function Registro({ onUsuarioAdded }) {
             </button>
           </div>
           <form onSubmit={(e) => onSubmit(e)} autoComplete="off">
-            <div className="form-floating mb-3 text-dark">
-              <input
-                type="text"
-                className="form-control"
-                id="nombreCompleto"
-                name="nombreCompleto"
-                placeholder="Nombre completo"
-                required={true}
-                value={nombreCompleto}
-                onChange={(e) => onInputChange(e)}
-                autoComplete="off"
-                inputMode="text"
-              />
-              <label htmlFor="nombreCompleto">Nombre completo</label>
-            </div>
+            <div className="modal-body">
+              <div className="form-floating form-group mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="nombreCompleto"
+                  name="nombreCompleto"
+                  placeholder="Nombre completo"
+                  required={true}
+                  value={nombreCompleto}
+                  onChange={(e) => onInputChange(e)}
+                  autoComplete="off"
+                  inputMode="text"
+                />
+                <label htmlFor="nombreCompleto">Nombre completo</label>
+              </div>
 
-            <div className="form-floating mb-3 text-dark">
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                name="email"
-                placeholder="nombre@ejemplo.com"
-                required={true}
-                value={email}
-                onChange={(e) => onInputChange(e)}
-                autoComplete="off"
-                inputMode="email"
-              />
-              <label htmlFor="email">Correo electrónico</label>
-            </div>
+              <div className="form-floating form-group mb-3">
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="nombre@ejemplo.com"
+                  required={true}
+                  value={email}
+                  onChange={(e) => onInputChange(e)}
+                  autoComplete="off"
+                  inputMode="email"
+                />
+                <label htmlFor="email">Correo electrónico</label>
+              </div>
 
-            <div className="form-floating mb-3 text-dark">
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                name="password"
-                placeholder="Contraseña"
-                required={true}
-                value={password}
-                onChange={(e) => onInputChange(e)}
-                autoComplete="off"
-                inputMode="password"
-              />
-              <label htmlFor="password">Contraseña</label>
-            </div>
+              <div className="form-floating form-group mb-3 position-relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="form-control"
+                  id="password"
+                  name="password"
+                  placeholder="Contraseña"
+                  required={true}
+                  value={password}
+                  onChange={(e) => onInputChange(e)}
+                  autoComplete="off"
+                  inputMode="password"
+                />
+                <label htmlFor="password">Contraseña</label>
+                <button
+                  type="button"
+                  className="btn position-absolute end-0 top-0 mt-2 me-2"
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{
+                    border: "none",
+                    background: "transparent",
+                  }}>
+                  {showPassword ? (
+                    <i className="fa-regular fa-eye-slash"></i>
+                  ) : (
+                    <i className="fa-regular fa-eye"></i>
+                  )}
+                </button>
+              </div>
 
-            <div className="form-floating mb-3 text-dark">
-              <input
-                type="password"
-                className="form-control"
-                id="confirmPassword"
-                name="confirmPassword"
-                placeholder="Confirmar Contraseña"
-                required={true}
-                value={confirmPassword}
-                onChange={(e) => onInputChange(e)}
-                autoComplete="off"
-                inputMode="password"
-              />
-              <label htmlFor="confirmPassword">Confirmar Contraseña</label>
+              <div className="form-floating form-group mb-3 position-relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  className="form-control"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  placeholder="Confirmar Contraseña"
+                  required={true}
+                  value={confirmPassword}
+                  onChange={(e) => onInputChange(e)}
+                  autoComplete="off"
+                  inputMode="password"
+                />
+                <label htmlFor="confirmPassword">Confirmar Contraseña</label>
+                <button
+                  type="button"
+                  className="btn position-absolute end-0 top-0 mt-2 me-2"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  style={{
+                    border: "none",
+                    background: "transparent",
+                  }}>
+                  {showConfirmPassword ? (
+                    <i className="fa-regular fa-eye-slash"></i>
+                  ) : (
+                    <i className="fa-regular fa-eye"></i>
+                  )}
+                </button>
+              </div>
             </div>
             <div className="modal-footer">
               <button

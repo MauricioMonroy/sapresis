@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
+import { toast } from "react-toastify";
 
 export default function AgregarDependencia({ onDependenciaAdded }) {
   const modalRef = useRef(null);
@@ -7,7 +8,7 @@ export default function AgregarDependencia({ onDependenciaAdded }) {
   const [dependencia, setDependencia] = useState({
     idDependencia: "",
     nombreDependencia: "",
-    institucion: { idInstitucion: "" }, // Cambiar a objeto Institucion
+    institucion: { idInstitucion: "" }, 
   });
 
   const { idDependencia, nombreDependencia, institucion } = dependencia;
@@ -15,7 +16,6 @@ export default function AgregarDependencia({ onDependenciaAdded }) {
   const [instituciones, setInstituciones] = useState([]);
 
   useEffect(() => {
-    // Cargar las instituciones al montar el componente
     const cargarInstituciones = async () => {
       const token = localStorage.getItem("token");
       const resultado = await axios.get(
@@ -37,7 +37,7 @@ export default function AgregarDependencia({ onDependenciaAdded }) {
     if (name === "idInstitucion") {
       setDependencia((prevDependencia) => ({
         ...prevDependencia,
-        institucion: { idInstitucion: value }, // Actualizar el objeto Institucion
+        institucion: { idInstitucion: value },
       }));
     } else {
       setDependencia({ ...dependencia, [name]: value });
@@ -63,6 +63,7 @@ export default function AgregarDependencia({ onDependenciaAdded }) {
 
     // Llamar a la función de actualización de la lista
     onDependenciaAdded();
+    toast.success("Registro agregado correctamente");
   };
 
   return (

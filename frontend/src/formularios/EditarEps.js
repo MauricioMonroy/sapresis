@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function EditarEps() {
   const urlBase = "http://localhost:8080/sipress-app/epsS";
@@ -19,12 +20,17 @@ export default function EditarEps() {
 
   const cargarEps = useCallback(async () => {
     const token = localStorage.getItem("token");
-    const resultado = await axios.get(`${urlBase}/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    setEps(resultado.data);
+    try {
+      const resultado = await axios.get(`${urlBase}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setEps(resultado.data);
+    } catch (error) {
+      console.error("Error al cargar los registros de Eps:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
+    }
   }, [id]);
 
   useEffect(() => {
@@ -42,12 +48,18 @@ export default function EditarEps() {
   const onSubmit = async (e) => {
     const token = localStorage.getItem("token");
     e.preventDefault();
-    await axios.put(`${urlBase}/${id}`, eps, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    navigate("/epsS");
+    try {
+      await axios.put(`${urlBase}/${id}`, eps, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      toast.success("Registro actualizado con éxito");
+      navigate("/epsS");
+    } catch (error) {
+      console.error("Error al actualizar el registro:", error);
+      toast.error("Error al actualizar el registro");
+    }
   };
 
   return (
@@ -118,7 +130,7 @@ export default function EditarEps() {
                 <button type="submit" className="btn btn-primary">
                   <i className="fa-regular fa-floppy-disk"></i> Guardar Cambios
                 </button>
-                <Link to="/epsS">
+                <Link to="../epsS">
                   <i className="fa-solid fa-triangle-exclamation"></i> Cancelar
                 </Link>
               </div>

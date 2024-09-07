@@ -1,0 +1,72 @@
+.pagination-container {
+  display: flex;
+  justify-content: center; /* Centrará la paginación */
+  padding: 10px 0;
+  list-style-type: none;
+}
+
+.pagination-item {
+  padding: 8px 12px;
+  height: 40px;
+  text-align: center;
+  margin: 0 8px;
+  color: #333; /* Ajusta el color de texto */
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  border-radius: 8px;
+  line-height: 1.5;
+  font-size: 16px;
+  min-width: 40px;
+  background-color: #f1f1f1; /* Fondo claro */
+  transition: background-color 0.3s ease;
+
+  &.dots:hover {
+    background-color: transparent;
+    cursor: default;
+  }
+
+  &:hover {
+    background-color: #e0e0e0; /* Fondo al pasar el mouse */
+    cursor: pointer;
+  }
+
+  &.selected {
+    background-color: #c0c0c0; /* Fondo del botón seleccionado */
+    font-weight: bold;
+  }
+
+  .arrow {
+    &::before {
+      position: relative;
+      content: "";
+      display: inline-block;
+      width: 0.4em;
+      height: 0.4em;
+      border-right: 0.12em solid rgba(0, 0, 0, 0.87);
+      border-top: 0.12em solid rgba(0, 0, 0, 0.87);
+    }
+
+    &.left {
+      transform: rotate(-135deg) translate(-50%);
+    }
+
+    &.right {
+      transform: rotate(45deg);
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+
+    .arrow::before {
+      border-right: 0.12em solid rgba(0, 0, 0, 0.43);
+      border-top: 0.12em solid rgba(0, 0, 0, 0.43);
+    }
+
+    &:hover {
+      background-color: transparent;
+      cursor: default;
+    }
+  }
+}

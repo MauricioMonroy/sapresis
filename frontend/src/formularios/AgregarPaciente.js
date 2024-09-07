@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
+import { toast } from "react-toastify";
 
 export default function AgregarPaciente({ onPacienteAdded }) {
   const modalRef = useRef(null);
@@ -11,7 +12,7 @@ export default function AgregarPaciente({ onPacienteAdded }) {
     direccionPaciente: "",
     telefonoPaciente: "",
     emailPaciente: "",
-    eps: { idEps: "" }, // Cambiar a objeto Eps
+    eps: { idEps: "" },
   });
 
   const {
@@ -27,7 +28,6 @@ export default function AgregarPaciente({ onPacienteAdded }) {
   const [epsS, setEpsS] = useState([]);
 
   useEffect(() => {
-    // Cargar las epsS al montar el componente
     const cargarEpsS = async () => {
       const token = localStorage.getItem("token");
       const resultado = await axios.get(
@@ -49,7 +49,7 @@ export default function AgregarPaciente({ onPacienteAdded }) {
     if (name === "idEps") {
       setPaciente((prevPaciente) => ({
         ...prevPaciente,
-        eps: { idEps: value }, // Actualizar el objeto Eps
+        eps: { idEps: value },
       }));
     } else {
       setPaciente({ ...paciente, [name]: value });
@@ -75,6 +75,7 @@ export default function AgregarPaciente({ onPacienteAdded }) {
 
     // Llamar a la función de actualización de la lista
     onPacienteAdded();
+    toast.success("Registro agregado correctamente");
   };
 
   return (

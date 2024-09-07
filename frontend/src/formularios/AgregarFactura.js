@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
+import { toast } from "react-toastify";
 
 export default function AgregarFactura({ onFacturaAdded }) {
   const modalRef = useRef(null);
@@ -9,7 +10,7 @@ export default function AgregarFactura({ onFacturaAdded }) {
     descripcionServicio: "",
     valor: "",
     total: "",
-    paciente: { idPaciente: "" }, // Cambiar a objeto Paciente
+    paciente: { idPaciente: "" },
   });
 
   const { numeroFactura, descripcionServicio, valor, total, paciente } =
@@ -40,7 +41,7 @@ export default function AgregarFactura({ onFacturaAdded }) {
     if (name === "idPaciente") {
       setFactura((prevFactura) => ({
         ...prevFactura,
-        paciente: { idPaciente: value }, // Actualizar el objeto Paciente
+        paciente: { idPaciente: value },
       }));
     } else {
       setFactura({ ...factura, [name]: value });
@@ -66,6 +67,7 @@ export default function AgregarFactura({ onFacturaAdded }) {
 
     // Llamar a la función de actualización de la lista
     onFacturaAdded();
+    toast.success("Registro agregado correctamente");
   };
 
   return (

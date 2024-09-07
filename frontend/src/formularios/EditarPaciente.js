@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function EditarPaciente() {
   const urlBase = "http://localhost:8080/sipress-app/pacientes";
@@ -48,7 +49,8 @@ export default function EditarPaciente() {
       );
       setEpsS(resultado.data);
     } catch (error) {
-      console.error("Error al cargar las eps:", error);
+      console.error("Error al cargar los registros de Eps:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, []);
 
@@ -62,7 +64,8 @@ export default function EditarPaciente() {
       });
       setPaciente(resultado.data);
     } catch (error) {
-      console.error("Error al cargar el paciente:", error);
+      console.error("Error al cargar los registros de Paciente:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, [id]);
 
@@ -101,9 +104,11 @@ export default function EditarPaciente() {
           Authorization: `Bearer ${token}`,
         },
       });
+      toast.success("Registro actualizado con éxito");
       navigate("/pacientes");
     } catch (error) {
       console.error("Error al actualizar el paciente:", error);
+      toast.error("Error al actualizar el registro");
     }
   };
 
@@ -227,7 +232,7 @@ export default function EditarPaciente() {
                 <button type="submit" className="btn btn-primary">
                   <i className="fa-regular fa-floppy-disk"></i> Guardar Cambios
                 </button>
-                <Link to="/pacientes">
+                <Link to="../pacientes">
                   <i className="fa-solid fa-triangle-exclamation"></i> Cancelar
                 </Link>
               </div>

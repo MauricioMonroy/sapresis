@@ -9,7 +9,7 @@
 }
 
 .login-page .bg-image {
-    background-image: url('/public/images/Logo_SIPRESS.png');
+    background: url("../src/assets/Logo_SIPRESS.png");
     background-color: #113733;
     background-repeat: no-repeat;
     background-size: 450px;
@@ -36,6 +36,10 @@
     .login-page .btn-login {
         padding: 0.5rem 0.75rem; 
         font-size: 0.8rem; 
+    }
+
+    .login-page .bg-image {
+        background-size: 200px; 
     }
 }
 

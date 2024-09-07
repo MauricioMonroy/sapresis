@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function EditarFactura() {
   const urlBase = "http://localhost:8080/sipress-app/facturas";
@@ -52,7 +53,8 @@ export default function EditarFactura() {
       );
       setPacientes(resultado.data);
     } catch (error) {
-      console.error("Error al cargar los pacientes:", error);
+      console.error("Error al cargar los registros de Paciente:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, []);
 
@@ -66,7 +68,8 @@ export default function EditarFactura() {
       });
       setFactura(resultado.data);
     } catch (error) {
-      console.error("Error al cargar la factura:", error);
+      console.error("Error al cargar los registros de Factura:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, [id]);
 
@@ -113,9 +116,11 @@ export default function EditarFactura() {
           Authorization: `Bearer ${token}`,
         },
       });
+      toast.success("Registro actualizado con éxito");
       navigate("/facturas");
     } catch (error) {
       console.error("Error al actualizar la factura:", error);
+      toast.error("Error al actualizar el registro");
     }
   };
 
@@ -213,7 +218,7 @@ export default function EditarFactura() {
                 <button type="submit" className="btn btn-primary">
                   <i className="fa-regular fa-floppy-disk"></i> Guardar Cambios
                 </button>
-                <Link to="/facturas">
+                <Link to="../facturas">
                   <i className="fa-solid fa-triangle-exclamation"></i> Cancelar
                 </Link>
               </div>

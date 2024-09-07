@@ -1,13 +1,20 @@
+import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
 import AgregarPersonal from "../formularios/AgregarPersonal";
+import Pagination from "../comunes/Pagination";
 import { Link, useNavigate } from "react-router-dom";
+import { confirmarEliminacion } from "../comunes/Notificaciones";
+import { toast } from "react-toastify";
+
+const PageSize = 5;
 
 export default function ListadoPersonal() {
   const urlBase = "http://localhost:8080/sipress-app/personalS";
   const [personal, setPersonalS] = useState([]);
+  const [role, setRole] = useState("");
   const [error, setError] = useState(null);
-  let navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
 
   const cargarPersonalS = async () => {
     try {
@@ -20,8 +27,8 @@ export default function ListadoPersonal() {
       setPersonalS(response.data);
       setError(null);
     } catch (error) {
-      setError("Error al cargar los pacientes");
-      console.error("Error al cargar pacientes:", error);
+      setError("Error al cargar los registros");
+      console.error("Error al cargar registros:", error);
     }
   };
 
@@ -30,32 +37,52 @@ export default function ListadoPersonal() {
   }, []);
 
   const eliminarPersonal = async (id) => {
-    const confirmacion = window.confirm(
-      "¿Está seguro de que desea eliminar este registro?"
-    );
-    if (confirmacion) {
-      const token = localStorage.getItem("token");
-      try {
-        await axios.delete(`${urlBase}/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        cargarPersonalS();
-      } catch (error) {
-        console.error("Error al eliminar el registro", error);
-        // Manejo de errores
-        if (error.response && error.response.status === 401) {
-          navigate("/login");
-        }
+    const token = localStorage.getItem("token");
+    try {
+      await axios.delete(`${urlBase}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      cargarPersonalS();
+      toast.success("Registro eliminado correctamente");
+    } catch (error) {
+      console.error("Error al eliminar el registro", error);
+      if (error.response && error.response.status === 401) {
+        navigate("/login");
+      } else {
+        toast.error("Hubo un error al eliminar el registro");
       }
     }
   };
 
+  // Limitación de funciones de acuerdo con el rol del usuario
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    axios
+      .get("http://localhost:8080/sipress-app/usuarios/perfil", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setRole(response.data.role);
+      })
+      .catch((error) => {
+        console.error("Error al obtener el rol del usuario", error);
+      });
+  }, []);
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return personal.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, personal]);
+
   return (
     <div className="p-3 mt-5 mb-2">
       <section>
-        {error && <p>Error al cargar registros: {error.message}</p>}
+        {error && <p>Error al cargar registros: {error}</p>}
         <AgregarPersonal onPersonalAdded={cargarPersonalS} />
         <div id="actions" className="mt-3">
           <div className="row justify-content-center">
@@ -69,8 +96,23 @@ export default function ListadoPersonal() {
               <Link
                 to="#"
                 className="btn btn-success"
-                data-bs-toggle="modal"
-                data-bs-target="#AgregarPersonalModal">
+                data-bs-toggle={
+                  role.nombre === "SUPERADMIN" || role.nombre === "ADMIN"
+                    ? "modal"
+                    : ""
+                }
+                data-bs-target={
+                  role.nombre === "SUPERADMIN" || role.nombre === "ADMIN"
+                    ? "#AgregarPersonalModal"
+                    : ""
+                }
+                onClick={() => {
+                  if (role.nombre === "USER") {
+                    toast.error(
+                      "No tiene los permisos necesarios para agregar un registro."
+                    );
+                  }
+                }}>
                 <i className="fa-regular fa-square-plus"></i> Agregar Registro
               </Link>
             </div>
@@ -98,57 +140,71 @@ export default function ListadoPersonal() {
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                    // Iterar sobre el arreglo de personal
-                    personal.map((personal, indice) => (
-                      <tr key={indice}>
-                        <th scope="row">{personal.idPersonal}</th>
-                        <td>
-                          {personal.nombrePersonal} {personal.apellidoPersonal}
-                        </td>
-                        <td>{personal.telefonoPersonal}</td>
-                        <td>{personal.emailPersonal}</td>
-                        <td>
-                          {personal.dependencia && (
+                  {currentTableData.map((personal, indice) => (
+                    <tr key={indice}>
+                      <th scope="row">{personal.idPersonal}</th>
+                      <td>
+                        {personal.nombrePersonal} {personal.apellidoPersonal}
+                      </td>
+                      <td>{personal.telefonoPersonal}</td>
+                      <td>{personal.emailPersonal}</td>
+                      <td>
+                        {personal.dependencia && (
+                          <div>
+                            {personal.dependencia.nombreDependencia}
                             <div>
-                              {personal.dependencia.nombreDependencia}
-                              <div>
-                                Sede:{" "}
-                                {personal.dependencia.institucion && (
-                                  <div>
-                                    {
-                                      personal.dependencia.institucion
-                                        .nombreInstitucion
-                                    }
-                                  </div>
-                                )}
-                              </div>
+                              Sede:{" "}
+                              {personal.dependencia.institucion && (
+                                <div>
+                                  {
+                                    personal.dependencia.institucion
+                                      .nombreInstitucion
+                                  }
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </td>
-                        <td>
-                          <div className="textCenter">
+                          </div>
+                        )}
+                      </td>
+                      <td>
+                        <div className="textCenter">
+                          {(role.nombre === "SUPERADMIN" ||
+                            role.nombre === "ADMIN") && (
                             <Link
                               to={`/personalS/editar/${personal.idPersonal}`}
                               className="btn btn-warning btn-sm me-2">
                               <i className="fa-regular fa-pen-to-square"></i>{" "}
                               Editar
                             </Link>
+                          )}
+                          {role.nombre === "SUPERADMIN" && (
                             <button
                               onClick={() =>
-                                eliminarPersonal(personal.idPersonal)
+                                confirmarEliminacion(
+                                  personal.idPersonal,
+                                  eliminarPersonal
+                                )
                               }
                               className="btn btn-danger btn-sm">
                               <i className="fa-regular fa-trash-can"></i>{" "}
                               Eliminar
                             </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))
-                  }
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
+            </div>
+            <div className="card-footer d-flex justify-content-center">
+              <Pagination
+                className="pagination-bar"
+                currentPage={currentPage}
+                totalCount={personal.length}
+                pageSize={PageSize}
+                onPageChange={(page) => setCurrentPage(page)}
+              />
             </div>
           </div>
         </div>

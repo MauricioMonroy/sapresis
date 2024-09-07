@@ -93,7 +93,7 @@ export default function DetalleFactura() {
                 Detalles de la Factura Médica
               </h1>
             </div>
-            <div className="card-body">              
+            <div className="card-body">
               <h5 className="card-title">Número de Factura: {numeroFactura}</h5>
               <p className="card-text">
                 Descripción del servicio: {descripcionServicio}

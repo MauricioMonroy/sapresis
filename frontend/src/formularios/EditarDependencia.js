@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function EditarDependencia() {
   const urlBase = "http://localhost:8080/sipress-app/dependencias";
@@ -41,7 +42,8 @@ export default function EditarDependencia() {
       );
       setInstituciones(resultado.data);
     } catch (error) {
-      console.error("Error al cargar las institucion:", error);
+      console.error("Error al cargar los registros de Institución:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, []);
 
@@ -55,7 +57,8 @@ export default function EditarDependencia() {
       });
       setDependencia(resultado.data);
     } catch (error) {
-      console.error("Error al cargar el dependencia:", error);
+      console.error("Error al cargar los registros:", error);
+      toast.error("Error al cargar los datos del registro solicitado");
     }
   }, [id]);
 
@@ -69,7 +72,7 @@ export default function EditarDependencia() {
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
-  
+
     // Manejo del campo relacionado con Institución
     if (name === "institucion.idInstitucion") {
       setDependencia((prevDependencia) => ({
@@ -86,7 +89,7 @@ export default function EditarDependencia() {
         [name]: value,
       }));
     }
-  };  
+  };
 
   const onSubmit = async (e) => {
     const token = localStorage.getItem("token");
@@ -98,8 +101,9 @@ export default function EditarDependencia() {
         },
       });
       navigate("/dependencias");
+      toast.success("Registro actualizado correctamente");
     } catch (error) {
-      console.error("Error al actualizar el dependencia:", error);
+      console.error("Error al actualizar los registros", error);
     }
   };
 
@@ -165,7 +169,7 @@ export default function EditarDependencia() {
                 <button type="submit" className="btn btn-primary">
                   <i className="fa-regular fa-floppy-disk"></i> Guardar Cambios
                 </button>
-                <Link to="/dependencias">
+                <Link to="../dependencias">
                   <i className="fa-solid fa-triangle-exclamation"></i> Cancelar
                 </Link>
               </div>

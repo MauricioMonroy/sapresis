@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
+import { toast } from "react-toastify";
 
 export default function AgregarDoctor({ onDoctorAdded }) {
   const modalRef = useRef(null);
@@ -10,7 +11,7 @@ export default function AgregarDoctor({ onDoctorAdded }) {
     apellidoDoctor: "",
     telefonoDoctor: "",
     emailDoctor: "",
-    dependencia: { idDependencia: "" }, // Cambiar a objeto Dependencia
+    dependencia: { idDependencia: "" }, 
   });
 
   const {
@@ -47,7 +48,7 @@ export default function AgregarDoctor({ onDoctorAdded }) {
     if (name === "idDependencia") {
       setDoctor((prevDoctor) => ({
         ...prevDoctor,
-        dependencia: { idDependencia: value }, // Actualizar el objeto Dependencia
+        dependencia: { idDependencia: value },
       }));
     } else {
       setDoctor({ ...doctor, [name]: value });
@@ -73,6 +74,7 @@ export default function AgregarDoctor({ onDoctorAdded }) {
 
     // Llamar a la función de actualización de la lista
     onDoctorAdded();
+    toast.success("Registro agregado correctamente");
   };
 
   return (

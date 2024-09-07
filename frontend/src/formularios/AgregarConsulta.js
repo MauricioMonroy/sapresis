@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 import Calendario from "../comunes/Calendario";
 import BasicTimePicker from "../comunes/BasicTimePicker";
 import dayjs from "dayjs";
@@ -33,7 +34,8 @@ export default function AgregarConsulta({ onConsultaAdded }) {
         );
         setPacientes(resultado.data);
       } catch (error) {
-        console.error("Error al cargar los pacientes:", error);
+        console.error("Error al cargar los registros de Paciente:", error);
+        toast.error("Error al cargar los datos del registro solicitado");
       }
     };
     cargarPacientes();
@@ -53,7 +55,8 @@ export default function AgregarConsulta({ onConsultaAdded }) {
         );
         setDoctores(resultado.data);
       } catch (error) {
-        console.error("Error al cargar los doctores:", error);
+        console.error("Error al cargar los registros de Doctor:", error);
+        toast.error("Error al cargar los datos del registro solicitado");
       }
     };
     cargarDoctores();
@@ -79,7 +82,7 @@ export default function AgregarConsulta({ onConsultaAdded }) {
         month: "2-digit",
         day: "2-digit",
       })
-      .replace(/\//g, "-"); // Reemplazar '/' con '-'
+      .replace(/\//g, "-");
     setConsulta((prevConsulta) => ({
       ...prevConsulta,
       fechaConsulta: dateStr,
@@ -97,7 +100,7 @@ export default function AgregarConsulta({ onConsultaAdded }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(consulta); // Verificar los datos a enviar
+    console.log(consulta);
     const urlBase = "http://localhost:8080/sipress-app/consultas";
     const token = localStorage.getItem("token");
     try {
@@ -111,8 +114,10 @@ export default function AgregarConsulta({ onConsultaAdded }) {
         modalInstance.hide();
       }
       onConsultaAdded();
+      toast.success("Registro agregado correctamente");
     } catch (error) {
       console.error("Error al agregar la consulta:", error);
+      toast.error("Error al agregar la consulta");
     }
   };
 

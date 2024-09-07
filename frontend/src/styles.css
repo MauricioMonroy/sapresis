@@ -245,29 +245,29 @@ body {
 footer {
     background: #113733;
     min-height: 80px;
-  }
-  
-  footer p {
+}
+
+footer p {
     color: #f3f3f3;
     text-align: center;
-  }
-  
-  #iconos i {
+}
+
+#iconos i {
     font-size: 26px;
     padding: 0 8px;
     color: #f3f3f3;
-  }
-  
-  .blockquote-footer {
+}
+
+.blockquote-footer {
     margin-top: -1rem;
     margin-bottom: 1rem;
     font-size: 0.875em;
     color: #6c757d;
-  }
-  
-  .blockquote-footer::before {
+}
+
+.blockquote-footer::before {
     content: "— ";
-  }
+}
 
 /* Reglas para la sección de botones de navegación */
 #actions {
@@ -981,11 +981,13 @@ textarea {
 }
 
 #detalle .card-title {
-    font-size: 1.25rem;
+    word-wrap: break-word;
+    font-size: 1.2rem;
     margin-bottom: 10px;
 }
 
 #detalle .card-text {
+    word-wrap: break-word;
     font-size: 1rem;
     margin-bottom: 5px;
 }
@@ -997,6 +999,22 @@ textarea {
 
 #detalle .btn {
     margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    #detalle .card {
+        padding: 10px;
+    }
+
+    #detalle .card-title,
+    .card-text {
+        font-size: 0.9rem;
+    }
+
+    #detalle .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }
 
 @media print {
