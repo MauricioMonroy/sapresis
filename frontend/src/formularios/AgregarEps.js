@@ -1,6 +1,15 @@
-import axios from "axios";
 import React, { useState, useRef } from "react";
+import axios from "axios";
 import { toast } from "react-toastify";
+
+/**
+ * Componente funcional que renderiza el modal para agregar una EPS
+ * @param {Object} props Las propiedades del componente
+ * @param {Function} props.onEpsAdded Función que se ejecuta cuando se agrega una EPS
+ * @returns El componente de formulario para agregar una EPS
+ * @requires react, axios, react-toastify, useRef, useState
+ * @version 1.0
+ */
 
 export default function AgregarEps({ onEpsAdded }) {
   const modalRef = useRef(null);

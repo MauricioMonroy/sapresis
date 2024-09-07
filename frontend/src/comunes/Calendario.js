@@ -2,6 +2,17 @@ import React, { useState } from "react";
 import { Calendar } from "primereact/calendar";
 import { addLocale } from "primereact/api";
 
+/**
+ * Componente Calendario
+ * @param {Object} props Las propiedades del componente.
+ * @param {Function} props.onDateClick Función que se ejecuta cuando se selecciona una fecha.
+ * @param {Function} props.addLocale Función que agrega un idioma al calendario.
+ * @param {Function} props.handleDateChange Función que se ejecuta cuando cambia la fecha.
+ * @returns {JSX.Element} El componente Calendario.
+ * @requires react primereact/api primereact/calendar
+ * @version 1.0
+ */
+
 const Calendario = ({ onDateClick }) => {
   const [date, setDate] = useState(null);
 

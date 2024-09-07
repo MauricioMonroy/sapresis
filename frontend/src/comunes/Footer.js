@@ -1,5 +1,11 @@
 import React from "react";
 
+/**
+ * Componente para mostrar el pie de página en todas las páginas.
+ * @returns El componente Footer.
+ * @version 1.0
+ */
+
 const Footer = () => {
   return (
     <footer className="py-5" id="iconos">

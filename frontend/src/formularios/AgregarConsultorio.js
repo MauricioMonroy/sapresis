@@ -1,9 +1,18 @@
-import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import { toast } from "react-toastify";
+
+/** Componente funcional que renderiza el modal para agregar un consultorio
+ * @param {Object} props Las propiedades del componente
+ * @param {Function} props.onConsultorioAdded Función que se ejecuta cuando se agrega un consultorio
+ * @returns El componente de formulario para agregar un consultorio
+ * @requires react, axios, react-toastify
+ * @version 1.0
+ * */
 
 export default function AgregarConsultorio({ onConsultorioAdded }) {
   const modalRef = useRef(null);
+  const [error, setError] = useState(null);
 
   const [consultorio, setConsultorio] = useState({
     numeroConsultorio: "",
@@ -30,9 +39,9 @@ export default function AgregarConsultorio({ onConsultorioAdded }) {
           }
         );
         setPacientes(resultado.data);
+        setError(null);
       } catch (error) {
-        console.error("Error al cargar los registros de Paciente:", error);
-        toast.error("Error al cargar los datos del registro solicitado");
+        console.error("Error al cargar los registros de Paciente", error);
       }
     };
     cargarPacientes();
@@ -51,9 +60,9 @@ export default function AgregarConsultorio({ onConsultorioAdded }) {
           }
         );
         setPersonalS(resultado.data);
+        setError(null);
       } catch (error) {
-        console.error("Error al cargar los registros de Personal:", error);
-        toast.error("Error al cargar los datos del registro solicitado");
+        console.error("Error al cargar los registros de Personal", error);
       }
     };
     cargarPersonalS();
@@ -89,7 +98,7 @@ export default function AgregarConsultorio({ onConsultorioAdded }) {
       onConsultorioAdded();
       toast.success("Registro agregado correctamente");
     } catch (error) {
-      console.error("Error al agregar el registro:", error);
+      console.error("Error al agregar el registro", error);
       toast.error("Error al agregar el registro");
     }
   };
@@ -118,6 +127,7 @@ export default function AgregarConsultorio({ onConsultorioAdded }) {
           </div>
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="modal-body">
+              {error && <p className="fs-5">{error}</p>}
               <div className="form-floating form-group mb-3">
                 <input
                   type="text"

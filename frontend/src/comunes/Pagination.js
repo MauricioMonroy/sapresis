@@ -2,6 +2,21 @@ import React from "react";
 import classnames from "classnames";
 import { usePagination, DOTS } from "./usePagination";
 import "../pagination.css";
+
+/**
+ * Componente que renderiza la paginación de las listas
+ * @param {Object} props Las propiedades del componente
+ * @param {Function} props.onPageChange Función que se ejecuta cuando se cambia de página
+ * @param {number} props.totalCount El número total de elementos en la lista
+ * @param {number} props.siblingCount El número de elementos a mostrar en la paginación
+ * @param {number} props.currentPage La página actual
+ * @param {number} props.pageSize El número de elementos por página
+ * @param {string} props.className La clase CSS del componente
+ * @returns El componente de paginación
+ * @requires classnames Para combinar clases CSS, usePagination, DOTS
+ * @version 1.0
+ */
+
 const Pagination = (props) => {
   const {
     onPageChange,

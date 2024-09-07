@@ -1,9 +1,19 @@
-import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import { toast } from "react-toastify";
+
+/**
+ * Componente funcional que renderiza el modal para agregar un personal
+ * @param {Object} props Las propiedades del componente
+ * @param {Function} props.onPersonalAdded Función que se ejecuta cuando se agrega un personal
+ * @returns El componente de formulario para agregar un personal
+ * @requires react, axios, react-toastify, useRef, useState, useEffect
+ * @version 1.0
+ * */
 
 export default function AgregarPersonal({ onPersonalAdded }) {
   const modalRef = useRef(null);
+  const [error, setError] = useState(null);
 
   const [personal, setPersonal] = useState({
     idPersonal: "",
@@ -28,16 +38,22 @@ export default function AgregarPersonal({ onPersonalAdded }) {
   useEffect(() => {
     // Cargar las dependencias al montar el componente
     const cargarDependencias = async () => {
-      const token = localStorage.getItem("token");
-      const resultado = await axios.get(
-        "http://localhost:8080/sipress-app/dependencias",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setDependencias(resultado.data);
+      try {
+        const token = localStorage.getItem("token");
+        const resultado = await axios.get(
+          "http://localhost:8080/sipress-app/dependencias",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setDependencias(resultado.data);
+        setError(null);
+      } catch (error) {
+        setError("Error al cargar los registros de Dependencia");
+        console.error("Error al cargar registros", error);
+      }
     };
 
     cargarDependencias();
@@ -101,6 +117,7 @@ export default function AgregarPersonal({ onPersonalAdded }) {
           </div>
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="modal-body">
+              {error && <p className="fs-5">{error}</p>}
               <div className="form-floating form-group mb-3">
                 <input
                   type="text"

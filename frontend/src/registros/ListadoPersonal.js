@@ -6,6 +6,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { confirmarEliminacion } from "../comunes/Notificaciones";
 import { toast } from "react-toastify";
 
+/**
+ * Componente funcional que muestra la lista de personal de salud registrados en el sistema.
+ * @param {Function} props.cargarPersonalS - Función que carga la lista de personal de salud.
+ * @param {Array} props.personal - Lista de personal de salud registrados en el sistema.
+ * @param {String} props.role - Rol del usuario autenticado.
+ * @param {String} props.error - Mensaje de error al cargar los registros.
+ * @param {Number} props.currentPage - Página actual de la lista de personal de salud.
+ * @param {Function} props.setCurrentPage - Función que establece la página actual de la lista de personal de salud.
+ * @param {Function} props.navigate - Función de navegación entre componentes.
+ * @param {String} urlBase - URL base para obtener la lista de personal de salud.
+ * @param {Number} PageSize - Número de registros por página.
+ * @returns {string} HTML con la lista de personal de salud.
+ * @requires react, axios, AgregarPersonal, Pagination, Link, useNavigate, confirmarEliminacion, toast.
+ * @version 1.0
+ * */
+
 const PageSize = 5;
 
 export default function ListadoPersonal() {
@@ -28,7 +44,7 @@ export default function ListadoPersonal() {
       setError(null);
     } catch (error) {
       setError("Error al cargar los registros");
-      console.error("Error al cargar registros:", error);
+      console.error("Error al cargar registros", error);
     }
   };
 
@@ -82,7 +98,6 @@ export default function ListadoPersonal() {
   return (
     <div className="p-3 mt-5 mb-2">
       <section>
-        {error && <p>Error al cargar registros: {error}</p>}
         <AgregarPersonal onPersonalAdded={cargarPersonalS} />
         <div id="actions" className="mt-3">
           <div className="row justify-content-center">
@@ -128,6 +143,7 @@ export default function ListadoPersonal() {
               </h3>
             </div>
             <div className="table-responsive">
+              {error && <p className="fs-5">{error}</p>}
               <table className="table table-striped table-hover align-middle">
                 <thead className="table-dark">
                   <tr>

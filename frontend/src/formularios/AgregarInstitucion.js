@@ -1,6 +1,15 @@
-import axios from "axios";
 import React, { useState, useRef } from "react";
+import axios from "axios";
 import { toast } from "react-toastify";
+
+/**
+ * Componente funcional que renderiza el modal para agregar una institución
+ * @param {Object} props Las propiedades del componente
+ * @param {Function} props.onInstitucionAdded Función que se ejecuta cuando se agrega una institución
+ * @returns El componente de formulario para agregar una institución
+ * @requires react, axios, react-toastify, useRef, useState
+ * @version 1.0
+ * */
 
 export default function AgregarInstitucion({ onInstitucionAdded }) {
   const modalRef = useRef(null);

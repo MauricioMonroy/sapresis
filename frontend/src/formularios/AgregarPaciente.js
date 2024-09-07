@@ -1,9 +1,19 @@
-import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import { toast } from "react-toastify";
+
+/**
+ * Componente funcional que renderiza el modal para agregar un paciente
+ * @param {Object} props Las propiedades del componente
+ * @param {Function} props.onPacienteAdded Función que se ejecuta cuando se agrega un paciente
+ * @returns El componente de formulario para agregar un paciente
+ * @requires react, axios, react-toastify, useRef, useState, useEffect
+ * @version 1.0
+ * */
 
 export default function AgregarPaciente({ onPacienteAdded }) {
   const modalRef = useRef(null);
+  const [error, setError] = useState(null);
 
   const [paciente, setPaciente] = useState({
     idPaciente: "",
@@ -29,16 +39,22 @@ export default function AgregarPaciente({ onPacienteAdded }) {
 
   useEffect(() => {
     const cargarEpsS = async () => {
-      const token = localStorage.getItem("token");
-      const resultado = await axios.get(
-        "http://localhost:8080/sipress-app/epsS",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setEpsS(resultado.data);
+      try {
+        const token = localStorage.getItem("token");
+        const resultado = await axios.get(
+          "http://localhost:8080/sipress-app/epsS",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setEpsS(resultado.data);
+        setError(null);
+      } catch (error) {
+        setError("Error al cargar los registros de Eps");
+        console.error("Error al cargar los registros de Eps:", error);
+      }
     };
 
     cargarEpsS();
@@ -89,6 +105,7 @@ export default function AgregarPaciente({ onPacienteAdded }) {
       <div className="modal-dialog modal-lg">
         <div className="modal-content bg-light">
           <div className="modal-header">
+            {error && <p className="fs-5">{error}</p>}
             <h1 className="modal-title fs-5" id="AgregarPacienteModalLabel">
               Registro de Pacientes
             </h1>

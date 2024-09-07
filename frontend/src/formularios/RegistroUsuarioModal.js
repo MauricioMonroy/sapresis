@@ -2,6 +2,15 @@ import axios from "axios";
 import React, { useState, useRef } from "react";
 import { toast } from "react-toastify";
 
+/**
+ * Componente funcional que renderiza el modal para agregar un usuario
+ * @param {Object} props Las propiedades del componente
+ * @param {Function} props.onUsuarioAdded Función que se ejecuta cuando se agrega un usuario
+ * @returns El componente de formulario para agregar un usuario
+ * @requires react, axios, react-toastify, useRef, useState
+ * @version 1.0
+ * */
+
 export default function Registro({ onUsuarioAdded }) {
   const modalRef = useRef(null);
 

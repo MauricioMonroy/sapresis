@@ -1,12 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
 import Calendario from "../comunes/Calendario";
 import BasicTimePicker from "../comunes/BasicTimePicker";
 import dayjs from "dayjs";
+import { toast } from "react-toastify";
+
+/**
+ * Componente funcional que renderiza el modal para agregar una consulta
+ * @param {Object} props Las propiedades del componente
+ * @param {Function} props.onConsultaAdded Función que se ejecuta cuando se agrega una consulta
+ * @returns El componente de formulario para agregar una consulta
+ * @requires react, axios, react-toastify, Calendario, BasicTimePicker, dayjs
+ * @version 1.0
+ */
 
 export default function AgregarConsulta({ onConsultaAdded }) {
   const modalRef = useRef(null);
+  const [error, setError] = useState(null);
 
   const [consulta, setConsulta] = useState({
     fechaConsulta: "",
@@ -33,9 +43,10 @@ export default function AgregarConsulta({ onConsultaAdded }) {
           }
         );
         setPacientes(resultado.data);
+        setError(null);
       } catch (error) {
-        console.error("Error al cargar los registros de Paciente:", error);
-        toast.error("Error al cargar los datos del registro solicitado");
+        setError("Error al cargar los registros de Paciente");
+        console.error("Error al cargar los registros de Paciente", error);
       }
     };
     cargarPacientes();
@@ -54,9 +65,10 @@ export default function AgregarConsulta({ onConsultaAdded }) {
           }
         );
         setDoctores(resultado.data);
+        setError(null);
       } catch (error) {
-        console.error("Error al cargar los registros de Doctor:", error);
-        toast.error("Error al cargar los datos del registro solicitado");
+        setError("Error al cargar los registros de Doctor");
+        console.error("Error al cargar los registros de Doctor", error);
       }
     };
     cargarDoctores();
@@ -145,6 +157,7 @@ export default function AgregarConsulta({ onConsultaAdded }) {
           </div>
           <form onSubmit={onSubmit}>
             <div className="modal-body">
+              {error && <p className="fs-5">{error}</p>}
               <div className="form-floating form-group mb-3">
                 <select
                   className="form-control"

@@ -6,6 +6,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { confirmarEliminacion } from "../comunes/Notificaciones";
 import { toast } from "react-toastify";
 
+/**
+ * Componente funcional que muestra la lista de facturas registradas en el sistema.
+ * @param {Function} props.cargarFacturas - Función que carga la lista de facturas.
+ * @param {Array} props.facturas - Lista de facturas registradas en el sistema.
+ * @param {String} props.role - Rol del usuario autenticado.
+ * @param {String} props.error - Mensaje de error al cargar los registros.
+ * @param {Number} props.currentPage - Página actual de la lista de facturas.
+ * @param {Function} props.setCurrentPage - Función que establece la página actual de la lista de facturas.
+ * @param {Function} props.navigate - Función de navegación entre componentes.
+ * @param {String} urlBase - URL base para obtener la lista de facturas.
+ * @param {Number} PageSize - Número de registros por página.
+ * @returns {string} HTML con la lista de facturas.
+ * @requires react, axios, AgregarFactura, Pagination, Link, useNavigate, confirmarEliminacion, toast.
+ * @version 1.0
+ */
+
 const PageSize = 5;
 
 export default function ListadoFacturas() {
@@ -84,7 +100,6 @@ export default function ListadoFacturas() {
     <div className="p-3 mb-2 mt-5">
       <section>
         <AgregarFactura onFacturaAdded={cargarFacturas} />
-        {error && <p>Error al cargar los registros: {error.message}</p>}
         <div id="actions" className="mt-3">
           <div className="row justify-content-center">
             <div className="col-12 col-md-4 d-flex justify-content-center">
@@ -130,6 +145,7 @@ export default function ListadoFacturas() {
               </h3>
             </div>
             <div className="table-responsive">
+              {error && <p className="fs-5">{error}</p>}
               <table className="table table-striped table-hover align-middle">
                 <thead className="table-dark">
                   <tr>

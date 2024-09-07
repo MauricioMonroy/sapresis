@@ -1,7 +1,14 @@
-import axios from "axios";
 import React, { useEffect, useState, useCallback } from "react";
+import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+
+/**
+ * Componente funcional que permite editar un personal
+ * @returns El componente de formulario para editar un personal
+ * @requires react, axios, react-toastify, useNavigate, useParams, Link, useState, useCallback, useEffect
+ * @version 1.0
+ * */
 
 export default function EditarPersonal() {
   const urlBase = "http://localhost:8080/sipress-app/personalS";

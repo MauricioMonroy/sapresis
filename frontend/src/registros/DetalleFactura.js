@@ -3,6 +3,14 @@ import React, { useEffect, useState, useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
 import { NumericFormat } from "react-number-format";
 
+/**
+ * Componente funcional que permite ver los detalles de una factura
+ * @param {Function} props.imprimirFactura - Función para imprimir la factura
+ * @returns El componente de detalles de factura
+ * @requires react, axios, react-router-dom, react-number-format
+ * @version 1.0
+ * */
+
 export default function DetalleFactura() {
   const urlBase = "http://localhost:8080/sipress-app/facturas";
 

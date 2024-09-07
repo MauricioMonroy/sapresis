@@ -6,6 +6,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { confirmarEliminacion } from "../comunes/Notificaciones";
 import { toast } from "react-toastify";
 
+/**
+ * Componente funcional que muestra la lista de usuarios registrados en el sistema.
+ * @param {Function} props.cargarUsuarios - Función que carga la lista de usuarios.
+ * @param {Array} props.usuarios - Lista de usuarios registrados en el sistema.
+ * @param {String} props.role - Rol del usuario autenticado.
+ * @param {String} props.error - Mensaje de error al cargar los registros.
+ * @param {Number} props.currentPage - Página actual de la lista de usuarios.
+ * @param {Function} props.setCurrentPage - Función que establece la página actual de la lista de usuarios.
+ * @param {Function} props.navigate - Función de navegación entre componentes.
+ * @param {String} urlBase - URL base para obtener la lista de usuarios.
+ * @param {Number} PageSize - Número de registros por página.
+ * @returns {string} HTML con la lista de usuarios.
+ * @requires react, axios, Registro, Pagination, Link, useNavigate, confirmarEliminacion, toast.
+ * @version 1.0
+ * */
+
 const PageSize = 5;
 
 const GestionUsuarios = () => {
@@ -28,7 +44,7 @@ const GestionUsuarios = () => {
       setError(null);
     } catch (error) {
       setError("Error al cargar los registros");
-      console.error("Error al cargar registros:", error);
+      console.error("Error al cargar los registros", error);
     }
   };
 
@@ -115,6 +131,7 @@ const GestionUsuarios = () => {
               </h3>
             </div>
             <div className="table-responsive">
+              {error && <p className="fs-5">{error}</p>}
               <table className="table table-striped table-hover align-middle">
                 <thead className="table-dark">
                   <tr>
