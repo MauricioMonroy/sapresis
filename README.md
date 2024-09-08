@@ -1,5 +1,7 @@
 # SIPRESS (Sistema Integral para la Prestación de Servicios de Salud)
 
+![SIPRESS Logo](backend/src/main/resources/images/print-logo.png)
+
 ## Descripción del Proyecto
 
 SIPRESS es un sistema está destinado a ser usado por el personal de una institución prestadora de salud. Está compuesto
