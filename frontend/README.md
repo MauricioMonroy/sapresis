@@ -13,7 +13,7 @@ patients, consultations, and other key aspects of healthcare.
     ```
 2. Navega al directorio / Navigate to the directory `frontend`:
    ```bash
-    cd sipressspringapp/frontend
+    cd sipresswebapp/frontend
     ```
 3. Instala las dependencias / Install the dependencies:
     ```bash
