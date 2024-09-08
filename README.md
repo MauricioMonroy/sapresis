@@ -2,8 +2,8 @@
 
 ## Descripción del Proyecto
 
-SIPRESS es un proyecto académico desarrollado para la Tecnología de Análisis y Desarrollo de Software (2721455) del
-SENA. Este sistema está destinado a ser usado por el personal de una institución prestadora de salud. Está compuesto por
+SIPRESS es un sistema está destinado a ser usado por el personal de una institución prestadora de salud. Está compuesto
+por
 varias entidades que permiten consultar y gestionar información básica sobre los empleados de la institución, como el
 número de identificación, el nombre y los datos de contacto. También permite la asignación de consultas, consultorios y
 pacientes, y la recuperación dinámica de ID, nombres, datos de contacto, fórmulas médicas, detalles de facturación y los
@@ -25,6 +25,8 @@ profesionales vinculados.
 1. Asegúrate de tener configurada una base de datos MySQL.
 2. Actualiza el archivo `application.properties` con las credenciales de tu base de datos.
 3. Usa Maven o tu IDE favorito para ejecutar el proyecto Spring Boot.
+
+Para conocer detalles específicos, consulta el archivo [README](backend/README.md) en la carpeta `backend`.
 
 ### Frontend
 
@@ -57,8 +59,8 @@ ___
 
 ## Project Description
 
-SIPRESS is an academic project developed for the Software Analysis and Development Technology (2721455) at SENA. This
-system is designed to be used by the staff of a health service provider institution. It consists of various entities
+SIPRESS is a system designed to be used by the staff of a health service provider institution. It consists of various
+entities
 that allow querying and managing basic information about the institution's employees, such as identification number,
 name, and contact details. It also enables the assignment of consultations, clinics, and patients, as well as the
 dynamic retrieval of IDs, names, contact details, medical prescriptions, billing details, and linked professionals.
@@ -79,6 +81,8 @@ dynamic retrieval of IDs, names, contact details, medical prescriptions, billing
 1. Ensure you have a MySQL database configured.
 2. Update the `application.properties` file with your database credentials.
 3. Use Maven or your favorite IDE to run the Spring Boot project.
+
+For specific details, check the [README](backend/README.md) file inside the `backend` folder.
 
 ### Frontend
 
