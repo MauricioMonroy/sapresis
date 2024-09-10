@@ -22,6 +22,18 @@ profesionales vinculados.
 
 ## Guía de Instalación
 
+### Clonar el Repositorio
+
+1. Abre una terminal en la ubicación donde deseas guardar el proyecto.
+2. Ejecuta el siguiente comando para clonar el repositorio:
+   ```bash
+   git clone https://github.com/MauricioMonroy/sipress-web-app.git
+    ```
+3. Abre el directorio del proyecto:
+   ```bash
+   cd sipress-web-app
+   ```
+
 ### Backend
 
 1. Asegúrate de tener configurada una base de datos MySQL.
@@ -77,6 +89,18 @@ dynamic retrieval of IDs, names, contact details, medical prescriptions, billing
 - Bootstrap 5
 
 ## Installation Guide
+
+### Clone the Repository
+
+1. Open a terminal in the location where you want to save the project.
+2. Run the following command to clone the repository:
+   ```bash
+   git clone https://github.com/MauricioMonroy/sipress-web-app.git
+    ```
+3. Open the project directory:
+   ```bash
+   cd sipress-web-app
+   ```
 
 ### Backend
 
