@@ -1,4 +1,4 @@
-# Arquitectura del Backend de SIPRESS
+# Manual de arquitectura y diseño de SIPRESS 
 
 ## Descripción de los componentes principales
 
@@ -7,7 +7,7 @@ La arquitectura del backend de la aplicación SIPRESS se basa en cinco paquetes 
 ```servicio``` y ```controlador```. Junto con estos, se encuentran dos paquetes adicionales: ```cliente``` y
 ```excepcion```:
 
-![Estructura de directorios](src/main/resources/images/backend-tree.png)
+![Estructura de directorios](../backend/src/main/resources/images/backend-tree.png)
 
 *Estructura de directorios del backend de SIPRESS*
 
@@ -30,11 +30,11 @@ anotaciones necesarias para la persistencia (mediante **JPA**), la serializació
 *JSON**) y
 las validaciones (para asegurar que los datos cumplan ciertos criterios antes de almacenarse).
 
-![Estructura del paquete modelo](src/main/resources/images/modelo.png)
+![Estructura del paquete modelo](../backend/src/main/resources/images/modelo.png)
 
 *Estructura del paquete modelo*
 
-![Diagrama de clases del paquete modelo](src/main/resources/images/diagrama-modelo.png)
+![Diagrama de clases del paquete modelo](../backend/src/main/resources/images/diagrama-modelo.png)
 
 *Diagrama de clases del paquete modelo*
 
@@ -47,7 +47,7 @@ Este paquete contiene las interfaces que extienden de JPA Repository. Estas inte
 gestión de
 peticiones a la base de datos.
 
-![Estructura del paquete repositorio](src/main/resources/images/repositorio.png)
+![Estructura del paquete repositorio](../backend/src/main/resources/images/repositorio.png)
 
 *Estructura del paquete repositorio*
 
@@ -63,7 +63,7 @@ para la administración de interfaces y sus implementaciones:
 * ```implementacion```: Contiene las clases que implementan los métodos definidos en las interfaces. Aquí se realiza la
   lógica de negocio y se gestionan las transacciones.
 
-![Estructura del paquete servicio](src/main/resources/images/servicio.png)
+![Estructura del paquete servicio](../backend/src/main/resources/images/servicio.png)
 
 *Estructura del paquete servicio*
 
@@ -76,7 +76,7 @@ realizadas por el
 cliente. Los controladores integran los métodos específicos de los servicios para responder a las peticiones del cliente
 y gestionar la información que se envía y recibe a través de los *endpoints* de tipo **REST**.
 
-![Estructura del paquete controlador](src/main/resources/images/controlador.png)
+![Estructura del paquete controlador](../backend/src/main/resources/images/controlador.png)
 
 *Estructura del paquete controlador*
 
@@ -91,7 +91,7 @@ cada usuario. El directorio se divide en varios subdirectorios, cada uno con un 
 la seguridad. A continuación, se describen los subdirectorios y las clases más importantes de cada
 uno:
 
-![Estructura del paquete auth](src/main/resources/images/auth.png)
+![Estructura del paquete auth](../backend/src/main/resources/images/auth.png)
 
 *Estructura del paquete auth*
 
@@ -101,7 +101,7 @@ uno:
 establecen las reglas de acceso. Permite la creación de roles y la creación de un usuario con privilegios de
 ``SUPERADMIN`` al iniciar la aplicación.
 
-![Detalle de las clases del subdirectorio bootstrap](src/main/resources/images/bootstrap-clases.png)
+![Detalle de las clases del subdirectorio bootstrap](../backend/src/main/resources/images/bootstrap-clases.png)
 
 *Detalle de las clases del subdirectorio bootstrap*
 
@@ -111,7 +111,7 @@ ___
 *endpoints* de la aplicación, se configura el cifrado de las contraseñas y se establecen las reglas de acceso a los
 usuarios.
 
-![Detalle de las clases del subdirectorio config](src/main/resources/images/config-clases.png)
+![Detalle de las clases del subdirectorio config](../backend/src/main/resources/images/config-clases.png)
 
 *Detalle de las clases del subdirectorio config*
 
@@ -120,7 +120,7 @@ ___
 **3. ``controlador``:** Contiene las clases que gestionan las peticiones **HTTP** relacionadas con la autenticación y
 autorización de los usuarios. Aquí se definen los *endpoints* para el inicio de sesión y el registro de usuarios.
 
-![Detalle de las clases del subdirectorio controlador](src/main/resources/images/controlador-clases.png)
+![Detalle de las clases del subdirectorio controlador](../backend/src/main/resources/images/controlador-clases.png)
 
 *Detalle de las clases del subdirectorio controlador*
 
@@ -131,7 +131,7 @@ autenticación
 y autorización de los usuarios. Estos objetos se utilizan para enviar y recibir información entre el cliente y el
 servidor.
 
-![Detalle de las clases del subdirectorio dtos](src/main/resources/images/dtos-clases.png)
+![Detalle de las clases del subdirectorio dtos](../backend/src/main/resources/images/dtos-clases.png)
 
 *Detalle de las clases del subdirectorio dtos*
 
@@ -142,7 +142,7 @@ Estas
 clases representan las tablas de la base de datos y contienen las anotaciones necesarias para la persistencia, la
 serialización y las validaciones.
 
-![Detalle de las clases del subdirectorio entidad](src/main/resources/images/entidad-clases.png)
+![Detalle de las clases del subdirectorio entidad](../backend/src/main/resources/images/entidad-clases.png)
 
 *Detalle de las clases del subdirectorio entidad*
 
@@ -152,7 +152,7 @@ ___
 Estas
 clases se lanzan en caso de errores relacionados con la autenticación y autorización de los usuarios.
 
-![Detalle de las clases del subdirectorio excepcion](src/main/resources/images/excepcion-clases.png)
+![Detalle de las clases del subdirectorio excepcion](../backend/src/main/resources/images/excepcion-clases.png)
 
 *Detalle de las clases del subdirectorio excepcion*
 
@@ -162,7 +162,7 @@ ___
 métodos CRUD proporcionados por defecto por la API de Spring Data JPA, lo que simplifica la gestión de peticiones a
 la base de datos.
 
-![Detalle de las clases del subdirectorio repositorio](src/main/resources/images/repositorio-clases.png)
+![Detalle de las clases del subdirectorio repositorio](../backend/src/main/resources/images/repositorio-clases.png)
 
 *Detalle de las clases del subdirectorio repositorio*
 
@@ -173,7 +173,7 @@ autorización
 de los usuarios. Aquí se realizan las operaciones de autenticación, autorización, registro de usuarios y gestión de
 tokens.
 
-![Detalle de las clases del subdirectorio servicio](src/main/resources/images/servicio-clases.png)
+![Detalle de las clases del subdirectorio servicio](../backend/src/main/resources/images/servicio-clases.png)
 
 *Detalle de las clases del subdirectorio servicio*
 
@@ -192,7 +192,7 @@ ___
 Para ilustrar la estructura y las relaciones entre los componentes de la aplicación SIPRESS, se presenta a continuación
 un diagrama de despliegue que muestra la arquitectura, las conexiones entre el backend, el frontend y otros componentes.
 
-![Diagrama de despliegue de la arquitectura](src/main/resources/images/diagrama-de-despliegue.png)
+![Diagrama de despliegue de la arquitectura](../backend/src/main/resources/images/diagrama-de-despliegue.png)
 
 *Diagrama de despliegue de la arquitectura*
 

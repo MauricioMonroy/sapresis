@@ -40,7 +40,9 @@ profesionales vinculados.
 2. Actualiza el archivo `application.properties` con las credenciales de tu base de datos.
 3. Usa Maven o tu IDE favorito para ejecutar el proyecto Spring Boot.
 
-Para conocer detalles específicos, consulta el archivo [README](backend/README.md) en la carpeta `backend`.
+Para conocer detalles específicos sobre la estructura del proyecto, consulta
+el [Manual de arquitectura y diseño de SIPRESS](documentation/ARCHITECTURE.md), en el archivo `ARCHITECTURE` dentro de la carpeta
+`documentation`.
 
 ### Frontend
 
@@ -108,7 +110,7 @@ dynamic retrieval of IDs, names, contact details, medical prescriptions, billing
 2. Update the `application.properties` file with your database credentials.
 3. Use Maven or your favorite IDE to run the Spring Boot project.
 
-For specific details, check the [README](backend/README.md) file inside the `backend` folder.
+For specific details, check the [README](documentation/ARCHITECTURE) file inside the `backend` folder.
 
 ### Frontend
 
