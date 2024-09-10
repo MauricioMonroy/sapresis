@@ -9,7 +9,7 @@ patients, consultations, and other key aspects of healthcare.
 
 1. Clona el repositorio / Clone the repository:
    ```bash
-   git clone https://github.com/MauricioMonroy/sipressweb-app.git
+   git clone https://github.com/MauricioMonroy/sipress-web-app.git
     ```
 2. Navega al directorio / Navigate to the directory `frontend`:
    ```bash
