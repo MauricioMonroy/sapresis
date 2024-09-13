@@ -1,4 +1,4 @@
-# Manual de arquitectura y diseño de SIPRESS 
+# Manual de arquitectura y diseño de SIPRESS
 
 ## Descripción de los componentes principales
 
@@ -182,7 +182,8 @@ ___
 ### Documentación de la API
 
 Para conocer más detalles sobre la implementación de la seguridad en la aplicación, se recomienda revisar la
-documentación de la API y las pruebas realizadas con Postman. Esta documentación se puede consultar en el siguiente
+documentación de la API y las pruebas realizadas con Postman en el directorio ``documentation``
+[SIPRESS API](/documentation/API_DOCUMENTATION.md) o en el siguiente
 enlace: [SIPRESS API Documentation](https://documenter.getpostman.com/view/37130978/2sAXjDfbBx)
 
 ___
@@ -291,6 +292,18 @@ con Postman para comprender mejor el funcionamiento de la aplicación.
 
 Enlace al repositorio de
 GitHub: [SIPRESS Backend Repository](https://github.com/MauricioMonroy/SipressSpringApp/tree/main/backend)
+
+---
+
+# Referencias
+
+- [Spring Boot](https://spring.io/projects/spring-boot)
+- [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
+- [Spring Security](https://spring.io/projects/spring-security)
+- [Spring Web](https://spring.io/guides/gs/spring-boot/)
+- [Spring Boot Actuator](https://spring.io/guides/gs/actuator-service/)
+- [Spring Boot DevTools](https://spring.io/guides/gs/spring-boot/)
+- [Spring Boot HATEOAS](https://spring.io/guides/gs/rest-hateoas/)
 
 ---
 
