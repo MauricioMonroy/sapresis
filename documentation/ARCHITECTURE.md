@@ -1,6 +1,38 @@
-# Manual de arquitectura y diseño de SIPRESS
+# Manual de Arquitectura y Diseño del Backend de SIPRESS
 
-## Descripción de los componentes principales
+## Introducción
+
+Este manual proporciona una descripción detallada de la arquitectura y el diseño del backend de SIPRESS, un sistema de
+gestión de servicios de salud. La aplicación está diseñada para permitir a los profesionales de la salud gestionar
+pacientes, consultas, recetas médicas y otros aspectos clave de la atención sanitaria. El backend de SIPRESS está
+desarrollado en Java con Spring Boot y utiliza una base de datos MySQL para el almacenamiento de datos.
+
+El manual está organizado en varias secciones que describen los componentes principales de la arquitectura, incluyendo
+los paquetes, las clases y las relaciones entre ellos. Además, se proporciona un diagrama de despliegue que ilustra la
+estructura y las conexiones entre los componentes de la aplicación. Por último, se incluye información adicional sobre
+la documentación de la API y las pruebas realizadas con Postman.
+
+---
+
+## Contenido
+
+- [Estructura del Proyecto](#estructura-del-proyecto)
+    - [Descripción de los paquetes principales](#descripción-de-los-paquetes-principales)
+    - [Paquete ``modelo``](#paquete-modelo)
+    - [Paquete ``repositorio``](#paquete-repositorio)
+    - [Paquete ``servicio``](#paquete-servicio)
+    - [Paquete ``controlador``](#paquete-controlador)
+    - [Paquete ``auth``](#paquete-auth)
+- [Referencias](#referencias)
+
+---
+
+## Estructura del Proyecto
+
+La estructura del proyecto backend de SIPRESS sigue una arquitectura basada en paquetes, donde cada paquete contiene
+clases relacionadas con una funcionalidad específica de la aplicación.
+
+## Descripción de los paquetes principales
 
 La arquitectura del backend de la aplicación SIPRESS se basa en cinco paquetes principales: ```auth```, ```modelo```,
 ```repositorio```,
@@ -309,7 +341,6 @@ GitHub: [SIPRESS Backend Repository](https://github.com/MauricioMonroy/SipressSp
 
 ## Contacto
 
-Si tiene alguna pregunta o sugerencia sobre la arquitectura del backend de SIPRESS, no dude en ponerse en contacto con
-el equipo de desarrollo a través de los siguientes medios:
+Si tiene alguna pregunta o sugerencia sobre la arquitectura del backend de SIPRESS, no dude en ponerse en contacto conmigo:
 
 - Correo electrónico: `mauricio.monroy0@soy.sena.edu.co` o `mauriciomonroy@live.cl`

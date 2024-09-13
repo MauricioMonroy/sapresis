@@ -1,4 +1,4 @@
-# 📄 Documentación de SIPRESS API
+# 📚 Documentación de SIPRESS API
 
 ---
 
@@ -53,6 +53,24 @@ GitHub [login-registration-service](https://github.com/MauricioMonroy/login-regi
 explica con más detalle el funcionamiento del registro y la autenticación. También se puede revisar el repositorio de
 GitHub [SIPRESS](https://github.com/MauricioMonroy/sipress-web-app.git), en donde se detalla la estructura, las
 características y el funcionamiento de la aplicación.
+
+___
+
+# Contenido
+
+- [Servicio de login y registro](#servicio-de-login-y-registro)
+- [Servicios de sipress-web-app](#servicios-de-sipress-web-app)
+  - [Servicio de institución](#servicio-de-institución)
+  - [Servicio de personal](#servicio-de-personal)
+  - [Servicio de paciente](#servicio-de-paciente)
+  - [Servicio de fórmula](#servicio-de-fórmula)
+  - [Servicio de factura](#servicio-de-factura)
+  - [Servicio de EPS](#servicio-de-eps)
+  - [Servicio de doctor](#servicio-de-doctor)
+  - [Servicio de dependencia](#servicio-de-dependencia)
+  - [Servicio de consultorio](#servicio-de-consultorio)
+  - [Servicio de consulta](#servicio-de-consulta)
+- [Referencias](#referencias)
 
 ___
 
@@ -196,7 +214,7 @@ La respuesta para la petición puede ser visualizada en formato JSON y contiene 
 
 ```
 
-## Autorización *`No se requiere autorización`*
+## Autorización `No se requiere autorización`
 
 ___
 
@@ -335,7 +353,7 @@ Para acceder a este endpoint es necesario incluir el token de autorización en e
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización `Bearer token`
 
 ___
 
@@ -474,7 +492,7 @@ La respuesta tiene una estructura tipo JSON que contiene los objetos tipo usuari
 ]
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -587,7 +605,7 @@ ___
 Los endpoints `/instituciones` y `/instituciones/{id}` permiten la gestión de información relacionada con las
 instituciones de salud. Estos servicios permiten la creación, actualización, eliminación y consulta de instituciones.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -627,7 +645,7 @@ recurso.
 ]
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -724,7 +742,7 @@ La respuesta generada tiene una estructura tipo JSON con el siguiente formato:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -821,7 +839,7 @@ La respuesta se visualizará en un formato JSON de la siguiente manera:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -927,15 +945,14 @@ La respuesta de la petición mostrará la siguiente estructura:
   "telefonoInstitucion": "",
   "codigoPostal": ""
 }
-
- ```
+```
 
 ### Importante
 
 Hay que ser precavidos al utilizar este punto final, ya que sustituirá el registro existente por los valores
 introducidos en el cuerpo de la solicitud.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -1027,7 +1044,7 @@ La respuesta generada tendrá la siguiente estructura:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -1056,12 +1073,12 @@ ___
 
 ___
 
-# Servicio de Personal
+# Servicio de personal
 
 Los endpoints `/personalS` y `/personalS/{id}` permiten la gestión de información relacionada con el personal de salud.
 Estos servicios permiten la creación, actualización, eliminación y consulta de personal.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -1112,7 +1129,7 @@ Ejemplos of response body:
 ]
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -1283,7 +1300,7 @@ La respuesta obtenida es de tipo JSON y tiene la siguiente estructura:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -1420,7 +1437,7 @@ La respuesta tendrá las mismas propiedades mencionadas, siguiendo una estructur
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -1569,7 +1586,7 @@ La respuesta tendrá las siguientes propiedades mencionadas, siguiendo una estru
 
 Se debe ser precavido con el uso de este endpoint, ya que se reemplazarán los valores de un registro existente.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -1684,7 +1701,7 @@ La respuesta generada tendrá la siguiente estructura:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -1713,12 +1730,12 @@ ___
 
 ___
 
-## Servicio de Paciente
+## Servicio de paciente
 
 Los endpoints `/pacientes` y `/pacientes/{id}` permiten la gestión de información relacionada con los pacientes. Estos
 servicios permiten la creación, actualización, eliminación y consulta de pacientes.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -1764,7 +1781,7 @@ recurso.
 ]
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -1883,7 +1900,7 @@ La respuesta obtenida es de tipo JSON y tiene la siguiente estructura:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -2012,7 +2029,7 @@ La respuesta mostrará las propiedades mencionadas en una estructura de tipo JSO
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -2158,7 +2175,7 @@ La respuesta de la petición mostrará la siguiente estructura como un formato d
 Se debe tener en cuenta que el suo de este endpoint reemplazara la información existente con la que se especifique en la
 nueva solicitud.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -2266,7 +2283,7 @@ La respuesta generada tendrá la siguiente estructura:
 Hay que tener en cuenta que la eliminación de un registro de la entidad Paciente, eliminará automáticamente los
 registros relacionados con otras entidades tales como Factura, Consultorio, Consulta y Fórmula.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ___
 
@@ -2295,13 +2312,13 @@ ___
 
 ---
 
-# Servicio de Fórmulas
+# Servicio de fórmula
 
 Los endpoints `/formulas` y `/formulas/{id}` permiten la gestión de información relacionada con las fórmulas médicas.
 Estos servicios permiten la creación, actualización, eliminación y consulta de fórmulas, así como los datos específicos
 relacionados con un paciente.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -2351,7 +2368,7 @@ recuperación.
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -2474,7 +2491,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -2599,7 +2616,7 @@ La respuesta se mostrará en un formato de tipo JSON con la siguiente estructura
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -2745,7 +2762,7 @@ La respuesta se mostrará en un formato de tipo JSON con la siguiente estructura
 Se debe tener en cuenta que el uso de este endpoint reemplazará la información existente con la que se especifique en la
 nueva solicitud.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -2867,7 +2884,7 @@ La respuesta generada tendrá la siguiente estructura:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -2896,13 +2913,13 @@ La respuesta generada tendrá la siguiente estructura:
 
 ---
 
-# Servicio de Facturas
+# Servicio de factura
 
 Los endpoints `/facturas` y `/facturas/{id}` permiten la gestión de información relacionada con las facturas médicas.
 Estos servicios permiten la creación, actualización, eliminación y consulta de facturas, así como los datos específicos
 relacionados con loa costos de las consultas y fórmulas médicas.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -2953,7 +2970,7 @@ Es necesario el inicio de sesión y el uso del token de tipo bearer que se gener
 ]
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -3076,7 +3093,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -3206,7 +3223,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -3350,7 +3367,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
 
 Se debe tener precaución con el uso de este endpoint, ya que reemplaza los valores originales del registro especificado.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -3472,7 +3489,7 @@ La respuesta generada tendrá la siguiente estructura:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -3501,12 +3518,12 @@ La respuesta generada tendrá la siguiente estructura:
 
 ---
 
-# Servicio de Eps
+# Servicio de eps
 
 Los endpoints `/epsS` y `/epsS/{id}` permiten la gestión de información relacionada con las Entidades Promotoras de
 Salud (EPS). Estos servicios permiten la creación, actualización, eliminación y consulta de las EPS.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -3542,7 +3559,7 @@ Es necesario el inicio de sesión y el uso del token de tipo bearer que se gener
 ]
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -3635,7 +3652,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -3733,7 +3750,7 @@ La respuesta se mostrará en formato JSON con la siguiente estructura:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -3833,7 +3850,7 @@ La respuesta se mostrará en un formato de tipo JSON con la siguiente estructura
 Se debe tener en cuenta que al usar este endpoint, la información del registro seleccionado se cambiará de forma
 permanente.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -3934,7 +3951,7 @@ La respuesta generada tendrá la siguiente estructura:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -3963,12 +3980,12 @@ La respuesta generada tendrá la siguiente estructura:
 
 ---
 
-# Servicio de Doctores
+# Servicio de doctor
 
 Los endpoints `/doctores` y `/doctores/{id}` permiten la gestión de información relacionada con la entidad Doctor. Estos
 servicios permiten la creación, actualización, eliminación y consulta de los registros de doctores.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -4016,7 +4033,7 @@ Es necesario el inicio de sesión y el uso del token de tipo bearer que se gener
 ]
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -4151,7 +4168,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -4271,7 +4288,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -4408,7 +4425,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
 Se debe tener precaución con el uso de este endpoint, ya que no solo reemplaza los valores originales del registro
 especificado, sino que también puede cambiar datos de la dependencia y la institución asociadas.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -4535,7 +4552,7 @@ La respuesta generada tendrá la siguiente estructura:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -4564,13 +4581,13 @@ La respuesta generada tendrá la siguiente estructura:
 
 ---
 
-# Servicio de Dependencias
+# Servicio de dependencia
 
 Los endpoints `/dependencias` y `/dependencias/{id}` permiten la gestión de información relacionada con la entidad
 Dependencia. Estos servicios permiten la creación, actualización, eliminación y consulta de los registros de
 dependencias.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -4612,7 +4629,7 @@ Para hacer efectiva la solicitud es necesario el uso del token de tipo bearer qu
 ]
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -4719,7 +4736,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -4820,7 +4837,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -4929,7 +4946,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
 Se debe tener precaución con el uso de este endpoint, ya que no solo reemplaza los valores originales del registro
 especificado, sino que también puede cambiar datos de la institución asociada.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -5035,7 +5052,7 @@ La respuesta generada tendrá la siguiente estructura:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -5064,13 +5081,13 @@ La respuesta generada tendrá la siguiente estructura:
 
 ---
 
-# Servicio de Consultorios
+# Servicio de consultorio
 
 Los endpoints `/consultorios` y `/consultorios/{id}` permiten la gestión de información relacionada con la entidad
 Consultorio. Estos servicios permiten la creación, actualización, eliminación y consulta de los registros de
 consultorios.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -5136,7 +5153,7 @@ Para hacer efectiva la solicitud es necesario el uso del token de tipo bearer qu
 ]
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -5307,7 +5324,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -5466,7 +5483,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -5649,7 +5666,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
 Se debe tener precaución con el uso de este endpoint, ya que no solo reemplaza los valores originales del registro
 especificado, sino que también puede cambiar datos del paciente, EPS, personal, dependencia y la institución asociada.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -5796,7 +5813,7 @@ La respuesta generada tendrá la siguiente estructura:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -5825,13 +5842,13 @@ La respuesta generada tendrá la siguiente estructura:
 
 ---
 
-# Servicio de Consultas
+# Servicio de consulta
 
 Los endpoints `/consultas` y `/consultas/{idPaciente}/{idDoctor}` permiten la gestión de información relacionada con la
 entidad Consulta. Estos servicios permiten la creación, actualización, eliminación y consulta de los registros de
 consultas.
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -5901,7 +5918,7 @@ Para hacer efectiva la solicitud es necesario el uso del token de tipo bearer qu
 ]
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -6165,7 +6182,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -6335,7 +6352,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
 }
 ```
 
-## Autorización *`Bearer token`*
+## Autorización *`Bearer token`
 
 ---
 
@@ -6536,7 +6553,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
 Se debe tener precaución con el uso de este endpoint, ya que no solo reemplaza los valores originales del registro
 especificado, sino que también puede cambiar datos del paciente, el doctor, la dependencia y la institución asociada.
 
-## Autorización *`Bearer token`*
+## Autorización ```Bearer token```
 
 ---
 
