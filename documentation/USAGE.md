@@ -78,7 +78,7 @@ La estructura de la aplicación y sus secciones se organiza en torno a las sigui
 
 ### **3.2. Mapa general de navegación**
 
-[![Mapa de navegación](../frontend/src/assets/images/site-map.svg)](../frontend/src/assets/images/site-map.svg)
+[![Mapa de navegación](../frontend/src/assets/images/site-map.png)](../frontend/src/assets/images/site-map.png)
 
 **Nota**: Haga clic en la imagen para ver el mapa de navegación en detalle.
 
