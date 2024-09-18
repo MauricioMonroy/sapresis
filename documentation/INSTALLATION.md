@@ -4,6 +4,23 @@
 
 # Guía de Instalación / Installation Guide
 
+___
+
+## Contenido / Table of Contents
+
+- [Acerca de SIPRESS / About SIPRESS](#acerca-de-sipress--about-sipress)
+- [Prerequisitos / Prerequisites](#prerequisitos--prerequisites)
+- [Pasos de Instalación / Installation Steps](#pasos-de-instalación--installation-steps)
+- [Funcionalidades Principales / Key Features](#funcionalidades-principales--key-features)
+- [Scripts Disponibles / Available Scripts](#scripts-disponibles--available-scripts)
+- [Contribuir / Contributing](#contribuir--contributing)
+- [Recursos y Documentación / Resources and Documentation](#recursos-y-documentación--resources-and-documentation)
+- [Autor / Author](#autor--author)
+
+---
+
+## Acerca de SIPRESS / About SIPRESS
+
 La aplicación web SIPRESS es una herramienta de gestión de pacientes y consultorios médicos. Permite a los usuarios
 llevar un registro de los pacientes, asignar consultas y médicos, y visualizar recetas médicas. La aplicación está
 desarrollada con React y utiliza una API REST para la gestión de datos. /The SIPRESS web app is a patient and medical
@@ -12,17 +29,6 @@ prescriptions. The application is developed with React and uses a REST API for d
 
 Para un correcto funcionamiento de la aplicación, es necesario seguir los pasos de instalación especificados a
 continuación. / For the application to work correctly, it is necessary to follow the installation steps specified below.
-
----
-
-## Contenido / Table of Contents
-
-- [Prerequisitos / Prerequisites](#prerequisitos--prerequisites)
-- [Pasos de Instalación / Installation Steps](#pasos-de-instalación--installation-steps)
-- [Funcionalidades Principales / Key Features](#funcionalidades-principales--key-features)
-- [Scripts Disponibles / Available Scripts](#scripts-disponibles--available-scripts)
-- [Contribuir / Contributing](#contribuir--contributing)
-- [Recursos y Documentación / Resources and Documentation](#recursos-y-documentación--resources-and-documentation)
 
 ---
 
@@ -168,3 +174,14 @@ Si tiene alguna pregunta o sugerencia sobre la arquitectura del backend de SIPRE
 conmigo/ If you have any questions or suggestions about the SIPRESS backend architecture, feel free to contact me:
 
 - Correo electrónico/ Email: `mauricio.monroy0@soy.sena.edu.co` o `mauriciomonroy@live.cl`
+
+---
+
+## Versión / Version
+
+1.0.0
+
+---
+
+[Regresar al inicio / Back to top](#guía-de-instalación--installation-guide)
+```

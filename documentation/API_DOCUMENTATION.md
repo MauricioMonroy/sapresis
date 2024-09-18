@@ -1,10 +1,34 @@
 ![Logo SIPRESS](../backend/src/main/resources/images/sipress-logo.png)
 
-# 📚 Documentación de SIPRESS API
+![SIPRESS API](https://img.shields.io/badge/SIPRESS-API-blue) 
 
-![SIPRESS API](https://img.shields.io/badge/SIPRESS-API-blue)
+# Documentación de SIPRESS API 
 
 ---
+
+## Contenido
+
+- [Introducción](#introducción)
+- [Guía de inicio](#guía-de-inicio)
+- [Servicio de login y registro](#servicio-de-login-y-registro)
+- [Servicios de sipress-web-app](#servicios-de-sipress-web-app)
+    - [Servicio de institución](#servicio-de-institución)
+    - [Servicio de personal](#servicio-de-personal)
+    - [Servicio de paciente](#servicio-de-paciente)
+    - [Servicio de fórmula](#servicio-de-fórmula)
+    - [Servicio de factura](#servicio-de-factura)
+    - [Servicio de EPS](#servicio-de-eps)
+    - [Servicio de doctor](#servicio-de-doctor)
+    - [Servicio de dependencia](#servicio-de-dependencia)
+    - [Servicio de consultorio](#servicio-de-consultorio)
+    - [Servicio de consulta](#servicio-de-consulta)
+- [Referencias](#referencias)
+- [Licencia](#licencia)
+- [Autor](#autor)
+
+___
+
+## Introducción
 
 Este documento ofrece una guía completa sobre cómo utilizar la API de SIPRESS, un sistema desarrollado para la gestión
 de información en instituciones prestadoras de salud.
@@ -59,24 +83,6 @@ GitHub [login-registration-service](https://github.com/MauricioMonroy/login-regi
 explica con más detalle el funcionamiento del registro y la autenticación. También se puede revisar el repositorio de
 GitHub [SIPRESS](https://github.com/MauricioMonroy/sipress-web-app.git), en donde se detalla la estructura, las
 características y el funcionamiento de la aplicación.
-
-___
-
-# Contenido
-
-- [Servicio de login y registro](#servicio-de-login-y-registro)
-- [Servicios de sipress-web-app](#servicios-de-sipress-web-app)
-    - [Servicio de institución](#servicio-de-institución)
-    - [Servicio de personal](#servicio-de-personal)
-    - [Servicio de paciente](#servicio-de-paciente)
-    - [Servicio de fórmula](#servicio-de-fórmula)
-    - [Servicio de factura](#servicio-de-factura)
-    - [Servicio de EPS](#servicio-de-eps)
-    - [Servicio de doctor](#servicio-de-doctor)
-    - [Servicio de dependencia](#servicio-de-dependencia)
-    - [Servicio de consultorio](#servicio-de-consultorio)
-    - [Servicio de consulta](#servicio-de-consulta)
-- [Referencias](#referencias)
 
 ___
 
@@ -6767,7 +6773,7 @@ La respuesta generada tendrá la siguiente estructura:
 
 ---
 
-# Referencias
+## Referencias
 
 - [Spring Boot Validation](https://spring.io/guides/gs/validating-form-input/)
 - [Spring Boot JWT](https://www.javainuse.com/spring/boot-jwt)
@@ -6775,15 +6781,15 @@ La respuesta generada tendrá la siguiente estructura:
 
 ---
 
-# Licencia
+## Licencia
 
 [LICENSE.md](../LICENSE.md)
 
 ---
 
-# Autor
+## Autor
 
-## Mauricio Alberto Monroy Calle
+### Mauricio Alberto Monroy Calle
 
 - GitHub: [@MauricioMonroy](https://github.com/MauricioMonroy)
 
@@ -6794,15 +6800,17 @@ conmigo:
 
 ---
 
-# Fecha
+## Fecha
 
-2024-09-13
+Septiembre de 2024
 
 ---
 
-# Versión
+## Versión
 
 1.0.0
 
 ---
+
+
 

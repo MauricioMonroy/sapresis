@@ -4,6 +4,28 @@
 
 # Manual de Arquitectura y Diseño del Backend de SIPRESS
 
+___
+
+## Contenido
+
+- [Introducción](#introducción)
+- [Tecnologías Utilizadas](#tecnologías-utilizadas)
+- [Estructura del Proyecto](#estructura-del-proyecto)
+  - [Descripción de los paquetes principales](#descripción-de-los-paquetes-principales)
+    - [Paquete `modelo`](#paquete-modelo)
+    - [Paquete `repositorio`](#paquete-repositorio)
+    - [Paquete `servicio`](#paquete-servicio)
+    - [Paquete `controlador`](#paquete-controlador)
+    - [Paquete `auth`](#paquete-auth)
+      - [Subdirectorios del paquete `auth`](#subdirectorios-del-paquete-auth)
+    - [Documentación de la API](#documentación-de-la-api)
+    - [Diagrama de despliegue del sistema](#diagrama-de-despliegue-del-sistema)
+      - [Descripción general del diagrama de despliegue](#descripción-general-del-diagrama-de-despliegue)
+- [Referencias](#referencias)
+- [Autor](#autor)
+
+---
+
 ## Introducción
 
 Este manual proporciona una descripción detallada de la arquitectura y el diseño del backend de SIPRESS, un sistema de
@@ -18,16 +40,26 @@ la documentación de la API y las pruebas realizadas con Postman.
 
 ---
 
-## Contenido
+## Tecnologías Utilizadas
 
-- [Estructura del Proyecto](#estructura-del-proyecto)
-    - [Descripción de los paquetes principales](#descripción-de-los-paquetes-principales)
-    - [Paquete `modelo`](#paquete-modelo)
-    - [Paquete `repositorio`](#paquete-repositorio)
-    - [Paquete `servicio`](#paquete-servicio)
-    - [Paquete `controlador`](#paquete-controlador)
-    - [Paquete `auth`](#paquete-auth)
-- [Referencias](#referencias)
+El backend de SIPRESS está desarrollado con las siguientes tecnologías y frameworks:
+
+- **Java:** Lenguaje de programación utilizado para el desarrollo de la aplicación.
+- **Spring Boot:** Framework de desarrollo de aplicaciones Java que facilita la creación de aplicaciones web y
+  servicios RESTful.
+- **Spring Data JPA:** Framework de persistencia de datos que facilita el acceso a la base de datos a través de
+  interfaces JPA.
+- **Spring Security:** Framework de seguridad que proporciona autenticación y autorización para proteger los recursos
+  de la aplicación.
+- **MySQL:** Sistema de gestión de bases de datos relacional utilizado para el almacenamiento de datos.
+- **JWT (JSON Web Token):** Estándar abierto que define un formato compacto y autocontenido para la transmisión segura
+  de información entre dos partes.
+- **Postman:** Herramienta de colaboración para el desarrollo de APIs que permite realizar pruebas y documentar
+  servicios web.
+- **Git:** Sistema de control de versiones utilizado para el desarrollo colaborativo del proyecto.
+- **GitHub:** Plataforma de desarrollo colaborativo que aloja el repositorio del proyecto.
+- **Visual Studio Code:** Editor de código utilizado para el desarrollo y la edición de archivos del proyecto.
+- **IntelliJ IDEA:** Entorno de desarrollo integrado (IDE) utilizado para el desarrollo y la depuración del proyecto.
 
 ---
 
@@ -330,7 +362,7 @@ GitHub: [SIPRESS Backend Repository](https://github.com/MauricioMonroy/SipressSp
 
 ---
 
-# Referencias
+## Referencias
 
 - [Spring Boot](https://spring.io/projects/spring-boot)
 - [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
@@ -354,5 +386,15 @@ conmigo:
 - Correo electrónico: `mauricio.monroy0@soy.sena.edu.co` o `mauriciomonroy@live.cl`
 
 ---
+
+## Versión
+
+La versión actual del manual de arquitectura y diseño del backend de SIPRESS es la `1.0.0`.
+
+
+[Inicio](#manual-de-arquitectura-y-diseño-del-backend-de-sipress)
+
+---
+```
 
 

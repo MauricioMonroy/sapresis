@@ -1,5 +1,7 @@
 [![SIPRESS](../frontend/src/assets/images/sipress-logo.png)](../frontend/src/assets/images/sipress-logo.png)
 
+![SIPRESS Web App](https://img.shields.io/badge/SIPRESS-Web%20App-blue)
+
 # Manual de uso Sipress-Web-App
 
 ---
@@ -289,8 +291,6 @@ los recursos disponibles en el repositorio del proyecto.
 
 ---
 
-###
-
 **Nota**: Este manual de uso de SIPRESS es parte del proyecto académico para la Tecnología de Análisis y Desarrollo de
 Software (2721455) del SENA, y fue realizado por el aprendiz Mauricio Alberto Monroy Calle.
 
@@ -312,6 +312,16 @@ conmigo:
 **Fecha**: Septiembre de 2024
 
 ---
+
+## **Versión**
+
+1.0.0
+
+---
+
+[Regresar al inicio](#manual-de-uso-sipress-web-app)
+[]: # (END)
+```
 
 
 
