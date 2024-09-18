@@ -89,11 +89,11 @@ acceso a los distintos endpoints de la aplicación.
 El endpoint `/sipress-app/usuarios/perfil` permite visualizar la información relacionada con un registro específico,
 mientras que el endpoint `/sipress-app/usuarios/` permite ver todos los registros.
 
-## <p style="color:khaki">POST</p> Iniciar sesión
+## <span style="color:khaki">POST</span> Iniciar sesión
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/auth/login
 ```
 
@@ -159,11 +159,11 @@ ___
 
 ___
 
-## <p style="color:khaki">POST</p> Registro de usuario
+## <span style="color:khaki">POST</span> Registro de usuario
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/auth/registro
 ```
 
@@ -281,11 +281,11 @@ ___
 
 ---
 
-## <p style="color:palegreen">GET</p> Obtener perfil de usuario
+## <span style="color:palegreen">GET</span> Obtener perfil de usuario
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/usuarios/perfil
 ```
 
@@ -410,11 +410,11 @@ ___
 
 ---
 
-## <p style="color:palegreen">GET</p> Obtener todos los usuarios
+## <span style="color:palegreen">GET</span> Obtener todos los usuarios
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/usuarios/todos
 ```
 
@@ -616,11 +616,11 @@ instituciones de salud. Estos servicios permiten la creación, actualización, e
 
 ___
 
-## <p style="color:lightgreen">GET</p> Obtener todos los registros
+## <span style="color:lightgreen">GET</span> Obtener todos los registros
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/instituciones
 ```
 
@@ -721,11 +721,11 @@ ___
 
 ---
 
-## <p style="color:lightgreen">GET</p> Obtener un registro
+## <span style="color:lightgreen">GET</span> Obtener un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/instituciones/{id}
 ```
 
@@ -808,11 +808,11 @@ ___
 
 ---
 
-## <p style="color:khaki">POST</p> Agregar un nuevo registro
+## <span style="color:khaki">POST</span> Agregar un nuevo registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/instituciones
 ```
 
@@ -915,11 +915,11 @@ ___
 
 ---
 
-## <p style="color:cornflowerblue">PUT</p> Actualizar un registro
+## <span style="color:cornflowerblue">PUT</span> Actualizar un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/instituciones/{id}
 ```
 
@@ -1017,11 +1017,11 @@ ___
 
 ---
 
-## <p style="color:lightsalmon">DELETE</p> Eliminar un registro
+## <span style="color:lightsalmon">DELETE</span> Eliminar un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/instituciones/{id}
 ```
 
@@ -1089,11 +1089,11 @@ Estos servicios permiten la creación, actualización, eliminación y consulta d
 
 ___
 
-## <p style="color:lightgreen">GET</p> Obtener todos los registros
+## <span style="color:lightgreen">GET</span> Obtener todos los registros
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/personalS
 ```
 
@@ -1267,11 +1267,11 @@ ___
 
 ---
 
-## <p style="color:lightgreen">GET</p> Obtener un registro
+## <span style="color:lightgreen">GET</span> Obtener un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/personalS/{id}
 ```
 
@@ -1377,11 +1377,11 @@ ___
 
 ---
 
-## <p style="color:khaki">POST</p> Agregar un nuevo registro
+## <span style="color:khaki">POST</span> Agregar un nuevo registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/personalS
 ```
 
@@ -1531,11 +1531,11 @@ ___
 
 ---
 
-## <p style="color:cornflowerblue">PUT</p> Actualizar un registro
+## <span style="color:cornflowerblue">PUT</span> Actualizar un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/personalS/{id}
 ```
 
@@ -1673,11 +1673,11 @@ ___
 
 ---
 
-## <p style="color:lightsalmon">DELETE</p> Eliminar un registro
+## <span style="color:lightsalmon">DELETE</span> Eliminar un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/personalS/{id}
 ```
 
@@ -1746,11 +1746,11 @@ servicios permiten la creación, actualización, eliminación y consulta de paci
 
 ___
 
-## <p style="color:lightgreen">GET</p> Obtener todos los registros
+## <span style="color:lightgreen">GET</span> Obtener todos los registros
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/pacientes
 ```
 
@@ -1871,11 +1871,11 @@ ___
 
 ---
 
-## <p style="color:lightgreen">GET</p> Obtener un registro
+## <span style="color:lightgreen">GET</span> Obtener un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/pacientes/{id}
 ```
 
@@ -1973,11 +1973,11 @@ ___
 
 ---
 
-## <p style="color:khaki">POST</p> Agregar un nuevo registro
+## <span style="color:khaki">POST</span> Agregar un nuevo registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/pacientes
 ```
 
@@ -2118,11 +2118,11 @@ ___
 
 ---
 
-## <p style="color:cornflowerblue">PUT</p> Actualizar un registro
+## <span style="color:cornflowerblue">PUT</span> Actualizar un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/pacientes/{id}
 ```
 
@@ -2251,11 +2251,11 @@ ___
 
 ---
 
-## <p style="color:lightsalmon">DELETE</p> Eliminar un registro
+## <span style="color:lightsalmon">DELETE</span> Eliminar un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/pacientes/{id}
 ```
 
@@ -2329,11 +2329,11 @@ relacionados con un paciente.
 
 ---
 
-## <p style="color:lightgreen">GET</p> Obtener todos los registros
+## <span style="color:lightgreen">GET</span> Obtener todos los registros
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/formulas
 ```
 
@@ -2456,11 +2456,11 @@ recuperación.
 
 ---
 
-## <p style="color:lightgreen">GET</p> Obtener un registro
+## <span style="color:lightgreen">GET</span> Obtener un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/formulas/{id}
 ```
 
@@ -2570,11 +2570,11 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 
 ---
 
-## <p style="color:khaki">POST</p> Agregar un nuevo registro
+## <span style="color:khaki">POST</span> Agregar un nuevo registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/formulas
 ```
 
@@ -2711,7 +2711,7 @@ La respuesta se mostrará en un formato de tipo JSON con la siguiente estructura
 
 ---
 
-## <p style="color:cornflowerblue">PUT</p> Actualizar un registro
+## <span style="color:cornflowerblue">PUT</span> Actualizar un registro
 
 Este endpoint permite la actualización de un registro específico de la entidad Fórmula.
 
@@ -2857,11 +2857,11 @@ nueva solicitud.
 
 ---
 
-## <p style="color:lightsalmon">DELETE</p> Eliminar un registro
+## <span style="color:lightsalmon">DELETE</span> Eliminar un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/formulas/{id}
 ```
 
@@ -2930,11 +2930,11 @@ relacionados con loa costos de las consultas y fórmulas médicas.
 
 ---
 
-## <p style="color:lightgreen">GET</p> Obtener todos los registros
+## <span style="color:lightgreen">GET</span> Obtener todos los registros
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/facturas
 ```
 
@@ -3058,11 +3058,11 @@ Es necesario el inicio de sesión y el uso del token de tipo bearer que se gener
 
 ---
 
-## <p style="color:lightgreen">GET</p> Obtener un registro
+## <span style="color:lightgreen">GET</span> Obtener un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/facturas/{id}
 ```
 
@@ -3172,11 +3172,11 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 
 ---
 
-## <p style="color:khaki">POST</p> Agregar un nuevo registro
+## <span style="color:khaki">POST</span> Agregar un nuevo registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/facturas
 ```
 
@@ -3318,7 +3318,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
 
 ---
 
-## <p style="color:cornflowerblue">PUT</p> Actualizar un registro
+## <span style="color:cornflowerblue">PUT</span> Actualizar un registro
 
 Este endpoint permite la actualización de un registro existente de la entidad Factura.
 
@@ -3462,11 +3462,11 @@ Se debe tener precaución con el uso de este endpoint, ya que reemplaza los valo
 
 ---
 
-## <p style="color:lightsalmon">DELETE</p> Eliminar un registro
+## <span style="color:lightsalmon">DELETE</span> Eliminar un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/facturas/{id}
 ```
 
@@ -3534,11 +3534,11 @@ Salud (EPS). Estos servicios permiten la creación, actualización, eliminación
 
 ---
 
-## <p style="color:lightgreen">GET</p> Obtener todos los registros
+## <span style="color:lightgreen">GET</span> Obtener todos los registros
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/epsS
 ```
 
@@ -3631,11 +3631,11 @@ Es necesario el inicio de sesión y el uso del token de tipo bearer que se gener
 
 ---
 
-## <p style="color:lightgreen">GET</p> Obtener un registro
+## <span style="color:lightgreen">GET</span> Obtener un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/epsS/{id}
 ```
 
@@ -3717,11 +3717,11 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 
 ---
 
-## <p style="color:khaki">POST</p> Agregar un nuevo registro
+## <span style="color:khaki">POST</span> Agregar un nuevo registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/epsS
 ```
 
@@ -3824,7 +3824,7 @@ La respuesta se mostrará en formato JSON con la siguiente estructura:
 
 ---
 
-## <p style="color:cornflowerblue">PUT</p> Actualizar un registro
+## <span style="color:cornflowerblue">PUT</span> Actualizar un registro
 
 Este endpoint permite la actualización de un registro específico de la entidad Eps.
 
@@ -3924,11 +3924,11 @@ permanente.
 
 ---
 
-## <p style="color:lightsalmon">DELETE</p> Eliminar un registro
+## <span style="color:lightsalmon">DELETE</span> Eliminar un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/epsS/{id}
 ```
 
@@ -3996,11 +3996,11 @@ servicios permiten la creación, actualización, eliminación y consulta de los 
 
 ---
 
-## <p style="color:lightgreen">GET</p> Obtener todos los registros
+## <span style="color:lightgreen">GET</span> Obtener todos los registros
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/doctores
 ```
 
@@ -4135,11 +4135,11 @@ Es necesario el inicio de sesión y el uso del token de tipo bearer que se gener
 
 ---
 
-## <p style="color:lightgreen">GET</p> Obtener un registro
+## <span style="color:lightgreen">GET</span> Obtener un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/doctores/{id}
 ```
 
@@ -4245,11 +4245,11 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 
 ---
 
-## <p style="color:khaki">POST</p> Agregar un nuevo registro
+## <span style="color:khaki">POST</span> Agregar un nuevo registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/doctores
 ```
 
@@ -4383,7 +4383,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
 
 ---
 
-## <p style="color:cornflowerblue">PUT</p> Actualizar un registro
+## <span style="color:cornflowerblue">PUT</span> Actualizar un registro
 
 Este endpoint permite la actualización de un registro existente de la entidad Doctor.
 
@@ -4525,11 +4525,11 @@ especificado, sino que también puede cambiar datos de la dependencia y la insti
 
 ---
 
-## <p style="color:lightsalmon">DELETE</p> Eliminar un registro
+## <span style="color:lightsalmon">DELETE</span> Eliminar un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/doctores/{id}
 ```
 
@@ -4598,11 +4598,11 @@ dependencias.
 
 ---
 
-## <p style="color:lightgreen">GET</p> Obtener todos los registros
+## <span style="color:lightgreen">GET</span> Obtener todos los registros
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/dependencias
 ```
 
@@ -4710,11 +4710,11 @@ Para hacer efectiva la solicitud es necesario el uso del token de tipo bearer qu
 
 ---
 
-## <p style="color:lightgreen">GET</p> Obtener un registro
+## <span style="color:lightgreen">GET</span> Obtener un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/dependencias/{id}
 ```
 
@@ -4806,11 +4806,11 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 
 ---
 
-## <p style="color:khaki">POST</p> Agregar un nuevo registro
+## <span style="color:khaki">POST</span> Agregar un nuevo registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/dependencias
 ```
 
@@ -4916,7 +4916,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
 
 ---
 
-## <p style="color:cornflowerblue">PUT</p> Actualizar un registro
+## <span style="color:cornflowerblue">PUT</span> Actualizar un registro
 
 Este endpoint permite la actualización de un registro existente de la entidad Dependencia.
 
@@ -5025,11 +5025,11 @@ especificado, sino que también puede cambiar datos de la institución asociada.
 
 ---
 
-## <p style="color:lightsalmon">DELETE</p> Eliminar un registro
+## <span style="color:lightsalmon">DELETE</span> Eliminar un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/dependencias/{id}
 ```
 
@@ -5098,11 +5098,11 @@ consultorios.
 
 ---
 
-## <p style="color:lightgreen">GET</p> Obtener todos los registros
+## <span style="color:lightgreen">GET</span> Obtener todos los registros
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/consultorios
 ```
 
@@ -5273,11 +5273,11 @@ Para hacer efectiva la solicitud es necesario el uso del token de tipo bearer qu
 
 ---
 
-## <p style="color:lightgreen">GET</p> Obtener un registro
+## <span style="color:lightgreen">GET</span> Obtener un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/consultorios/{id}
 ```
 
@@ -5419,11 +5419,11 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 
 ---
 
-## <p style="color:khaki">POST</p> Agregar un nuevo registro
+## <span style="color:khaki">POST</span> Agregar un nuevo registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/consultorios
 ```
 
@@ -5603,7 +5603,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
 
 ---
 
-## <p style="color:cornflowerblue">PUT</p> Actualizar un registro
+## <span style="color:cornflowerblue">PUT</span> Actualizar un registro
 
 Este endpoint permite la actualización de un registro existente de la entidad Consultorio.
 
@@ -5786,11 +5786,11 @@ especificado, sino que también puede cambiar datos del paciente, EPS, personal,
 
 ---
 
-## <p style="color:lightsalmon">DELETE</p> Eliminar un registro
+## <span style="color:lightsalmon">DELETE</span> Eliminar un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/consultorios/{id}
 ```
 
@@ -5859,11 +5859,11 @@ consultas.
 
 ---
 
-## <p style="color:lightgreen">GET</p> Obtener todos los registros
+## <span style="color:lightgreen">GET</span> Obtener todos los registros
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/consultas
 ```
 
@@ -6126,11 +6126,11 @@ Para hacer efectiva la solicitud es necesario el uso del token de tipo bearer qu
 
 ---
 
-## <p style="color:lightgreen">GET</p> Obtener un registro
+## <span style="color:lightgreen">GET</span> Obtener un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/consultas/{idPaciente}/{idDoctor}
 ```
 
@@ -6281,11 +6281,11 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 
 ---
 
-## <p style="color:khaki">POST</p> Agregar un nuevo registro
+## <span style="color:khaki">POST</span> Agregar un nuevo registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/consultas
 ```
 
@@ -6477,11 +6477,11 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
 
 ---
 
-## <p style="color:cornflowerblue">PUT</p> Actualizar un registro
+## <span style="color:cornflowerblue">PUT</span> Actualizar un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/consultas/{idPaciente}/{idDoctor}
 ```
 
@@ -6678,11 +6678,11 @@ especificado, sino que también puede cambiar datos del paciente, el doctor, la 
 
 ---
 
-## <p style="color:lightsalmon">DELETE</p> Eliminar un registro
+## <span style="color:lightsalmon">DELETE</span> Eliminar un registro
 
 ### Endpoint
 
-```http request
+```
 /sipress-app/consultas/{idPaciente}/{idDoctor}
 ```
 
