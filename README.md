@@ -62,7 +62,7 @@ y fue realizado por el aprendiz Mauricio Alberto Monroy Calle.
 
 ## Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT. Para más detalles, revisa el archivo [LICENSE.md](LICENSE.md).
+Este proyecto está licenciado bajo la Licencia MIT. Para más detalles, revisa el archivo [LICENSE](LICENSE.md).
 
 ___
 

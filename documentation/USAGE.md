@@ -294,7 +294,7 @@ los recursos disponibles en el repositorio del proyecto.
 **Nota**: Este manual de uso de SIPRESS es parte del proyecto académico para la Tecnología de Análisis y Desarrollo de
 Software (2721455) del SENA, y fue realizado por el aprendiz Mauricio Alberto Monroy Calle.
 
-**Licencia**: [MIT](../LICENSE)
+**Licencia**: [MIT](../LICENSE.md)
 
 ---
 
