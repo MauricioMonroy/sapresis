@@ -1,11 +1,43 @@
-# SIPRESS Frontend
+![Logo SIPRESS](../frontend/src/assets/images/sipress-logo.png)
 
-Este es el frontend de SIPRESS, un sistema integral para la prestación de servicios de salud. La aplicación permite al
-personal de salud gestionar pacientes, consultas y otros aspectos clave de la atención sanitaria. / This is the frontend
-of SIPRESS, a comprehensive system for health service provision. The application allows health personnel to manage
-patients, consultations, and other key aspects of healthcare.
+![SIPRESS Web App](https://img.shields.io/badge/SIPRESS-Web%20App-blue)
 
-## Instalación / Installation
+# Guía de Instalación / Installation Guide
+
+La aplicación web SIPRESS es una herramienta de gestión de pacientes y consultorios médicos. Permite a los usuarios
+llevar un registro de los pacientes, asignar consultas y médicos, y visualizar recetas médicas. La aplicación está
+desarrollada con React y utiliza una API REST para la gestión de datos. /The SIPRESS web app is a patient and medical
+office management tool. It allows users to keep track of patients, assign consultations and doctors, and view medical
+prescriptions. The application is developed with React and uses a REST API for data management.
+
+Para un correcto funcionamiento de la aplicación, es necesario seguir los pasos de instalación especificados a
+continuación. / For the application to work correctly, it is necessary to follow the installation steps specified below.
+
+#
+
+---
+
+## Contenido / Table of Contents
+
+- [Prerequisitos / Prerequisites](#prerequisitos--prerequisites)
+- [Pasos de Instalación / Installation Steps](#pasos-de-instalación--installation-steps)
+- [Funcionalidades Principales / Key Features](#funcionalidades-principales--key-features)
+- [Scripts Disponibles / Available Scripts](#scripts-disponibles--available-scripts)
+- [Contribuir / Contributing](#contribuir--contributing)
+- [Recursos y Documentación / Resources and Documentation](#recursos-y-documentación--resources-and-documentation)
+
+#
+
+---
+
+## Prerequisitos / Prerequisites
+
+- Node.js
+- npm
+- Git
+- Backend API ( [SIPRESS API](https://github.com/MauricioMonroy/sipress-web-app/tree/main/backend) )
+
+## Pasos de Instalación / Installation Steps
 
 1. Clona el repositorio / Clone the repository:
    ```bash
@@ -26,13 +58,26 @@ patients, consultations, and other key aspects of healthcare.
 5. Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación. / Open
    [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
+#
+
+---
+
 ## Funcionalidades Principales / Key Features
 
-- Gestión de pacientes: Agregar, editar y eliminar registros de pacientes. / Patient management: Add, edit, and delete
+- Gestión de pacientes: Agregar, editar y eliminar registros de pacientes. / Patient management: `Add`, `edit`, and
+  `delete`
   patient records.
 - Asignación de consultas y médicos. / Assignment of consultations and doctors.
 - Visualización de recetas médicas. / Viewing medical prescriptions.
 - Gestión de empleados y consultorios. / Employee and clinic management.
+
+- **Nota:** Para el correcto funcionamiento de la aplicación, es necesario contar con la API REST de SIPRESS. / **Note:
+  **
+  For the correct operation of the application, it is necessary to have the SIPRESS REST API.
+
+#
+
+---
 
 ## Scripts Disponibles / Available Scripts
 
@@ -74,7 +119,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### `npm run eject`
 
 **Nota: esta es una operación unidireccional. Una vez que `eject` se ejecuta, no se puede volver atrás.** /
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
 Si no estás satisfecho con la herramienta de compilación y las opciones de configuración, puedes usar `eject` en
 cualquier momento. Este comando eliminará la única dependencia de compilación del proyecto /
@@ -92,8 +137,12 @@ No tienes que usar `eject`. El conjunto de características seleccionadas está 
 medianos, y no deberías sentirte obligado a usar esta función. Sin embargo, entendemos que esta herramienta no sería
 útil si no pudieras personalizarla cuando estás listo para hacerlo. / You don't have to ever use `eject`. The curated
 feature set is suitable for small and middle deployments, and you
-shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't
+shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you could not
 customize it when you are ready for it.
+
+#
+
+---
 
 ## Contribuir / Contributing
 
@@ -107,6 +156,10 @@ welcome. If you would like to contribute, please follow these steps:
 4. Envía tus cambios / Push your changes (`git push origin feature/nueva-funcionalidad`).
 5. Crea un Pull Request. / Create a Pull Request.
 
+#
+
+---
+
 ## Recursos y Documentación / Resources and Documentation
 
 Puedes aprender más sobre Create React App en la / You can learn more in
@@ -115,9 +168,17 @@ the [Documentación oficial / Create React App documentation](https://facebook.g
 Para aprender React, revisa la / To learn React, check out
 the [Documentación oficial de React / React documentation](https://reactjs.org/).
 
+#
+
+---
+
 ## Autor / Author
 
 ### Mauricio Alberto Monroy Calle
 
-- [GitHub](https://github.com/MauricioMonroy)
-- Email me at: <mauriciomonroy@live.cl> or <mauricio.monroy0@soy.sena.edu.co>
+- GitHub: [@MauricioMonroy](https://github.com/MauricioMonroy)
+
+Si tiene alguna pregunta o sugerencia sobre la arquitectura del backend de SIPRESS, no dude en ponerse en contacto
+conmigo/ If you have any questions or suggestions about the SIPRESS backend architecture, feel free to contact me:
+
+- Correo electrónico/ Email: `mauricio.monroy0@soy.sena.edu.co` o `mauriciomonroy@live.cl`

@@ -14,6 +14,8 @@ La API REST de SIPRESS ofrece un conjunto de servicios que permiten realizar ope
 pacientes, consultorios, fórmulas médicas, y más. La API también incluye autenticación y autorización para garantizar
 que solo los usuarios autorizados puedan acceder a los recursos del sistema.
 
+---
+
 ## **Guía de inicio**
 
 Para comenzar a utilizar la API de SIPRESS, se debe tener en cuenta lo siguiente:
@@ -54,25 +56,29 @@ explica con más detalle el funcionamiento del registro y la autenticación. Tam
 GitHub [SIPRESS](https://github.com/MauricioMonroy/sipress-web-app.git), en donde se detalla la estructura, las
 características y el funcionamiento de la aplicación.
 
+#
+
 ___
 
 # Contenido
 
 - [Servicio de login y registro](#servicio-de-login-y-registro)
 - [Servicios de sipress-web-app](#servicios-de-sipress-web-app)
-  - [Servicio de institución](#servicio-de-institución)
-  - [Servicio de personal](#servicio-de-personal)
-  - [Servicio de paciente](#servicio-de-paciente)
-  - [Servicio de fórmula](#servicio-de-fórmula)
-  - [Servicio de factura](#servicio-de-factura)
-  - [Servicio de EPS](#servicio-de-eps)
-  - [Servicio de doctor](#servicio-de-doctor)
-  - [Servicio de dependencia](#servicio-de-dependencia)
-  - [Servicio de consultorio](#servicio-de-consultorio)
-  - [Servicio de consulta](#servicio-de-consulta)
+    - [Servicio de institución](#servicio-de-institución)
+    - [Servicio de personal](#servicio-de-personal)
+    - [Servicio de paciente](#servicio-de-paciente)
+    - [Servicio de fórmula](#servicio-de-fórmula)
+    - [Servicio de factura](#servicio-de-factura)
+    - [Servicio de EPS](#servicio-de-eps)
+    - [Servicio de doctor](#servicio-de-doctor)
+    - [Servicio de dependencia](#servicio-de-dependencia)
+    - [Servicio de consultorio](#servicio-de-consultorio)
+    - [Servicio de consulta](#servicio-de-consulta)
 - [Referencias](#referencias)
 
 ___
+
+#
 
 # Servicio de login y registro
 
@@ -570,6 +576,8 @@ ___
 
 ___
 
+#
+
 # Servicios de sipress-web-app
 
 Los servicios de SIPRESS permiten la gestión de información relacionada con el personal, los pacientes, los
@@ -599,6 +607,8 @@ Las entidades que hacen parte de este sistema son:
 - ### **`Consulta`**
 
 ___
+
+#
 
 # Servicio de institución
 
@@ -1072,6 +1082,8 @@ ___
 ```
 
 ___
+
+#
 
 # Servicio de personal
 
@@ -1730,7 +1742,9 @@ ___
 
 ___
 
-## Servicio de paciente
+#
+
+# Servicio de paciente
 
 Los endpoints `/pacientes` y `/pacientes/{id}` permiten la gestión de información relacionada con los pacientes. Estos
 servicios permiten la creación, actualización, eliminación y consulta de pacientes.
@@ -2311,6 +2325,8 @@ ___
 ```
 
 ---
+
+#
 
 # Servicio de fórmula
 
@@ -2912,6 +2928,8 @@ La respuesta generada tendrá la siguiente estructura:
 ```
 
 ---
+
+#
 
 # Servicio de factura
 
@@ -3518,6 +3536,8 @@ La respuesta generada tendrá la siguiente estructura:
 
 ---
 
+#
+
 # Servicio de eps
 
 Los endpoints `/epsS` y `/epsS/{id}` permiten la gestión de información relacionada con las Entidades Promotoras de
@@ -3979,6 +3999,8 @@ La respuesta generada tendrá la siguiente estructura:
 ```
 
 ---
+
+#
 
 # Servicio de doctor
 
@@ -4581,6 +4603,8 @@ La respuesta generada tendrá la siguiente estructura:
 
 ---
 
+#
+
 # Servicio de dependencia
 
 Los endpoints `/dependencias` y `/dependencias/{id}` permiten la gestión de información relacionada con la entidad
@@ -5080,6 +5104,8 @@ La respuesta generada tendrá la siguiente estructura:
 ```
 
 ---
+
+#
 
 # Servicio de consultorio
 
@@ -5841,6 +5867,8 @@ La respuesta generada tendrá la siguiente estructura:
 ```
 
 ---
+
+#
 
 # Servicio de consulta
 
@@ -6778,9 +6806,12 @@ La respuesta generada tendrá la siguiente estructura:
 
 ## Mauricio Alberto Monroy Calle
 
-- [GitHub](https://github.com/MauricioMonroy)
+- GitHub: [@MauricioMonroy](https://github.com/MauricioMonroy)
 
-### Contacto: `mauriciomonroy@live.cl` o `mauricio.monroy0@soy.sena.edu.co`
+Si tiene alguna pregunta o sugerencia sobre la arquitectura del backend de SIPRESS, no dude en ponerse en contacto
+conmigo:
+
+- Correo electrónico: `mauricio.monroy0@soy.sena.edu.co` o `mauriciomonroy@live.cl`
 
 ---
 

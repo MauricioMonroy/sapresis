@@ -1,4 +1,10 @@
+![SIPRESS](../backend/src/main/resources/images/sipress-logo.png)
+
+![SIPRESS Java Backend](https://img.shields.io/badge/SIPRESS-Java%20Backend-blue)
+
 # Manual de Arquitectura y Diseño del Backend de SIPRESS
+
+#
 
 ## Introducción
 
@@ -12,6 +18,8 @@ los paquetes, las clases y las relaciones entre ellos. Además, se proporciona u
 estructura y las conexiones entre los componentes de la aplicación. Por último, se incluye información adicional sobre
 la documentación de la API y las pruebas realizadas con Postman.
 
+#
+
 ---
 
 ## Contenido
@@ -24,6 +32,8 @@ la documentación de la API y las pruebas realizadas con Postman.
     - [Paquete ``controlador``](#paquete-controlador)
     - [Paquete ``auth``](#paquete-auth)
 - [Referencias](#referencias)
+
+#
 
 ---
 
@@ -53,6 +63,8 @@ los aspectos más importantes de los cinco paquetes principales. Los paquetes ad
 tienen funciones accesorias y no es necesario describirlos en detalle. El primero contiene las clases que definen los
 objetos que se envían al cliente, y el segundo, las excepciones personalizadas que se lanzan en caso de errores.
 
+#
+
 ___
 
 ### Paquete ``modelo``
@@ -70,6 +82,8 @@ las validaciones (para asegurar que los datos cumplan ciertos criterios antes de
 
 *Diagrama de clases del paquete modelo*
 
+#
+
 ___
 
 ### Paquete ``repositorio``
@@ -82,6 +96,8 @@ peticiones a la base de datos.
 ![Estructura del paquete repositorio](../backend/src/main/resources/images/repositorio.png)
 
 *Estructura del paquete repositorio*
+
+#
 
 ___
 
@@ -99,6 +115,8 @@ para la administración de interfaces y sus implementaciones:
 
 *Estructura del paquete servicio*
 
+#
+
 ___
 
 ### Paquete ``controlador``
@@ -111,6 +129,8 @@ y gestionar la información que se envía y recibe a través de los *endpoints* 
 ![Estructura del paquete controlador](../backend/src/main/resources/images/controlador.png)
 
 *Estructura del paquete controlador*
+
+#
 
 ___
 
@@ -209,6 +229,8 @@ tokens.
 
 *Detalle de las clases del subdirectorio servicio*
 
+#
+
 ___
 
 ### Documentación de la API
@@ -217,6 +239,8 @@ Para conocer más detalles sobre la implementación de la seguridad en la aplica
 documentación de la API y las pruebas realizadas con Postman en el directorio ``documentation``
 [SIPRESS API](/documentation/API_DOCUMENTATION.md) o en el siguiente
 enlace: [SIPRESS API Documentation](https://documenter.getpostman.com/view/37130978/2sAXjDfbBx)
+
+#
 
 ___
 
@@ -228,6 +252,8 @@ un diagrama de despliegue que muestra la arquitectura, las conexiones entre el b
 ![Diagrama de despliegue de la arquitectura](../backend/src/main/resources/images/diagrama-de-despliegue.png)
 
 *Diagrama de despliegue de la arquitectura*
+
+#
 
 ### Descripción general del diagrama de despliegue
 
@@ -314,6 +340,8 @@ si la solicitud debe ser autorizada para continuar hacia el ``Controlador``.
 Una vez que el ``SecurityFilter`` valida el ``JWT Token``, permite que la solicitud continúe hacia el ``Controlador``,
 donde se procesará de acuerdo con la lógica de negocio.
 
+#
+
 ---
 
 ## Información adicional
@@ -324,6 +352,8 @@ con Postman para comprender mejor el funcionamiento de la aplicación.
 
 Enlace al repositorio de
 GitHub: [SIPRESS Backend Repository](https://github.com/MauricioMonroy/SipressSpringApp/tree/main/backend)
+
+#
 
 ---
 
@@ -339,8 +369,23 @@ GitHub: [SIPRESS Backend Repository](https://github.com/MauricioMonroy/SipressSp
 
 ---
 
-## Contacto
+#
 
-Si tiene alguna pregunta o sugerencia sobre la arquitectura del backend de SIPRESS, no dude en ponerse en contacto conmigo:
+## Autor
+
+### Mauricio Alberto Monroy Calle
+
+- GitHub: [@MauricioMonroy](https://github.com/MauricioMonroy)
+
+Si tiene alguna pregunta o sugerencia sobre la arquitectura del backend de SIPRESS, no dude en ponerse en contacto
+conmigo:
 
 - Correo electrónico: `mauricio.monroy0@soy.sena.edu.co` o `mauriciomonroy@live.cl`
+
+---
+
+[] # (fin del archivo)
+
+```java
+```
+
