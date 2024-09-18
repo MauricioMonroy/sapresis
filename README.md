@@ -53,6 +53,8 @@ el [Manual de arquitectura y diseño de SIPRESS](documentation/ARCHITECTURE.md),
 
 Para instrucciones detalladas, consulta el archivo [README](frontend/README.md) en la carpeta `frontend`.
 
+Para instrucciones de uso y funcionamiento de la aplicación, consulta el archivo [USAGE](documentation/USAGE.md) en la carpeta `documentation`.
+
 ## Información Académica
 
 Este trabajo es parte del proyecto académico para la Tecnología de Análisis y Desarrollo de Software (2721455) del SENA,
@@ -120,6 +122,8 @@ For specific details, check the [README](documentation/ARCHITECTURE) file inside
    production.
 
 For detailed instructions, check the [README](frontend/README.md) file inside the `frontend` folder.
+
+For instructions on how to use and operate the application, check the [USAGE](documentation/USAGE.md) file inside the `documentation` folder.
 
 ## Academic Information
 
