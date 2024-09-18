@@ -40,9 +40,9 @@ profesionales vinculados.
 2. Actualiza el archivo `application.properties` con las credenciales de tu base de datos.
 3. Usa Maven o tu IDE favorito para ejecutar el proyecto Spring Boot.
 
-Para conocer detalles específicos sobre la estructura del proyecto, consulta
-el [Manual de arquitectura y diseño de SIPRESS](documentation/ARCHITECTURE.md), en el archivo `ARCHITECTURE` dentro de la carpeta
-`documentation`.
+Para conocer detalles específicos sobre la estructura del proyecto, consulta el archivo [ARCHITECTURE](documentation/ARCHITECTURE.md) en la carpeta `documentation`.
+
+Para conocer información de la API y cómo interactuar con ella, consulta el archivo [API_DOCUMENTATION](documentation/API_DOCUMENTATION.md) en la carpeta `documentation`.
 
 ### Frontend
 
@@ -51,7 +51,7 @@ el [Manual de arquitectura y diseño de SIPRESS](documentation/ARCHITECTURE.md),
 3. Usa `npm start` para iniciar la aplicación en modo desarrollo o `npm run build` para construir la aplicación para
    producción.
 
-Para instrucciones detalladas, consulta el archivo [README](frontend/README.md) en la carpeta `frontend`.
+Para instrucciones detalladas, consulta el archivo [INSTALLATION](documentation/INSTALLATION.md) en la carpeta `documentation`.
 
 Para instrucciones de uso y funcionamiento de la aplicación, consulta el archivo [USAGE](documentation/USAGE.md) en la carpeta `documentation`.
 
@@ -112,7 +112,9 @@ dynamic retrieval of IDs, names, contact details, medical prescriptions, billing
 2. Update the `application.properties` file with your database credentials.
 3. Use Maven or your favorite IDE to run the Spring Boot project.
 
-For specific details, check the [README](documentation/ARCHITECTURE) file inside the `backend` folder.
+For specific details about the project structure, check the [ARCHITECTURE](documentation/ARCHITECTURE.md) file inside the `documentation` folder.
+
+For information about the API and how to interact with it, check the [API_DOCUMENTATION](documentation/API_DOCUMENTATION.md) file inside the `documentation` folder.
 
 ### Frontend
 
@@ -121,7 +123,7 @@ For specific details, check the [README](documentation/ARCHITECTURE) file inside
 3. Use `npm start` to start the application in development mode or `npm run build` to build the application for
    production.
 
-For detailed instructions, check the [README](frontend/README.md) file inside the `frontend` folder.
+For detailed instructions, check the [INSTALLATION](documentation/INSTALLATION.md) file inside the `documentation` folder.
 
 For instructions on how to use and operate the application, check the [USAGE](documentation/USAGE.md) file inside the `documentation` folder.
 
