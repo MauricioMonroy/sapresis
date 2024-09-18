@@ -298,8 +298,6 @@ Software (2721455) del SENA, y fue realizado por el aprendiz Mauricio Alberto Mo
 
 ---
 
-#
-
 ## Autor
 
 ### Mauricio Alberto Monroy Calle
@@ -313,9 +311,7 @@ conmigo:
 
 **Fecha**: Septiembre de 2024
 
-```
-
-[]: # (END)
+---
 
 
 

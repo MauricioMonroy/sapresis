@@ -13,8 +13,6 @@ prescriptions. The application is developed with React and uses a REST API for d
 Para un correcto funcionamiento de la aplicación, es necesario seguir los pasos de instalación especificados a
 continuación. / For the application to work correctly, it is necessary to follow the installation steps specified below.
 
-#
-
 ---
 
 ## Contenido / Table of Contents
@@ -25,8 +23,6 @@ continuación. / For the application to work correctly, it is necessary to follo
 - [Scripts Disponibles / Available Scripts](#scripts-disponibles--available-scripts)
 - [Contribuir / Contributing](#contribuir--contributing)
 - [Recursos y Documentación / Resources and Documentation](#recursos-y-documentación--resources-and-documentation)
-
-#
 
 ---
 
@@ -58,8 +54,6 @@ continuación. / For the application to work correctly, it is necessary to follo
 5. Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación. / Open
    [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-#
-
 ---
 
 ## Funcionalidades Principales / Key Features
@@ -74,8 +68,6 @@ continuación. / For the application to work correctly, it is necessary to follo
 - **Nota:** Para el correcto funcionamiento de la aplicación, es necesario contar con la API REST de SIPRESS. / **Note:
   **
   For the correct operation of the application, it is necessary to have the SIPRESS REST API.
-
-#
 
 ---
 
@@ -140,8 +132,6 @@ feature set is suitable for small and middle deployments, and you
 shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you could not
 customize it when you are ready for it.
 
-#
-
 ---
 
 ## Contribuir / Contributing
@@ -156,8 +146,6 @@ welcome. If you would like to contribute, please follow these steps:
 4. Envía tus cambios / Push your changes (`git push origin feature/nueva-funcionalidad`).
 5. Crea un Pull Request. / Create a Pull Request.
 
-#
-
 ---
 
 ## Recursos y Documentación / Resources and Documentation
@@ -167,8 +155,6 @@ the [Documentación oficial / Create React App documentation](https://facebook.g
 
 Para aprender React, revisa la / To learn React, check out
 the [Documentación oficial de React / React documentation](https://reactjs.org/).
-
-#
 
 ---
 

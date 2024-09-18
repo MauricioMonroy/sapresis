@@ -1,4 +1,8 @@
+![Logo SIPRESS](../backend/src/main/resources/images/sipress-logo.png)
+
 # 📚 Documentación de SIPRESS API
+
+![SIPRESS API](https://img.shields.io/badge/SIPRESS-API-blue)
 
 ---
 
@@ -56,8 +60,6 @@ explica con más detalle el funcionamiento del registro y la autenticación. Tam
 GitHub [SIPRESS](https://github.com/MauricioMonroy/sipress-web-app.git), en donde se detalla la estructura, las
 características y el funcionamiento de la aplicación.
 
-#
-
 ___
 
 # Contenido
@@ -77,8 +79,6 @@ ___
 - [Referencias](#referencias)
 
 ___
-
-#
 
 # Servicio de login y registro
 
@@ -575,8 +575,7 @@ ___
 ```
 
 ___
-
-#
+___
 
 # Servicios de sipress-web-app
 
@@ -607,8 +606,6 @@ Las entidades que hacen parte de este sistema son:
 - ### **`Consulta`**
 
 ___
-
-#
 
 # Servicio de institución
 
@@ -1082,8 +1079,6 @@ ___
 ```
 
 ___
-
-#
 
 # Servicio de personal
 
@@ -1742,8 +1737,6 @@ ___
 
 ___
 
-#
-
 # Servicio de paciente
 
 Los endpoints `/pacientes` y `/pacientes/{id}` permiten la gestión de información relacionada con los pacientes. Estos
@@ -2325,8 +2318,6 @@ ___
 ```
 
 ---
-
-#
 
 # Servicio de fórmula
 
@@ -2928,8 +2919,6 @@ La respuesta generada tendrá la siguiente estructura:
 ```
 
 ---
-
-#
 
 # Servicio de factura
 
@@ -3536,8 +3525,6 @@ La respuesta generada tendrá la siguiente estructura:
 
 ---
 
-#
-
 # Servicio de eps
 
 Los endpoints `/epsS` y `/epsS/{id}` permiten la gestión de información relacionada con las Entidades Promotoras de
@@ -3999,8 +3986,6 @@ La respuesta generada tendrá la siguiente estructura:
 ```
 
 ---
-
-#
 
 # Servicio de doctor
 
@@ -4603,8 +4588,6 @@ La respuesta generada tendrá la siguiente estructura:
 
 ---
 
-#
-
 # Servicio de dependencia
 
 Los endpoints `/dependencias` y `/dependencias/{id}` permiten la gestión de información relacionada con la entidad
@@ -5104,8 +5087,6 @@ La respuesta generada tendrá la siguiente estructura:
 ```
 
 ---
-
-#
 
 # Servicio de consultorio
 
@@ -5867,8 +5848,6 @@ La respuesta generada tendrá la siguiente estructura:
 ```
 
 ---
-
-#
 
 # Servicio de consulta
 
