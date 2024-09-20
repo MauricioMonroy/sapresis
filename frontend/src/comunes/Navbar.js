@@ -16,7 +16,7 @@ const Navbar = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:8080/sipress-app/usuarios/perfil", {
+      .get("https://sipress-backend.onrender.com/sipress-app/usuarios/perfil", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

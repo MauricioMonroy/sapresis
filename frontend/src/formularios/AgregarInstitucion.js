@@ -36,7 +36,7 @@ export default function AgregarInstitucion({ onInstitucionAdded }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const urlBase = "http://localhost:8080/sipress-app/instituciones";
+    const urlBase = "https://sipress-backend.onrender.com/sipress-app/instituciones";
     const token = localStorage.getItem("token");
     await axios.post(urlBase, institucion, {
       headers: {

@@ -48,7 +48,7 @@ export default function Registro() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/sipress-app/auth/registro",
+        "https://sipress-backend.onrender.com/sipress-app/auth/registro",
         {
           nombreCompleto,
           email,

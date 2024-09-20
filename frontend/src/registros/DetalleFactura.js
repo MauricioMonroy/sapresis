@@ -12,7 +12,7 @@ import { NumericFormat } from "react-number-format";
  * */
 
 export default function DetalleFactura() {
-  const urlBase = "http://localhost:8080/sipress-app/facturas";
+  const urlBase = "https://sipress-backend.onrender.com/sipress-app/facturas";
 
   const { id } = useParams();
 

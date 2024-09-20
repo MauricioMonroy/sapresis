@@ -25,7 +25,7 @@ import { toast } from "react-toastify";
 const PageSize = 5;
 
 export default function ListadoEps() {
-  const urlBase = "http://localhost:8080/sipress-app/epsS";
+  const urlBase = "https://sipress-backend.onrender.com/sipress-app/epsS";
   const [eps, setEpsS] = useState([]);
   const [role, setRole] = useState("");
   const [error, setError] = useState(null);
@@ -76,7 +76,7 @@ export default function ListadoEps() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:8080/sipress-app/usuarios/perfil", {
+      .get("https://sipress-backend.onrender.com/sipress-app/usuarios/perfil", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

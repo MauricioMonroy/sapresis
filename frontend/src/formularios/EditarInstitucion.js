@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
  * */
 
 export default function EditarInstitucion() {
-  const urlBase = "http://localhost:8080/sipress-app/instituciones";
+  const urlBase = "https://sipress-backend.onrender.com/sipress-app/instituciones";
 
   let navigate = useNavigate();
   const { id } = useParams();

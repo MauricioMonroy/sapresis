@@ -41,7 +41,7 @@ export default function AgregarDoctor({ onDoctorAdded }) {
       try {
         const token = localStorage.getItem("token");
         const resultado = await axios.get(
-          "http://localhost:8080/sipress-app/dependencias",
+          "https://sipress-backend.onrender.com/sipress-app/dependencias",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -73,7 +73,7 @@ export default function AgregarDoctor({ onDoctorAdded }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const urlBase = "http://localhost:8080/sipress-app/doctores";
+    const urlBase = "https://sipress-backend.onrender.com/sipress-app/doctores";
     const token = localStorage.getItem("token");
     await axios.post(urlBase, doctor, {
       headers: {

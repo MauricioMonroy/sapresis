@@ -40,7 +40,7 @@ export default function Registro({ onUsuarioAdded }) {
       toast.warning("Las contraseñas no coinciden");
       return;
     }
-    const urlBase = "http://localhost:8080/sipress-app/auth/registro";
+    const urlBase = "https://sipress-backend.onrender.com/sipress-app/auth/registro";
     const token = localStorage.getItem("token");
     await axios.post(urlBase, usuario, {
       headers: {

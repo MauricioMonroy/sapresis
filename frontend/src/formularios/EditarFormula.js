@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
  * */
 
 export default function EditarFormula() {
-  const urlBase = "http://localhost:8080/sipress-app/formulas";
+  const urlBase = "https://sipress-backend.onrender.com/sipress-app/formulas";
 
   let navigate = useNavigate();
   const { id } = useParams();
@@ -51,7 +51,7 @@ export default function EditarFormula() {
     const token = localStorage.getItem("token");
     try {
       const resultado = await axios.get(
-        "http://localhost:8080/sipress-app/pacientes",
+        "https://sipress-backend.onrender.com/sipress-app/pacientes",
         {
           headers: {
             Authorization: `Bearer ${token}`,
