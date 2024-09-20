@@ -40,6 +40,11 @@ export default function Registro() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Verificación de que los campos no estén vacíos
+    if (!nombreCompleto || !email || !password || !confirmPassword) {
+      toast.warning("Por favor, complete todos los campos");
+      return;
+    }
     // Verificación de que las contraseñas coincidan
     if (password !== confirmPassword) {
       toast.warning("Las contraseñas no coinciden");

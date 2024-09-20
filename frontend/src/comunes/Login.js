@@ -30,6 +30,10 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!usuario.email || !usuario.password) {
+      toast.error("Por favor, ingrese su correo y contraseña");
+      return;
+    }
     try {
       const response = await fetch(urlBase, {
         method: "POST",
