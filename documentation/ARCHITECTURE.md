@@ -250,7 +250,7 @@ ___
 
 Para conocer más detalles sobre la implementación de la seguridad en la aplicación, se recomienda revisar la
 documentación de la API y las pruebas realizadas con Postman en el directorio `documentation`
-[SIPRESS API](/documentation/API_DOCUMENTATION.md) o en el siguiente
+[SIPRESS API](../documentation/API_DOCUMENTATION.md) o en el siguiente
 enlace: [SIPRESS API Documentation](https://documenter.getpostman.com/view/37130978/2sAXjDfbBx)
 
 ___
