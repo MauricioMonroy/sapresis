@@ -144,7 +144,7 @@ export default function Login() {
                               to="#"
                               data-bs-toggle="modal"
                               data-bs-target="#RegistroModal">
-                              ¿No tienes una cuenta? Regístrate
+                              ¿No tiene una cuenta? Regístrese
                             </Link>
                           </div>
                         </div>

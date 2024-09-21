@@ -49,14 +49,25 @@ export default function Registro(onUsuarioRegistered) {
       toast.warning("Las contraseñas no coinciden");
       return;
     }
-    const urlBase =
-      "https://sipress-backend.onrender.com/sipress-app/auth/registro";
-    const token = localStorage.getItem("token");
-    await axios.post(urlBase, formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+
+    try {
+      const response = await axios.post(
+        "https://sipress-backend.onrender.com/sipress-app/auth/registro",
+        {
+          nombreCompleto,
+          email,
+          password,
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success("Usuario registrado con éxito");
+        return;
+      }
+    } catch (error) {
+      console.error("Error al registrar el usuario:", error);
+      toast.error("Error al registrar el usuario");
+    }
 
     // Cerrar el modal manualmente
     const modalElement = modalRef.current;
@@ -64,10 +75,7 @@ export default function Registro(onUsuarioRegistered) {
       const modalInstance = new window.bootstrap.Modal(modalElement);
       modalInstance.hide();
     }
-
-    // Llamar a la función de actualización de la lista
     onUsuarioRegistered();
-    toast.success("Registro agregado correctamente");
   };
 
   return (
