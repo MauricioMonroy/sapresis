@@ -1,40 +1,49 @@
-import axios from "axios";
 import React, { useState, useRef } from "react";
+import axios from "axios";
 import { toast } from "react-toastify";
 
 /**
- * Componente funcional que renderiza el modal para agregar un usuario
- * @param {Object} props Las propiedades del componente
- * @param {Function} props.onUsuarioAdded Función que se ejecuta cuando se agrega un usuario
- * @returns El componente de formulario para agregar un usuario
- * @requires react, axios, react-toastify, useRef, useState
+ * Componente funcional que permite registrar un usuario
+ * @param {Function} props.handleChange - Función para manejar el cambio en los campos del formulario
+ * @param {Function} props.handleSubmit - Función para manejar el envío del formulario
+ * @param {Function} props.showPassword - Función para mostrar u ocultar la contraseña
+ * @param {Function} props.showConfirmPassword - Función para mostrar u ocultar la confirmación de contraseña
+ * @param {Function} props.response - Respuesta de la petición al servidor
+ * @param {Object} props.formData - Objeto con los datos del formulario
+ * @returns El componente de formulario para registrar un usuario
+ * @requires react, axios, react-toastify, useNavigate, useState
  * @version 1.0
  * */
 
-export default function Registro({ onUsuarioAdded }) {
+export default function Registro(onUsuarioRegistered) {
   const modalRef = useRef(null);
 
-  const [usuario, setUsuario] = useState({
+  const [formData, setFormData] = useState({
     nombreCompleto: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
 
-  const { nombreCompleto, email, password, confirmPassword } = usuario;
+  const { nombreCompleto, email, password, confirmPassword } = formData;
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const onInputChange = (e) => {
-    setUsuario({
-      ...usuario,
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    // Verificación de que los campos no estén vacíos
+    if (!nombreCompleto || !email || !password || !confirmPassword) {
+      toast.warning("Por favor, complete todos los campos");
+      return;
+    }
     // Verificación de que las contraseñas coincidan
     if (password !== confirmPassword) {
       toast.warning("Las contraseñas no coinciden");
@@ -43,7 +52,7 @@ export default function Registro({ onUsuarioAdded }) {
     const urlBase =
       "https://sipress-backend.onrender.com/sipress-app/auth/registro";
     const token = localStorage.getItem("token");
-    await axios.post(urlBase, usuario, {
+    await axios.post(urlBase, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -57,22 +66,22 @@ export default function Registro({ onUsuarioAdded }) {
     }
 
     // Llamar a la función de actualización de la lista
-    onUsuarioAdded();
+    onUsuarioRegistered();
     toast.success("Registro agregado correctamente");
   };
 
   return (
     <div
       className="modal fade"
-      id="RegistroUsuarioModal"
+      id="RegistroModal"
       tabIndex="-1"
-      aria-labelledby="RegistroUsuarioModalLabel"
+      aria-labelledby="RegistroModalLabel"
       aria-hidden="true"
       ref={modalRef}>
       <div className="modal-dialog modal-lg">
         <div className="modal-content bg-light">
           <div className="modal-header">
-            <h1 className="modal-title fs-5" id="RegistroUsuarioModalLabel">
+            <h1 className="modal-title fs-5" id="RegistroModalLabel">
               Registro de Usuarios
             </h1>
             <button
@@ -83,7 +92,8 @@ export default function Registro({ onUsuarioAdded }) {
               <span></span>
             </button>
           </div>
-          <form onSubmit={(e) => onSubmit(e)} autoComplete="off">
+
+          <form onSubmit={handleSubmit} id="registroForm" autoComplete="off">
             <div className="modal-body">
               <div className="form-floating form-group mb-3">
                 <input
@@ -94,7 +104,7 @@ export default function Registro({ onUsuarioAdded }) {
                   placeholder="Nombre completo"
                   required={true}
                   value={nombreCompleto}
-                  onChange={(e) => onInputChange(e)}
+                  onChange={handleChange}
                   autoComplete="off"
                   inputMode="text"
                 />
@@ -110,7 +120,7 @@ export default function Registro({ onUsuarioAdded }) {
                   placeholder="nombre@ejemplo.com"
                   required={true}
                   value={email}
-                  onChange={(e) => onInputChange(e)}
+                  onChange={handleChange}
                   autoComplete="off"
                   inputMode="email"
                 />
@@ -126,7 +136,7 @@ export default function Registro({ onUsuarioAdded }) {
                   placeholder="Contraseña"
                   required={true}
                   value={password}
-                  onChange={(e) => onInputChange(e)}
+                  onChange={handleChange}
                   autoComplete="off"
                   inputMode="password"
                 />
@@ -156,7 +166,7 @@ export default function Registro({ onUsuarioAdded }) {
                   placeholder="Confirmar Contraseña"
                   required={true}
                   value={confirmPassword}
-                  onChange={(e) => onInputChange(e)}
+                  onChange={handleChange}
                   autoComplete="off"
                   inputMode="password"
                 />
@@ -188,7 +198,7 @@ export default function Registro({ onUsuarioAdded }) {
                 type="submit"
                 className="btn btn-primary"
                 data-bs-dismiss="modal">
-                <i className="fa-solid fa-folder-plus"></i> Guardar registro
+                <i className="fa-solid fa-folder-plus"></i> Registrarse
               </button>
             </div>
           </form>

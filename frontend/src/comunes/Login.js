@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import RegistroModal from "../formularios/RegistroModal";
 import "../login.css";
 
 /**
  * Componente funcional que representa la vista de inicio de sesión
+ * Alberga el modal de registro de usuario
  * @returns El componente con la interfaz de inicio de sesión
  * @requires react, useNavigate, toast
  * @version 1.0
@@ -58,6 +60,11 @@ export default function Login() {
       console.error("Error en la autenticación", error);
       toast.error("Error de conexión");
     }
+  };
+
+  // Lógica de respuesta al registro de usuario
+  const handleUsuarioRegistered = () => {
+    toast.success("Registro exitoso. Ahora puede iniciar sesión.");
   };
 
   return (
@@ -133,9 +140,12 @@ export default function Login() {
                             Ingresar
                           </button>
                           <div className="text-center">
-                            <a className="small" href="/registro">
-                              Registrarse
-                            </a>
+                            <Link
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#RegistroModal">
+                              ¿No tienes una cuenta? Regístrate
+                            </Link>
                           </div>
                         </div>
                       </form>
@@ -147,6 +157,9 @@ export default function Login() {
           </div>
         </div>
       </div>
+
+      {/* Modal de registro de usuario */}
+      <RegistroModal onUsuarioRegistered={handleUsuarioRegistered} />
     </section>
   );
 }
