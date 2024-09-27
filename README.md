@@ -1,6 +1,6 @@
-# Sapresis - Sistema Integral para la Prestación de Servicios de Salud
+![Sapresis Logo](backend/src/main/resources/images/sapresis-logo.png)
 
-![Sapresis Logo](backend/src/main/resources/images/print-logo.png)
+# Sapresis - Sistema Integral para la Prestación de Servicios de Salud
 
 ## Descripción del Proyecto
 
