@@ -12,7 +12,7 @@ import { NumericFormat } from "react-number-format";
  * */
 
 export default function DetalleFactura() {
-  const urlBase = "https://sapresis-backend.onrender.com/sapresis/facturas";
+  const urlBase = process.env.REACT_APP_API_URL + "/sapresis/facturas";
 
   const { id } = useParams();
 

@@ -29,7 +29,7 @@ export default function AgregarEps({ onEpsAdded }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const urlBase = "https://sapresis-backend.onrender.com/sapresis/epsS";
+    const urlBase = process.env.REACT_APP_API_URL + "/sapresis/epsS";
     const token = localStorage.getItem("token");
     await axios.post(urlBase, eps, {
       headers: {

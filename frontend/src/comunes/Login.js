@@ -13,7 +13,7 @@ import "../login.css";
  */
 
 export default function Login() {
-  const urlBase = "https://sapresis-backend.onrender.com/sapresis/auth/login";
+  const urlBase = process.env.REACT_APP_API_URL + "/sapresis/auth/login";
   let navigate = useNavigate();
 
   const [usuario, setUsuario] = useState({
@@ -55,7 +55,7 @@ export default function Login() {
       const token = loginResponse.token;
       localStorage.setItem("token", token);
       navigate("/inicio");
-      toast.success("Bienvenido a Sipress");
+      toast.success("Bienvenido a Sapresis");
     } catch (error) {
       console.error("Error en la autenticación", error);
       toast.error("Error de conexión");
@@ -79,7 +79,7 @@ export default function Login() {
                   <div className="card-body">
                     <div className="col-md-9 col-lg-8 mx-auto">
                       <h3 className="login-heading mb-4">
-                        Bienvenido a Sipress
+                        Bienvenido a Sapresis
                       </h3>
                       <p>Por favor ingrese sus credenciales</p>
                       <form

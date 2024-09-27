@@ -25,7 +25,7 @@ import { toast } from "react-toastify";
 const PageSize = 5;
 
 export default function ListadoFormulas() {
-  const urlBase = "https://sapresis-backend.onrender.com/sapresis/formulas";
+  const urlBase = process.env.REACT_APP_API_URL + "/sapresis/formulas";
   const [formulas, setFormulas] = useState([]);
   const [role, setRole] = useState("");
   const [error, setError] = useState(null);
@@ -76,7 +76,7 @@ export default function ListadoFormulas() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get("https://sapresis-backend.onrender.com/sapresis/usuarios/perfil", {
+      .get(process.env.REACT_APP_API_URL + "/sapresis/usuarios/perfil", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

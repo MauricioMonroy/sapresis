@@ -1,0 +1,19 @@
+/* LoadingScreen.css */
+.loading-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #113733;
+}
+
+.loading-screen img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .loading-screen img {
+        max-width: 80%;
+    }
+}

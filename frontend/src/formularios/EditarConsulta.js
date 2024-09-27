@@ -15,7 +15,7 @@ import dayjs from "dayjs";
  * */
 
 export default function EditarConsulta() {
-  const urlBase = "https://sapresis-backend.onrender.com/sapresis/consultas";
+  const urlBase = process.env.REACT_APP_API_URL + "/sapresis/consultas";
 
   let navigate = useNavigate();
   const { pacienteId, doctorId } = useParams();
@@ -34,7 +34,7 @@ export default function EditarConsulta() {
     const token = localStorage.getItem("token");
     try {
       const resultado = await axios.get(
-        "https://sapresis-backend.onrender.com/sapresis/pacientes",
+        process.env.REACT_APP_API_URL + "/sapresis/pacientes",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -52,7 +52,7 @@ export default function EditarConsulta() {
     const token = localStorage.getItem("token");
     try {
       const resultado = await axios.get(
-        "https://sapresis-backend.onrender.com/sapresis/doctores",
+        process.env.REACT_APP_API_URL + "/sapresis/doctores",
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
  * */
 
 export default function EditarDoctor() {
-  const urlBase = "https://sapresis-backend.onrender.com/sapresis/doctores";
+  const urlBase = process.env.REACT_APP_API_URL + "/sapresis/doctores";
 
   let navigate = useNavigate();
   const { id } = useParams();
@@ -50,7 +50,7 @@ export default function EditarDoctor() {
     const token = localStorage.getItem("token");
     try {
       const resultado = await axios.get(
-        "https://sapresis-backend.onrender.com/sapresis/dependencias",
+        process.env.REACT_APP_API_URL + "/sapresis/dependencias",
         {
           headers: {
             Authorization: `Bearer ${token}`,

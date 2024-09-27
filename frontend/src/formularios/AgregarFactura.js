@@ -34,7 +34,7 @@ export default function AgregarFactura({ onFacturaAdded }) {
       try {
         const token = localStorage.getItem("token");
         const resultado = await axios.get(
-          "https://sapresis-backend.onrender.com/sapresis/pacientes",
+          process.env.REACT_APP_API_URL + "/sapresis/pacientes",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -66,7 +66,7 @@ export default function AgregarFactura({ onFacturaAdded }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const urlBase = "https://sapresis-backend.onrender.com/sapresis/facturas";
+    const urlBase = process.env.REACT_APP_API_URL + "/sapresis/facturas";
     const token = localStorage.getItem("token");
     await axios.post(urlBase, factura, {
       headers: {

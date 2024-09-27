@@ -13,11 +13,10 @@ function Inicio() {
       <header>
         <div className="container">
           <div className="row bg-light rounded-3 text-center m-5">
-            <div className="m-2">
-              <h3 className="fw-bold">
-                Sistema Integral para la Prestación de Servicios de Salud -{" "}
-                <span className="text-success fw-bold fs-3">Sapresis</span>
-              </h3>
+            <div className="m-2">            
+              <h4 className="fw-bold">
+              <span className="text-success fw-bold fs-2">Sapresis</span> - Sistema Integral para la Prestación de Servicios de Salud
+              </h4>
               <p className="fs-6">
                 El Sapresis es una aplicación diseñada para simplificar la
                 gestión de las Instituciones Prestadoras de Salud (IPS),
@@ -42,11 +41,13 @@ function Inicio() {
                     <h3 className="card-title">Sedes</h3>
                   </div>
                   <div className="card-body">
+                    <span>
                     <img
                       src={`${process.env.PUBLIC_URL}images/institucion.png`}
                       alt="institucion.png"
                       className="card-img-top"
                     />
+                    </span>                   
                   </div>
                 </div>
               </a>

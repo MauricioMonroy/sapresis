@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
  * */
 
 export default function EditarFactura() {
-  const urlBase = "https://sapresis-backend.onrender.com/sapresis/facturas";
+  const urlBase = process.env.REACT_APP_API_URL + "/sapresis/facturas";
 
   let navigate = useNavigate();
   const { id } = useParams();
@@ -51,7 +51,7 @@ export default function EditarFactura() {
     const token = localStorage.getItem("token");
     try {
       const resultado = await axios.get(
-        "https://sapresis-backend.onrender.com/sapresis/pacientes",
+        process.env.REACT_APP_API_URL + "/sapresis/pacientes",
         {
           headers: {
             Authorization: `Bearer ${token}`,

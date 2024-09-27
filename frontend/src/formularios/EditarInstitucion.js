@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
  * */
 
 export default function EditarInstitucion() {
-  const urlBase = "https://sapresis-backend.onrender.com/sapresis/instituciones";
+  const urlBase = process.env.REACT_APP_API_URL + "/sapresis/instituciones";
 
   let navigate = useNavigate();
   const { id } = useParams();

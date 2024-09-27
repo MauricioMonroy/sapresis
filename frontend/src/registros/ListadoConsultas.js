@@ -23,7 +23,7 @@ import { toast } from "react-toastify";
 const PageSize = 5;
 
 export default function ListadoConsultas() {
-  const urlBase = "https://sapresis-backend.onrender.com/sapresis/consultas";
+  const urlBase = process.env.REACT_APP_API_URL + "/sapresis/consultas";
   const [consultas, setConsultas] = useState([]);
   const [role, setRole] = useState("");
   const [error, setError] = useState(null);
@@ -74,7 +74,7 @@ export default function ListadoConsultas() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get("https://sapresis-backend.onrender.com/sapresis/usuarios/perfil", {
+      .get(process.env.REACT_APP_API_URL + "/sapresis/usuarios/perfil", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

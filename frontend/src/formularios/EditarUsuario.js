@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
  * */
 
 export default function EditarUsuario() {
-  const urlBase = "https://sapresis-backend.onrender.com/sapresis/usuarios";
+  const urlBase = process.env.REACT_APP_API_URL + "/sapresis/usuarios";
 
   let navigate = useNavigate();
   const { id } = useParams();

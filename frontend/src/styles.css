@@ -152,6 +152,11 @@ body {
     padding: 10px;
 }
 
+.animated-gif-img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
 /*MEDIA QUERIES INDEX*/
 @media (max-width: 768px) {
     .row {
@@ -233,7 +238,7 @@ body {
 /* Estilo para la imagen del logo */
 .logo-imagen {
     max-width: 160px;
-    max-height: 50px;
+    max-height: 56px;
 }
 
 @media (max-width: 768px) {

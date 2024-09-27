@@ -5,7 +5,7 @@
  * @requires react-router-dom, useLocation
  * */
 
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -15,6 +15,7 @@ import {
 import Inicio from "./comunes/Inicio";
 import Navbar from "./comunes/Navbar";
 import Footer from "./comunes/Footer";
+import LoadingScreen from "./comunes/LoadingScreen";
 import Login from "./comunes/Login";
 import Logout from "./comunes/Logout";
 import GestionUsuarios from "./registros/GestionUsuarios";
@@ -57,7 +58,10 @@ function App() {
 }
 
 function Main() {
+  const [loading, setLoading] = useState(true); // Controlar el estado de carga
   const location = useLocation();
+
+  // Definir las rutas donde no se debe mostrar el Navbar y Footer
   const noNavAndFooterRoutes = [
     "/",
     "/login",
@@ -65,6 +69,10 @@ function Main() {
     "/logout-success",
     "/registro",
   ];
+
+  const handleLoadingComplete = () => {
+    setLoading(false); // Deja de mostrar la pantalla de carga
+  };
 
   return (
     <div className="App">
@@ -80,7 +88,12 @@ function Main() {
         <Route path="/login" element={<Login />} />
         <Route path="/gestion-usuarios" element={<GestionUsuarios />} />
         <Route path="/logout-success" element={<Logout />} />
-        <Route path="/inicio" element={<Inicio />} />
+        
+          <Route path="/inicio" element={loading ? (
+          <LoadingScreen onLoadingComplete={handleLoadingComplete} />
+        ) : (<Inicio />)} />
+        
+
         <Route path="/pacientes" element={<ListadoPacientes />} />
         <Route path="/doctores" element={<ListadoDoctores />} />
         <Route path="/personalS" element={<ListadoPersonal />} />

@@ -41,7 +41,7 @@ export default function Registro({ onUsuarioAdded }) {
       return;
     }
     const urlBase =
-      "https://sapresis-backend.onrender.com/sapresis/auth/registro";
+      process.env.REACT_APP_API_URL + "/sapresis/auth/registro";
     const token = localStorage.getItem("token");
     await axios.post(urlBase, usuario, {
       headers: {

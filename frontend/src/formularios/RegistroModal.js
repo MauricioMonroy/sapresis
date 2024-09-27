@@ -52,7 +52,7 @@ export default function Registro(onUsuarioRegistered) {
 
     try {
       const response = await axios.post(
-        "https://sapresis-backend.onrender.com/sapresis/auth/registro",
+        process.env.REACT_APP_API_URL + "/sapresis/auth/registro",
         {
           nombreCompleto,
           email,

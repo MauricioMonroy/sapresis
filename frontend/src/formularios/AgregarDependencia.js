@@ -30,7 +30,7 @@ export default function AgregarDependencia({ onDependenciaAdded }) {
       try {
         const token = localStorage.getItem("token");
         const resultado = await axios.get(
-          "https://sapresis-backend.onrender.com/sapresis/instituciones",
+          process.env.REACT_APP_API_URL + "/sapresis/instituciones",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -62,7 +62,7 @@ export default function AgregarDependencia({ onDependenciaAdded }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const urlBase = "https://sapresis-backend.onrender.com/sapresis/dependencias";
+    const urlBase = process.env.REACT_APP_API_URL + "/sapresis/dependencias";
     const token = localStorage.getItem("token");
     await axios.post(urlBase, dependencia, {
       headers: {

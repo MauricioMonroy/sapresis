@@ -41,7 +41,7 @@ export default function AgregarPersonal({ onPersonalAdded }) {
       try {
         const token = localStorage.getItem("token");
         const resultado = await axios.get(
-          "https://sapresis-backend.onrender.com/sapresis/dependencias",
+          process.env.REACT_APP_API_URL + "/sapresis/dependencias",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -73,7 +73,7 @@ export default function AgregarPersonal({ onPersonalAdded }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const urlBase = "https://sapresis-backend.onrender.com/sapresis/personalS";
+    const urlBase = process.env.REACT_APP_API_URL + "/sapresis/personalS";
     const token = localStorage.getItem("token");
     await axios.post(urlBase, personal, {
       headers: {
