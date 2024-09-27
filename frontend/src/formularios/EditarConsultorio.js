@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
  * */
 
 export default function EditarConsultorio() {
-  const urlBase = "https://sipress-backend.onrender.com/sipress-app/consultorios";
+  const urlBase = "https://sapresis-backend.onrender.com/sapresis/consultorios";
 
   let navigate = useNavigate();
   const { id } = useParams();
@@ -30,7 +30,7 @@ export default function EditarConsultorio() {
     const token = localStorage.getItem("token");
     try {
       const resultado = await axios.get(
-        "https://sipress-backend.onrender.com/sipress-app/pacientes",
+        "https://sapresis-backend.onrender.com/sapresis/pacientes",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -48,7 +48,7 @@ export default function EditarConsultorio() {
     const token = localStorage.getItem("token");
     try {
       const resultado = await axios.get(
-        "https://sipress-backend.onrender.com/sipress-app/personalS",
+        "https://sapresis-backend.onrender.com/sapresis/personalS",
         {
           headers: {
             Authorization: `Bearer ${token}`,

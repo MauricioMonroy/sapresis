@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class PersonalApp {
 
-    private static final String BASE_URL = "http://localhost:8080/sipress-app";
+    private static final String BASE_URL = "http://localhost:8080/sapresis";
     private static final HttpClient client = HttpClient.newHttpClient();
     private static final ObjectMapper mapper = new ObjectMapper();
     private static final Scanner scanner = new Scanner(System.in);

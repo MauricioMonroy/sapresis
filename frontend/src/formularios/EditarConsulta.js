@@ -15,7 +15,7 @@ import dayjs from "dayjs";
  * */
 
 export default function EditarConsulta() {
-  const urlBase = "https://sipress-backend.onrender.com/sipress-app/consultas";
+  const urlBase = "https://sapresis-backend.onrender.com/sapresis/consultas";
 
   let navigate = useNavigate();
   const { pacienteId, doctorId } = useParams();
@@ -34,7 +34,7 @@ export default function EditarConsulta() {
     const token = localStorage.getItem("token");
     try {
       const resultado = await axios.get(
-        "https://sipress-backend.onrender.com/sipress-app/pacientes",
+        "https://sapresis-backend.onrender.com/sapresis/pacientes",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -52,7 +52,7 @@ export default function EditarConsulta() {
     const token = localStorage.getItem("token");
     try {
       const resultado = await axios.get(
-        "https://sipress-backend.onrender.com/sipress-app/doctores",
+        "https://sapresis-backend.onrender.com/sapresis/doctores",
         {
           headers: {
             Authorization: `Bearer ${token}`,

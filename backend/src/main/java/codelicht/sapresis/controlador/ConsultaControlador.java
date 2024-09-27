@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("sipress-app")
+@RequestMapping("sapresis")
 @CrossOrigin(value = "http://localhost:3000")
 public class ConsultaControlador {
 

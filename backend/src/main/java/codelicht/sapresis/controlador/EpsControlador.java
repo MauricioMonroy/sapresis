@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("sipress-app")
+@RequestMapping("sapresis")
 @CrossOrigin(value = "http://localhost:3000")
 public class EpsControlador {
     private static final Logger logger =
@@ -30,7 +30,7 @@ public class EpsControlador {
         this.epsServicio = epsServicio;
     }
 
-    // http://localhost:8080/sipress-app/epsS
+    // http://localhost:8080/sapresis/epsS
     @GetMapping("/epsS")
     public List<Eps> obtenerEpsS() {
         var epsS = epsServicio.listarEpsS();

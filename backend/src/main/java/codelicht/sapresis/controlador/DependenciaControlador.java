@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("sipress-app")
+@RequestMapping("sapresis")
 @CrossOrigin(value = "http://localhost:3000")
 public class DependenciaControlador {
     private static final Logger logger =
@@ -34,7 +34,7 @@ public class DependenciaControlador {
         this.institucionServicio = institucionServicio;
     }
 
-    // http://localhost:8080/sipress-app/dependencias
+    // http://localhost:8080/sapresis/dependencias
     @GetMapping("/dependencias")
     public List<Dependencia> obtenerDependencias() {
         var dependencias = dependenciaServicio.listarDependencias();

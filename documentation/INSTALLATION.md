@@ -1,6 +1,6 @@
-![Logo SIPRESS](../frontend/src/assets/images/sipress-logo.png)
+![Logo Sapresis](../frontend/src/assets/images/sapresis-logo.png)
 
-![SIPRESS Web App](https://img.shields.io/badge/SIPRESS-Web%20App-blue)
+![Sapresis Web App](https://img.shields.io/badge/Sapresis-Web%20App-blue)
 
 # Guía de Instalación / Installation Guide
 
@@ -8,7 +8,7 @@ ___
 
 ## Contenido / Table of Contents
 
-- [Acerca de SIPRESS / About SIPRESS](#acerca-de-sipress--about-sipress)
+- [Acerca de Sapresis / About Sapresis](#acerca-de-sapresis--about-sapresis)
 - [Prerequisitos / Prerequisites](#prerequisitos--prerequisites)
 - [Pasos de Instalación / Installation Steps](#pasos-de-instalación--installation-steps)
 - [Funcionalidades Principales / Key Features](#funcionalidades-principales--key-features)
@@ -19,11 +19,11 @@ ___
 
 ---
 
-## Acerca de SIPRESS / About SIPRESS
+## Acerca de Sapresis / About Sapresis
 
-La aplicación web SIPRESS es una herramienta de gestión de pacientes y consultorios médicos. Permite a los usuarios
+La aplicación web Sapresis es una herramienta de gestión de pacientes y consultorios médicos. Permite a los usuarios
 llevar un registro de los pacientes, asignar consultas y médicos, y visualizar recetas médicas. La aplicación está
-desarrollada con React y utiliza una API REST para la gestión de datos. /The SIPRESS web app is a patient and medical
+desarrollada con React y utiliza una API REST para la gestión de datos. /The Sapresis web app is a patient and medical
 office management tool. It allows users to keep track of patients, assign consultations and doctors, and view medical
 prescriptions. The application is developed with React and uses a REST API for data management.
 
@@ -37,17 +37,17 @@ continuación. / For the application to work correctly, it is necessary to follo
 - Node.js
 - npm
 - Git
-- Backend API ( [SIPRESS API](https://github.com/MauricioMonroy/sipress-web-app/tree/main/backend) )
+- Backend API ( [Sapresis API](https://github.com/MauricioMonroy/sapresis/tree/main/backend) )
 
 ## Pasos de Instalación / Installation Steps
 
 1. Clona el repositorio / Clone the repository:
    ```bash
-   git clone https://github.com/MauricioMonroy/sipress-web-app.git
+   git clone https://github.com/MauricioMonroy/sapresis.git
     ```
 2. Navega al directorio / Navigate to the directory `frontend`:
    ```bash
-    cd sipress-web-app/frontend
+    cd sapresis/frontend
     ```
 3. Instala las dependencias / Install the dependencies:
     ```bash
@@ -71,9 +71,9 @@ continuación. / For the application to work correctly, it is necessary to follo
 - Visualización de recetas médicas. / Viewing medical prescriptions.
 - Gestión de empleados y consultorios. / Employee and clinic management.
 
-- **Nota:** Para el correcto funcionamiento de la aplicación, es necesario contar con la API REST de SIPRESS. / **Note:
+- **Nota:** Para el correcto funcionamiento de la aplicación, es necesario contar con la API REST de Sapresis. / **Note:
   **
-  For the correct operation of the application, it is necessary to have the SIPRESS REST API.
+  For the correct operation of the application, it is necessary to have the Sapresis REST API.
 
 ---
 
@@ -170,8 +170,8 @@ the [Documentación oficial de React / React documentation](https://reactjs.org/
 
 - GitHub: [@MauricioMonroy](https://github.com/MauricioMonroy)
 
-Si tiene alguna pregunta o sugerencia sobre la arquitectura del backend de SIPRESS, no dude en ponerse en contacto
-conmigo/ If you have any questions or suggestions about the SIPRESS backend architecture, feel free to contact me:
+Si tiene alguna pregunta o sugerencia sobre la arquitectura del backend de Sapresis, no dude en ponerse en contacto
+conmigo/ If you have any questions or suggestions about the Sapresis backend architecture, feel free to contact me:
 
 - Correo electrónico/ Email: `mauricio.monroy0@soy.sena.edu.co` o `mauriciomonroy@live.cl`
 

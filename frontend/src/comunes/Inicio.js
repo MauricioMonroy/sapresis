@@ -16,10 +16,10 @@ function Inicio() {
             <div className="m-2">
               <h3 className="fw-bold">
                 Sistema Integral para la Prestación de Servicios de Salud -{" "}
-                <span className="text-success fw-bold fs-3">SIPRESS</span>
+                <span className="text-success fw-bold fs-3">Sapresis</span>
               </h3>
               <p className="fs-6">
-                El SIPRESS es una aplicación diseñada para simplificar la
+                El Sapresis es una aplicación diseñada para simplificar la
                 gestión de las Instituciones Prestadoras de Salud (IPS),
                 facilitando el manejo de la información de los pacientes,
                 personal médico y administrativo, así como de los servicios que

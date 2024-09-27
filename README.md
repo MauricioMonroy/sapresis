@@ -1,10 +1,10 @@
-# SIPRESS (Sistema Integral para la Prestación de Servicios de Salud)
+# Sapresis - Sistema Integral para la Prestación de Servicios de Salud
 
-![SIPRESS Logo](backend/src/main/resources/images/print-logo.png)
+![Sapresis Logo](backend/src/main/resources/images/print-logo.png)
 
 ## Descripción del Proyecto
 
-SIPRESS es un sistema está destinado a ser usado por el personal de una institución prestadora de salud. Está compuesto
+Sapresis es un sistema está destinado a ser usado por el personal de una institución prestadora de salud. Está compuesto
 por
 varias entidades que permiten consultar y gestionar información básica sobre los empleados de la institución, como el
 número de identificación, el nombre y los datos de contacto. También permite la asignación de consultas, consultorios y
@@ -27,11 +27,11 @@ profesionales vinculados.
 1. Abre una terminal en la ubicación donde deseas guardar el proyecto.
 2. Ejecuta el siguiente comando para clonar el repositorio:
    ```bash
-   git clone https://github.com/MauricioMonroy/sipress-web-app.git
+   git clone https://github.com/MauricioMonroy/sapresis.git
     ```
 3. Abre el directorio del proyecto:
    ```bash
-   cd sipress-web-app
+   cd sapresis
    ```
 
 ### Backend
@@ -73,11 +73,11 @@ ___
 
 ### **English:**
 
-# SIPRESS (Comprehensive System for Health Service Provision)
+# Sapresis (Comprehensive System for Health Service Provision)
 
 ## Project Description
 
-SIPRESS is a system designed to be used by the staff of a health service provider institution. It consists of various
+Sapresis is a system designed to be used by the staff of a health service provider institution. It consists of various
 entities
 that allow querying and managing basic information about the institution's employees, such as identification number,
 name, and contact details. It also enables the assignment of consultations, clinics, and patients, as well as the
@@ -99,11 +99,11 @@ dynamic retrieval of IDs, names, contact details, medical prescriptions, billing
 1. Open a terminal in the location where you want to save the project.
 2. Run the following command to clone the repository:
    ```bash
-   git clone https://github.com/MauricioMonroy/sipress-web-app.git
+   git clone https://github.com/MauricioMonroy/sapresis.git
     ```
 3. Open the project directory:
    ```bash
-   cd sipress-web-app
+   cd sapresis
    ```
 
 ### Backend

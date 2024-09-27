@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
  * */
 
 export default function EditarUsuario() {
-  const urlBase = "https://sipress-backend.onrender.com/sipress-app/usuarios";
+  const urlBase = "https://sapresis-backend.onrender.com/sapresis/usuarios";
 
   let navigate = useNavigate();
   const { id } = useParams();

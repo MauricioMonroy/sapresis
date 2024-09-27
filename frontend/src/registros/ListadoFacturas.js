@@ -25,7 +25,7 @@ import { toast } from "react-toastify";
 const PageSize = 5;
 
 export default function ListadoFacturas() {
-  const urlBase = "https://sipress-backend.onrender.com/sipress-app/facturas";
+  const urlBase = "https://sapresis-backend.onrender.com/sapresis/facturas";
   const [facturas, setFacturas] = useState([]);
   const [role, setRole] = useState("");
   const [error, setError] = useState(null);
@@ -76,7 +76,7 @@ export default function ListadoFacturas() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get("https://sipress-backend.onrender.com/sipress-app/usuarios/perfil", {
+      .get("https://sapresis-backend.onrender.com/sapresis/usuarios/perfil", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

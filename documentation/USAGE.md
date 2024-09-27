@@ -1,8 +1,8 @@
-[![SIPRESS](../frontend/src/assets/images/sipress-logo.png)](../frontend/src/assets/images/sipress-logo.png)
+[![Sapresis](../frontend/src/assets/images/sapresis-logo.png)](../frontend/src/assets/images/sapresis-logo.png)
 
-![SIPRESS Web App](https://img.shields.io/badge/SIPRESS-Web%20App-blue)
+![Sapresis Web App](https://img.shields.io/badge/Sapresis-Web%20App-blue)
 
-# Manual de uso Sipress-Web-App
+# Manual de uso Sapresis
 
 ---
 
@@ -28,23 +28,23 @@
 
 ## **1. Introducción**
 
-SIPRESS es un sistema integral para la prestación de servicios de salud. La aplicación permite al personal de salud
+Sapresis es un sistema integral para la prestación de servicios de salud. La aplicación permite al personal de salud
 gestionar pacientes, consultas y otros aspectos clave de la atención sanitaria.
 
-El objetivo de este manual es proporcionar una guía detallada sobre cómo utilizar SIPRESS. A continuación, se describen
+El objetivo de este manual es proporcionar una guía detallada sobre cómo utilizar Sapresis. A continuación, se describen
 las funcionalidades principales y los pasos para acceder a ellas.
 
 ---
 
 ## **2. Requisitos Previos**
 
-Antes de utilizar SIPRESS, asegúrate de cumplir con los siguientes requisitos:
+Antes de utilizar Sapresis, asegúrate de cumplir con los siguientes requisitos:
 
-- **Navegador web recomendado**: SIPRESS funciona correctamente en las versiones más recientes de Google Chrome, Mozilla
+- **Navegador web recomendado**: Sapresis funciona correctamente en las versiones más recientes de Google Chrome, Mozilla
   Firefox y Microsoft Edge. Otros navegadores pueden ser compatibles, pero no están garantizados.
 - **Resoluciones de pantalla**: La aplicación tiene un diseño responsivo y se adapta a diferentes tamaños de pantalla.
   Se recomienda una resolución mínima de 1024x768 píxeles para una experiencia óptima.
-- **Acceso a la aplicación**: Actualmente, SIPRESS se encuentra en fase de desarrollo y preproducción, por lo que no
+- **Acceso a la aplicación**: Actualmente, Sapresis se encuentra en fase de desarrollo y preproducción, por lo que no
   está disponible en un servidor público. Para acceder a la aplicación, es necesario ejecutarla localmente siguiendo los
   pasos detallados en el documento de instalación.
 
@@ -55,7 +55,7 @@ nuevas credenciales.
 
 ## **3. Estructura de la Aplicación**
 
-SIPRESS consta de varios módulos y funcionalidades que permiten gestionar diferentes aspectos de la atención sanitaria.
+Sapresis consta de varios módulos y funcionalidades que permiten gestionar diferentes aspectos de la atención sanitaria.
 A continuación, se describen los principales módulos de la aplicación:
 
 - **Gestión de Pacientes**: Permite agregar, editar y eliminar registros de pacientes. Proporciona información detallada
@@ -85,7 +85,7 @@ las secciones principales y las funcionalidades asociadas a cada una.
 La estructura de la aplicación y sus secciones se organiza en torno a las siguientes funcionalidades:
 
 - **`Login`**: Página de inicio de sesión para acceder a la aplicación. Permite a los usuarios autenticarse con sus
-  credenciales y acceder a las funcionalidades de SIPRESS.
+  credenciales y acceder a las funcionalidades de Sapresis.
 - **`Inicio (Home Page)`**: Página principal de la aplicación. Proporciona un resumen de las funcionalidades principales
   y enlaces rápidos a las secciones más utilizadas.
 - **`Menú de Navegación (Navbar)`**: Proporciona acceso rápido a las diferentes secciones de la aplicación. Permite
@@ -109,13 +109,13 @@ La estructura de la aplicación y sus secciones se organiza en torno a las sigui
 
 **Nota**: Haga clic en la imagen para ver el mapa de navegación en detalle.
 
-*Mapa general de navegación de SIPRESS*
+*Mapa general de navegación de Sapresis*
 
 ---
 
 ### **3.3. Descripción del flujo de navegación**
 
-El flujo de navegación en SIPRESS sigue un patrón común en las aplicaciones web. El flujo comienza con la página de
+El flujo de navegación en Sapresis sigue un patrón común en las aplicaciones web. El flujo comienza con la página de
 inicio de sesión (login). Al acceder a la aplicación, el usuario es recibido por esta página, la cual ofrece dos
 opciones: iniciar sesión o registrarse como un nuevo usuario. Si un usuario no está registrado, puede hacerlo
 proporcionando la información requerida: correo electrónico, nombre completo y contraseña. Una vez registrado, el
@@ -237,7 +237,7 @@ usuario puede iniciar sesión.
 
 #### **3.3.7. Responsividad y diseño adaptativo**
 
-* La aplicación SIPRESS está diseñada para ser responsiva y adaptarse a diferentes tamaños de pantalla. Se recomienda
+* La aplicación Sapresis está diseñada para ser responsiva y adaptarse a diferentes tamaños de pantalla. Se recomienda
   una resolución mínima de 1024x768 píxeles para una experiencia óptima, pero la aplicación es compatible con
   resoluciones más bajas y dispositivos móviles.
 
@@ -249,14 +249,14 @@ usuario puede iniciar sesión.
 
 ## **4. Consideraciones técnicas**
 
-SIPRESS está desarrollado con tecnologías modernas y estándares de la industria. Para el desarrollo del frontend se
+Sapresis está desarrollado con tecnologías modernas y estándares de la industria. Para el desarrollo del frontend se
 utilizó React, HTML, CSS, Bootstrap 5, JavaScript y los iconos FontAwesome.
 
 Como gran parte del código se realizó con React, es necesario especificar que la aplicación se divide en componentes
 reutilizables que se utilizan en diferentes partes de la aplicación. Esto permite una mayor modularidad y mantenibilidad
 del código.
 
-Los componentes de React utilizados en SIPRESS incluyen:
+Los componentes de React utilizados en Sapresis incluyen:
 
 - **Axios**: Para realizar peticiones HTTP al backend y gestionar las respuestas.
 - **React Router**: Para gestionar la navegación entre las diferentes secciones de la aplicación.
@@ -274,24 +274,24 @@ rendimiento óptimo y una experiencia de usuario satisfactoria.
 
 ## **5. Conclusiones**
 
-SIPRESS es una aplicación integral para la gestión de servicios de salud que ofrece una amplia gama de funcionalidades
+Sapresis es una aplicación integral para la gestión de servicios de salud que ofrece una amplia gama de funcionalidades
 para el personal de salud. La aplicación proporciona una interfaz intuitiva y fácil de usar, que permite a los usuarios
 gestionar pacientes, consultas, médicos y otros aspectos clave de la atención sanitaria de forma eficiente.
 
-El manual de uso de SIPRESS proporciona una guía detallada sobre cómo utilizar la aplicación, describiendo las
+El manual de uso de Sapresis proporciona una guía detallada sobre cómo utilizar la aplicación, describiendo las
 funcionalidades principales y los pasos para acceder a ellas. La estructura de la aplicación, los módulos y las
 secciones se presentan de forma clara y concisa, facilitando la comprensión y el uso de la aplicación.
 
-En resumen, SIPRESS es una herramienta poderosa y versátil que puede mejorar la eficiencia y la calidad de los servicios
-de salud. Con una interfaz amigable y funcionalidades avanzadas, SIPRESS se posiciona como una solución integral para la
+En resumen, Sapresis es una herramienta poderosa y versátil que puede mejorar la eficiencia y la calidad de los servicios
+de salud. Con una interfaz amigable y funcionalidades avanzadas, Sapresis se posiciona como una solución integral para la
 gestión de servicios de salud en instituciones médicas y centros de atención sanitaria.
 
-Para obtener más información sobre SIPRESS, sus funcionalidades y su implementación, consulte la documentación técnica y
+Para obtener más información sobre Sapresis, sus funcionalidades y su implementación, consulte la documentación técnica y
 los recursos disponibles en el repositorio del proyecto.
 
 ---
 
-**Nota**: Este manual de uso de SIPRESS es parte del proyecto académico para la Tecnología de Análisis y Desarrollo de
+**Nota**: Este manual de uso de Sapresis es parte del proyecto académico para la Tecnología de Análisis y Desarrollo de
 Software (2721455) del SENA, y fue realizado por el aprendiz Mauricio Alberto Monroy Calle.
 
 **Licencia**: [MIT](../LICENSE.md)
@@ -304,7 +304,7 @@ Software (2721455) del SENA, y fue realizado por el aprendiz Mauricio Alberto Mo
 
 - [GitHub](https://github.com/MauricioMonroy)
 
-Si tiene alguna pregunta o sugerencia sobre la arquitectura del backend de SIPRESS, no dude en ponerse en contacto
+Si tiene alguna pregunta o sugerencia sobre la arquitectura del backend de Sapresis, no dude en ponerse en contacto
 conmigo:
 
 - Correo electrónico: `mauricio.monroy0@soy.sena.edu.co` o `mauriciomonroy@live.cl`
@@ -319,7 +319,7 @@ conmigo:
 
 ---
 
-[Regresar al inicio](#manual-de-uso-sipress-web-app)
+[Regresar al inicio](#manual-de-uso-sapresis)
 []: # (END)
 ```
 

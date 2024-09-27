@@ -43,18 +43,18 @@ public class SecurityConfiguration {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests((authorize) -> authorize
                         // Rutas abiertas para registro y autenticación
-                        .requestMatchers("/sipress-app/auth/**")
+                        .requestMatchers("/sapresis/auth/**")
                         .permitAll()
 
-                        // Rotas para SIPRESS protegidas por autenticación
-                        .requestMatchers("/sipress-app/**")
+                        // Rutas para Sapresis protegidas por autenticación
+                        .requestMatchers("/sapresis/**")
                         .authenticated()
 
                         // Cualquier otra ruta requiere autenticación
                         .anyRequest()
                         .authenticated()
                 ).logout(logout -> logout
-                        .logoutUrl("/sipress-app/auth/logout")
+                        .logoutUrl("/sapresis/auth/logout")
                         .logoutSuccessUrl("/logout-success")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
@@ -72,7 +72,7 @@ public class SecurityConfiguration {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // Establece la URL de origen del frontend
-        configuration.setAllowedOrigins(List.of("http://localhost:3000", "https://sipress.onrender.com/"));
+        configuration.setAllowedOrigins(List.of("http://localhost:3000", "https://sapresis.onrender.com/"));
 
         // Establece los métodos HTTP permitidos
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));

@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
  * */
 
 export default function EditarEps() {
-  const urlBase = "https://sipress-backend.onrender.com/sipress-app/epsS";
+  const urlBase = "https://sapresis-backend.onrender.com/sapresis/epsS";
 
   let navigate = useNavigate();
   const { id } = useParams();

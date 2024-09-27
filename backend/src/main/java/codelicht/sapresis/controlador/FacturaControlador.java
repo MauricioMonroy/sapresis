@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("sipress-app")
+@RequestMapping("sapresis")
 @CrossOrigin(value = "http://localhost:3000")
 public class FacturaControlador {
     private static final Logger logger =
@@ -34,7 +34,7 @@ public class FacturaControlador {
         this.pacienteServicio = pacienteServicio;
     }
 
-    // http://localhost:8080/sipress-app/facturas
+    // http://localhost:8080/sapresis/facturas
     @GetMapping("/facturas")
     public List<Factura> obtenerFacturas() {
         var facturas = facturaServicio.listarFacturas();

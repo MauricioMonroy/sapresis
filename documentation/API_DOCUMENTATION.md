@@ -1,8 +1,8 @@
-![Logo SIPRESS](../backend/src/main/resources/images/sipress-logo.png)
+![Logo Sapresis](../backend/src/main/resources/images/sapresis-logo.png)
 
-![SIPRESS API](https://img.shields.io/badge/SIPRESS-API-blue) 
+![Sapresis API](https://img.shields.io/badge/Sapresis-API-blue) 
 
-# Documentación de SIPRESS API 
+# Documentación de Sapresis API 
 
 ---
 
@@ -11,7 +11,7 @@
 - [Introducción](#introducción)
 - [Guía de inicio](#guía-de-inicio)
 - [Servicio de login y registro](#servicio-de-login-y-registro)
-- [Servicios de sipress-web-app](#servicios-de-sipress-web-app)
+- [Servicios de sapresis](#servicios-de-sapresis)
     - [Servicio de institución](#servicio-de-institución)
     - [Servicio de personal](#servicio-de-personal)
     - [Servicio de paciente](#servicio-de-paciente)
@@ -30,15 +30,15 @@ ___
 
 ## Introducción
 
-Este documento ofrece una guía completa sobre cómo utilizar la API de SIPRESS, un sistema desarrollado para la gestión
+Este documento ofrece una guía completa sobre cómo utilizar la API de Sapresis, un sistema desarrollado para la gestión
 de información en instituciones prestadoras de salud.
 
-SIPRESS es un proyecto académico desarrollado para la Tecnología de Análisis y Desarrollo de Software (2721455) del
+Sapresis es un proyecto académico desarrollado para la Tecnología de Análisis y Desarrollo de Software (2721455) del
 SENA. Este sistema está diseñado para ser utilizado por el personal de instituciones prestadoras de salud y permite la
 consulta y gestión de información crítica relacionada con la administración de personal, la asignación de consultas y el
 manejo de pacientes.
 
-La API REST de SIPRESS ofrece un conjunto de servicios que permiten realizar operaciones como la gestión de empleados,
+La API REST de Sapresis ofrece un conjunto de servicios que permiten realizar operaciones como la gestión de empleados,
 pacientes, consultorios, fórmulas médicas, y más. La API también incluye autenticación y autorización para garantizar
 que solo los usuarios autorizados puedan acceder a los recursos del sistema.
 
@@ -46,7 +46,7 @@ que solo los usuarios autorizados puedan acceder a los recursos del sistema.
 
 ## **Guía de inicio**
 
-Para comenzar a utilizar la API de SIPRESS, se debe tener en cuenta lo siguiente:
+Para comenzar a utilizar la API de Sapresis, se debe tener en cuenta lo siguiente:
 
 - Es necesario utilizar una clave API válida para enviar solicitudes a los endpoints de la API.
 
@@ -58,13 +58,13 @@ Para comenzar a utilizar la API de SIPRESS, se debe tener en cuenta lo siguiente
 
 ## Request
 
-La clave de la API de SIPRESS utiliza autenticación basada en tokens JWT (JSON Web Token) para proteger los endpoints.
+La clave de la API de Sapresis utiliza autenticación basada en tokens JWT (JSON Web Token) para proteger los endpoints.
 Todos los usuarios deben autenticarse proporcionando sus credenciales para obtener un token de acceso. Solo los usuarios
 con credenciales de `ADMIN` o `SUPERADMIN` pueden gestionar solicitudes.
 
 ### Pasos para la autenticación:
 
-1. Se debe enviar una solicitud POST al endpoint `/sipress-app/auth/login` con las credenciales del usuario (`email` y
+1. Se debe enviar una solicitud POST al endpoint `/sapresis/auth/login` con las credenciales del usuario (`email` y
    `password`).
 
 2. Si las credenciales son válidas, se recibirá un token JWT en la respuesta.
@@ -81,26 +81,26 @@ Si el token está ausente, está malformado o es inválido, se mostrará un cód
 Si tiene preguntas, puede revisar el repositorio de
 GitHub [login-registration-service](https://github.com/MauricioMonroy/login-registration-service.git) en donde se
 explica con más detalle el funcionamiento del registro y la autenticación. También se puede revisar el repositorio de
-GitHub [SIPRESS](https://github.com/MauricioMonroy/sipress-web-app.git), en donde se detalla la estructura, las
+GitHub [Sapresis](https://github.com/MauricioMonroy/sapresis.git), en donde se detalla la estructura, las
 características y el funcionamiento de la aplicación.
 
 ___
 
 # Servicio de login y registro
 
-Los endpoints `/sipress-app/auth/login` y `/sipress-app/auth/registro` permiten la gestión de la autorización y la
+Los endpoints `/sapresis/auth/login` y `/sapresis/auth/registro` permiten la gestión de la autorización y la
 autenticación en la API, esto es, el ingreso y el registro de usuarios, generando un token que es necesario para el
 acceso a los distintos endpoints de la aplicación.
 
-El endpoint `/sipress-app/usuarios/perfil` permite visualizar la información relacionada con un registro específico,
-mientras que el endpoint `/sipress-app/usuarios/` permite ver todos los registros.
+El endpoint `/sapresis/usuarios/perfil` permite visualizar la información relacionada con un registro específico,
+mientras que el endpoint `/sapresis/usuarios/` permite ver todos los registros.
 
 ## <span style="color:khaki">POST</span> Iniciar sesión
 
 ### Endpoint
 
 ```
-/sipress-app/auth/login
+/sapresis/auth/login
 ```
 
 Este endpoint permite el inicio de sesión en la aplicación, siempre y cuando se usen las credenciales correctas. La
@@ -158,7 +158,7 @@ ___
   "title": "Unauthorized",
   "status": 401,
   "detail": "Bad credentials",
-  "instance": "/sipress-app/auth/login",
+  "instance": "/sapresis/auth/login",
   "description": "El usuario o la contraseña son incorrectos"
 }
 ```
@@ -170,7 +170,7 @@ ___
 ### Endpoint
 
 ```
-/sipress-app/auth/registro
+/sapresis/auth/registro
 ```
 
 Este endpoint permite el registro de un nuevo usuario en la aplicación. La respuesta arroja un token que autoriza el
@@ -280,7 +280,7 @@ ___
   "title": "Bad Request",
   "status": 400,
   "detail": "Email ya registrado",
-  "instance": "/sipress-app/auth/registro",
+  "instance": "/sapresis/auth/registro",
   "description": "El correo electrónico ya se encuentra registrado en el sistema"
 }
 ```
@@ -292,7 +292,7 @@ ___
 ### Endpoint
 
 ```
-/sipress-app/usuarios/perfil
+/sapresis/usuarios/perfil
 ```
 
 Este endpoint permite visualizar la información relacionada con un registro específico. La respuesta arroja un objeto
@@ -409,7 +409,7 @@ ___
   "title": "Unauthorized",
   "status": 401,
   "detail": "Full authentication is required to access this resource",
-  "instance": "/sipress-app/usuarios/perfil",
+  "instance": "/sapresis/usuarios/perfil",
   "description": "No se ha proporcionado un token de autenticación válido"
 }
 ```
@@ -421,7 +421,7 @@ ___
 ### Endpoint
 
 ```
-/sipress-app/usuarios/todos
+/sapresis/usuarios/todos
 ```
 
 Este endpoint permite visualizar la información de todos los registros de usuarios en la aplicación.
@@ -575,7 +575,7 @@ ___
   "title": "Unauthorized",
   "status": 401,
   "detail": "Full authentication is required to access this resource",
-  "instance": "/sipress-app/usuarios/todos",
+  "instance": "/sapresis/usuarios/todos",
   "description": "No se ha proporcionado un token de autenticación válido"
 }
 ```
@@ -583,11 +583,11 @@ ___
 ___
 ___
 
-# Servicios de sipress-web-app
+# Servicios de sapresis
 
-Los servicios de SIPRESS permiten la gestión de información relacionada con el personal, los pacientes, los
+Los servicios de Sapresis permiten la gestión de información relacionada con el personal, los pacientes, los
 consultorios, las fórmulas médicas y otros aspectos clave de la atención sanitaria. A continuación, se describen los
-servicios disponibles en la API de SIPRESS.
+servicios disponibles en la API de Sapresis.
 
 Las entidades que hacen parte de este sistema son:
 
@@ -627,7 +627,7 @@ ___
 ### Endpoint
 
 ```
-/sipress-app/instituciones
+/sapresis/instituciones
 ```
 
 Este endpoint permite visualizar la información de todos los registros de instituciones en la aplicación y que se
@@ -707,7 +707,7 @@ ___
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/instituciones",
+  "instance": "/sapresis/instituciones",
   "description": "Error interno del servidor"
 }
 ```
@@ -720,7 +720,7 @@ ___
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/instituciones",
+  "instance": "/sapresis/instituciones",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -732,7 +732,7 @@ ___
 ### Endpoint
 
 ```
-/sipress-app/instituciones/{id}
+/sapresis/instituciones/{id}
 ```
 
 Este endpoint permite recuperar la información de un solo registro de la entidad institución.
@@ -781,7 +781,7 @@ ___
   "title": "Not Found",
   "status": 404,
   "detail": "Institución no encontrada",
-  "instance": "/sipress-app/instituciones/104",
+  "instance": "/sapresis/instituciones/104",
   "description": "No se encontró la institución con el ID 104"
 }
 ```
@@ -794,7 +794,7 @@ ___
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/instituciones/101",
+  "instance": "/sapresis/instituciones/101",
   "description": "Error interno del servidor"
 }
 ```
@@ -807,7 +807,7 @@ ___
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/instituciones/101",
+  "instance": "/sapresis/instituciones/101",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -819,10 +819,10 @@ ___
 ### Endpoint
 
 ```
-/sipress-app/instituciones
+/sapresis/instituciones
 ```
 
-Este endpoint permite añadir un nuevo registro de institución en la aplicación SIPRESS.
+Este endpoint permite añadir un nuevo registro de institución en la aplicación Sapresis.
 
 ### Request Body
 
@@ -901,7 +901,7 @@ ___
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/instituciones",
+  "instance": "/sapresis/instituciones",
   "description": "Error interno del servidor"
 }
 ```
@@ -914,7 +914,7 @@ ___
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/instituciones",
+  "instance": "/sapresis/instituciones",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -926,7 +926,7 @@ ___
 ### Endpoint
 
 ```
-/sipress-app/instituciones/{id}
+/sapresis/instituciones/{id}
 ```
 
 Este endpoint actualiza un registro de la entidad Institución con el ID especificado.
@@ -1003,7 +1003,7 @@ ___
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/instituciones/104",
+  "instance": "/sapresis/instituciones/104",
   "description": "Error interno del servidor"
 }
 ```
@@ -1016,7 +1016,7 @@ ___
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/instituciones/104",
+  "instance": "/sapresis/instituciones/104",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -1028,7 +1028,7 @@ ___
 ### Endpoint
 
 ```
-/sipress-app/instituciones/{id}
+/sapresis/instituciones/{id}
 ```
 
 Este endpoint borra un registro de la base de datos.
@@ -1079,7 +1079,7 @@ ___
   "title": "Internal Server Error",
   "status": 500,
   "detail": "Institucion no encontrada con el id: 108",
-  "instance": "/sipress-app/instituciones/108",
+  "instance": "/sapresis/instituciones/108",
   "description": "Error interno del servidor"
 }
 ```
@@ -1100,7 +1100,7 @@ ___
 ### Endpoint
 
 ```
-/sipress-app/personalS
+/sapresis/personalS
 ```
 
 Este endpoint permite recuperar la lista de todos los miembros del personal que pertenecen a las instituciones
@@ -1253,7 +1253,7 @@ ___
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/personalS",
+  "instance": "/sapresis/personalS",
   "description": "Error interno del servidor"
 }
 ```
@@ -1266,7 +1266,7 @@ ___
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/personalS",
+  "instance": "/sapresis/personalS",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -1278,7 +1278,7 @@ ___
 ### Endpoint
 
 ```
-/sipress-app/personalS/{id}
+/sapresis/personalS/{id}
 ```
 
 Este endpoint permite recuperar la información de un solo registro de la entidad Personal, así como la información
@@ -1350,7 +1350,7 @@ ___
   "title": "Not Found",
   "status": 404,
   "detail": "Personal no encontrado",
-  "instance": "/sipress-app/personalS/4106",
+  "instance": "/sapresis/personalS/4106",
   "description": "No se encontró el personal con el ID 4106"
 }
 ```
@@ -1363,7 +1363,7 @@ ___
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/personalS/4102",
+  "instance": "/sapresis/personalS/4102",
   "description": "Error interno del servidor"
 }
 ```
@@ -1376,7 +1376,7 @@ ___
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/personalS/4102",
+  "instance": "/sapresis/personalS/4102",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -1388,7 +1388,7 @@ ___
 ### Endpoint
 
 ```
-/sipress-app/personalS
+/sapresis/personalS
 ```
 
 Este endpoint es usado para agregar un nuevo objeto de la entidad Personal.
@@ -1517,7 +1517,7 @@ ___
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/personalS",
+  "instance": "/sapresis/personalS",
   "description": "Error interno del servidor"
 }
 ```
@@ -1530,7 +1530,7 @@ ___
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/personalS",
+  "instance": "/sapresis/personalS",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -1542,7 +1542,7 @@ ___
 ### Endpoint
 
 ```
-/sipress-app/personalS/{id}
+/sapresis/personalS/{id}
 ```
 
 Este endpoint permite la actualización de un registro de la entidad Personal.
@@ -1659,7 +1659,7 @@ ___
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/personalS/4104",
+  "instance": "/sapresis/personalS/4104",
   "description": "Error interno del servidor"
 }
 ```
@@ -1672,7 +1672,7 @@ ___
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/personalS/4104",
+  "instance": "/sapresis/personalS/4104",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -1684,7 +1684,7 @@ ___
 ### Endpoint
 
 ```
-/sipress-app/personalS/{id}
+/sapresis/personalS/{id}
 ```
 
 Este endpoint permite la eliminación de un registro de la base de datos. El ID del registro debe ser especificado en la
@@ -1736,7 +1736,7 @@ ___
   "title": "Internal Server Error",
   "status": 500,
   "detail": "Personal no encontrado con el id: 4107",
-  "instance": "/sipress-app/personalS/4107",
+  "instance": "/sapresis/personalS/4107",
   "description": "Error interno del servidor"
 }
 ```
@@ -1757,7 +1757,7 @@ ___
 ### Endpoint
 
 ```
-/sipress-app/pacientes
+/sapresis/pacientes
 ```
 
 Este endpoint permite recuperar la lista de todos los pacientes registrados en la base de datos.
@@ -1857,7 +1857,7 @@ ___
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/pacientes",
+  "instance": "/sapresis/pacientes",
   "description": "Error interno del servidor"
 }
 ```
@@ -1870,7 +1870,7 @@ ___
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/pacientes",
+  "instance": "/sapresis/pacientes",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -1882,7 +1882,7 @@ ___
 ### Endpoint
 
 ```
-/sipress-app/pacientes/{id}
+/sapresis/pacientes/{id}
 ```
 
 Este endpoint permite recuperar un registro de la entidad Paciente, así como el objeto de la entidad Eps relacionado.
@@ -1946,7 +1946,7 @@ ___
   "title": "Not Found",
   "status": 404,
   "detail": "Paciente no encontrado",
-  "instance": "/sipress-app/pacientes/4",
+  "instance": "/sapresis/pacientes/4",
   "description": "No se encontró el paciente con el ID 4"
 }
 ```
@@ -1959,7 +1959,7 @@ ___
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/pacientes/3",
+  "instance": "/sapresis/pacientes/3",
   "description": "Error interno del servidor"
 }
 ```
@@ -1972,7 +1972,7 @@ ___
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/pacientes/3",
+  "instance": "/sapresis/pacientes/3",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -1984,7 +1984,7 @@ ___
 ### Endpoint
 
 ```
-/sipress-app/pacientes
+/sapresis/pacientes
 ```
 
 Este endpoint permite añadir un nuevo registro de la entidad Paciente.
@@ -2104,7 +2104,7 @@ ___
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/pacientes",
+  "instance": "/sapresis/pacientes",
   "description": "Error interno del servidor"
 }
 ```
@@ -2117,7 +2117,7 @@ ___
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/pacientes",
+  "instance": "/sapresis/pacientes",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -2129,7 +2129,7 @@ ___
 ### Endpoint
 
 ```
-/sipress-app/pacientes/{id}
+/sapresis/pacientes/{id}
 ```
 
 Este endpoint permite la actualización de un registro de la entidad Paciente con el ID especificado en la petición HTTP.
@@ -2237,7 +2237,7 @@ ___
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/pacientes/1",
+  "instance": "/sapresis/pacientes/1",
   "description": "Error interno del servidor"
 }
 ```
@@ -2250,7 +2250,7 @@ ___
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/pacientes/1",
+  "instance": "/sapresis/pacientes/1",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -2262,7 +2262,7 @@ ___
 ### Endpoint
 
 ```
-/sipress-app/pacientes/{id}
+/sapresis/pacientes/{id}
 ```
 
 Este endpoint permite la eliminación de un registro de la base de datos. El ID del registro debe ser especificado en la
@@ -2318,7 +2318,7 @@ ___
   "title": "Internal Server Error",
   "status": 500,
   "detail": "Paciente no encontrado con el id: 5",
-  "instance": "/sipress-app/pacientes/5",
+  "instance": "/sapresis/pacientes/5",
   "description": "Error interno del servidor"
 }
 ```
@@ -2340,7 +2340,7 @@ relacionados con un paciente.
 ### Endpoint
 
 ```
-/sipress-app/formulas
+/sapresis/formulas
 ```
 
 Este endpoint permite recuperar todos los registros de la entidad Fórmula.
@@ -2442,7 +2442,7 @@ recuperación.
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/formulas",
+  "instance": "/sapresis/formulas",
   "description": "Error interno del servidor"
 }
 ```
@@ -2455,7 +2455,7 @@ recuperación.
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/formulas",
+  "instance": "/sapresis/formulas",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -2467,7 +2467,7 @@ recuperación.
 ### Endpoint
 
 ```
-/sipress-app/formulas/{id}
+/sapresis/formulas/{id}
 ```
 
 Este endpoint permite la recuperación de un solo registro de la entidad Fórmula de la base de datos.
@@ -2543,7 +2543,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Not Found",
   "status": 404,
   "detail": "Fórmula no encontrada",
-  "instance": "/sipress-app/formulas/80003",
+  "instance": "/sapresis/formulas/80003",
   "description": "No se encontró la fórmula con el ID 80003"
 }
 ```
@@ -2556,7 +2556,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/formulas/80002",
+  "instance": "/sapresis/formulas/80002",
   "description": "Error interno del servidor"
 }
 ```
@@ -2569,7 +2569,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/formulas/80002",
+  "instance": "/sapresis/formulas/80002",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -2581,7 +2581,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 ### Endpoint
 
 ```
-/sipress-app/formulas
+/sapresis/formulas
 ```
 
 Este endpoint permite agregar un nuevo registro de la entidad Fórmula, y relacionarla con un objeto específico de la
@@ -2697,7 +2697,7 @@ La respuesta se mostrará en un formato de tipo JSON con la siguiente estructura
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/formulas",
+  "instance": "/sapresis/formulas",
   "description": "Error interno del servidor"
 }
 ```
@@ -2710,7 +2710,7 @@ La respuesta se mostrará en un formato de tipo JSON con la siguiente estructura
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/formulas",
+  "instance": "/sapresis/formulas",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -2843,7 +2843,7 @@ nueva solicitud.
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/formulas/80003",
+  "instance": "/sapresis/formulas/80003",
   "description": "Error interno del servidor"
 }
 ```
@@ -2856,7 +2856,7 @@ nueva solicitud.
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/formulas/80003",
+  "instance": "/sapresis/formulas/80003",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -2868,7 +2868,7 @@ nueva solicitud.
 ### Endpoint
 
 ```
-/sipress-app/formulas/{id}
+/sapresis/formulas/{id}
 ```
 
 Este endpoint permite la eliminación de un registro de la entidad Fórmula. El ID del registro debe ser especificado en
@@ -2919,7 +2919,7 @@ La respuesta generada tendrá la siguiente estructura:
   "title": "Internal Server Error",
   "status": 500,
   "detail": "Fórmula no encontrada con el id: 80004",
-  "instance": "/sipress-app/formulas/80004",
+  "instance": "/sapresis/formulas/80004",
   "description": "Error interno del servidor"
 }
 ```
@@ -2941,7 +2941,7 @@ relacionados con loa costos de las consultas y fórmulas médicas.
 ### Endpoint
 
 ```
-/sipress-app/facturas
+/sapresis/facturas
 ```
 
 Este endpoint permite la recuperación de todos los objetos de tipo Factura registrados en la base de datos.
@@ -3044,7 +3044,7 @@ Es necesario el inicio de sesión y el uso del token de tipo bearer que se gener
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/facturas",
+  "instance": "/sapresis/facturas",
   "description": "Error interno del servidor"
 }
 ```
@@ -3057,7 +3057,7 @@ Es necesario el inicio de sesión y el uso del token de tipo bearer que se gener
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/facturas",
+  "instance": "/sapresis/facturas",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -3069,7 +3069,7 @@ Es necesario el inicio de sesión y el uso del token de tipo bearer que se gener
 ### Endpoint
 
 ```
-/sipress-app/facturas/{id}
+/sapresis/facturas/{id}
 ```
 
 Este endpoint permite la recuperación de un solo registro de la entidad Factura de la base de datos.
@@ -3145,7 +3145,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Not Found",
   "status": 404,
   "detail": "Factura no encontrada",
-  "instance": "/sipress-app/facturas/50003",
+  "instance": "/sapresis/facturas/50003",
   "description": "No se encontró la factura con el ID 50003"
 }
 ```
@@ -3158,7 +3158,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/facturas/50002",
+  "instance": "/sapresis/facturas/50002",
   "description": "Error interno del servidor"
 }
 ```
@@ -3171,7 +3171,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/facturas/50002",
+  "instance": "/sapresis/facturas/50002",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -3183,7 +3183,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 ### Endpoint
 
 ```
-/sipress-app/facturas
+/sapresis/facturas
 ```
 
 Este endpoint permite el registro de un nuevo objeto de la entidad Factura.
@@ -3304,7 +3304,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/facturas",
+  "instance": "/sapresis/facturas",
   "description": "Error interno del servidor"
 }
 ```
@@ -3317,7 +3317,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/facturas",
+  "instance": "/sapresis/facturas",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -3448,7 +3448,7 @@ Se debe tener precaución con el uso de este endpoint, ya que reemplaza los valo
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/facturas/50003",
+  "instance": "/sapresis/facturas/50003",
   "description": "Error interno del servidor"
 }
 ```
@@ -3461,7 +3461,7 @@ Se debe tener precaución con el uso de este endpoint, ya que reemplaza los valo
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/facturas/50003",
+  "instance": "/sapresis/facturas/50003",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -3473,7 +3473,7 @@ Se debe tener precaución con el uso de este endpoint, ya que reemplaza los valo
 ### Endpoint
 
 ```
-/sipress-app/facturas/{id}
+/sapresis/facturas/{id}
 ```
 
 Este endpoint permite la eliminación de un registro de la entidad Factura. El ID del registro debe ser especificado en
@@ -3524,7 +3524,7 @@ La respuesta generada tendrá la siguiente estructura:
   "title": "Internal Server Error",
   "status": 500,
   "detail": "Factura no encontrada con el id: 50004",
-  "instance": "/sipress-app/facturas/50004",
+  "instance": "/sapresis/facturas/50004",
   "description": "Error interno del servidor"
 }
 ```
@@ -3545,7 +3545,7 @@ Salud (EPS). Estos servicios permiten la creación, actualización, eliminación
 ### Endpoint
 
 ```
-/sipress-app/epsS
+/sapresis/epsS
 ```
 
 Este endpoint permite la recuperación de todos los objetos de tipo Eps registrados en la base de datos.
@@ -3617,7 +3617,7 @@ Es necesario el inicio de sesión y el uso del token de tipo bearer que se gener
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/epsS",
+  "instance": "/sapresis/epsS",
   "description": "Error interno del servidor"
 }
 ```
@@ -3630,7 +3630,7 @@ Es necesario el inicio de sesión y el uso del token de tipo bearer que se gener
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/epsS",
+  "instance": "/sapresis/epsS",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -3642,7 +3642,7 @@ Es necesario el inicio de sesión y el uso del token de tipo bearer que se gener
 ### Endpoint
 
 ```
-/sipress-app/epsS/{id}
+/sapresis/epsS/{id}
 ```
 
 Este endpoint permite la recuperación de un solo registro de la entidad Eps de la base de datos.
@@ -3690,7 +3690,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Not Found",
   "status": 404,
   "detail": "EPS no encontrada",
-  "instance": "/sipress-app/epsS/245",
+  "instance": "/sapresis/epsS/245",
   "description": "No se encontró la EPS con el ID 245"
 }
 ```
@@ -3703,7 +3703,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/epsS/243",
+  "instance": "/sapresis/epsS/243",
   "description": "Error interno del servidor"
 }
 ```
@@ -3716,7 +3716,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/epsS/243",
+  "instance": "/sapresis/epsS/243",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -3728,7 +3728,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 ### Endpoint
 
 ```
-/sipress-app/epsS
+/sapresis/epsS
 ```
 
 Este endpoint permite el registro de un nuevo objeto de la entidad Eps.
@@ -3810,7 +3810,7 @@ La respuesta se mostrará en formato JSON con la siguiente estructura:
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/epsS",
+  "instance": "/sapresis/epsS",
   "description": "Error interno del servidor"
 }
 ```
@@ -3823,7 +3823,7 @@ La respuesta se mostrará en formato JSON con la siguiente estructura:
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/epsS",
+  "instance": "/sapresis/epsS",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -3910,7 +3910,7 @@ permanente.
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/epsS/241",
+  "instance": "/sapresis/epsS/241",
   "description": "Error interno del servidor"
 }
 ```
@@ -3923,7 +3923,7 @@ permanente.
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/epsS/241",
+  "instance": "/sapresis/epsS/241",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -3935,7 +3935,7 @@ permanente.
 ### Endpoint
 
 ```
-/sipress-app/epsS/{id}
+/sapresis/epsS/{id}
 ```
 
 Este endpoint permite la eliminación de un registro de la entidad Eps. El ID del registro debe ser especificado en la
@@ -3986,7 +3986,7 @@ La respuesta generada tendrá la siguiente estructura:
   "title": "Internal Server Error",
   "status": 500,
   "detail": "EPS no encontrada con el id: 245",
-  "instance": "/sipress-app/epsS/245",
+  "instance": "/sapresis/epsS/245",
   "description": "Error interno del servidor"
 }
 ```
@@ -4007,7 +4007,7 @@ servicios permiten la creación, actualización, eliminación y consulta de los 
 ### Endpoint
 
 ```
-/sipress-app/doctores
+/sapresis/doctores
 ```
 
 Este endpoint permite la recuperación de todos los objetos de tipo Doctor registrados en la base de datos.
@@ -4121,7 +4121,7 @@ Es necesario el inicio de sesión y el uso del token de tipo bearer que se gener
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/doctores",
+  "instance": "/sapresis/doctores",
   "description": "Error interno del servidor"
 }
 ```
@@ -4134,7 +4134,7 @@ Es necesario el inicio de sesión y el uso del token de tipo bearer que se gener
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/doctores",
+  "instance": "/sapresis/doctores",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -4146,7 +4146,7 @@ Es necesario el inicio de sesión y el uso del token de tipo bearer que se gener
 ### Endpoint
 
 ```
-/sipress-app/doctores/{id}
+/sapresis/doctores/{id}
 ```
 
 Este endpoint permite la recuperación de un solo registro de la entidad Doctor de la base de datos.
@@ -4218,7 +4218,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Not Found",
   "status": 404,
   "detail": "Doctor no encontrado",
-  "instance": "/sipress-app/doctores/2004",
+  "instance": "/sapresis/doctores/2004",
   "description": "No se encontró el doctor con el ID 2004"
 }
 ```
@@ -4231,7 +4231,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/doctores/2002",
+  "instance": "/sapresis/doctores/2002",
   "description": "Error interno del servidor"
 }
 ```
@@ -4244,7 +4244,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/doctores/2002",
+  "instance": "/sapresis/doctores/2002",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -4256,7 +4256,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 ### Endpoint
 
 ```
-/sipress-app/doctores
+/sapresis/doctores
 ```
 
 Este endpoint permite el registro de un nuevo objeto de la entidad Doctor.
@@ -4369,7 +4369,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/doctores",
+  "instance": "/sapresis/doctores",
   "description": "Error interno del servidor"
 }
 ```
@@ -4382,7 +4382,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/doctores",
+  "instance": "/sapresis/doctores",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -4511,7 +4511,7 @@ especificado, sino que también puede cambiar datos de la dependencia y la insti
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/doctores/2003",
+  "instance": "/sapresis/doctores/2003",
   "description": "Error interno del servidor"
 }
 ```
@@ -4524,7 +4524,7 @@ especificado, sino que también puede cambiar datos de la dependencia y la insti
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/doctores/2003",
+  "instance": "/sapresis/doctores/2003",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -4536,7 +4536,7 @@ especificado, sino que también puede cambiar datos de la dependencia y la insti
 ### Endpoint
 
 ```
-/sipress-app/doctores/{id}
+/sapresis/doctores/{id}
 ```
 
 Este endpoint permite la eliminación de un registro de la entidad Doctor. El ID del registro debe ser especificado en la
@@ -4587,7 +4587,7 @@ La respuesta generada tendrá la siguiente estructura:
   "title": "Internal Server Error",
   "status": 500,
   "detail": "Doctor no encontrado con el id: 2004",
-  "instance": "/sipress-app/doctores/2004",
+  "instance": "/sapresis/doctores/2004",
   "description": "Error interno del servidor"
 }
 ```
@@ -4609,7 +4609,7 @@ dependencias.
 ### Endpoint
 
 ```
-/sipress-app/dependencias
+/sapresis/dependencias
 ```
 
 Este endpoint permite recuperar todos los registros de la entidad dependencia de la bse de datos.
@@ -4696,7 +4696,7 @@ Para hacer efectiva la solicitud es necesario el uso del token de tipo bearer qu
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/dependencias",
+  "instance": "/sapresis/dependencias",
   "description": "Error interno del servidor"
 }
 ```
@@ -4709,7 +4709,7 @@ Para hacer efectiva la solicitud es necesario el uso del token de tipo bearer qu
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/dependencias",
+  "instance": "/sapresis/dependencias",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -4721,7 +4721,7 @@ Para hacer efectiva la solicitud es necesario el uso del token de tipo bearer qu
 ### Endpoint
 
 ```
-/sipress-app/dependencias/{id}
+/sapresis/dependencias/{id}
 ```
 
 Este endpoint permite la recuperación de un solo registro de la entidad Dependencia de la base de datos.
@@ -4779,7 +4779,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Not Found",
   "status": 404,
   "detail": "Dependencia no encontrada",
-  "instance": "/sipress-app/dependencias/1404",
+  "instance": "/sapresis/dependencias/1404",
   "description": "No se encontró la dependencia con el ID 1404"
 }
 ```
@@ -4792,7 +4792,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/dependencias/1403",
+  "instance": "/sapresis/dependencias/1403",
   "description": "Error interno del servidor"
 }
 ```
@@ -4805,7 +4805,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/dependencias/1403",
+  "instance": "/sapresis/dependencias/1403",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -4817,7 +4817,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 ### Endpoint
 
 ```
-/sipress-app/dependencias
+/sapresis/dependencias
 ```
 
 Este endpoint permite el registro de un nuevo objeto de la entidad Dependencia.
@@ -4902,7 +4902,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/dependencias",
+  "instance": "/sapresis/dependencias",
   "description": "Error interno del servidor"
 }
 ```
@@ -4915,7 +4915,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/dependencias",
+  "instance": "/sapresis/dependencias",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -5011,7 +5011,7 @@ especificado, sino que también puede cambiar datos de la institución asociada.
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/dependencias/1404",
+  "instance": "/sapresis/dependencias/1404",
   "description": "Error interno del servidor"
 }
 ```
@@ -5024,7 +5024,7 @@ especificado, sino que también puede cambiar datos de la institución asociada.
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/dependencias/1404",
+  "instance": "/sapresis/dependencias/1404",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -5036,7 +5036,7 @@ especificado, sino que también puede cambiar datos de la institución asociada.
 ### Endpoint
 
 ```
-/sipress-app/dependencias/{id}
+/sapresis/dependencias/{id}
 ```
 
 Este endpoint permite la eliminación de un registro de la entidad Dependencia. El ID del registro debe ser especificado
@@ -5087,7 +5087,7 @@ La respuesta generada tendrá la siguiente estructura:
   "title": "Internal Server Error",
   "status": 500,
   "detail": "Dependencia no encontrada con el id: 1404",
-  "instance": "/sipress-app/dependencias/1404",
+  "instance": "/sapresis/dependencias/1404",
   "description": "Error interno del servidor"
 }
 ```
@@ -5109,7 +5109,7 @@ consultorios.
 ### Endpoint
 
 ```
-/sipress-app/consultorios
+/sapresis/consultorios
 ```
 
 Este endpoint permite recuperar todos los registros de la entidad consultorio de la base de datos.
@@ -5259,7 +5259,7 @@ Para hacer efectiva la solicitud es necesario el uso del token de tipo bearer qu
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/consultorios",
+  "instance": "/sapresis/consultorios",
   "description": "Error interno del servidor"
 }
 ```
@@ -5272,7 +5272,7 @@ Para hacer efectiva la solicitud es necesario el uso del token de tipo bearer qu
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/consultorios",
+  "instance": "/sapresis/consultorios",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -5284,7 +5284,7 @@ Para hacer efectiva la solicitud es necesario el uso del token de tipo bearer qu
 ### Endpoint
 
 ```
-/sipress-app/consultorios/{id}
+/sapresis/consultorios/{id}
 ```
 
 Este endpoint permite la recuperación de un solo registro de la entidad Consultorio de la base de datos.
@@ -5392,7 +5392,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Not Found",
   "status": 404,
   "detail": "Consultorio no encontrado",
-  "instance": "/sipress-app/consultorios/625",
+  "instance": "/sapresis/consultorios/625",
   "description": "No se encontró el consultorio con el ID 625"
 }
 ```
@@ -5405,7 +5405,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/consultorios/624",
+  "instance": "/sapresis/consultorios/624",
   "description": "Error interno del servidor"
 }
 ```
@@ -5418,7 +5418,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/consultorios/624",
+  "instance": "/sapresis/consultorios/624",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -5430,7 +5430,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 ### Endpoint
 
 ```
-/sipress-app/consultorios
+/sapresis/consultorios
 ```
 
 Este endpoint permite el registro de un nuevo objeto de la entidad Consultorio.
@@ -5589,7 +5589,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/consultorios",
+  "instance": "/sapresis/consultorios",
   "description": "Error interno del servidor"
 }
 ```
@@ -5602,7 +5602,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/consultorios",
+  "instance": "/sapresis/consultorios",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -5772,7 +5772,7 @@ especificado, sino que también puede cambiar datos del paciente, EPS, personal,
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/consultorios/345",
+  "instance": "/sapresis/consultorios/345",
   "description": "Error interno del servidor"
 }
 ```
@@ -5785,7 +5785,7 @@ especificado, sino que también puede cambiar datos del paciente, EPS, personal,
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/consultorios/345",
+  "instance": "/sapresis/consultorios/345",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -5797,7 +5797,7 @@ especificado, sino que también puede cambiar datos del paciente, EPS, personal,
 ### Endpoint
 
 ```
-/sipress-app/consultorios/{id}
+/sapresis/consultorios/{id}
 ```
 
 Este endpoint permite la eliminación de un registro de la entidad Consultorio. El ID del registro debe ser especificado
@@ -5848,7 +5848,7 @@ La respuesta generada tendrá la siguiente estructura:
   "title": "Internal Server Error",
   "status": 500,
   "detail": "Consultorio no encontrado con el id: 345",
-  "instance": "/sipress-app/consultorios/345",
+  "instance": "/sapresis/consultorios/345",
   "description": "Error interno del servidor"
 }
 ```
@@ -5870,7 +5870,7 @@ consultas.
 ### Endpoint
 
 ```
-/sipress-app/consultas
+/sapresis/consultas
 ```
 
 Este endpoint permite recuperar todos los registros de la entidad consulta de la base de datos.
@@ -6112,7 +6112,7 @@ Para hacer efectiva la solicitud es necesario el uso del token de tipo bearer qu
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/consultas",
+  "instance": "/sapresis/consultas",
   "description": "Error interno del servidor"
 }
 ```
@@ -6125,7 +6125,7 @@ Para hacer efectiva la solicitud es necesario el uso del token de tipo bearer qu
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/consultas",
+  "instance": "/sapresis/consultas",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -6137,7 +6137,7 @@ Para hacer efectiva la solicitud es necesario el uso del token de tipo bearer qu
 ### Endpoint
 
 ```
-/sipress-app/consultas/{idPaciente}/{idDoctor}
+/sapresis/consultas/{idPaciente}/{idDoctor}
 ```
 
 Este endpoint permite la recuperación de un solo registro de la entidad Consulta de la base de datos.
@@ -6254,7 +6254,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Not Found",
   "status": 404,
   "detail": "Consulta no encontrada",
-  "instance": "/sipress-app/consultas/2/2004",
+  "instance": "/sapresis/consultas/2/2004",
   "description": "No se encontró la consulta con el ID del paciente 2 y el ID del doctor 2004"
 }
 ```
@@ -6267,7 +6267,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/consultas/2/2004",
+  "instance": "/sapresis/consultas/2/2004",
   "description": "Error interno del servidor"
 }
 ```
@@ -6280,7 +6280,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/consultas/2/2004",
+  "instance": "/sapresis/consultas/2/2004",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -6292,7 +6292,7 @@ La respuesta mostrará la información con la siguiente estructura de tipo JSON:
 ### Endpoint
 
 ```
-/sipress-app/consultas
+/sapresis/consultas
 ```
 
 Este endpoint permite el registro de un nuevo objeto de la entidad Consulta.
@@ -6463,7 +6463,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/consultas",
+  "instance": "/sapresis/consultas",
   "description": "Error interno del servidor"
 }
 ```
@@ -6476,7 +6476,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/consultas",
+  "instance": "/sapresis/consultas",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -6488,7 +6488,7 @@ La respuesta se mostrará en un esquema de tipo JSON con la siguiente estructura
 ### Endpoint
 
 ```
-/sipress-app/consultas/{idPaciente}/{idDoctor}
+/sapresis/consultas/{idPaciente}/{idDoctor}
 ```
 
 Este endpoint permite la actualización de un registro existente de la entidad Consulta.
@@ -6664,7 +6664,7 @@ especificado, sino que también puede cambiar datos del paciente, el doctor, la 
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/consultas/4/2001",
+  "instance": "/sapresis/consultas/4/2001",
   "description": "Error interno del servidor"
 }
 ```
@@ -6677,7 +6677,7 @@ especificado, sino que también puede cambiar datos del paciente, el doctor, la 
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/consultas/4/2001",
+  "instance": "/sapresis/consultas/4/2001",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -6689,7 +6689,7 @@ especificado, sino que también puede cambiar datos del paciente, el doctor, la 
 ### Endpoint
 
 ```
-/sipress-app/consultas/{idPaciente}/{idDoctor}
+/sapresis/consultas/{idPaciente}/{idDoctor}
 ```
 
 Este endpoint permite la eliminación de un registro de la entidad Consulta. Los ID del paciente y del doctor deben ser
@@ -6740,7 +6740,7 @@ La respuesta generada tendrá la siguiente estructura:
   "title": "Not Found",
   "status": 404,
   "detail": "Consulta no encontrada",
-  "instance": "/sipress-app/consultas/4/2001",
+  "instance": "/sapresis/consultas/4/2001",
   "description": "No se encontró la consulta con el ID del paciente 4 y el ID del doctor 2001"
 }
 ```
@@ -6753,7 +6753,7 @@ La respuesta generada tendrá la siguiente estructura:
   "title": "Internal Server Error",
   "status": 500,
   "detail": "JWT strings must contain exactly 2 period characters. Found: 0",
-  "instance": "/sipress-app/consultas/4/2001",
+  "instance": "/sapresis/consultas/4/2001",
   "description": "Error interno del servidor"
 }
 ```
@@ -6766,7 +6766,7 @@ La respuesta generada tendrá la siguiente estructura:
   "title": "Forbidden",
   "status": 403,
   "detail": "JWT expired at 2024-08-19T16:31:46Z. Current time: 2024-08-19T17:27:28Z, a difference of 3342019 milliseconds.  Allowed clock skew: 0 milliseconds.",
-  "instance": "/sipress-app/consultas/4/2001",
+  "instance": "/sapresis/consultas/4/2001",
   "description": "El token JWT ha expirado"
 }
 ```
@@ -6794,7 +6794,7 @@ La respuesta generada tendrá la siguiente estructura:
 
 - GitHub: [@MauricioMonroy](https://github.com/MauricioMonroy)
 
-Si tiene alguna pregunta o sugerencia sobre la arquitectura del backend de SIPRESS, no dude en ponerse en contacto
+Si tiene alguna pregunta o sugerencia sobre la arquitectura del backend de Sapresis, no dude en ponerse en contacto
 conmigo:
 
 - Correo electrónico: `mauricio.monroy0@soy.sena.edu.co` o `mauriciomonroy@live.cl`

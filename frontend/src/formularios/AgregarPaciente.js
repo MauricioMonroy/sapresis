@@ -42,7 +42,7 @@ export default function AgregarPaciente({ onPacienteAdded }) {
       try {
         const token = localStorage.getItem("token");
         const resultado = await axios.get(
-          "https://sipress-backend.onrender.com/sipress-app/epsS",
+          "https://sapresis-backend.onrender.com/sapresis/epsS",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -74,7 +74,7 @@ export default function AgregarPaciente({ onPacienteAdded }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const urlBase = "https://sipress-backend.onrender.com/sipress-app/pacientes";
+    const urlBase = "https://sapresis-backend.onrender.com/sapresis/pacientes";
     const token = localStorage.getItem("token");
     await axios.post(urlBase, paciente, {
       headers: {

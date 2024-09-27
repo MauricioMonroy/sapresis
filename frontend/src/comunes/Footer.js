@@ -14,7 +14,7 @@ const Footer = () => {
         <p>Todos los derechos reservados.</p>
         <div className="text-center">
           <a
-            href="https://github.com/MauricioMonroy/sipress-web-app.git"
+            href="https://github.com/MauricioMonroy/sapresis.git"
             aria-label="Repositorio GitHub de Mauricio Monroy"
             rel="noopener noreferrer"
             target="_blank">

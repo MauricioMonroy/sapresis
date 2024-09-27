@@ -41,7 +41,7 @@ export default function Registro({ onUsuarioAdded }) {
       return;
     }
     const urlBase =
-      "https://sipress-backend.onrender.com/sipress-app/auth/registro";
+      "https://sapresis-backend.onrender.com/sapresis/auth/registro";
     const token = localStorage.getItem("token");
     await axios.post(urlBase, usuario, {
       headers: {

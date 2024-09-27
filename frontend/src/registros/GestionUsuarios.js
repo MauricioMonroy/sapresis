@@ -25,7 +25,7 @@ import { toast } from "react-toastify";
 const PageSize = 5;
 
 const GestionUsuarios = () => {
-  const urlBase = "https://sipress-backend.onrender.com/sipress-app/usuarios/todos";
+  const urlBase = "https://sapresis-backend.onrender.com/sapresis/usuarios/todos";
   const [usuarios, setUsuarios] = useState([]);
   const [role, setRole] = useState("");
   const [error, setError] = useState(null);
@@ -53,7 +53,7 @@ const GestionUsuarios = () => {
   }, []);
 
   const eliminarUsuario = async (id) => {
-    const urlPath = "https://sipress-backend.onrender.com/sipress-app/usuarios";
+    const urlPath = "https://sapresis-backend.onrender.com/sapresis/usuarios";
     const token = localStorage.getItem("token");
     try {
       await axios.delete(`${urlPath}/${id}`, {
@@ -77,7 +77,7 @@ const GestionUsuarios = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get("https://sipress-backend.onrender.com/sipress-app/usuarios/perfil", {
+      .get("https://sapresis-backend.onrender.com/sapresis/usuarios/perfil", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

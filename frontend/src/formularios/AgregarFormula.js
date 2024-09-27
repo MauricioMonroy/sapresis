@@ -39,7 +39,7 @@ export default function AgregarFormula({ onFormulaAdded }) {
       try {
         const token = localStorage.getItem("token");
         const resultado = await axios.get(
-          "https://sipress-backend.onrender.com/sipress-app/pacientes",
+          "https://sapresis-backend.onrender.com/sapresis/pacientes",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -71,7 +71,7 @@ export default function AgregarFormula({ onFormulaAdded }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const urlBase = "https://sipress-backend.onrender.com/sipress-app/formulas";
+    const urlBase = "https://sapresis-backend.onrender.com/sapresis/formulas";
     const token = localStorage.getItem("token");
     await axios.post(urlBase, formula, {
       headers: {

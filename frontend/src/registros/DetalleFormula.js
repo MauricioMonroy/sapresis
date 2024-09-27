@@ -12,7 +12,7 @@ import { NumericFormat } from "react-number-format";
  * */
 
 export default function DetalleFormula() {
-  const urlBase = "https://sipress-backend.onrender.com/sipress-app/formulas";
+  const urlBase = "https://sapresis-backend.onrender.com/sapresis/formulas";
 
   const { id } = useParams();
 

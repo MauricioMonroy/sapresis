@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * Controlador para la autenticación de usuarios
  * Proporciona métodos para la gestión de registros y asignación de tokens JWT
  */
-@RequestMapping("/sipress-app/auth")
+@RequestMapping("/sapresis/auth")
 @RestController
 @CrossOrigin(value = "http://localhost:3000")
 public class AuthControlador {

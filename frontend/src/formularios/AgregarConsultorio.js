@@ -31,7 +31,7 @@ export default function AgregarConsultorio({ onConsultorioAdded }) {
       const token = localStorage.getItem("token");
       try {
         const resultado = await axios.get(
-          "https://sipress-backend.onrender.com/sipress-app/pacientes",
+          "https://sapresis-backend.onrender.com/sapresis/pacientes",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -52,7 +52,7 @@ export default function AgregarConsultorio({ onConsultorioAdded }) {
       const token = localStorage.getItem("token");
       try {
         const resultado = await axios.get(
-          "https://sipress-backend.onrender.com/sipress-app/personalS",
+          "https://sapresis-backend.onrender.com/sapresis/personalS",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -83,7 +83,7 @@ export default function AgregarConsultorio({ onConsultorioAdded }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const urlBase = "https://sipress-backend.onrender.com/sipress-app/consultorios";
+    const urlBase = "https://sapresis-backend.onrender.com/sapresis/consultorios";
     const token = localStorage.getItem("token");
     try {
       await axios.post(urlBase, consultorio, {

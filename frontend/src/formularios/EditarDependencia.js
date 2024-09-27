@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
  * */
 
 export default function EditarDependencia() {
-  const urlBase = "https://sipress-backend.onrender.com/sipress-app/dependencias";
+  const urlBase = "https://sapresis-backend.onrender.com/sapresis/dependencias";
 
   let navigate = useNavigate();
   const { id } = useParams();
@@ -40,7 +40,7 @@ export default function EditarDependencia() {
     const token = localStorage.getItem("token");
     try {
       const resultado = await axios.get(
-        "https://sipress-backend.onrender.com/sipress-app/instituciones",
+        "https://sapresis-backend.onrender.com/sapresis/instituciones",
         {
           headers: {
             Authorization: `Bearer ${token}`,

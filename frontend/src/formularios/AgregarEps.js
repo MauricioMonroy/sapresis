@@ -29,7 +29,7 @@ export default function AgregarEps({ onEpsAdded }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const urlBase = "https://sipress-backend.onrender.com/sipress-app/epsS";
+    const urlBase = "https://sapresis-backend.onrender.com/sapresis/epsS";
     const token = localStorage.getItem("token");
     await axios.post(urlBase, eps, {
       headers: {

@@ -1,8 +1,8 @@
-![SIPRESS](../backend/src/main/resources/images/sipress-logo.png)
+![Sapresis](../backend/src/main/resources/images/sapresis-logo.png)
 
-![SIPRESS Java Backend](https://img.shields.io/badge/SIPRESS-Java%20Backend-blue)
+![Sapresis Java Backend](https://img.shields.io/badge/Sapresis-Java%20Backend-blue)
 
-# Manual de Arquitectura y Diseño del Backend de SIPRESS
+# Manual de Arquitectura y Diseño del Backend de Sapresis
 
 ___
 
@@ -28,9 +28,9 @@ ___
 
 ## Introducción
 
-Este manual proporciona una descripción detallada de la arquitectura y el diseño del backend de SIPRESS, un sistema de
+Este manual proporciona una descripción detallada de la arquitectura y el diseño del backend de Sapresis, un sistema de
 gestión de servicios de salud. La aplicación está diseñada para permitir a los profesionales de la salud gestionar
-pacientes, consultas, recetas médicas y otros aspectos clave de la atención sanitaria. El backend de SIPRESS está
+pacientes, consultas, recetas médicas y otros aspectos clave de la atención sanitaria. El backend de Sapresis está
 desarrollado en Java con Spring Boot y utiliza una base de datos MySQL para el almacenamiento de datos.
 
 El manual está organizado en varias secciones que describen los componentes principales de la arquitectura, incluyendo
@@ -42,7 +42,7 @@ la documentación de la API y las pruebas realizadas con Postman.
 
 ## Tecnologías Utilizadas
 
-El backend de SIPRESS está desarrollado con las siguientes tecnologías y frameworks:
+El backend de Sapresis está desarrollado con las siguientes tecnologías y frameworks:
 
 - **Java:** Lenguaje de programación utilizado para el desarrollo de la aplicación.
 - **Spring Boot:** Framework de desarrollo de aplicaciones Java que facilita la creación de aplicaciones web y
@@ -65,18 +65,18 @@ El backend de SIPRESS está desarrollado con las siguientes tecnologías y frame
 
 ## Estructura del Proyecto
 
-La estructura del proyecto backend de SIPRESS sigue una arquitectura basada en paquetes, donde cada paquete contiene
+La estructura del proyecto backend de Sapresis sigue una arquitectura basada en paquetes, donde cada paquete contiene
 clases relacionadas con una funcionalidad específica de la aplicación.
 
 ## Descripción de los paquetes principales
 
-La arquitectura del backend de la aplicación SIPRESS se basa en cinco paquetes principales: `auth`, `modelo`,
+La arquitectura del backend de la aplicación Sapresis se basa en cinco paquetes principales: `auth`, `modelo`,
 `repositorio`, `servicio` y `controlador`. Junto con estos, se encuentran dos paquetes adicionales: `cliente` y
 `excepcion`, que contienen clases accesorias y de manejo de errores, respectivamente.
 
 ![Estructura de directorios](../backend/src/main/resources/images/backend-tree.png)
 
-*Estructura de directorios del backend de SIPRESS*
+*Estructura de directorios del backend de Sapresis*
 
 Las clases allí definidas trabajan en conjunto para permitir la conexión y la transferencia de información entre los
 paquetes y la información correspondiente en las tablas de la base de datos. Para el despliegue de la información, se
@@ -250,14 +250,14 @@ ___
 
 Para conocer más detalles sobre la implementación de la seguridad en la aplicación, se recomienda revisar la
 documentación de la API y las pruebas realizadas con Postman en el directorio `documentation`
-[SIPRESS API](../documentation/API_DOCUMENTATION.md) o en el siguiente
-enlace: [SIPRESS API Documentation](https://documenter.getpostman.com/view/37130978/2sAXjDfbBx)
+[Sapresis API](../documentation/API_DOCUMENTATION.md) o en el siguiente
+enlace: [Sapresis API Documentation](https://documenter.getpostman.com/view/37130978/2sAXjDfbBx)
 
 ___
 
 ## Diagrama de despliegue del sistema
 
-Para ilustrar la estructura y las relaciones entre los componentes de la aplicación SIPRESS, se presenta a continuación
+Para ilustrar la estructura y las relaciones entre los componentes de la aplicación Sapresis, se presenta a continuación
 un diagrama de despliegue que muestra la arquitectura, las conexiones entre el backend, el frontend y otros componentes.
 
 ![Diagrama de despliegue de la arquitectura](../backend/src/main/resources/images/diagrama-de-despliegue.png)
@@ -353,12 +353,12 @@ donde se procesará de acuerdo con la lógica de negocio.
 
 ## Información adicional
 
-Para obtener más información sobre la arquitectura del backend de SIPRESS, se recomienda revisar el código fuente y la
+Para obtener más información sobre la arquitectura del backend de Sapresis, se recomienda revisar el código fuente y la
 documentación de las clases y métodos. Además, se puede consultar la documentación de la API y las pruebas realizadas
 con Postman para comprender mejor el funcionamiento de la aplicación.
 
 Enlace al repositorio de
-GitHub: [SIPRESS Backend Repository](https://github.com/MauricioMonroy/SipressSpringApp/tree/main/backend)
+GitHub: [Sapresis Backend Repository](https://github.com/MauricioMonroy/SipressSpringApp/tree/main/backend)
 
 ---
 
@@ -380,7 +380,7 @@ GitHub: [SIPRESS Backend Repository](https://github.com/MauricioMonroy/SipressSp
 
 - GitHub: [@MauricioMonroy](https://github.com/MauricioMonroy)
 
-Si tiene alguna pregunta o sugerencia sobre la arquitectura del backend de SIPRESS, no dude en ponerse en contacto
+Si tiene alguna pregunta o sugerencia sobre la arquitectura del backend de Sapresis, no dude en ponerse en contacto
 conmigo:
 
 - Correo electrónico: `mauricio.monroy0@soy.sena.edu.co` o `mauriciomonroy@live.cl`
@@ -389,10 +389,10 @@ conmigo:
 
 ## Versión
 
-La versión actual del manual de arquitectura y diseño del backend de SIPRESS es la `1.0.0`.
+La versión actual del manual de arquitectura y diseño del backend de Sapresis es la `1.0.0`.
 
 
-[Inicio](#manual-de-arquitectura-y-diseño-del-backend-de-sipress)
+[Inicio](#manual-de-arquitectura-y-diseño-del-backend-de-sapresis)
 
 ---
 ```

@@ -34,7 +34,7 @@ export default function AgregarFactura({ onFacturaAdded }) {
       try {
         const token = localStorage.getItem("token");
         const resultado = await axios.get(
-          "https://sipress-backend.onrender.com/sipress-app/pacientes",
+          "https://sapresis-backend.onrender.com/sapresis/pacientes",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -66,7 +66,7 @@ export default function AgregarFactura({ onFacturaAdded }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const urlBase = "https://sipress-backend.onrender.com/sipress-app/facturas";
+    const urlBase = "https://sapresis-backend.onrender.com/sapresis/facturas";
     const token = localStorage.getItem("token");
     await axios.post(urlBase, factura, {
       headers: {

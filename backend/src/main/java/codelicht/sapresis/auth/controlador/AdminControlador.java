@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * Proporciona métodos para la creación usuarios con roles de administrador
  */
 @RestController
-@RequestMapping("/sipress-app/admin")
+@RequestMapping("/sapresis/admin")
 @CrossOrigin(value = "http://localhost:3000")
 public class AdminControlador {
 

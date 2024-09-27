@@ -22,7 +22,7 @@ import java.util.Optional;
  * Controlador para la gestión de usuarios
  * Proporciona métodos para la obtención de información de usuarios autenticados y de todos los usuarios
  */
-@RequestMapping("/sipress-app/usuarios")
+@RequestMapping("/sapresis/usuarios")
 @RestController
 @CrossOrigin(value = "http://localhost:3000")
 public class UsuarioControlador {

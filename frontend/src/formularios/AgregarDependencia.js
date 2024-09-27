@@ -30,7 +30,7 @@ export default function AgregarDependencia({ onDependenciaAdded }) {
       try {
         const token = localStorage.getItem("token");
         const resultado = await axios.get(
-          "https://sipress-backend.onrender.com/sipress-app/instituciones",
+          "https://sapresis-backend.onrender.com/sapresis/instituciones",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -62,7 +62,7 @@ export default function AgregarDependencia({ onDependenciaAdded }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const urlBase = "https://sipress-backend.onrender.com/sipress-app/dependencias";
+    const urlBase = "https://sapresis-backend.onrender.com/sapresis/dependencias";
     const token = localStorage.getItem("token");
     await axios.post(urlBase, dependencia, {
       headers: {

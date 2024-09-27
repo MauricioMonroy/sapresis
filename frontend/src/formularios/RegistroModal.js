@@ -52,7 +52,7 @@ export default function Registro(onUsuarioRegistered) {
 
     try {
       const response = await axios.post(
-        "https://sipress-backend.onrender.com/sipress-app/auth/registro",
+        "https://sapresis-backend.onrender.com/sapresis/auth/registro",
         {
           nombreCompleto,
           email,

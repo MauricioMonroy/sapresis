@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("sipress-app")
+@RequestMapping("sapresis")
 @CrossOrigin(value = "http://localhost:3000")
 public class FormulaControlador {
     private static final Logger logger =
@@ -34,7 +34,7 @@ public class FormulaControlador {
         this.pacienteServicio = pacienteServicio;
     }
 
-    // http://localhost:8080/sipress-app/formulas
+    // http://localhost:8080/sapresis/formulas
     @GetMapping("/formulas")
     public List<Formula> obtenerFormulas() {
         var formulas = formulaServicio.listarFormulas();

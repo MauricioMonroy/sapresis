@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("sipress-app")
+@RequestMapping("sapresis")
 @CrossOrigin(value = "http://localhost:3000")
 public class PacienteControlador {
     private static final Logger logger =
@@ -34,7 +34,7 @@ public class PacienteControlador {
         this.epsServicio = epsServicio;
     }
 
-    // http://localhost:8080/sipress-app/pacientes
+    // http://localhost:8080/sapresis/pacientes
     @GetMapping("/pacientes")
     public List<Paciente> obtenerPacientes() {
         var pacientes = pacienteServicio.listarPacientes();
