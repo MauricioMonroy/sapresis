@@ -57,7 +57,7 @@ export default function DetalleFactura() {
     } catch (error) {
       console.error("Error al cargar la factura:", error);
     }
-  }, [id]);
+  }, [id, urlBase]);
 
   useEffect(() => {
     cargarFactura();

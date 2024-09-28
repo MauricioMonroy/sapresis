@@ -50,7 +50,7 @@ export default function ListadoPacientes() {
 
   useEffect(() => {
     cargarPacientes();
-  }, []);
+  });
 
   const eliminarPaciente = async (id) => {
     const token = localStorage.getItem("token");

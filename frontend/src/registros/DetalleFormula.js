@@ -57,7 +57,7 @@ export default function DetalleFormula() {
     } catch (error) {
       console.error("Error al cargar la fórmula:", error);
     }
-  }, [id]);
+  }, [id, urlBase]);
 
   useEffect(() => {
     cargarFormula();

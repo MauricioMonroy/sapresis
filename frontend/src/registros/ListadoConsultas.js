@@ -48,7 +48,7 @@ export default function ListadoConsultas() {
 
   useEffect(() => {
     cargarConsultas();
-  }, []);
+  });
 
   const eliminarConsulta = async (pacienteId, doctorId) => {
     const token = localStorage.getItem("token");

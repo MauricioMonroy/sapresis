@@ -88,12 +88,16 @@ function Main() {
         <Route path="/login" element={<Login />} />
         <Route path="/gestion-usuarios" element={<GestionUsuarios />} />
         <Route path="/logout-success" element={<Logout />} />
-        
-          <Route path="/inicio" element={loading ? (
-          <LoadingScreen onLoadingComplete={handleLoadingComplete} />
-        ) : (<Inicio />)} />
-        
-
+        <Route
+          path="/inicio"
+          element={
+            loading ? (
+              <LoadingScreen onLoadingComplete={handleLoadingComplete} />
+            ) : (
+              <Inicio />
+            )
+          }
+        />
         <Route path="/pacientes" element={<ListadoPacientes />} />
         <Route path="/doctores" element={<ListadoDoctores />} />
         <Route path="/personalS" element={<ListadoPersonal />} />

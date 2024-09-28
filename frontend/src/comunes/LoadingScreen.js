@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import "../loading-screen.css";
 
+/** 
+ * @param {*} param0 
+ * @returns 
+ */
 const LoadingScreen = ({ onLoadingComplete }) => {
   useEffect(() => {
     const timer = setTimeout(() => {

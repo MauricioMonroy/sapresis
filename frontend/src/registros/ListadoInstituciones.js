@@ -50,7 +50,7 @@ export default function ListadoInstituciones() {
 
   useEffect(() => {
     cargarInstituciones();
-  }, []);
+  });
 
   const eliminarInstitucion = async (id) => {
     const token = localStorage.getItem("token");

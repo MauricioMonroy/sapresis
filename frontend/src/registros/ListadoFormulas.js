@@ -50,7 +50,7 @@ export default function ListadoFormulas() {
 
   useEffect(() => {
     cargarFormulas();
-  }, []);
+  });
 
   const eliminarFormula = async (id) => {
     const token = localStorage.getItem("token");

@@ -50,7 +50,7 @@ export default function ListadoFacturas() {
 
   useEffect(() => {
     cargarFacturas();
-  }, []);
+  });
 
   const eliminarFactura = async (id) => {
     const token = localStorage.getItem("token");

@@ -50,7 +50,7 @@ export default function ListadoDependencias() {
 
   useEffect(() => {
     cargarDependencias();
-  }, []);
+  });
 
   const eliminarDependencia = async (id) => {
     const token = localStorage.getItem("token");

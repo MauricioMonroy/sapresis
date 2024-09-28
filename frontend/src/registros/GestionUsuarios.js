@@ -50,7 +50,7 @@ const GestionUsuarios = () => {
 
   useEffect(() => {
     cargarUsuarios();
-  }, []);
+  });
 
   const eliminarUsuario = async (id) => {
     const urlPath = process.env.REACT_APP_API_URL + "/sapresis/usuarios";

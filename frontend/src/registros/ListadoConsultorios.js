@@ -50,7 +50,7 @@ export default function ListadoConsultorios() {
 
   useEffect(() => {
     cargarConsultorios();
-  }, []);
+  });
 
   const eliminarConsultorio = async (id) => {
     const token = localStorage.getItem("token");

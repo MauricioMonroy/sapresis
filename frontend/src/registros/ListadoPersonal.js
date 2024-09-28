@@ -50,7 +50,7 @@ export default function ListadoPersonal() {
 
   useEffect(() => {
     cargarPersonalS();
-  }, []);
+  });
 
   const eliminarPersonal = async (id) => {
     const token = localStorage.getItem("token");

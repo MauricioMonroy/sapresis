@@ -50,7 +50,7 @@ export default function ListadoEps() {
 
   useEffect(() => {
     cargarEpsS();
-  }, []);
+  });
 
   const eliminarEps = async (id) => {
     const token = localStorage.getItem("token");
