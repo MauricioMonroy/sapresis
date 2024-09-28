@@ -8,12 +8,12 @@
 }
 
 .loading-screen img {
-    max-width: 100%;
+    max-width: 38%;
     height: auto;
 }
 
 @media (max-width: 768px) {
     .loading-screen img {
-        max-width: 80%;
+        max-width: 100%;
     }
 }

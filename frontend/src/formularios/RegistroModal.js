@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
  * @version 1.0
  * */
 
-export default function Registro(onUsuarioRegistered) {
+export default function Registro({ onUsuarioRegistered }) {
   const modalRef = useRef(null);
 
   const [formData, setFormData] = useState({
@@ -60,7 +60,7 @@ export default function Registro(onUsuarioRegistered) {
         }
       );
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         toast.success("Usuario registrado con éxito");
         return;
       }
