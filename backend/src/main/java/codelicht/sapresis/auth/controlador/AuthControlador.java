@@ -8,11 +8,15 @@ import codelicht.sapresis.auth.servicio.AuthenticationService;
 import codelicht.sapresis.auth.servicio.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Controlador para la autenticación de usuarios
@@ -31,10 +35,16 @@ public class AuthControlador {
     }
 
     @PostMapping("/registro")
-    public ResponseEntity<Usuario> registrar(@RequestBody RegistrarUsuarioDto registrarUsuarioDto) {
+    public ResponseEntity<Map<String, Object>> registrar(@RequestBody RegistrarUsuarioDto registrarUsuarioDto) {
         Usuario usuarioRegistrado = authenticationService.registrar(registrarUsuarioDto);
-        return ResponseEntity.ok(usuarioRegistrado);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Usuario registrado exitosamente");
+        response.put("usuario", usuarioRegistrado);
+
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> autenticar(@RequestBody LoginUsuarioDto loginUsuarioDto) {
