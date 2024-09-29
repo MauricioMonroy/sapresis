@@ -8,15 +8,19 @@ import codelicht.sapresis.auth.servicio.AuthenticationService;
 import codelicht.sapresis.auth.servicio.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Controlador para la autenticación de usuarios
@@ -29,13 +33,28 @@ public class AuthControlador {
     private final JwtService jwtService;
     private final AuthenticationService authenticationService;
 
-    public AuthControlador(JwtService jwtService, AuthenticationService authenticationService) {
+    public AuthControlador(
+            JwtService jwtService,
+            AuthenticationService authenticationService) {
         this.jwtService = jwtService;
         this.authenticationService = authenticationService;
     }
 
     @PostMapping("/registro")
-    public ResponseEntity<Map<String, Object>> registrar(@RequestBody RegistrarUsuarioDto registrarUsuarioDto) {
+    public ResponseEntity<Map<String, Object>> registrar(
+            @Valid
+            @RequestBody
+            RegistrarUsuarioDto registrarUsuarioDto,
+            BindingResult result) {
+        if (result.hasErrors()) {
+            Map<String, Object> response = new HashMap<>();
+            List<String> errores = result.getFieldErrors().stream()
+                    .map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
+                    .collect(Collectors.toList());
+            response.put("errors", errores);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+
         Usuario usuarioRegistrado = authenticationService.registrar(registrarUsuarioDto);
 
         Map<String, Object> response = new HashMap<>();
@@ -45,9 +64,10 @@ public class AuthControlador {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> autenticar(@RequestBody LoginUsuarioDto loginUsuarioDto) {
+    public ResponseEntity<LoginResponse> autenticar(
+            @RequestBody
+            LoginUsuarioDto loginUsuarioDto) {
         Usuario usuarioAutenticado = authenticationService.autenticar(loginUsuarioDto);
 
         String jwtToken = jwtService.generateToken(usuarioAutenticado);
@@ -60,7 +80,9 @@ public class AuthControlador {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<Void> logout(
+            HttpServletRequest request,
+            HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);

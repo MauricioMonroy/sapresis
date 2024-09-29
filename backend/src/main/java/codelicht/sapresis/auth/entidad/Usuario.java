@@ -1,6 +1,9 @@
 package codelicht.sapresis.auth.entidad;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -27,15 +30,23 @@ public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
+    @NotNull
     private Integer id;
 
     @Column(nullable = false)
+    @NotNull
+    @NotEmpty
     private String nombreCompleto;
 
     @Column(unique = true, length = 100, nullable = false)
+    @NotNull
+    @NotEmpty
+    @Email
     private String email;
 
     @Column(nullable = false)
+    @NotNull
+    @NotEmpty
     private String password;
 
     @CreationTimestamp
