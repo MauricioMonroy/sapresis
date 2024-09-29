@@ -67,7 +67,7 @@ export default function EditarDependencia() {
       console.error("Error al cargar los registros:", error);
       toast.error("Error al cargar los datos del registro solicitado");
     }
-  }, [id]);
+  }, [id, urlBase]);
 
   useEffect(() => {
     cargarInstituciones();

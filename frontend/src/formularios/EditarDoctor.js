@@ -77,7 +77,7 @@ export default function EditarDoctor() {
       console.error("Error al cargar los registros de Doctor:", error);
       toast.error("Error al cargar los datos del registro solicitado");
     }
-  }, [id]);
+  }, [id, urlBase]);
 
   useEffect(() => {
     cargarDependencias();

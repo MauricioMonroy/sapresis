@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import axios from "axios";
 import AgregarFactura from "../formularios/AgregarFactura";
 import Pagination from "../comunes/Pagination";
@@ -32,7 +32,7 @@ export default function ListadoFacturas() {
   const [currentPage, setCurrentPage] = useState(1);
   let navigate = useNavigate();
 
-  const cargarFacturas = async () => {
+  const cargarFacturas = useCallback(async () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(urlBase, {
@@ -46,11 +46,11 @@ export default function ListadoFacturas() {
       setError("Error al cargar los registros");
       console.error("Error al cargar registros:", error);
     }
-  };
+  }, [urlBase]);
 
   useEffect(() => {
     cargarFacturas();
-  });
+  }, [cargarFacturas]);
 
   const eliminarFactura = async (id) => {
     const token = localStorage.getItem("token");

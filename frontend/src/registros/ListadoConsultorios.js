@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import axios from "axios";
 import AgregarConsultorio from "../formularios/AgregarConsultorio";
 import Pagination from "../comunes/Pagination";
@@ -32,7 +32,7 @@ export default function ListadoConsultorios() {
   const [currentPage, setCurrentPage] = useState(1);
   let navigate = useNavigate();
 
-  const cargarConsultorios = async () => {
+  const cargarConsultorios = useCallback(async () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(urlBase, {
@@ -46,11 +46,11 @@ export default function ListadoConsultorios() {
       setError("Error al cargar los registros");
       console.error("Error al cargar registros", error);
     }
-  };
+  }, [urlBase]);
 
   useEffect(() => {
     cargarConsultorios();
-  });
+  }, [cargarConsultorios]);
 
   const eliminarConsultorio = async (id) => {
     const token = localStorage.getItem("token");

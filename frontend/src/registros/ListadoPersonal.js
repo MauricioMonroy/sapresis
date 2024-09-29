@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import axios from "axios";
 import AgregarPersonal from "../formularios/AgregarPersonal";
 import Pagination from "../comunes/Pagination";
@@ -32,7 +32,7 @@ export default function ListadoPersonal() {
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
 
-  const cargarPersonalS = async () => {
+  const cargarPersonalS = useCallback(async () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(urlBase, {
@@ -46,11 +46,11 @@ export default function ListadoPersonal() {
       setError("Error al cargar los registros");
       console.error("Error al cargar registros", error);
     }
-  };
+  }, [urlBase]);
 
   useEffect(() => {
     cargarPersonalS();
-  });
+  }, [cargarPersonalS]);
 
   const eliminarPersonal = async (id) => {
     const token = localStorage.getItem("token");

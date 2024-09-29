@@ -75,7 +75,7 @@ export default function EditarConsultorio() {
       console.error("Error al cargar el regitro:", error);
       toast.error("Error al cargar los datos del registro solicitado");
     }
-  }, [id]);
+  }, [id, urlBase]);
 
   useEffect(() => {
     cargarPacientes();

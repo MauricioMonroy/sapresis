@@ -78,7 +78,7 @@ export default function EditarFormula() {
       console.error("Error al cargar los registros de Fórmula:", error);
       toast.error("Error al cargar los datos del registro solicitado");
     }
-  }, [id]);
+  }, [id, urlBase]);
 
   useEffect(() => {
     cargarPacientes();

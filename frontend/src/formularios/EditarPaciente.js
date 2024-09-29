@@ -74,7 +74,7 @@ export default function EditarPaciente() {
       console.error("Error al cargar los registros de Paciente:", error);
       toast.error("Error al cargar los datos del registro solicitado");
     }
-  }, [id]);
+  }, [id, urlBase]);
 
   useEffect(() => {
     cargarEpsS();

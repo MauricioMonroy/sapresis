@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import axios from "axios";
 import Registro from "../formularios/RegistroUsuarioModal";
 import Pagination from "../comunes/Pagination";
@@ -32,7 +32,7 @@ const GestionUsuarios = () => {
   const [currentPage, setCurrentPage] = useState(1);
   let navigate = useNavigate();
 
-  const cargarUsuarios = async () => {
+  const cargarUsuarios = useCallback(async () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(urlBase, {
@@ -46,11 +46,11 @@ const GestionUsuarios = () => {
       setError("Error al cargar los registros");
       console.error("Error al cargar los registros", error);
     }
-  };
+  }, [urlBase]);
 
   useEffect(() => {
     cargarUsuarios();
-  });
+  }, [cargarUsuarios]);
 
   const eliminarUsuario = async (id) => {
     const urlPath = process.env.REACT_APP_API_URL + "/sapresis/usuarios";

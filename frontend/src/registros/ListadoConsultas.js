@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import axios from "axios";
 import AgregarConsulta from "../formularios/AgregarConsulta";
 import Pagination from "../comunes/Pagination";
@@ -30,7 +30,7 @@ export default function ListadoConsultas() {
   const [currentPage, setCurrentPage] = useState(1);
   let navigate = useNavigate();
 
-  const cargarConsultas = async () => {
+  const cargarConsultas = useCallback(async () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(urlBase, {
@@ -44,11 +44,11 @@ export default function ListadoConsultas() {
       setError("Error al cargar los registros");
       console.error("Error al cargar registros", error);
     }
-  };
+  }, [urlBase]);
 
   useEffect(() => {
     cargarConsultas();
-  });
+  }, [cargarConsultas]);
 
   const eliminarConsulta = async (pacienteId, doctorId) => {
     const token = localStorage.getItem("token");

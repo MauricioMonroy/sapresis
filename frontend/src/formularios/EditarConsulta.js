@@ -82,7 +82,7 @@ export default function EditarConsulta() {
       console.error("Error al cargar el registro:", error);
       toast.error("Error al cargar los datos del registro solicitado");
     }
-  }, [pacienteId, doctorId]);
+  }, [pacienteId, doctorId, urlBase]);
 
   useEffect(() => {
     cargarPacientes();

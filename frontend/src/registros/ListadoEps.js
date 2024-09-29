@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import axios from "axios";
 import AgregarEps from "../formularios/AgregarEps";
 import Pagination from "../comunes/Pagination";
@@ -32,7 +32,7 @@ export default function ListadoEps() {
   const [currentPage, setCurrentPage] = useState(1);
   let navigate = useNavigate();
 
-  const cargarEpsS = async () => {
+  const cargarEpsS = useCallback(async () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(urlBase, {
@@ -46,11 +46,11 @@ export default function ListadoEps() {
       setError("Error al cargar los registros");
       console.error("Error al cargar los registros:", error);
     }
-  };
+  }, [urlBase]);
 
   useEffect(() => {
     cargarEpsS();
-  });
+  }, [cargarEpsS]);
 
   const eliminarEps = async (id) => {
     const token = localStorage.getItem("token");

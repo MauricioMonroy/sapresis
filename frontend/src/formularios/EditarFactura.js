@@ -78,7 +78,7 @@ export default function EditarFactura() {
       console.error("Error al cargar los registros de Factura:", error);
       toast.error("Error al cargar los datos del registro solicitado");
     }
-  }, [id]);
+  }, [id, urlBase]);
 
   useEffect(() => {
     cargarPacientes();
