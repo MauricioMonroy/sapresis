@@ -1,4 +1,4 @@
-package codelicht.sapresis;
+package codelicht.sapresis.auth;
 
 import codelicht.sapresis.auth.servicio.JwtService;
 import lombok.Getter;
