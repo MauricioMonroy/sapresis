@@ -12,7 +12,7 @@
     <!-- Información básica del proyecto -->
     <groupId>codelicht</groupId>
     <artifactId>sapresis</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>Sapresis</name>
     <description>Sistema-Integral-para-Prestación-de-Servicios-de-Salud</description>
     <url>https://sapresis.onrender.com/</url>
