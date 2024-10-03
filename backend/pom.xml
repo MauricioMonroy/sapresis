@@ -28,7 +28,7 @@
 
     <!-- Sistema de control de versiones -->
     <scm>
-        <url>https://github.com/tuusuario/sapresis</url>
+        <url>https://github.com/MauricioMontoy/sapresis</url>
         <connection>scm:git:git://github.com/MauricioMonroy/sapresis.git</connection>
         <developerConnection>scm:git:ssh://git@github.com:MauricioMonroy/sapresis.git</developerConnection>
     </scm>
