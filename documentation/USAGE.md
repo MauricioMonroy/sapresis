@@ -105,9 +105,181 @@ La estructura de la aplicación y sus secciones se organiza en torno a las sigui
 
 ### **3.2. Mapa general de navegación**
 
-[![Mapa de navegación](../frontend/src/assets/images/site-map.png)](../frontend/src/assets/images/site-map.png)
-
-**Nota**: Haga clic en la imagen para ver el mapa de navegación en detalle.
+```mermaid
+---
+config:
+  theme: dark
+---
+flowchart TD
+    A[Login Page]=====>|Credenciales correctas|B[Home Page]    
+    A ---|Registrarse|G[[Formulario de Registro]]-----|Guardar Registro|A
+    G ---|Cancelar| A
+    A -.-x|Credenciales incorrectas|B-.->|Redirige|A
+    G-.-|Crea nuevo usuario|N     
+    D[Lista de Personal]
+    E[Lista de Doctores]
+    F[Lista de Consultas]
+    H[Lista de Instituciones]
+    I[Lista de Dependencias]
+    J[Lista de Consultorios]
+    K[Lista de EPS]
+    C[Lista de Pacientes]
+    L[Lista de Facturas]
+    M[Lista de Fórmulas]
+    N[Lista de Usuarios]
+    subgraph Cat_Gestion_Pacientes [Pacientes y Servicios]
+    direction LR
+        subgraph Pacientes [Pacientes]
+        direction LR
+            C -->|Agregar Registro| O([Modal Formulario])
+            O -->|Guardar| C
+            O -->|Cerrar| C
+            C -->|Editar| P[[Formulario de Edición]]
+            C -->|Eliminar| Q{Confirmar}
+            Q -->|No| C
+            P -->|Guardar| C
+            P -->|Cancelar| C
+            Q -->|Sí| C
+        end
+        subgraph Facturas [Facturas]
+        direction LR
+            L -->|Agregar Registro| O1([Modal Formulario])
+            O1 -->|Guardar| L
+            O1 -->|Cerrar| L
+            L -->|Editar| P1[[Formulario de Edición]]
+            L -->|Eliminar| Q1{Confirmar}
+            Q1 -->|No| L
+            L -->|Detalle| R{{Datos de Factura}}
+            P1 -->|Guardar| L
+            P1 -->|Cancelar| L
+            Q1 -->|Sí| L
+            R -->|Imprimir| S[/Vista Previa/]
+            S-->|Cerrar|R
+            R -->|Volver| L
+        end
+        subgraph Formulas [Fórmulas]
+        direction LR
+            M -->|Agregar Registro| O2([Modal Formulario])
+            O2 -->|Guardar| M
+            O2 -->|Cerrar| M
+            M -->|Editar| P2[[Formulario de Edición]]
+            M -->|Eliminar| Q2{Confirmar}
+            Q2 -->|No| M
+            M -->|Detalle| T{{Datos de Fórmula}}
+            P2 -->|Guardar| M
+            P2 -->|Cancelar| M
+            Q2 -->|Sí| M
+            T -->|Imprimir| U[/Vista Previa/]
+            U-->|Cerrar|T
+            T -->|Volver| M
+        end
+        subgraph Consultas [Consultas]
+        direction LR
+            F -->|Agregar Registro Modal| O5([Modal Formulario])
+            O5 -->|Guardar| F
+            O5 -->|Cerrar| F
+            F -->|Editar| P5[[Formulario de Edición]]
+            F -->|Eliminar| Q5{Confirmar}
+            Q5 -->|No| F
+            P5 -->|Guardar| F
+            P5 -->|Cancelar| F
+            Q5 -->|Sí| F
+        end    
+    end
+    subgraph Cat_Gestion_Personal [Gestión Recursos]
+    direction LR
+        subgraph Personal [Personal]
+        direction LR
+            D --> |Agregar Registro Modal| O3([Modal Formulario])
+            O3 -->|Guardar| D
+            O3 -->|Cerrar| D
+            D -->|Editar| P3[[Formulario de Edición]]
+            D -->|Eliminar| Q3{Confirmar}
+            Q3 -->|No| D
+            P3 -->|Guardar| D
+            P3 -->|Cancelar| D
+            Q3 -->|Sí| D
+        end
+        subgraph Doctores [Doctores]
+        direction LR
+            E --> |Agregar Registro Modal| O4([Modal Formulario])
+            O4 -->|Guardar| E
+            O4 -->|Cerrar| E
+            E -->|Editar| P4[[Formulario de Edición]]
+            E -->|Eliminar| Q4{Confirmar}
+            Q4 -->|No| E
+            P4 -->|Guardar| E
+            P4 -->|Cancelar| E
+            Q4 -->|Sí| E
+        end   
+        subgraph Consultorios [Consultorios]
+        direction LR
+            J --> |Agregar Registro| O8([Modal Formulario])
+            O8 -->|Guardar| J
+            O8 -->|Cerrar| J
+            J -->|Editar| P8[[Formulario de Edición]]
+            J -->|Eliminar| Q8{Confirmar}
+            Q8 -->|No| J            
+            P8 -->|Guardar| J
+            P8 -->|Cancelar| J
+            Q8 -->|Sí| J
+        end       
+    end
+    subgraph Cat_Gestion_Infraestructura [Gestión de Infraestructura]
+    direction LR
+        subgraph Sedes [Sedes]
+        direction LR
+            H --> |Agregar Registro| O6([Modal Formulario])
+            O6 -->|Guardar| H
+            O6 -->|Cerrar| H
+            H -->|Editar| P6[[Formulario de Edición]]
+            H --> |Eliminar| Q6{Confirmar}
+            Q6 -->|No| H
+            P6 -->|Guardar| H
+            P6 -->|Cancelar| H
+            Q6 -->|ConfSíirmar| H
+        end
+        subgraph Dependencias [Dependencias]
+        direction LR
+            I -->|Agregar Registro| O7([Modal Formulario])
+            O7 -->|Guardar| I
+            O7 -->|Cerrar| I
+            I -->|Editar| P7[[Formulario de Edición]]
+            I -->|Eliminar| Q7{Confirmar}
+            Q7 -->|No| I
+            P7 -->|Guardar| I
+            P7 -->|Cancelar| I
+            Q7 -->|Sí| I
+        end        
+        subgraph EPS [EPS]
+        direction LR
+            K -->|Agregar Registro| O9([Modal Formulario])
+            O9 -->|Guardar| K
+            O9 -->|Cerrar| K
+            K -->|Editar| P9[[Formulario de Edición]]
+            K -->|Eliminar| Q9{Confirmar}
+            Q9 -->|No| K
+            P9 -->|Guardar| K
+            P9 -->|Cancelar| K
+            Q9 -->|Sí| K
+        end
+    end
+    subgraph Gestion_Usuarios [Gestión de Usuarios]
+        N -->|Agregar Registro| O10([Modal Formulario])
+        O10 -->|Guardar| N
+        O10 -->|Cerrar| N
+        N -->|Editar| P10[[Formulario de Edición]]
+        N -->|Eliminar| Q10{Confirmar}
+        Q10 -->|No| N
+        P10 -->|Guardar| N
+        P10 -->|Cancelar| N
+        Q10 -->|Sí| N
+    end
+    B ====> Cat_Gestion_Pacientes
+    B ====> Cat_Gestion_Personal
+    B ====> Cat_Gestion_Infraestructura
+    B ==>|Acceso Solo SUPERADMIN| Gestion_Usuarios
+```
 
 *Mapa general de navegación de Sapresis*
 
