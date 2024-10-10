@@ -18,12 +18,12 @@ import java.util.function.Function;
 /**
  * Servicio para la generación y validación de tokens JWT
  * Utiliza la librería io.jsonwebtoken
- * Extrae la clave secreta y el tiempo de expiración desde application.properties
+ * Extrae la clave secreta y el tiempo de expiración desde application.yaml
  */
 @Service
 public class JwtService {
 
-    // Inyectando valores desde application.properties
+    // Inyectando valores desde application.yaml
     @Value("${security.jwt.secret-key}")
     private String secretKey;
 

@@ -9,7 +9,6 @@ FROM openjdk:17-jdk
 WORKDIR /app
 
 COPY --from=build /app/target/sapresis-1.0.0.jar app.jar
-COPY src/main/resources/application.properties /app/config/application.properties
 
 EXPOSE 8080
 

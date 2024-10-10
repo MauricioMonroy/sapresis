@@ -1,0 +1,32 @@
+logging:
+  level:
+    org:
+      springframework:
+        web: INFO
+security:
+  jwt:
+    expiration-time: 3600000
+    secret-key: ${SECURITY_JWT_SECRET_KEY}
+spring:
+  application:
+    name: sapresis
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+  main:
+    allow-circular-references: true
+
+
+
+
+
