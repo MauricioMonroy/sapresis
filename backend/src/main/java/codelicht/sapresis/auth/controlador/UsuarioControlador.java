@@ -53,6 +53,16 @@ public class UsuarioControlador {
         return ResponseEntity.ok(usuario);
     }
 
+    @GetMapping("/buscar")
+    @PreAuthorize("hasAnyRole('SUPERADMIN')")
+    public ResponseEntity<Usuario> obtenerUsuarioPorEmail(@RequestParam String email) {
+        Usuario usuario = userService.findByEmail(email);
+        if (usuario == null)
+            throw new RecursoNoEncontradoExcepcion("Usuario no encontrado con el email: " + email);
+        return ResponseEntity.ok(usuario);
+    }
+
+
     @GetMapping("/todos")
     @PreAuthorize("hasAnyRole('SUPERADMIN')")
     public ResponseEntity<List<Usuario>> allUsers() {
