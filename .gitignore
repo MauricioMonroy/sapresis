@@ -38,3 +38,5 @@ build/
 
 ### Variables de entorno ###
 .env
+/frontend/.env.development
+/frontend/.env.production
