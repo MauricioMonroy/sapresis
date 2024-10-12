@@ -51,6 +51,10 @@ public class UserService {
         return usuarioRepositorio.findById(id).orElse(null);
     }
 
+    public Usuario findByEmail(String email) {
+        return usuarioRepositorio.findByEmail(email).orElse(null);
+    }
+
     public Usuario saveUsuario(Usuario usuario) {
         return usuarioRepositorio.save(usuario);
     }
