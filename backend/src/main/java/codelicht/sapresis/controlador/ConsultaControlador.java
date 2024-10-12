@@ -15,7 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +34,9 @@ public class ConsultaControlador {
     private final IPacienteServicio pacienteServicio;
     private final IDoctorServicio doctorServicio;
 
-    public ConsultaControlador(IConsultaServicio consultaServicio, IPacienteServicio pacienteServicio, IDoctorServicio doctorServicio) {
+    public ConsultaControlador(IConsultaServicio consultaServicio,
+                               IPacienteServicio pacienteServicio,
+                               IDoctorServicio doctorServicio) {
         this.consultaServicio = consultaServicio;
         this.pacienteServicio = pacienteServicio;
         this.doctorServicio = doctorServicio;
@@ -46,35 +50,47 @@ public class ConsultaControlador {
     }
 
     @GetMapping("/consultas/{pacienteId}/{doctorId}")
-    public ResponseEntity<Consulta> obtenerConsultaPorId(@PathVariable Integer pacienteId, @PathVariable Integer doctorId) {
+    public ResponseEntity<Consulta> obtenerConsultaPorId(
+            @PathVariable Integer pacienteId,
+            @PathVariable Integer doctorId) {
         ConsultaPK consultaPK = new ConsultaPK(pacienteId, doctorId);
         Consulta consulta = consultaServicio.buscarConsultaPorId(consultaPK);
         if (consulta == null) {
-            throw new RecursoNoEncontradoExcepcion("Consulta no encontrada con el id de paciente: " + pacienteId + " y id de doctor: " + doctorId);
+            throw new RecursoNoEncontradoExcepcion(
+                    "Consulta no encontrada con el id de paciente: "
+                            + pacienteId
+                            + " y id de doctor: "
+                            + doctorId);
         }
         return ResponseEntity.ok(consulta);
     }
 
     @GetMapping("/consultas/paciente/{id}")
-    public ResponseEntity<List<Consulta>> buscarConsultaPorIdPaciente(@PathVariable("id") Integer idPaciente) {
+    public ResponseEntity<List<Consulta>> buscarConsultaPorIdPaciente(
+            @PathVariable("id")
+            Integer idPaciente) {
         List<Consulta> consultas = consultaServicio.buscarConsultaPorIdPaciente(idPaciente);
         if (consultas == null || consultas.isEmpty()) {
-            throw new RecursoNoEncontradoExcepcion("Consulta no encontrada con el id de paciente: " + idPaciente);
+            throw new RecursoNoEncontradoExcepcion(
+                    "Consulta no encontrada con el id de paciente: " + idPaciente);
         }
         return ResponseEntity.ok(consultas);
     }
 
     @GetMapping("/consultas/doctor/{id}")
-    public ResponseEntity<List<Consulta>> buscarConsultaPorIdDoctor(@PathVariable("id") Integer idDoctor) {
+    public ResponseEntity<List<Consulta>> buscarConsultaPorIdDoctor(
+            @PathVariable("id") Integer idDoctor) {
         List<Consulta> consultas = consultaServicio.buscarConsultaPorIdDoctor(idDoctor);
         if (consultas == null || consultas.isEmpty()) {
-            throw new RecursoNoEncontradoExcepcion("Consulta no encontrada con el id de doctor: " + idDoctor);
+            throw new RecursoNoEncontradoExcepcion(
+                    "Consulta no encontrada con el id de doctor: " + idDoctor);
         }
         return ResponseEntity.ok(consultas);
     }
 
     @PostMapping("/consultas")
-    public ResponseEntity<?> agregarConsulta(@Valid @RequestBody Consulta consulta, BindingResult result) {
+    public ResponseEntity<?> agregarConsulta(
+            @Valid @RequestBody Consulta consulta, BindingResult result) {
         if (result.hasErrors()) {
             List<String> errors = result.getFieldErrors().stream()
                     .map(FieldError::getDefaultMessage)
@@ -87,7 +103,8 @@ public class ConsultaControlador {
         if (consulta.getPaciente() != null) {
             Paciente paciente = pacienteServicio.buscarPacientePorId(consulta.getPaciente().getIdPaciente());
             if (paciente == null) {
-                throw new RecursoNoEncontradoExcepcion("Paciente no encontrado con el id: " + consulta.getPaciente().getIdPaciente());
+                throw new RecursoNoEncontradoExcepcion(
+                        "Paciente no encontrado con el id: " + consulta.getPaciente().getIdPaciente());
             }
             consulta.setPaciente(paciente);
         }
@@ -95,17 +112,26 @@ public class ConsultaControlador {
         if (consulta.getDoctor() != null) {
             Doctor doctor = doctorServicio.buscarDoctorPorId(consulta.getDoctor().getIdDoctor());
             if (doctor == null) {
-                throw new RecursoNoEncontradoExcepcion("Doctor no encontrado con el id: " + consulta.getDoctor().getIdDoctor());
+                throw new RecursoNoEncontradoExcepcion(
+                        "Doctor no encontrado con el id: " + consulta.getDoctor().getIdDoctor());
             }
             consulta.setDoctor(doctor);
         }
 
         assert consulta.getPaciente() != null;
         assert consulta.getDoctor() != null;
-        consulta.setConsultaPK(new ConsultaPK(consulta.getPaciente().getIdPaciente(), consulta.getDoctor().getIdDoctor()));
-
+        consulta.setConsultaPK(new ConsultaPK(
+                consulta.getPaciente().getIdPaciente(),
+                consulta.getDoctor().getIdDoctor()));
         Consulta nuevaConsulta = consultaServicio.guardarConsulta(consulta);
-        return ResponseEntity.ok(nuevaConsulta);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{pacienteId}/{doctorId}")
+                .buildAndExpand(
+                        nuevaConsulta.getPaciente().getIdPaciente(),
+                        nuevaConsulta.getDoctor().getIdDoctor())
+                .toUri();
+        return ResponseEntity.created(location).body(nuevaConsulta);
     }
 
     @PutMapping("/consultas/{pacienteId}/{doctorId}")
@@ -123,7 +149,11 @@ public class ConsultaControlador {
         ConsultaPK consultaPK = new ConsultaPK(pacienteId, doctorId);
         Consulta consultaExistente = consultaServicio.buscarConsultaPorId(consultaPK);
         if (consultaExistente == null) {
-            throw new RecursoNoEncontradoExcepcion("Consulta no encontrada con el id de paciente: " + pacienteId + " y id de doctor: " + doctorId);
+            throw new RecursoNoEncontradoExcepcion(
+                    "Consulta no encontrada con el id de paciente: "
+                            + pacienteId
+                            + " y id de doctor: "
+                            + doctorId);
         }
 
         // Actualizamos los campos necesarios
@@ -138,11 +168,17 @@ public class ConsultaControlador {
 
 
     @DeleteMapping("/consultas/{pacienteId}/{doctorId}")
-    public ResponseEntity<Map<String, Boolean>> eliminarConsulta(@PathVariable Integer pacienteId, @PathVariable Integer doctorId) {
+    public ResponseEntity<Map<String, Boolean>> eliminarConsulta(
+            @PathVariable Integer pacienteId,
+            @PathVariable Integer doctorId) {
         ConsultaPK consultaPK = new ConsultaPK(pacienteId, doctorId);
         Consulta consulta = consultaServicio.buscarConsultaPorId(consultaPK);
         if (consulta == null) {
-            throw new RecursoNoEncontradoExcepcion("Consulta no encontrada con el id de paciente: " + pacienteId + " y id de doctor: " + doctorId);
+            throw new RecursoNoEncontradoExcepcion(
+                    "Consulta no encontrada con el id de paciente: "
+                            + pacienteId
+                            + " y id de doctor: "
+                            + doctorId);
         }
         consultaServicio.eliminarConsulta(consulta);
         Map<String, Boolean> respuesta = new HashMap<>();

@@ -12,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +65,12 @@ public class PersonalControlador {
             personal.setDependencia(dependencia);
         }
         Personal nuevoPersonal = personalServicio.guardarPersonal(personal);
-        return ResponseEntity.ok(nuevoPersonal);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(nuevoPersonal.getIdPersonal())
+                .toUri();
+        return ResponseEntity.created(location).body(nuevoPersonal);
     }
 
     @PutMapping("/personalS/{id}")

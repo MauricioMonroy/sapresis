@@ -14,7 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,7 +74,11 @@ public class ConsultorioControlador {
             consultorio.setPersonal(personal);
         }
         Consultorio nuevoConsultorio = consultorioServicio.guardarConsultorio(consultorio);
-        return ResponseEntity.ok(nuevoConsultorio);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(nuevoConsultorio.getNumeroConsultorio())
+                .toUri();
+        return ResponseEntity.created(location).body(nuevoConsultorio);
     }
 
     @PutMapping("/consultorios/{id}")

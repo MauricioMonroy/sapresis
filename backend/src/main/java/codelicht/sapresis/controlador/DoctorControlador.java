@@ -12,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +66,12 @@ public class DoctorControlador {
             doctor.setDependencia(dependencia);
         }
         Doctor nuevoDoctor = doctorServicio.guardarDoctor(doctor);
-        return ResponseEntity.ok(nuevoDoctor);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(nuevoDoctor.getIdDoctor())
+                .toUri();
+        return ResponseEntity.created(location).body(nuevoDoctor);
     }
 
     @PutMapping("/doctores/{id}")

@@ -12,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +66,12 @@ public class FormulaControlador {
             formula.setPaciente(paciente);
         }
         Formula nuevaFormula = formulaServicio.guardarFormula(formula);
-        return ResponseEntity.ok(nuevaFormula);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(nuevaFormula.getNumeroFormula())
+                .toUri();
+        return ResponseEntity.created(location).body(nuevaFormula);
     }
 
     @PutMapping("/formulas/{id}")

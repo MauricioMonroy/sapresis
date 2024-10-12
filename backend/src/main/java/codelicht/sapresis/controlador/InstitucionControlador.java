@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +58,12 @@ public class InstitucionControlador {
         }
         logger.info("Institucion a agregar: {}", institucion);
         Institucion nuevaInstitucion = institucionServicio.guardarInstitucion(institucion);
-        return ResponseEntity.ok(nuevaInstitucion);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(nuevaInstitucion.getIdInstitucion())
+                .toUri();
+        return ResponseEntity.created(location).body(nuevaInstitucion);
     }
 
     @PutMapping("/instituciones/{id}")

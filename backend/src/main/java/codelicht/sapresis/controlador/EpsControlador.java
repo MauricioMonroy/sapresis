@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +58,11 @@ public class EpsControlador {
         }
         logger.info("Eps a agregar: {}", eps);
         Eps nuevaEps = epsServicio.guardarEps(eps);
-        return ResponseEntity.ok(nuevaEps);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(nuevaEps.getIdEps())
+                .toUri();
+        return ResponseEntity.created(location).body(nuevaEps);
     }
 
     @PutMapping("/epsS/{id}")
