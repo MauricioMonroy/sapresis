@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import "../loading-screen.css";
 
-/** 
- * @param {*} param0 
- * @returns 
+/**
+ * @param {*} param0
+ * @returns
  */
 const LoadingScreen = ({ onLoadingComplete }) => {
   useEffect(() => {
@@ -21,6 +22,9 @@ const LoadingScreen = ({ onLoadingComplete }) => {
       />
     </div>
   );
+};
+LoadingScreen.propTypes = {
+  onLoadingComplete: PropTypes.func.isRequired,
 };
 
 export default LoadingScreen;

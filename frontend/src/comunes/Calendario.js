@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Calendar } from "primereact/calendar";
 import { addLocale } from "primereact/api";
 
@@ -69,6 +70,9 @@ const Calendario = ({ onDateClick }) => {
   return (
     <Calendar inline value={date} onChange={handleDateChange} locale="es" />
   );
+};
+Calendario.propTypes = {
+  onDateClick: PropTypes.func.isRequired,
 };
 
 export default Calendario;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 import Calendario from "../comunes/Calendario";
 import BasicTimePicker from "../comunes/BasicTimePicker";
@@ -102,8 +103,13 @@ export default function AgregarConsulta({ onConsultaAdded }) {
   };
 
   const onTimeChange = (newValue) => {
-    const date = new Date(newValue);
-    const timeStr = date.toLocaleTimeString("es-CO");
+    const date = new Date(newValue);    
+    const timeStr = date.toLocaleTimeString({
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    });
     setConsulta((prevConsulta) => ({
       ...prevConsulta,
       horaConsulta: timeStr,
@@ -116,20 +122,32 @@ export default function AgregarConsulta({ onConsultaAdded }) {
     const urlBase = process.env.REACT_APP_API_URL + "/sapresis/consultas";
     const token = localStorage.getItem("token");
     try {
-      await axios.post(urlBase, consulta, {
+      const response = await axios.post(urlBase, consulta, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      if (modalRef.current) {
-        const modalInstance = new window.bootstrap.Modal(modalRef.current);
-        modalInstance.hide();
+      // Verificar si el código de estado es 201 Created
+      if (response.status === 201) {
+        // Cerrar el modal manualmente
+        const modalElement = modalRef.current;
+        if (modalElement) {
+          const modalInstance = new window.bootstrap.Modal(modalElement);
+          modalInstance.hide();
+        }
+
+        // Llamar a la función de actualización de la lista
+        onConsultaAdded();
+        toast.success("Registro agregado correctamente");
+      } else {
+        toast.error("Error: no se pudo agregar el registro.");
       }
-      onConsultaAdded();
-      toast.success("Registro agregado correctamente");
     } catch (error) {
-      console.error("Error al agregar la consulta:", error);
-      toast.error("Error al agregar la consulta");
+      // Manejar cualquier error de la petición
+      toast.error(
+        "Error: " +
+          (error.response?.data?.message || "Error al agregar el registro")
+      );
     }
   };
 
@@ -241,3 +259,6 @@ export default function AgregarConsulta({ onConsultaAdded }) {
     </div>
   );
 }
+AgregarConsulta.propTypes = {
+  onConsultaAdded: PropTypes.func.isRequired,
+};

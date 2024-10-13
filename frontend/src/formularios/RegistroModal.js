@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -61,21 +62,21 @@ export default function Registro({ onUsuarioRegistered }) {
       );
 
       if (response.status === 201) {
-        toast.success("Usuario registrado con éxito");
+        // Cerrar el modal manualmente después de mostrar el toast
+        const modalElement = modalRef.current;
+        if (modalElement) {
+          const modalInstance = new window.bootstrap.Modal(modalElement);
+          modalInstance.hide();
+        }
+
+        // Llama a la función de callback si el registro es exitoso
+        onUsuarioRegistered();
         return;
       }
     } catch (error) {
       console.error("Error al registrar el usuario:", error);
       toast.error("Error al registrar el usuario");
     }
-
-    // Cerrar el modal manualmente
-    const modalElement = modalRef.current;
-    if (modalElement) {
-      const modalInstance = new window.bootstrap.Modal(modalElement);
-      modalInstance.hide();
-    }
-    onUsuarioRegistered();
   };
 
   return (
@@ -215,3 +216,6 @@ export default function Registro({ onUsuarioRegistered }) {
     </div>
   );
 }
+Registro.propTypes = {
+  onUsuarioRegistered: PropTypes.func.isRequired,
+};

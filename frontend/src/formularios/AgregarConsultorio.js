@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -86,20 +87,31 @@ export default function AgregarConsultorio({ onConsultorioAdded }) {
     const urlBase = process.env.REACT_APP_API_URL + "/sapresis/consultorios";
     const token = localStorage.getItem("token");
     try {
-      await axios.post(urlBase, consultorio, {
+      const response = await axios.post(urlBase, consultorio, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      if (modalRef.current) {
-        const modalInstance = new window.bootstrap.Modal(modalRef.current);
-        modalInstance.hide();
+      // Verificar si el código de estado es 201 Created
+      if (response.status === 201) {
+        // Cerrar el modal manualmente
+        const modalElement = modalRef.current;
+        if (modalElement) {
+          const modalInstance = new window.bootstrap.Modal(modalElement);
+          modalInstance.hide();
+        }
+        // Llamar a la función de actualización de la lista
+        onConsultorioAdded();
+        toast.success("Registro agregado correctamente");
+      } else {
+        toast.error("Error: no se pudo agregar el registro.");
       }
-      onConsultorioAdded();
-      toast.success("Registro agregado correctamente");
     } catch (error) {
-      console.error("Error al agregar el registro", error);
-      toast.error("Error al agregar el registro");
+      // Manejar cualquier error de la petición
+      toast.error(
+        "Error: " +
+          (error.response?.data?.message || "Error al agregar el registro")
+      );
     }
   };
 
@@ -216,3 +228,6 @@ export default function AgregarConsultorio({ onConsultorioAdded }) {
     </div>
   );
 }
+AgregarConsultorio.propTypes = {
+  onConsultorioAdded: PropTypes.func.isRequired,
+};

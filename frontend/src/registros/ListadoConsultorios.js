@@ -22,14 +22,13 @@ import { toast } from "react-toastify";
  * @version 1.0
  * */
 
-const PageSize = 5;
-
 export default function ListadoConsultorios() {
   const urlBase = process.env.REACT_APP_API_URL + "/sapresis/consultorios";
   const [consultorios, setConsultorios] = useState([]);
   const [role, setRole] = useState("");
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(5);
   let navigate = useNavigate();
 
   const cargarConsultorios = useCallback(async () => {
@@ -91,10 +90,10 @@ export default function ListadoConsultorios() {
   }, []);
 
   const currentTableData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * PageSize;
-    const lastPageIndex = firstPageIndex + PageSize;
+    const firstPageIndex = (currentPage - 1) * pageSize;
+    const lastPageIndex = firstPageIndex + pageSize;
     return consultorios.slice(firstPageIndex, lastPageIndex);
-  }, [consultorios, currentPage]);
+  }, [consultorios, currentPage, pageSize]);
 
   return (
     <div className="p-3 mb-2 mt-5">
@@ -158,7 +157,7 @@ export default function ListadoConsultorios() {
                 </thead>
                 <tbody>
                   {currentTableData.map((consultorio, indice) => (
-                    <tr key={indice}>
+                    <tr key={indice} data-id={consultorio.numeroConsultorio}>
                       <th scope="row">{consultorio.numeroConsultorio}</th>
                       <td>
                         {consultorio.personal && (
@@ -214,12 +213,25 @@ export default function ListadoConsultorios() {
                 </tbody>
               </table>
             </div>
+            <div className="fs-6">
+              <label htmlFor="pageSize">Registros por página: </label>{" "}
+              <select
+                id="pageSize"
+                value={pageSize}
+                onChange={(e) => setPageSize(Number(e.target.value))}>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+            </div>
             <div className="card-footer d-flex justify-content-center">
               <Pagination
                 className="pagination-bar"
                 currentPage={currentPage}
                 totalCount={consultorios.length}
-                pageSize={PageSize}
+                pageSize={pageSize}
                 onPageChange={(page) => setCurrentPage(page)}
               />
             </div>

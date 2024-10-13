@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -75,22 +76,36 @@ export default function AgregarPersonal({ onPersonalAdded }) {
     e.preventDefault();
     const urlBase = process.env.REACT_APP_API_URL + "/sapresis/personalS";
     const token = localStorage.getItem("token");
-    await axios.post(urlBase, personal, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
 
-    // Cerrar el modal manualmente
-    const modalElement = modalRef.current;
-    if (modalElement) {
-      const modalInstance = new window.bootstrap.Modal(modalElement);
-      modalInstance.hide();
+    try {
+      const response = await axios.post(urlBase, personal, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // Verificar si el código de estado es 201 Created
+      if (response.status === 201) {
+        // Cerrar el modal manualmente
+        const modalElement = modalRef.current;
+        if (modalElement) {
+          const modalInstance = new window.bootstrap.Modal(modalElement);
+          modalInstance.hide();
+        }
+
+        // Llamar a la función de actualización de la lista
+        onPersonalAdded();
+        toast.success("Registro agregado correctamente");
+      } else {
+        toast.error("Error: no se pudo agregar el registro.");
+      }
+    } catch (error) {
+      // Manejar cualquier error de la petición
+      toast.error(
+        "Error: " +
+          (error.response?.data?.message || "Error al agregar el registro")
+      );
     }
-
-    // Llamar a la función de actualización de la lista
-    onPersonalAdded();
-    toast.success("Registro agregado correctamente");
   };
 
   return (
@@ -228,3 +243,6 @@ export default function AgregarPersonal({ onPersonalAdded }) {
     </div>
   );
 }
+AgregarPersonal.propTypes = {
+  onPersonalAdded: PropTypes.func.isRequired,
+};

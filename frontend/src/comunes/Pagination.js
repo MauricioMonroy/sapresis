@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import classnames from "classnames";
 import { usePagination, DOTS } from "./usePagination";
 import "../pagination.css";
@@ -58,16 +59,24 @@ const Pagination = (props) => {
         className={classnames("pagination-item", {
           disabled: currentPage === 1,
         })}
-        onClick={onPrevious}>
+        onClick={onPrevious}
+        key="prev-arrow">
         <div className="arrow left" />
       </li>
-      {paginationRange.map((pageNumber) => {
+
+      {/* Páginas numéricas */}
+      {paginationRange.map((pageNumber, index) => {
         if (pageNumber === DOTS) {
-          return <li className="pagination-item dots">&#8230;</li>;
+          return (
+            <li key={`dots-${index}`} className="pagination-item dots">
+              &#8230;
+            </li>
+          );
         }
 
         return (
           <li
+            key={pageNumber}
             className={classnames("pagination-item", {
               selected: pageNumber === currentPage,
             })}
@@ -81,11 +90,20 @@ const Pagination = (props) => {
         className={classnames("pagination-item", {
           disabled: currentPage === lastPage,
         })}
-        onClick={onNext}>
+        onClick={onNext}
+        key="next-arrow">
         <div className="arrow right" />
       </li>
     </ul>
   );
+};
+Pagination.propTypes = {
+  onPageChange: PropTypes.func.isRequired,
+  totalCount: PropTypes.number.isRequired,
+  siblingCount: PropTypes.number,
+  currentPage: PropTypes.number,
+  pageSize: PropTypes.number,
+  className: PropTypes.string,
 };
 
 export default Pagination;

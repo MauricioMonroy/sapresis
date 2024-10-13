@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -54,7 +55,7 @@ export const confirmarEliminacion = (id, eliminarPersonal) => {
   toast.warn(
     ({ closeToast }) => (
       <div className="container">
-        <h5>¿Está seguro de que desea eliminar este registro?</h5>
+        <h5>¿Está seguro de eliminar este registro?</h5>
         <div>
           <button
             className="btn btn-outline-danger me-4"

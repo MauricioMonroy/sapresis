@@ -1,4 +1,5 @@
 import axios from "axios";
+import PropTypes from "prop-types";
 import React, { useState, useRef } from "react";
 import { toast } from "react-toastify";
 
@@ -40,8 +41,7 @@ export default function Registro({ onUsuarioAdded }) {
       toast.warning("Las contraseñas no coinciden");
       return;
     }
-    const urlBase =
-      process.env.REACT_APP_API_URL + "/sapresis/auth/registro";
+    const urlBase = process.env.REACT_APP_API_URL + "/sapresis/auth/registro";
     const token = localStorage.getItem("token");
     await axios.post(urlBase, usuario, {
       headers: {
@@ -197,3 +197,6 @@ export default function Registro({ onUsuarioAdded }) {
     </div>
   );
 }
+Registro.propTypes = {
+  onUsuarioAdded: PropTypes.func.isRequired,
+};
