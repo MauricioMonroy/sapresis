@@ -73,7 +73,7 @@ describe("Prueba de registro y eliminacíon de un usuario en Sapresis", () => {
     );
 
     // Hacer clic en el botón de menú Usuarios
-    cy.wait(5000).contains("Usuarios").click();
+    cy.wait(8000).contains("Usuarios").click();
 
     // Cambiar la cantidad de registros visibles por página a 100
     cy.get("select#pageSize").select("100");
