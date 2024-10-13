@@ -72,8 +72,8 @@ describe("Prueba de registro y eliminacíon de un usuario en Sapresis", () => {
       { timeout: 5000 }
     );
 
-    // Hacer clic en el botón de menú Usuarios
-    cy.wait(8000).contains("Usuarios").click();
+    // Visitar la página de administración de usuarios
+    cy.visit("http://localhost:3000/gestion-usuarios");
 
     // Cambiar la cantidad de registros visibles por página a 100
     cy.get("select#pageSize").select("100");
