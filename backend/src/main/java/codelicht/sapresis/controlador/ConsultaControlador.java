@@ -156,16 +156,34 @@ public class ConsultaControlador {
                             + doctorId);
         }
 
-        // Actualizamos los campos necesarios
-        consultaExistente.setPaciente(consultaRecuperada.getPaciente());
-        consultaExistente.setDoctor(consultaRecuperada.getDoctor());
+        // Verificar si el paciente está presente y actualizar
+        if (consultaRecuperada.getPaciente() != null) {
+            Paciente paciente = pacienteServicio.buscarPacientePorId(consultaRecuperada.getPaciente().getIdPaciente());
+            if (paciente == null) {
+                throw new RecursoNoEncontradoExcepcion(
+                        "Paciente no encontrado con el id: " + consultaRecuperada.getPaciente().getIdPaciente());
+            }
+            consultaExistente.setPaciente(paciente);
+        }
+
+        // Verificar si el doctor está presente y actualizar
+        if (consultaRecuperada.getDoctor() != null) {
+            Doctor doctor = doctorServicio.buscarDoctorPorId(consultaRecuperada.getDoctor().getIdDoctor());
+            if (doctor == null) {
+                throw new RecursoNoEncontradoExcepcion(
+                        "Doctor no encontrado con el id: " + consultaRecuperada.getDoctor().getIdDoctor());
+            }
+            consultaExistente.setDoctor(doctor);
+        }
+
+        // Actualizar otros campos
         consultaExistente.setFechaConsulta(consultaRecuperada.getFechaConsulta());
         consultaExistente.setHoraConsulta(consultaRecuperada.getHoraConsulta());
 
+        // Guardar la consulta actualizada
         Consulta consultaActualizada = consultaServicio.guardarConsulta(consultaExistente);
         return ResponseEntity.ok(consultaActualizada);
     }
-
 
     @DeleteMapping("/consultas/{pacienteId}/{doctorId}")
     public ResponseEntity<Map<String, Boolean>> eliminarConsulta(

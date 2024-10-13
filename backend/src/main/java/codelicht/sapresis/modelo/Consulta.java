@@ -2,7 +2,9 @@ package codelicht.sapresis.modelo;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +23,7 @@ public class Consulta implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
+    @JsonUnwrapped
     @EmbeddedId
     protected ConsultaPK consultaPK;
 
