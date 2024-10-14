@@ -7,6 +7,14 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
+      on("after:run", (results) => {
+        console.log("Pruebas finalizadas", results);
+      });
     },
   },
+  screenshotsFolder: "cypress/screenshots",
+  screenshotOnRunFailure: true,
+  trashAssetsBeforeRuns: true,
+  video: true,
+  report: true,
 });
