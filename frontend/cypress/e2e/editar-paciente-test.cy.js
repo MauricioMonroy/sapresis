@@ -1,4 +1,4 @@
-describe("Prueba de edición de un registro Paciente", () => {
+describe("PR-006: Prueba de edición de un registro Paciente", () => {
   it("Debería permitir que un usuario con rol ADMIN pueda editar un registro, en este caso de la entidad Paciente", () => {
     // Visitar la página de inicio de sesión
     cy.visit("http://localhost:3000");

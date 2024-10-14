@@ -1,4 +1,4 @@
-describe("Prueba de registro y eliminación de un doctor", () => {
+describe("PR-005: Prueba de registro y eliminación de un doctor", () => {
   it("Debería permitir que un usuario con rol ADMIN pueda registrar un doctor y luego ser eliminado por un SUPERADMIN", () => {
     // Visitar la página de inicio de sesión
     cy.visit("http://localhost:3000");

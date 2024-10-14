@@ -1,4 +1,4 @@
-describe("Prueba de registro y eliminacíon de un usuario en Sapresis", () => {
+describe("PR-002: Prueba de registro y eliminacíon de un usuario en Sapresis", () => {
   it("Debería permitir el registro y la eliminación de un usuario desde el frontend y verificar la respuesta del backend", () => {
     // Visitar la página de inicio de sesión
     cy.visit("http://localhost:3000/login");
