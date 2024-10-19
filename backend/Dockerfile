@@ -1,15 +1,14 @@
-FROM maven:3.8.1-openjdk-17 AS build
+FROM openjdk:17-jdk-alpine
+
 WORKDIR /app
 
-COPY . .
+ARG JAR_FILE=target/sapresis-1.0.0.jar
 
-RUN mvn clean package -DskipTests
+COPY ${JAR_FILE} app.jar
+COPY wait-for-it.sh .
 
-FROM openjdk:17-jdk
-WORKDIR /app
-
-COPY --from=build /app/target/sapresis-1.0.0.jar app.jar
+RUN chmod +x wait-for-it.sh
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "app.jar"]
+ENTRYPOINT ["./wait-for-it.sh"]

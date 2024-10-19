@@ -1,0 +1,41 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    env_file:
+      - ./backend/.env
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    volumes:
+      - ./frontend/nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  database:
+    image: mysql:lts
+    environment:
+      MYSQL_ROOT_PASSWORD: Jc9sR2wP3Y
+      MYSQL_DATABASE: sapresis-db
+    ports:
+      - "3307:3306"
+    networks:
+        - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
