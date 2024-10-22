@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,7 @@ public class EpsControlador {
 
     // http://localhost:8080/sapresis/epsS
     @GetMapping("/epsS")
+    @PreAuthorize("isAuthenticated()")
     public List<Eps> obtenerEpsS() {
         var epsS = epsServicio.listarEpsS();
         epsS.forEach((eps -> logger.info(eps.toString())));
@@ -41,6 +43,7 @@ public class EpsControlador {
     }
 
     @GetMapping("/epsS/{id}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Eps> buscarEpsPorId(@PathVariable Integer id) {
         Eps eps = epsServicio.buscarEpsPorId(id);
         if (eps == null)
@@ -49,6 +52,7 @@ public class EpsControlador {
     }
 
     @PostMapping("/epsS")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<?> agregarEps(@Valid @RequestBody Eps eps, BindingResult result) {
         if (result.hasErrors()) {
             List<String> errors = result.getFieldErrors().stream()
@@ -66,6 +70,7 @@ public class EpsControlador {
     }
 
     @PutMapping("/epsS/{id}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Eps> actualizarEps(@PathVariable Integer id, @RequestBody Eps epsRecuperada) {
         Eps eps = epsServicio.buscarEpsPorId(id);
         if (eps == null)
@@ -79,6 +84,7 @@ public class EpsControlador {
     }
 
     @DeleteMapping("/epsS/{id}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN')")
     public ResponseEntity<Map<String, Boolean>> eliminarEps(@PathVariable Integer id) {
         Eps eps = epsServicio.buscarEpsPorId(id);
         if (eps == null)

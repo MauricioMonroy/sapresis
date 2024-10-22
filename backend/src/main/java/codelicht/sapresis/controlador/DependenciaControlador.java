@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,7 @@ public class DependenciaControlador {
 
     // http://localhost:8080/sapresis/dependencias
     @GetMapping("/dependencias")
+    @PreAuthorize("isAuthenticated()")
     public List<Dependencia> obtenerDependencias() {
         var dependencias = dependenciaServicio.listarDependencias();
         dependencias.forEach((dependencia -> logger.info(dependencia.toString())));
@@ -45,6 +47,7 @@ public class DependenciaControlador {
     }
 
     @GetMapping("/dependencias/{id}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Dependencia> buscarDependenciaPorId(@PathVariable Integer id) {
         Dependencia dependencia = dependenciaServicio.buscarDependenciaPorId(id);
         if (dependencia == null)
@@ -53,6 +56,7 @@ public class DependenciaControlador {
     }
 
     @PostMapping("/dependencias")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<?> agregarDependencia(@Valid @RequestBody Dependencia dependencia, BindingResult result) {
         if (result.hasErrors()) {
             List<String> errors = result.getFieldErrors().stream()
@@ -75,6 +79,7 @@ public class DependenciaControlador {
     }
 
     @PutMapping("/dependencias/{id}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Dependencia> actualizarDependencia(@PathVariable Integer id,
                                                              @RequestBody Dependencia dependenciaRecuperada) {
         Dependencia dependencia = dependenciaServicio.buscarDependenciaPorId(id);
@@ -88,6 +93,7 @@ public class DependenciaControlador {
     }
 
     @DeleteMapping("/dependencias/{id}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN')")
     public ResponseEntity<Map<String, Boolean>> eliminarDependencia(@PathVariable Integer id) {
         Dependencia dependencia = dependenciaServicio.buscarDependenciaPorId(id);
         if (dependencia == null)

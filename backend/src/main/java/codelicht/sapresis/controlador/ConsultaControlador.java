@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +44,7 @@ public class ConsultaControlador {
     }
 
     @GetMapping("/consultas")
+    @PreAuthorize("isAuthenticated()")
     public List<Consulta> obtenerConsultas() {
         var consultas = consultaServicio.listarConsultas();
         consultas.forEach(consulta -> logger.info(consulta.toString()));
@@ -50,6 +52,7 @@ public class ConsultaControlador {
     }
 
     @GetMapping("/consultas/{pacienteId}/{doctorId}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Consulta> obtenerConsultaPorId(
             @PathVariable Integer pacienteId,
             @PathVariable Integer doctorId) {
@@ -66,6 +69,7 @@ public class ConsultaControlador {
     }
 
     @GetMapping("/consultas/paciente/{id}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<List<Consulta>> buscarConsultaPorIdPaciente(
             @PathVariable("id")
             Integer idPaciente) {
@@ -78,6 +82,7 @@ public class ConsultaControlador {
     }
 
     @GetMapping("/consultas/doctor/{id}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<List<Consulta>> buscarConsultaPorIdDoctor(
             @PathVariable("id") Integer idDoctor) {
         List<Consulta> consultas = consultaServicio.buscarConsultaPorIdDoctor(idDoctor);
@@ -89,6 +94,7 @@ public class ConsultaControlador {
     }
 
     @PostMapping("/consultas")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<?> agregarConsulta(
             @Valid @RequestBody Consulta consulta, BindingResult result) {
         if (result.hasErrors()) {
@@ -135,6 +141,7 @@ public class ConsultaControlador {
     }
 
     @PutMapping("/consultas/{pacienteId}/{doctorId}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Consulta> actualizarConsulta(@PathVariable Integer pacienteId,
                                                        @PathVariable Integer doctorId,
                                                        @Valid @RequestBody Consulta consultaRecuperada,
@@ -186,6 +193,7 @@ public class ConsultaControlador {
     }
 
     @DeleteMapping("/consultas/{pacienteId}/{doctorId}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN')")
     public ResponseEntity<Map<String, Boolean>> eliminarConsulta(
             @PathVariable Integer pacienteId,
             @PathVariable Integer doctorId) {

@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,7 @@ public class FormulaControlador {
 
     // http://localhost:8080/sapresis/formulas
     @GetMapping("/formulas")
+        @PreAuthorize("isAuthenticated()")
     public List<Formula> obtenerFormulas() {
         var formulas = formulaServicio.listarFormulas();
         formulas.forEach((formula -> logger.info(formula.toString())));
@@ -45,6 +47,7 @@ public class FormulaControlador {
     }
 
     @GetMapping("/formulas/{id}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Formula> buscarFormulaPorId(@PathVariable Integer id) {
         Formula formula = formulaServicio.buscarFormulaPorId(id);
         if (formula == null)
@@ -53,6 +56,7 @@ public class FormulaControlador {
     }
 
     @PostMapping("/formulas")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<?> agregarFormula(@Valid @RequestBody Formula formula, BindingResult result) {
         if (result.hasErrors()) {
             List<String> errors = result.getFieldErrors().stream()
@@ -75,6 +79,7 @@ public class FormulaControlador {
     }
 
     @PutMapping("/formulas/{id}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Formula> actualizarFormula(@PathVariable Integer id,
                                                      @RequestBody Formula formulaRecuperada) {
         Formula formula = formulaServicio.buscarFormulaPorId(id);
@@ -90,6 +95,7 @@ public class FormulaControlador {
     }
 
     @DeleteMapping("/formulas/{id}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN')")
     public ResponseEntity<Map<String, Boolean>> eliminarFormula(@PathVariable Integer id) {
         Formula formula = formulaServicio.buscarFormulaPorId(id);
         if (formula == null)

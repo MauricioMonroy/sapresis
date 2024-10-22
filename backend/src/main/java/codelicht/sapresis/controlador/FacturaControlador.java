@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,7 @@ public class FacturaControlador {
 
     // http://localhost:8080/sapresis/facturas
     @GetMapping("/facturas")
+    @PreAuthorize("isAuthenticated()")
     public List<Factura> obtenerFacturas() {
         var facturas = facturaServicio.listarFacturas();
         facturas.forEach((factura -> logger.info(factura.toString())));
@@ -45,6 +47,7 @@ public class FacturaControlador {
     }
 
     @GetMapping("/facturas/{id}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Factura> buscarFacturaPorId(@PathVariable Integer id) {
         Factura factura = facturaServicio.buscarFacturaPorId(id);
         if (factura == null)
@@ -53,6 +56,7 @@ public class FacturaControlador {
     }
 
     @PostMapping("/facturas")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<?> agregarFactura(@Valid @RequestBody Factura factura, BindingResult result) {
         if (result.hasErrors()) {
             List<String> errors = result.getFieldErrors().stream()
@@ -75,6 +79,7 @@ public class FacturaControlador {
     }
 
     @PutMapping("/facturas/{id}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Factura> actualizarFactura(@PathVariable Integer id,
                                                      @RequestBody Factura facturaRecuperada) {
         Factura factura = facturaServicio.buscarFacturaPorId(id);
@@ -90,6 +95,7 @@ public class FacturaControlador {
     }
 
     @DeleteMapping("/facturas/{id}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN')")
     public ResponseEntity<Map<String, Boolean>> eliminarFactura(@PathVariable Integer id) {
         Factura factura = facturaServicio.buscarFacturaPorId(id);
         if (factura == null)

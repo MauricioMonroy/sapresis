@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,7 @@ public class PacienteControlador {
 
     // http://localhost:8080/sapresis/pacientes
     @GetMapping("/pacientes")
+    @PreAuthorize("isAuthenticated()")
     public List<Paciente> obtenerPacientes() {
         var pacientes = pacienteServicio.listarPacientes();
         pacientes.forEach((paciente -> logger.info(paciente.toString())));
@@ -45,6 +47,7 @@ public class PacienteControlador {
     }
 
     @GetMapping("/pacientes/{id}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Paciente> buscarPacientePorId(@PathVariable Integer id) {
         Paciente paciente = pacienteServicio.buscarPacientePorId(id);
         if (paciente == null)
@@ -53,6 +56,7 @@ public class PacienteControlador {
     }
 
     @PostMapping("/pacientes")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<?> agregarPaciente(@Valid @RequestBody Paciente paciente, BindingResult result) {
         if (result.hasErrors()) {
             List<String> errors = result.getFieldErrors().stream()
@@ -75,6 +79,7 @@ public class PacienteControlador {
     }
 
     @PutMapping("/pacientes/{id}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Paciente> actualizarPaciente(@PathVariable Integer id,
                                                        @RequestBody Paciente pacienteRecuperado) {
         Paciente paciente = pacienteServicio.buscarPacientePorId(id);
@@ -92,6 +97,7 @@ public class PacienteControlador {
     }
 
     @DeleteMapping("/pacientes/{id}")
+    @PreAuthorize("hasAnyRole('SUPERADMIN')")
     public ResponseEntity<Map<String, Boolean>> eliminarPaciente(@PathVariable Integer id) {
         Paciente paciente = pacienteServicio.buscarPacientePorId(id);
         if (paciente == null)

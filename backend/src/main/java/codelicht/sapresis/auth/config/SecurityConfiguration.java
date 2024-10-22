@@ -48,7 +48,7 @@ public class SecurityConfiguration {
 
                         // Rutas para Sapresis protegidas por autenticación
                         .requestMatchers("/sapresis/**")
-                        .authenticated()
+                        .permitAll()
 
                         // Cualquier otra ruta requiere autenticación
                         .anyRequest()
