@@ -7,7 +7,6 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +35,6 @@ public class InstitucionControlador {
 
     // http://localhost:8080/sapresis/instituciones
     @GetMapping("/instituciones")
-    @PreAuthorize("isAuthenticated()")
     public List<Institucion> obtenerInstituciones() {
         var instituciones = institucionServicio.listarInstituciones();
         instituciones.forEach((institucion -> logger.info(institucion.toString())));
@@ -53,7 +51,6 @@ public class InstitucionControlador {
 
 
     @PostMapping("/instituciones")
-    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<?> agregarInstitucion(@Valid @RequestBody Institucion institucion, BindingResult result) {
         if (result.hasErrors()) {
             List<String> errors = result.getFieldErrors().stream().map(FieldError::getDefaultMessage).collect(Collectors.toList());
@@ -70,7 +67,6 @@ public class InstitucionControlador {
     }
 
     @PutMapping("/instituciones/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Institucion> actualizarInstitucion(@PathVariable Integer id,
                                                              @RequestBody Institucion institucionRecuperada) {
         Institucion institucion = institucionServicio.buscarInstitucionPorId(id);
@@ -86,7 +82,6 @@ public class InstitucionControlador {
     }
 
     @DeleteMapping("/instituciones/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN')")
     public ResponseEntity<Map<String, Boolean>> eliminarInstitucion(@PathVariable Integer id) {
         Institucion institucion = institucionServicio.buscarInstitucionPorId(id);
         if (institucion == null)

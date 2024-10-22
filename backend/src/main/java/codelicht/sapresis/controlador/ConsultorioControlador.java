@@ -11,7 +11,6 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +42,6 @@ public class ConsultorioControlador {
 
     // http://localhost:8080/sapresis/consultorios
     @GetMapping("/consultorios")
-    @PreAuthorize("isAuthenticated()")
     public List<Consultorio> obtenerConsultorios() {
         var consultorios = consultorioServicio.listarConsultorios();
         consultorios.forEach((consultorio -> logger.info(consultorio.toString())));
@@ -51,7 +49,6 @@ public class ConsultorioControlador {
     }
 
     @GetMapping("/consultorios/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Consultorio> buscarConsultorioPorId(@PathVariable Integer id) {
         Consultorio consultorio = consultorioServicio.buscarConsultorioPorId(id);
         if (consultorio == null)
@@ -60,7 +57,6 @@ public class ConsultorioControlador {
     }
 
     @PostMapping("/consultorios")
-    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<?> agregarConsultorio(@Valid @RequestBody Consultorio consultorio, BindingResult result) {
         if (result.hasErrors()) {
             List<String> errors = result.getFieldErrors().stream()
@@ -86,7 +82,6 @@ public class ConsultorioControlador {
     }
 
     @PutMapping("/consultorios/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Consultorio> actualizarConsultorio(@PathVariable Integer id,
                                                              @RequestBody Consultorio consultorioRecuperado) {
         Consultorio consultorio = consultorioServicio.buscarConsultorioPorId(id);
@@ -101,7 +96,6 @@ public class ConsultorioControlador {
     }
 
     @DeleteMapping("/consultorios/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN')")
     public ResponseEntity<Map<String, Boolean>> eliminarConsultorio(@PathVariable Integer id) {
         Consultorio consultorio = consultorioServicio.buscarConsultorioPorId(id);
         if (consultorio == null)

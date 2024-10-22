@@ -9,7 +9,6 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +37,6 @@ public class PersonalControlador {
 
     // http://localhost:8080/sapresis/personalS
     @GetMapping("/personalS")
-    @PreAuthorize("isAuthenticated()")
     public List<Personal> obtenerPersonalS() {
         var personalS = personalServicio.listarPersonalS();
         personalS.forEach((personal -> logger.info(personal.toString())));
@@ -46,7 +44,6 @@ public class PersonalControlador {
     }
 
     @GetMapping("/personalS/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Personal> buscarPersonalPorId(@PathVariable Integer id) {
         Personal personal = personalServicio.buscarPersonalPorId(id);
         if (personal == null)
@@ -55,7 +52,6 @@ public class PersonalControlador {
     }
 
     @PostMapping("/personalS")
-    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<?> agregarPersonal(@Valid @RequestBody Personal personal, BindingResult result) {
         if (result.hasErrors()) {
             List<String> errors = result.getFieldErrors().stream()
@@ -78,7 +74,6 @@ public class PersonalControlador {
     }
 
     @PutMapping("/personalS/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Personal> actualizarPersonal(@PathVariable Integer id, @RequestBody Personal personalRecuperado) {
         Personal personal = personalServicio.buscarPersonalPorId(id);
         if (personal == null)
@@ -95,7 +90,6 @@ public class PersonalControlador {
     }
 
     @DeleteMapping("/personalS/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN')")
     public ResponseEntity<Map<String, Boolean>> eliminarPersonal(@PathVariable Integer id) {
         Personal personal = personalServicio.buscarPersonalPorId(id);
         if (personal == null)

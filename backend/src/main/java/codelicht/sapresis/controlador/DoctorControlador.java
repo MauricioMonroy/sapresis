@@ -9,7 +9,6 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +38,6 @@ public class DoctorControlador {
 
     // http://localhost:8080/sapresis/doctores
     @GetMapping("/doctores")
-    @PreAuthorize("isAuthenticated()")
     public List<Doctor> obtenerDoctors() {
         var doctores = doctorServicio.listarDoctores();
         doctores.forEach((doctor -> logger.info(doctor.toString())));
@@ -47,7 +45,6 @@ public class DoctorControlador {
     }
 
     @GetMapping("/doctores/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Doctor> buscarDoctorPorId(@PathVariable Integer id) {
         Doctor doctor = doctorServicio.buscarDoctorPorId(id);
         if (doctor == null)
@@ -56,7 +53,6 @@ public class DoctorControlador {
     }
 
     @PostMapping("/doctores")
-    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<?> agregarDoctor(@Valid @RequestBody Doctor doctor, BindingResult result) {
         if (result.hasErrors()) {
             List<String> errors = result.getFieldErrors().stream()
@@ -79,7 +75,6 @@ public class DoctorControlador {
     }
 
     @PutMapping("/doctores/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN, ADMIN')")
     public ResponseEntity<Doctor> actualizarDoctor(@PathVariable Integer id,
                                                    @RequestBody Doctor doctorRecuperado) {
         Doctor doctor = doctorServicio.buscarDoctorPorId(id);
@@ -96,7 +91,6 @@ public class DoctorControlador {
     }
 
     @DeleteMapping("/doctores/{id}")
-    @PreAuthorize("hasAnyRole('SUPERADMIN')")
     public ResponseEntity<Map<String, Boolean>> eliminarDoctor(@PathVariable Integer id) {
         Doctor doctor = doctorServicio.buscarDoctorPorId(id);
         if (doctor == null)
