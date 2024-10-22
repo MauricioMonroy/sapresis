@@ -42,17 +42,10 @@ public class SecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests((authorize) -> authorize
-                        // Rutas abiertas para registro y autenticación
-                        .requestMatchers("/sapresis/auth/**")
-                        .permitAll()
 
-                        // Rutas para Sapresis protegidas por autenticación
                         .requestMatchers("/sapresis/**")
                         .permitAll()
 
-                        // Cualquier otra ruta requiere autenticación
-                        .anyRequest()
-                        .authenticated()
                 ).logout(logout -> logout
                         .logoutUrl("/sapresis/auth/logout")
                         .logoutSuccessUrl("/logout-success")
