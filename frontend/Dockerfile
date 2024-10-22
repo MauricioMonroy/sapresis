@@ -4,12 +4,12 @@ WORKDIR /app
 LABEL authors="Mauricio Monroy <"
 
 COPY package.json ./
-COPY yarn.lock ./
-RUN  yarn install
+COPY package-lock.json ./
+RUN  npm install
 
 COPY . .
 
-RUN yarn run build
+RUN npm run build
 
 FROM nginx:1.21.3-alpine
 
