@@ -72,7 +72,7 @@ public class SecurityConfiguration {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // Establece la URL de origen del frontend
-        configuration.setAllowedOrigins(List.of("http://localhost:3000", "https://sapresis-web.onrender.com"));
+        configuration.setAllowedOrigins(List.of("http://localhost:3000", "https://sapresis-web.onrender.com/"));
 
         // Establece los métodos HTTP permitidos
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
