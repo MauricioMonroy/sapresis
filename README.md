@@ -3,6 +3,23 @@
 # Sapresis - Sistema Integral para la Prestación de Servicios de Salud
 https://mauriciomonroy.github.io/sapresis/
 
+## Acceso a Sapresis
+
+La aplicación Sapresis está disponible en el siguiente enlace:
+
+🔗 [Sapresis - Acceso a la Aplicación](https://www.sapresis.rf.gd/)
+
+### Importante
+Ten en cuenta que la carga del frontend puede tardar un poco, pero el backend puede demorar hasta **2 minutos** en estar completamente disponible. Si al intentar acceder notas que la aplicación no responde, espera unos momentos y vuelve a intentarlo.
+
+### Credenciales de Prueba
+Para probar la aplicación, puedes usar las siguientes credenciales:
+
+- **Correo:** `guest@user.com`
+- **Contraseña:** `user`
+
+¡Gracias por tu paciencia y por probar Sapresis! 🚀
+
 ## Descripción del Proyecto
 
 Sapresis es un sistema está destinado a ser usado por el personal de una institución prestadora de salud. Está compuesto
