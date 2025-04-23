@@ -75,7 +75,8 @@ public class SecurityConfiguration {
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:3000",
                 "https://sapresis-web.onrender.com",
-                "https://sapresis.rf.gd"));
+                "https://sapresis.rf.gd",
+                "https://www.sapresis.rf.gd/"));
 
         // Establece los métodos HTTP permitidos
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
