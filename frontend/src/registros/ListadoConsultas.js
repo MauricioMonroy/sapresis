@@ -156,7 +156,7 @@ export default function ListadoConsultas() {
                 </thead>
                 <tbody>
                   {currentTableData.map((consulta, indice) => (
-                    <tr key={indice} data-id={consulta.idPaciente.idDoctor}>
+                    <tr key={indice} data-id={consulta.pacienteId.doctorId}>
                       <td>
                         {consulta.paciente && (
                           <div>
